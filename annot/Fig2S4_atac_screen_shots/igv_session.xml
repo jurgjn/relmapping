@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Session genome="ce10" hasGeneTrack="true" hasSequenceTrack="true" locus="chrX:2111000-2120000" path="/Users/jj374/cb-head2/relmapping/annot/FigA_atac_screen_shot/igv_session.xml" version="8">
+    <Resources>
+        <Resource path="/Users/jj374/cb-head2/relmapping/annot/S1_accessible_sites/S1a_accessible_sites.bed"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/atac728_geo/coverage_spmr_q10_reads_by_stage/atac728_wt_l3.coverage_spmr_q10_reads_by_stage.bw"/>
+        <Resource path="/Volumes/ahringer/Jurgen Janes/20180114.Daugherty2017/Daugherty2017_EE_25bp_mean.bw"/>
+        <Resource path="/Users/jj374/Desktop/Supplementaries &amp; Tracks/Ho2017/GSE97425_merged.embryo.ce10.total.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/WS260_ce10/WS260_ce10.transcripts.annot.gtf.gz"/>
+        <Resource path="/Volumes/ahringer/Jurgen Janes/20180114.Daugherty2017/Daugherty2017_L3_25bp_mean.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/atac728_geo/coverage_spmr_q10_reads_by_stage/atac728_wt_l2.coverage_spmr_q10_reads_by_stage.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/atac728_geo/coverage_spmr_q10_reads_by_stage/atac728_wt_l4.coverage_spmr_q10_reads_by_stage.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/annot/FigA_atac_screen_shot/Daugherty2017_consensus_ATAC_bed3.bed"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/annot/FigA_atac_screen_shot/Ho2017_embryo.bed"/>
+        <Resource path="/Volumes/ahringer/Jurgen Janes/20180114.Daugherty2017/Daugherty2017_YA_25bp_mean.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/annot/FigA_atac_screen_shot/Ho2017_L1_arrest.bed"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/atac728_geo/coverage_spmr_q10_reads_by_stage/atac728_wt_emb.coverage_spmr_q10_reads_by_stage.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/atac728_geo/coverage_spmr_q10_reads_by_stage/atac728_wt_l1.coverage_spmr_q10_reads_by_stage.bw"/>
+        <Resource path="/Users/jj374/Desktop/Supplementaries &amp; Tracks/Ho2017/GSE97425_merged.L1.ce10.total.normalized.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/atac728_geo/coverage_spmr_q10_reads_by_stage/atac728_wt_ya.coverage_spmr_q10_reads_by_stage.bw"/>
+    </Resources>
+    <Panel height="1045" name="DataPanel" width="839">
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="178,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" height="50" id="/Volumes/ahringer/Jurgen Janes/20180114.Daugherty2017/Daugherty2017_EE_25bp_mean.bw" name="Daugherty2017 ATAC-seq EE" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.0" minimum="-0.25" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="178,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" height="50" id="/Volumes/ahringer/Jurgen Janes/20180114.Daugherty2017/Daugherty2017_L3_25bp_mean.bw" name="Daugherty2017 ATAC-seq L3" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.0" minimum="-0.25" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="178,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" height="50" id="/Volumes/ahringer/Jurgen Janes/20180114.Daugherty2017/Daugherty2017_YA_25bp_mean.bw" name="Daugherty2017 ATAC-seq YA" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.0" minimum="-0.25" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" id="/Users/jj374/cb-head2/relmapping/annot/FigA_atac_screen_shot/Daugherty2017_consensus_ATAC_bed3.bed" name="Daugherty2017 consensus peaks" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,178,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" height="50" id="/Users/jj374/Desktop/Supplementaries &amp; Tracks/Ho2017/GSE97425_merged.embryo.ce10.total.bw" name="Ho2017 DNase-seq Emb" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="150.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" id="/Users/jj374/cb-head2/relmapping/annot/FigA_atac_screen_shot/Ho2017_embryo.bed" name="Ho2017 DHSs Emb" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,178,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" height="50" id="/Users/jj374/Desktop/Supplementaries &amp; Tracks/Ho2017/GSE97425_merged.L1.ce10.total.normalized.bw" name="Ho2017 DNase-seq L1 arrest" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="150.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" id="/Users/jj374/cb-head2/relmapping/annot/FigA_atac_screen_shot/Ho2017_L1_arrest.bed" name="Ho2017 DHSs L1 arrest" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" height="50" id="/Users/jj374/cb-head2/relmapping/atac728_geo/coverage_spmr_q10_reads_by_stage/atac728_wt_emb.coverage_spmr_q10_reads_by_stage.bw" name="ATAC-seq wt Emb" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="20.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" height="50" id="/Users/jj374/cb-head2/relmapping/atac728_geo/coverage_spmr_q10_reads_by_stage/atac728_wt_l1.coverage_spmr_q10_reads_by_stage.bw" name="ATAC-seq wt L1" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="20.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" height="50" id="/Users/jj374/cb-head2/relmapping/atac728_geo/coverage_spmr_q10_reads_by_stage/atac728_wt_l2.coverage_spmr_q10_reads_by_stage.bw" name="ATAC-seq wt L2" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="20.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" height="50" id="/Users/jj374/cb-head2/relmapping/atac728_geo/coverage_spmr_q10_reads_by_stage/atac728_wt_l3.coverage_spmr_q10_reads_by_stage.bw" name="ATAC-seq wt L3" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="20.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" height="50" id="/Users/jj374/cb-head2/relmapping/atac728_geo/coverage_spmr_q10_reads_by_stage/atac728_wt_l4.coverage_spmr_q10_reads_by_stage.bw" name="ATAC-seq wt L4" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="20.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" height="50" id="/Users/jj374/cb-head2/relmapping/atac728_geo/coverage_spmr_q10_reads_by_stage/atac728_wt_ya.coverage_spmr_q10_reads_by_stage.bw" name="ATAC-seq wt YA" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="20.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" id="/Users/jj374/cb-head2/relmapping/annot/S1_accessible_sites/S1a_accessible_sites.bed" name="Accessible sites" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="11" id="/Users/jj374/cb-head2/relmapping/WS260_ce10/WS260_ce10.transcripts.annot.gtf.gz" name="Annotated transcripts" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+    </Panel>
+    <Panel height="149" name="FeaturePanel" width="839">
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="Reference sequence" name="Reference sequence" sortable="false" visible="true"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" colorScale="ContinuousColorScale;0.0;88.0;255,255,255;0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" height="35" id="ce10_genes" name="Gene" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="88.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+    </Panel>
+    <PanelLayout dividerFractions="0.8717735220649458"/>
+</Session>

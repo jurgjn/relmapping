@@ -1,0 +1,2037 @@
+annot_with_gene_id:
+- coding_promoter
+- pseudogene_promoter
+- non-coding_RNA
+
+annot:
+- coding_promoter
+- pseudogene_promoter
+- unknown_promoter
+- putative_enhancer
+- non-coding_RNA
+- other_element
+
+annot_strand:
+- coding_promoter
+- pseudogene_promoter
+- unknown_promoter
+- transcription_initiation
+- non-coding_RNA
+- no_transcription
+
+stages:
+- wt_emb
+- wt_l1
+- wt_l2
+- wt_l3
+- wt_l4
+- wt_ya
+- glp1_ya
+- glp1_d3
+- glp1_d7
+- glp1_d10
+- glp1_d14
+
+stages728:
+- wt_emb
+- wt_l1
+- wt_l2
+- wt_l3
+- wt_l4
+- wt_ya
+- glp1_d1
+- glp1_d2
+- glp1_d6
+- glp1_d9
+- glp1_d13
+
+stages_wt:
+- wt_emb
+- wt_l1
+- wt_l2
+- wt_l3
+- wt_l4
+- wt_ya
+
+stages_glp1:
+- glp1_d1
+- glp1_d2
+- glp1_d6
+- glp1_d9
+- glp1_d13
+
+stages728_glp1:
+- glp1_ya
+- glp1_d3
+- glp1_d7
+- glp1_d10
+- glp1_d14
+
+stages_rep:
+- wt_emb_rep1
+- wt_emb_rep2
+- wt_l1_rep1
+- wt_l1_rep2
+- wt_l2_rep1
+- wt_l2_rep2
+- wt_l3_rep1
+- wt_l3_rep2
+- wt_l4_rep1
+- wt_l4_rep2
+- wt_ya_rep1
+- wt_ya_rep2
+- glp1_d1_rep1
+- glp1_d1_rep2
+- glp1_d2_rep1
+- glp1_d2_rep2
+- glp1_d6_rep1
+- glp1_d6_rep2
+- glp1_d9_rep1
+- glp1_d9_rep2
+- glp1_d13_rep1
+- glp1_d13_rep2
+
+stages_wt_rep:
+- wt_emb_rep1
+- wt_emb_rep2
+- wt_l1_rep1
+- wt_l1_rep2
+- wt_l2_rep1
+- wt_l2_rep2
+- wt_l3_rep1
+- wt_l3_rep2
+- wt_l4_rep1
+- wt_l4_rep2
+- wt_ya_rep1
+- wt_ya_rep2
+
+stages_glp1_rep:
+- glp1_d1_rep1
+- glp1_d1_rep2
+- glp1_d2_rep1
+- glp1_d2_rep2
+- glp1_d6_rep1
+- glp1_d6_rep2
+- glp1_d9_rep1
+- glp1_d9_rep2
+- glp1_d13_rep1
+- glp1_d13_rep2
+
+stages_atac:
+- wt_emb
+- wt_l1
+- wt_l2
+- wt_l3
+- wt_l4
+- wt_ya
+- glp1_d1
+- glp1_d2
+- glp1_d6
+- glp1_d9
+- glp1_d13
+- gon2gem1_d1
+- gon2gem1_d2
+
+stages728_atac:
+- wt_emb
+- wt_l1
+- wt_l2
+- wt_l3
+- wt_l4
+- wt_ya
+- glp1_ya
+- glp1_d3
+- glp1_d7
+- glp1_d10
+- glp1_d14
+- gon2gem1_ya
+- gon2gem1_d3
+
+stages_atac_rep:
+- wt_emb_rep1
+- wt_emb_rep2
+- wt_l1_rep1
+- wt_l1_rep2
+- wt_l2_rep1
+- wt_l2_rep2
+- wt_l3_rep1
+- wt_l3_rep2
+- wt_l4_rep1
+- wt_l4_rep2
+- wt_ya_rep1
+- wt_ya_rep2
+- glp1_d1_rep1
+- glp1_d1_rep2
+- glp1_d2_rep1
+- glp1_d2_rep2
+- glp1_d6_rep1
+- glp1_d6_rep2
+- glp1_d9_rep1
+- glp1_d9_rep2
+- glp1_d13_rep1
+- glp1_d13_rep2
+- gon2gem1_d1_rep1
+- gon2gem1_d1_rep2
+- gon2gem1_d2_rep1
+- gon2gem1_d2_rep2
+
+stages728_atac_rep:
+- wt_emb_rep1
+- wt_emb_rep2
+- wt_l1_rep1
+- wt_l1_rep2
+- wt_l2_rep1
+- wt_l2_rep2
+- wt_l3_rep1
+- wt_l3_rep2
+- wt_l4_rep1
+- wt_l4_rep2
+- wt_ya_rep1
+- wt_ya_rep2
+- glp1_ya_rep1
+- glp1_ya_rep2
+- glp1_d3_rep1
+- glp1_d3_rep2
+- glp1_d7_rep1
+- glp1_d7_rep2
+- glp1_d10_rep1
+- glp1_d10_rep2
+- glp1_d14_rep1
+- glp1_d14_rep2
+- gon2gem1_ya_rep1
+- gon2gem1_ya_rep2
+- gon2gem1_d3_rep1
+- gon2gem1_d3_rep2
+
+atac809:
+  wt_emb_rep1: HS086_Caro-A
+  wt_emb_rep2: HS086_Caro-E
+  wt_l1_rep1: HS232_L1_JA2_N2_atac-S1
+  wt_l1_rep2: HS232_L1_JA6_N2_atac_S2
+  wt_l2_rep1: HS254_L2_JA1_N2_atac_S1
+  wt_l2_rep2a: HS254_L2_JA7_N2_atac_S1
+  wt_l2_rep2b: HS327_crb55_JA7
+  wt_l3_rep1a: HS232_L3_JA8_N2_atac_S1
+  wt_l3_rep1b: HS298_JA8_N2_atac_Sr
+  wt_l3_rep1c: HS327_crb55_JA8
+  wt_l3_rep2a: HS232_L3_JA22_N2_atac_S2
+  wt_l3_rep2b: HS298_JA22_N2_atac_Sr
+  wt_l3_rep2c: HS327_crb55_JA22
+  wt_l4_rep1a: HS232_L4_JA3_N2_atac_S2
+  wt_l4_rep1b: HS327_crb55_JA3
+  wt_l4_rep2a: HS298_JA9_N2_atac_S5
+  wt_l4_rep2b: HS327_crb55_JA9
+  wt_ya_rep1a: HS168_crb55_N702-N503
+  wt_ya_rep1b: HS254_YA_JA4_N2_atac_S2
+  wt_ya_rep1c: HS327_crb55_JA4
+  wt_ya_rep2: HS168_crb55_N701-N503
+  glp1_d1_rep1a: HS456_MS14
+  glp1_d1_rep1b: HS457_MS20
+  glp1_d1_rep1c: HS458_MS31
+  glp1_d1_rep2a: HS446_MS4
+  glp1_d1_rep2b: HS456_MS9
+  glp1_d2_rep1a: HS456_MS15
+  glp1_d2_rep1b: HS457_MS21
+  glp1_d2_rep1c: HS458_MS32
+  glp1_d2_rep2a: HS446_MS1
+  glp1_d2_rep2b: HS456_MS8
+  glp1_d2_rep2c: HS457_MS19
+  glp1_d6_rep1a: HS446_MS3
+  glp1_d6_rep1b: HS457_MS24
+  glp1_d6_rep1c: HS458_MS33
+  glp1_d6_rep2: HS462_MS39
+  glp1_d9_rep1a: HS446_MS2
+  glp1_d9_rep1b: HS457_MS26
+  glp1_d9_rep1c: HS458_MS34
+  glp1_d9_rep2: HS462_MS40
+  glp1_d13_rep1a: HS456_MS17
+  glp1_d13_rep1b: HS456_MS18
+  glp1_d13_rep1c: HS457_MS28
+  glp1_d13_rep1d: HS457_MS29
+  glp1_d13_rep1e: HS458_MS35
+  glp1_d13_rep1f: HS458_MS36
+  glp1_d13_rep1g: HS462_MS37
+  glp1_d13_rep1h: HS462_MS38
+  glp1_d13_rep2a: HS462_MS41
+  glp1_d13_rep2b: HS465_MS44
+  glp1_d13_rep2c: HS470_MS48
+  gon2gem1_d1_rep1a: HS457_MS23
+  gon2gem1_d1_rep1b: HS462_MS43
+  gon2gem1_d1_rep2a: HS474_MS49
+  gon2gem1_d1_rep2b: HS476_MS51
+  gon2gem1_d2_rep1a: HS457_MS22
+  gon2gem1_d2_rep1b: HS462_MS42
+  gon2gem1_d2_rep2a: HS474_MS50
+  gon2gem1_d2_rep2b: HS476_MS52
+
+atac809_pe:
+  wt_emb_rep1: HS086_Caro-A
+  wt_emb_rep2: HS086_Caro-E
+  wt_l1_rep1: HS232_L1_JA2_N2_atac-S1
+  wt_l1_rep2: HS232_L1_JA6_N2_atac_S2
+  wt_l2_rep1: HS254_L2_JA1_N2_atac_S1
+  wt_l2_rep2a: HS254_L2_JA7_N2_atac_S1
+  wt_l2_rep2b: HS327_crb55_JA7
+  wt_l3_rep1a: HS232_L3_JA8_N2_atac_S1
+  wt_l3_rep1b: HS298_JA8_N2_atac_Sr
+  wt_l3_rep1c: HS327_crb55_JA8
+  wt_l3_rep2a: HS232_L3_JA22_N2_atac_S2
+  wt_l3_rep2b: HS298_JA22_N2_atac_Sr
+  wt_l3_rep2c: HS327_crb55_JA22
+  wt_l4_rep1a: HS232_L4_JA3_N2_atac_S2
+  wt_l4_rep1b: HS327_crb55_JA3
+  wt_l4_rep2a: HS298_JA9_N2_atac_S5
+  wt_l4_rep2b: HS327_crb55_JA9
+  wt_ya_rep1a: HS168_crb55_N702-N503
+  wt_ya_rep1b: HS254_YA_JA4_N2_atac_S2
+  wt_ya_rep1c: HS327_crb55_JA4
+  wt_ya_rep2: HS168_crb55_N701-N503
+
+atac808:
+  wt_emb_rep1: HS086_Caro-A
+  wt_emb_rep2: HS086_Caro-E
+  wt_l1_rep1: HS232_L1_JA2_N2_atac-S1
+  wt_l1_rep2: HS232_L1_JA6_N2_atac_S2
+  wt_l2_rep1: HS254_L2_JA1_N2_atac_S1
+  wt_l2_rep2a: HS254_L2_JA7_N2_atac_S1
+  wt_l2_rep2b: HS327_crb55_JA7
+  wt_l3_rep1a: HS232_L3_JA8_N2_atac_S1
+  wt_l3_rep1b: HS298_JA8_N2_atac_Sr
+  wt_l3_rep1c: HS327_crb55_JA8
+  wt_l3_rep2a: HS232_L3_JA22_N2_atac_S2
+  wt_l3_rep2b: HS298_JA22_N2_atac_Sr
+  wt_l3_rep2c: HS327_crb55_JA22
+  wt_l4_rep1a: HS232_L4_JA3_N2_atac_S2
+  wt_l4_rep1b: HS327_crb55_JA3
+  wt_l4_rep2a: HS298_JA9_N2_atac_S5
+  wt_l4_rep2b: HS327_crb55_JA9
+  wt_ya_rep1a: HS168_crb55_N702-N503
+  wt_ya_rep1b: HS254_YA_JA4_N2_atac_S2
+  wt_ya_rep1c: HS327_crb55_JA4
+  wt_ya_rep2: HS168_crb55_N701-N503
+  glp1_d1_rep1a: HS456_MS14
+  glp1_d1_rep1b: HS457_MS20
+  glp1_d1_rep1c: HS458_MS31
+  glp1_d1_rep2a: HS446_MS4
+  glp1_d1_rep2b: HS456_MS9
+  glp1_d2_rep1a: HS456_MS15
+  glp1_d2_rep1b: HS457_MS21
+  glp1_d2_rep1c: HS458_MS32
+  glp1_d2_rep2a: HS446_MS1
+  glp1_d2_rep2b: HS456_MS8
+  glp1_d2_rep2c: HS457_MS19
+  glp1_d6_rep1a: HS446_MS3
+  glp1_d6_rep1b: HS457_MS24
+  glp1_d6_rep1c: HS458_MS33
+  glp1_d6_rep2: HS462_MS39
+  glp1_d9_rep1a: HS446_MS2
+  glp1_d9_rep1b: HS457_MS26
+  glp1_d9_rep1c: HS458_MS34
+  glp1_d9_rep2: HS462_MS40
+  glp1_d13_rep1a: HS456_MS17
+  glp1_d13_rep1b: HS456_MS18
+  glp1_d13_rep1c: HS457_MS28
+  glp1_d13_rep1d: HS457_MS29
+  glp1_d13_rep1e: HS458_MS35
+  glp1_d13_rep1f: HS458_MS36
+  glp1_d13_rep1e: HS462_MS37
+  glp1_d13_rep1f: HS462_MS38
+  glp1_d13_rep2a: HS462_MS41
+  glp1_d13_rep2b: HS465_MS44
+  glp1_d13_rep2c: HS470_MS48
+  gon2gem1_d1_rep1a: HS457_MS23
+  gon2gem1_d1_rep1b: HS462_MS43
+  gon2gem1_d1_rep2a: HS474_MS49
+  gon2gem1_d1_rep2b: HS476_MS51
+  gon2gem1_d2_rep1a: HS457_MS22
+  gon2gem1_d2_rep1b: HS462_MS42
+  gon2gem1_d2_rep2a: HS474_MS50
+  gon2gem1_d2_rep2b: HS476_MS52
+
+atac808_pe:
+  wt_emb_rep1: HS086_Caro-A
+  wt_emb_rep2: HS086_Caro-E
+  wt_l1_rep1: HS232_L1_JA2_N2_atac-S1
+  wt_l1_rep2: HS232_L1_JA6_N2_atac_S2
+  wt_l2_rep1: HS254_L2_JA1_N2_atac_S1
+  wt_l2_rep2a: HS254_L2_JA7_N2_atac_S1
+  wt_l2_rep2b: HS327_crb55_JA7
+  wt_l3_rep1a: HS232_L3_JA8_N2_atac_S1
+  wt_l3_rep1b: HS298_JA8_N2_atac_Sr
+  wt_l3_rep1c: HS327_crb55_JA8
+  wt_l3_rep2a: HS232_L3_JA22_N2_atac_S2
+  wt_l3_rep2b: HS298_JA22_N2_atac_Sr
+  wt_l3_rep2c: HS327_crb55_JA22
+  wt_l4_rep1a: HS232_L4_JA3_N2_atac_S2
+  wt_l4_rep1b: HS327_crb55_JA3
+  wt_l4_rep2a: HS298_JA9_N2_atac_S5
+  wt_l4_rep2b: HS327_crb55_JA9
+  wt_ya_rep1a: HS168_crb55_N702-N503
+  wt_ya_rep1b: HS254_YA_JA4_N2_atac_S2
+  wt_ya_rep1c: HS327_crb55_JA4
+  wt_ya_rep2: HS168_crb55_N701-N503
+
+atac749:
+  wt_emb_rep1: HS086_Caro-A
+  wt_emb_rep2: HS086_Caro-E
+  wt_l1_rep1: HS232_L1_JA2_N2_atac-S1
+  wt_l1_rep2: HS232_L1_JA6_N2_S2
+  wt_l2_rep1: HS254_L2_JA1_N2_S1
+  wt_l2_rep2a: HS254_L2_JA7_N2_S1
+  wt_l2_rep2b: HS327_crb55_JA7
+  wt_l3_rep1a: HS232_L3_JA8_N2_S1
+  wt_l3_rep1b: HS298_JA8_N2_Sr
+  wt_l3_rep1c: HS327_crb55_JA8
+  wt_l3_rep2a: HS232_L3_JA22_N2_S2
+  wt_l3_rep2b: HS298_JA22_N2_Sr
+  wt_l3_rep2c: HS327_crb55_JA22
+  wt_l4_rep1a: HS232_L4_JA3_N2_S2
+  wt_l4_rep1b: HS327_crb55_JA3
+  wt_l4_rep2a: HS298_JA9_N2_S5
+  wt_l4_rep2b: HS327_crb55_JA9
+  wt_ya_rep1a: HS168_crb55_N702-N503
+  wt_ya_rep1b: HS254_YA_JA4_N2_S2
+  wt_ya_rep1c: HS327_crb55_JA4
+  wt_ya_rep2: HS168_crb55_N701-N503
+  glp1_ya_rep1a: HS456_MS14
+  glp1_ya_rep1b: HS457_MS20
+  glp1_ya_rep1c: HS458_MS31
+  glp1_ya_rep2a: HS446_MS4
+  glp1_ya_rep2b: HS456_MS9
+  glp1_d3_rep1a: HS456_MS15
+  glp1_d3_rep1b: HS457_MS21
+  glp1_d3_rep1c: HS458_MS32
+  glp1_d3_rep2a: HS446_MS1
+  glp1_d3_rep2b: HS456_MS8
+  glp1_d3_rep2c: HS457_MS19
+  glp1_d7_rep1a: HS446_MS3
+  glp1_d7_rep1b: HS457_MS24
+  glp1_d7_rep1c: HS458_MS33
+  glp1_d7_rep2: HS462_MS39
+  glp1_d10_rep1a: HS446_MS2
+  glp1_d10_rep1b: HS457_MS26
+  glp1_d10_rep1c: HS458_MS34
+  glp1_d10_rep2: HS462_MS40
+  glp1_d14_rep1a: HS456_MS17
+  glp1_d14_rep1b: HS456_MS18
+  glp1_d14_rep1c: HS457_MS28
+  glp1_d14_rep1d: HS457_MS29
+  glp1_d14_rep1e: HS458_MS35
+  glp1_d14_rep1f: HS458_MS36
+  glp1_d14_rep1e: HS462_MS37
+  glp1_d14_rep1f: HS462_MS38
+  glp1_d14_rep2a: HS462_MS41
+  glp1_d14_rep2b: HS465_MS44
+  glp1_d14_rep2c: HS470_MS48
+  gon2gem1_ya_rep1a: HS457_MS23
+  gon2gem1_ya_rep1b: HS462_MS43
+  gon2gem1_ya_rep2a: HS474_MS49
+  gon2gem1_ya_rep2b: HS476_MS51
+  gon2gem1_d3_rep1a: HS457_MS22
+  gon2gem1_d3_rep1b: HS462_MS42
+  gon2gem1_d3_rep2a: HS474_MS50
+  gon2gem1_d3_rep2b: HS476_MS52
+
+atac749_pe:
+  wt_emb_rep1: HS086_Caro-A
+  wt_emb_rep2: HS086_Caro-E
+  wt_l1_rep1: HS232_L1_JA2_N2_atac-S1
+  wt_l1_rep2: HS232_L1_JA6_N2_S2
+  wt_l2_rep1: HS254_L2_JA1_N2_S1
+  wt_l2_rep2a: HS254_L2_JA7_N2_S1
+  wt_l2_rep2b: HS327_crb55_JA7
+  wt_l3_rep1a: HS232_L3_JA8_N2_S1
+  wt_l3_rep1b: HS298_JA8_N2_Sr
+  wt_l3_rep1c: HS327_crb55_JA8
+  wt_l3_rep2a: HS232_L3_JA22_N2_S2
+  wt_l3_rep2b: HS298_JA22_N2_Sr
+  wt_l3_rep2c: HS327_crb55_JA22
+  wt_l4_rep1a: HS232_L4_JA3_N2_S2
+  wt_l4_rep1b: HS327_crb55_JA3
+  wt_l4_rep2a: HS298_JA9_N2_S5
+  wt_l4_rep2b: HS327_crb55_JA9
+  wt_ya_rep1a: HS168_crb55_N702-N503
+  wt_ya_rep1b: HS254_YA_JA4_N2_S2
+  wt_ya_rep1c: HS327_crb55_JA4
+  wt_ya_rep2: HS168_crb55_N701-N503
+
+atac749_se:
+  glp1_ya_rep1a: HS456_MS14
+  glp1_ya_rep1b: HS457_MS20
+  glp1_ya_rep1c: HS458_MS31
+  glp1_ya_rep2a: HS446_MS4
+  glp1_ya_rep2b: HS456_MS9
+  glp1_d3_rep1a: HS456_MS15
+  glp1_d3_rep1b: HS457_MS21
+  glp1_d3_rep1c: HS458_MS32
+  glp1_d3_rep2a: HS446_MS1
+  glp1_d3_rep2b: HS456_MS8
+  glp1_d3_rep2c: HS457_MS19
+  glp1_d7_rep1a: HS446_MS3
+  glp1_d7_rep1b: HS457_MS24
+  glp1_d7_rep1c: HS458_MS33
+  glp1_d7_rep2: HS462_MS39
+  glp1_d10_rep1a: HS446_MS2
+  glp1_d10_rep1b: HS457_MS26
+  glp1_d10_rep1c: HS458_MS34
+  glp1_d10_rep2: HS462_MS40
+  glp1_d14_rep1a: HS456_MS17
+  glp1_d14_rep1b: HS456_MS18
+  glp1_d14_rep1c: HS457_MS28
+  glp1_d14_rep1d: HS457_MS29
+  glp1_d14_rep1e: HS458_MS35
+  glp1_d14_rep1f: HS458_MS36
+  glp1_d14_rep1e: HS462_MS37
+  glp1_d14_rep1f: HS462_MS38
+  glp1_d14_rep2a: HS462_MS41
+  glp1_d14_rep2b: HS465_MS44
+  glp1_d14_rep2c: HS470_MS48
+
+atac728: # ATAC-seq, joint developmental/aging regulatory map
+  atac728_wt_emb_rep1: HS086_Caro-A
+  atac728_wt_emb_rep2: HS086_Caro-E
+  atac728_wt_l1_rep1: HS232_L1_JA2_N2_atac-S1
+  atac728_wt_l1_rep2: HS232_L1_JA6_N2_atac_S2
+  atac728_wt_l2_rep1: HS254_L2_JA1_N2_atac_S1
+  atac728_wt_l2_rep2a: HS254_L2_JA7_N2_atac_S1
+  atac728_wt_l2_rep2b: HS327_crb55_JA7
+  atac728_wt_l3_rep1a: HS232_L3_JA8_N2_atac_S1
+  atac728_wt_l3_rep1b: HS298_JA8_N2_atac_Sr
+  atac728_wt_l3_rep1c: HS327_crb55_JA8
+  atac728_wt_l3_rep2a: HS232_L3_JA22_N2_atac_S2
+  atac728_wt_l3_rep2b: HS298_JA22_N2_atac_Sr
+  atac728_wt_l3_rep2c: HS327_crb55_JA22
+  atac728_wt_l4_rep1a: HS232_L4_JA3_N2_atac_S2
+  atac728_wt_l4_rep1b: HS327_crb55_JA3
+  atac728_wt_l4_rep2a: HS298_JA9_N2_atac_S5
+  atac728_wt_l4_rep2b: HS327_crb55_JA9
+  atac728_wt_ya_rep1a: HS168_crb55_N702-N503
+  atac728_wt_ya_rep1b: HS254_YA_JA4_N2_atac_S2
+  atac728_wt_ya_rep1c: HS327_crb55_JA4
+  atac728_wt_ya_rep2: HS168_crb55_N701-N503
+  atac728_glp1_ya_rep1a: HS456_MS14
+  atac728_glp1_ya_rep1b: HS457_MS20
+  atac728_glp1_ya_rep1c: HS458_MS31
+  atac728_glp1_ya_rep2a: HS446_MS4
+  atac728_glp1_ya_rep2b: HS456_MS9
+  atac728_glp1_d3_rep1a: HS456_MS15
+  atac728_glp1_d3_rep1b: HS457_MS21
+  atac728_glp1_d3_rep1c: HS458_MS32
+  atac728_glp1_d3_rep2a: HS446_MS1
+  atac728_glp1_d3_rep2b: HS456_MS8
+  atac728_glp1_d3_rep2c: HS457_MS19
+  atac728_glp1_d7_rep1a: HS446_MS3
+  atac728_glp1_d7_rep1b: HS457_MS24
+  atac728_glp1_d7_rep1c: HS458_MS33
+  atac728_glp1_d7_rep2: HS462_MS39
+  atac728_glp1_d10_rep1a: HS446_MS2
+  atac728_glp1_d10_rep1b: HS457_MS26
+  atac728_glp1_d10_rep1c: HS458_MS34
+  atac728_glp1_d10_rep2: HS462_MS40
+  atac728_glp1_d14_rep1a: HS456_MS17
+  atac728_glp1_d14_rep1b: HS456_MS18
+  atac728_glp1_d14_rep1c: HS457_MS28
+  atac728_glp1_d14_rep1d: HS457_MS29
+  atac728_glp1_d14_rep1e: HS458_MS35
+  atac728_glp1_d14_rep1f: HS458_MS36
+  atac728_glp1_d14_rep1e: HS462_MS37
+  atac728_glp1_d14_rep1f: HS462_MS38
+  atac728_glp1_d14_rep2a: HS462_MS41
+  atac728_glp1_d14_rep2b: HS465_MS44
+  atac728_glp1_d14_rep2c: HS470_MS48
+  atac728_gon2gem1_ya_rep1a: HS457_MS23
+  atac728_gon2gem1_ya_rep1b: HS462_MS43
+  atac728_gon2gem1_ya_rep2a: HS474_MS49
+  atac728_gon2gem1_ya_rep2b: HS476_MS51
+  atac728_gon2gem1_d3_rep1a: HS457_MS22
+  atac728_gon2gem1_d3_rep1b: HS462_MS42
+  atac728_gon2gem1_d3_rep2a: HS474_MS50
+  atac728_gon2gem1_d3_rep2b: HS476_MS52
+
+atac728_pe:
+  atac728_wt_emb_rep1: HS086_Caro-A
+  atac728_wt_emb_rep2: HS086_Caro-E
+  atac728_wt_l1_rep1: HS232_L1_JA2_N2_atac-S1
+  atac728_wt_l1_rep2: HS232_L1_JA6_N2_atac_S2
+  atac728_wt_l2_rep1: HS254_L2_JA1_N2_atac_S1
+  atac728_wt_l2_rep2a: HS254_L2_JA7_N2_atac_S1
+  atac728_wt_l2_rep2b: HS327_crb55_JA7
+  atac728_wt_l3_rep1a: HS232_L3_JA8_N2_atac_S1
+  atac728_wt_l3_rep1b: HS298_JA8_N2_atac_Sr
+  atac728_wt_l3_rep1c: HS327_crb55_JA8
+  atac728_wt_l3_rep2a: HS232_L3_JA22_N2_atac_S2
+  atac728_wt_l3_rep2b: HS298_JA22_N2_atac_Sr
+  atac728_wt_l3_rep2c: HS327_crb55_JA22
+  atac728_wt_l4_rep1a: HS232_L4_JA3_N2_atac_S2
+  atac728_wt_l4_rep1b: HS327_crb55_JA3
+  atac728_wt_l4_rep2a: HS298_JA9_N2_atac_S5
+  atac728_wt_l4_rep2b: HS327_crb55_JA9
+  atac728_wt_ya_rep1a: HS168_crb55_N702-N503
+  atac728_wt_ya_rep1b: HS254_YA_JA4_N2_atac_S2
+  atac728_wt_ya_rep1c: HS327_crb55_JA4
+  atac728_wt_ya_rep2: HS168_crb55_N701-N503
+
+atac_cfp1_805:
+- HS322_crb55_EMB-JA33
+- HS322_crb55_EMB-JA33w
+- HS333_crb55_RC22
+- HS333_crb55_JA26
+- HS333_crb55_JA30
+- HS569_ATAC_RC20_N2_a
+- HS569_ATAC_RC20_N2_b
+- HS569_ATAC_RC23_cfp1_a
+- HS569_ATAC_RC23_cfp1_b
+- HS588_ATAC_JA22_N2_L3
+- HS588_ATAC_JA51_N2_L3
+- HS588_ATAC_JA52_cfp1_L3
+- HS588_ATAC_Wei_SM_L3
+
+atac_cfp1_804:
+- HS067_CG001
+- HS067_CG002
+- HS067_CG003
+- HS067_CG004
+- HS067_CG005
+- HS067_CG006
+- HS067_CG007
+- HS067_CG008
+- HS067_CG009
+- HS067_CG010
+- HS067_CG011
+- HS086_Caro-A
+- HS086_Caro-E
+- HS086_Caro-D
+- HS086_Caro-G
+- HS097_Caro-I
+- HS097_Caro-K
+- HS298_JA26_N2_atac_S1
+- HS298_RC22_cfp1_atac_S1
+- HS311_JA26_ATAC_S2
+- HS322_crb55_EMB-JA32
+- HS322_crb55_EMB-JA32w
+- HS322_crb55_EMB-JA33
+- HS322_crb55_EMB-JA33w
+- HS333_crb55_RC22
+- HS333_crb55_JA26
+- HS333_crb55_JA30
+- HS333_crb55_JA31
+- HS333_crb55_Undt
+
+lcap_raw:
+- chen13_emb_lcap1
+- chen13_emb_lcap2
+- chen13_lcap_extra_emb
+- chen13_lcap_extra_l3
+- HS182_JA26r-N2-lcRNA-S1r
+- HS218_RC20_N2_lcRNA_S3
+- HS327_AM132_1
+- HS327_AM132_2
+- HS327_AM132_3
+- HS327_AM132_4
+- HS352_JA1_lcRNA_S1r
+- HS352_JA22_lcRNA_S1r
+- HS352_JA2_lcRNA_S1r
+- HS352_JA3_lcRNA_S1r
+- HS352_JA4_lcRNA_S1r
+- HS352_JA5_lcRNA_S1r
+- HS352_JA6_lcRNA_S1r
+- HS352_JA7_lcRNA_S1r
+- HS352_JA8_lcRNA_S1r
+- HS352_JA9_lcRNA_S1r
+- HS434_K19_LibA
+- HS434_K19_LibB
+- HS434_K19_LibC
+- HS460_crb55_MSR01_YA_rep2
+- HS460_crb55_MSR02_YA_rep2ca
+- HS460_crb55_MSR03_D10_rep2
+- HS460_crb55_MSR04_D7_rep1
+- HS460_crb55_MSR05_YA_rep1
+- HS460_crb55_MSR06_D7_rep2
+- HS473_MSR07
+- HS473_MSR08
+- HS473_MSR09
+- HS473_MSR10
+- HS473_MSR11
+- HS473_MSR12
+- HS473_MSR13
+- HS473_MSR14
+- HS473_MSR15
+- HS473_MSR16
+- HS482_JA8_lcRNA_S1r
+- HS482_L06_N2_R1_lcRNA
+- HS482_L06_N2_R2_lcRNA
+- HS482_L07_DM_R1_lcRNA
+- HS482_L07_DM_R2_lcRNA
+- HS482_P49_YA_lcRNA
+- HS482_P62_YA_lcRNA
+- HS482_P50_D3_lcRNA
+- HS482_P62_D3_lcRNA
+- HS485_JA22_lcRNA_S1r2
+- HS485_JA2_lcRNA_S1r2
+- HS485_JA4_lcRNA_S1r2
+- HS485_JA6_lcRNA_S1r2
+- HS485_JA9_lcRNA_S1r2
+- HS485_JA26_lcRNA_S1r
+- HS485_JA3_lcRNA_S1r2
+- HS485_JA5_lcRNA_S1r2
+- HS485_JA7_lcRNA_S1r2
+- HS569_lcRNA_glp1_P15_D3
+- HS569_lcRNA_glp1_P15_YA
+- HS569_lcRNA_glp1_P22_D10
+- HS569_lcRNA_glp1_P22_D14
+- HS569_lcRNA_glp1_P22_D3
+- HS569_lcRNA_glp1_P22_D7
+- HS569_lcRNA_glp1_P22_YA
+- HS569_lcRNA_glp1_P39_D10
+- HS569_lcRNA_glp1_P39_D14
+- HS569_lcRNA_glp1_P39_D7
+
+lcap_HS569:
+- HS569_lcRNA_glp1_P15_D3
+- HS569_lcRNA_glp1_P15_YA
+- HS569_lcRNA_glp1_P22_D10
+- HS569_lcRNA_glp1_P22_D14
+- HS569_lcRNA_glp1_P22_D3
+- HS569_lcRNA_glp1_P22_D7
+- HS569_lcRNA_glp1_P22_YA
+- HS569_lcRNA_glp1_P39_D10
+- HS569_lcRNA_glp1_P39_D14
+- HS569_lcRNA_glp1_P39_D7
+
+lcap808: # lcap805 with glp1 sample swaps fixed by inferring the (likely) label via clustering to old glp1 data that had the antisense artefacts (but was correctly labelled)
+  wt_emb_rep1a: HS182_JA26r-N2-lcRNA-S1r
+  wt_emb_rep1b: HS485_JA26_lcRNA_S1r
+  wt_emb_rep2: HS218_RC20_N2_lcRNA_S3
+  wt_l1_rep1a: HS352_JA2_lcRNA_S1r
+  wt_l1_rep1b: HS485_JA2_lcRNA_S1r2
+  wt_l1_rep2a: HS352_JA6_lcRNA_S1r
+  wt_l1_rep2b: HS485_JA6_lcRNA_S1r2
+  wt_l2_rep1: HS352_JA1_lcRNA_S1r
+  wt_l2_rep2a: HS352_JA7_lcRNA_S1r
+  wt_l2_rep2b: HS485_JA7_lcRNA_S1r2
+  wt_l3_rep1a: HS352_JA8_lcRNA_S1r
+  wt_l3_rep1b: HS482_JA8_lcRNA_S1r
+  wt_l3_rep2a: HS352_JA22_lcRNA_S1r
+  wt_l3_rep2b: HS485_JA22_lcRNA_S1r2
+  wt_l4_rep1a: HS352_JA3_lcRNA_S1r
+  wt_l4_rep1b: HS485_JA3_lcRNA_S1r2
+  wt_l4_rep2a: HS352_JA9_lcRNA_S1r
+  wt_l4_rep2b: HS485_JA9_lcRNA_S1r2
+  wt_ya_rep1a: HS352_JA4_lcRNA_S1r
+  wt_ya_rep1b: HS485_JA4_lcRNA_S1r2
+  wt_ya_rep2a: HS352_JA5_lcRNA_S1r
+  wt_ya_rep2b: HS485_JA5_lcRNA_S1r2
+  glp1_d1_rep1: HS569_lcRNA_glp1_P15_YA # 'glp1_d1_rep1': 'glp1_d1_rep1'
+  glp1_d1_rep2: HS569_lcRNA_glp1_P39_D7 # 'glp1_d6_rep2': 'glp1_d1_rep2'
+  glp1_d2_rep1: HS569_lcRNA_glp1_P22_D10 # 'glp1_d9_rep1': 'glp1_d2_rep1'
+  glp1_d2_rep2: HS569_lcRNA_glp1_P39_D10 # 'glp1_d9_rep2': 'glp1_d2_rep2'
+  glp1_d6_rep1: HS569_lcRNA_glp1_P22_D14 # 'glp1_d13_rep1': 'glp1_d6_rep1'
+  glp1_d6_rep2: HS569_lcRNA_glp1_P39_D14 # 'glp1_d13_rep2': 'glp1_d6_rep2'
+  glp1_d9_rep1: HS569_lcRNA_glp1_P22_YA # 'glp1_d1_rep2': 'glp1_d9_rep1'
+  glp1_d9_rep2: HS569_lcRNA_glp1_P15_D3 # 'glp1_d2_rep1': 'glp1_d9_rep2'
+  glp1_d13_rep1: HS569_lcRNA_glp1_P22_D3 # 'glp1_d2_rep2': 'glp1_d13_rep1'
+  glp1_d13_rep2: HS569_lcRNA_glp1_P22_D7 # 'glp1_d6_rep1': 'glp1_d13_rep2'
+
+lcap805: # long cap, joint developmental/aging regulatory map, new gpl1 data to address anti-sense artefacts
+  wt_emb_rep1a: HS182_JA26r-N2-lcRNA-S1r
+  wt_emb_rep1b: HS485_JA26_lcRNA_S1r
+  wt_emb_rep2: HS218_RC20_N2_lcRNA_S3
+  wt_l1_rep1a: HS352_JA2_lcRNA_S1r
+  wt_l1_rep1b: HS485_JA2_lcRNA_S1r2
+  wt_l1_rep2a: HS352_JA6_lcRNA_S1r
+  wt_l1_rep2b: HS485_JA6_lcRNA_S1r2
+  wt_l2_rep1: HS352_JA1_lcRNA_S1r
+  wt_l2_rep2a: HS352_JA7_lcRNA_S1r
+  wt_l2_rep2b: HS485_JA7_lcRNA_S1r2
+  wt_l3_rep1a: HS352_JA8_lcRNA_S1r
+  wt_l3_rep1b: HS482_JA8_lcRNA_S1r
+  wt_l3_rep2a: HS352_JA22_lcRNA_S1r
+  wt_l3_rep2b: HS485_JA22_lcRNA_S1r2
+  wt_l4_rep1a: HS352_JA3_lcRNA_S1r
+  wt_l4_rep1b: HS485_JA3_lcRNA_S1r2
+  wt_l4_rep2a: HS352_JA9_lcRNA_S1r
+  wt_l4_rep2b: HS485_JA9_lcRNA_S1r2
+  wt_ya_rep1a: HS352_JA4_lcRNA_S1r
+  wt_ya_rep1b: HS485_JA4_lcRNA_S1r2
+  wt_ya_rep2a: HS352_JA5_lcRNA_S1r
+  wt_ya_rep2b: HS485_JA5_lcRNA_S1r2
+  glp1_d1_rep1: HS569_lcRNA_glp1_P15_YA
+  glp1_d1_rep2: HS569_lcRNA_glp1_P22_YA
+  glp1_d2_rep1: HS569_lcRNA_glp1_P15_D3
+  glp1_d2_rep2: HS569_lcRNA_glp1_P22_D3
+  glp1_d6_rep1: HS569_lcRNA_glp1_P22_D7
+  glp1_d6_rep2: HS569_lcRNA_glp1_P39_D7
+  glp1_d9_rep1: HS569_lcRNA_glp1_P22_D10
+  glp1_d9_rep2: HS569_lcRNA_glp1_P39_D10
+  glp1_d13_rep1: HS569_lcRNA_glp1_P22_D14
+  glp1_d13_rep2: HS569_lcRNA_glp1_P39_D14
+
+lcap749: # long cap, joint developmental/aging regulatory map
+  wt_emb_rep1a: HS182_JA26r-N2-lcRNA-S1r
+  wt_emb_rep1b: HS485_JA26_lcRNA_S1r
+  wt_emb_rep2: HS218_RC20_N2_lcRNA_S3
+  wt_l1_rep1a: HS352_JA2_lcRNA_S1r
+  wt_l1_rep1b: HS485_JA2_lcRNA_S1r2
+  wt_l1_rep2a: HS352_JA6_lcRNA_S1r
+  wt_l1_rep2b: HS485_JA6_lcRNA_S1r2
+  wt_l2_rep1: HS352_JA1_lcRNA_S1r
+  wt_l2_rep2a: HS352_JA7_lcRNA_S1r
+  wt_l2_rep2b: HS485_JA7_lcRNA_S1r2
+  wt_l3_rep1a: HS352_JA8_lcRNA_S1r
+  wt_l3_rep1b: HS482_JA8_lcRNA_S1r
+  wt_l3_rep2a: HS352_JA22_lcRNA_S1r
+  wt_l3_rep2b: HS485_JA22_lcRNA_S1r2
+  wt_l4_rep1a: HS352_JA3_lcRNA_S1r
+  wt_l4_rep1b: HS485_JA3_lcRNA_S1r2
+  wt_l4_rep2a: HS352_JA9_lcRNA_S1r
+  wt_l4_rep2b: HS485_JA9_lcRNA_S1r2
+  wt_ya_rep1a: HS352_JA4_lcRNA_S1r
+  wt_ya_rep1b: HS485_JA4_lcRNA_S1r2
+  wt_ya_rep2a: HS352_JA5_lcRNA_S1r
+  wt_ya_rep2b: HS485_JA5_lcRNA_S1r2
+  glp1_ya_rep1: HS473_MSR07
+  glp1_ya_rep2: HS473_MSR08
+  glp1_d3_rep1: HS473_MSR09
+  glp1_d3_rep2: HS473_MSR10
+  glp1_d7_rep1: HS473_MSR11
+  glp1_d7_rep2: HS473_MSR12
+  glp1_d10_rep1: HS473_MSR13
+  glp1_d10_rep2: HS473_MSR14
+  glp1_d14_rep1: HS473_MSR15
+  glp1_d14_rep2: HS473_MSR16
+
+lcap728: # long cap, joint developmental/aging regulatory map
+  lcap728_wt_emb_rep1a: HS182_JA26r-N2-lcRNA-S1r
+  lcap728_wt_emb_rep1b: HS485_JA26_lcRNA_S1r
+  lcap728_wt_emb_rep2: HS218_RC20_N2_lcRNA_S3
+  lcap728_wt_l1_rep1a: HS352_JA2_lcRNA_S1r
+  lcap728_wt_l1_rep1b: HS485_JA2_lcRNA_S1r2
+  lcap728_wt_l1_rep2a: HS352_JA6_lcRNA_S1r
+  lcap728_wt_l1_rep2b: HS485_JA6_lcRNA_S1r2
+  lcap728_wt_l2_rep1: HS352_JA1_lcRNA_S1r
+  lcap728_wt_l2_rep2a: HS352_JA7_lcRNA_S1r
+  lcap728_wt_l2_rep2b: HS485_JA7_lcRNA_S1r2
+  lcap728_wt_l3_rep1a: HS352_JA8_lcRNA_S1r
+  lcap728_wt_l3_rep1b: HS482_JA8_lcRNA_S1r
+  lcap728_wt_l3_rep2a: HS352_JA22_lcRNA_S1r
+  lcap728_wt_l3_rep2b: HS485_JA22_lcRNA_S1r2
+  lcap728_wt_l4_rep1a: HS352_JA3_lcRNA_S1r
+  lcap728_wt_l4_rep1b: HS485_JA3_lcRNA_S1r2
+  lcap728_wt_l4_rep2a: HS352_JA9_lcRNA_S1r
+  lcap728_wt_l4_rep2b: HS485_JA9_lcRNA_S1r2
+  lcap728_wt_ya_rep1a: HS352_JA4_lcRNA_S1r
+  lcap728_wt_ya_rep1b: HS485_JA4_lcRNA_S1r2
+  lcap728_wt_ya_rep2a: HS352_JA5_lcRNA_S1r
+  lcap728_wt_ya_rep2b: HS485_JA5_lcRNA_S1r2
+  lcap728_glp1_ya_rep1: HS473_MSR07
+  lcap728_glp1_ya_rep2: HS473_MSR08
+  lcap728_glp1_d3_rep1: HS473_MSR09
+  lcap728_glp1_d3_rep2: HS473_MSR10
+  lcap728_glp1_d7_rep1: HS473_MSR11
+  lcap728_glp1_d7_rep2: HS473_MSR12
+  lcap728_glp1_d10_rep1: HS473_MSR13
+  lcap728_glp1_d10_rep2: HS473_MSR14
+  lcap728_glp1_d14_rep1: HS473_MSR15
+  lcap728_glp1_d14_rep2: HS473_MSR16
+
+lcap_am1:
+  # lcap_am1 = long cap libraries, aging map, revision 1
+  # YA replicate 1: HS473 MSR07
+  # YA replicate 2: HS473 MSR08
+  # D3 replicate 1: HS473 MSR09
+  # D3 replicate 2: HS473 MSR10
+  # D7 replicate 1: HS473 MSR11
+  # D7 replicate 2: HS473 MSR12
+  # D10 replicate 1: HS473 MSR13
+  # D10 replicate 2: HS473 MSR14
+  # D14 replicate 1: HS473 MSR15
+  # D14 replicate 2: HS473 MSR16
+  HS473_MSR07: lcap_am1_ya_rep1
+  HS473_MSR08: lcap_am1_ya_rep2
+  HS473_MSR09: lcap_am1_d3_rep1
+  HS473_MSR10: lcap_am1_d3_rep2
+  HS473_MSR11: lcap_am1_d7_rep1
+  HS473_MSR12: lcap_am1_d7_rep2
+  HS473_MSR13: lcap_am1_d10_rep1
+  HS473_MSR14: lcap_am1_d10_rep2
+  HS473_MSR15: lcap_am1_d14_rep1
+  HS473_MSR16: lcap_am1_d14_rep2
+
+# https://symfony.com/doc/current/components/yaml/yaml_format.html
+atac629: # ATAC-seq, developmental
+  atac_emb_rep1: HS086_Caro-A
+  atac_emb_rep2: HS086_Caro-E
+  atac_l1_rep1: HS232_L1_JA2_N2_atac-S1
+  atac_l1_rep2: HS232_L1_JA6_N2_atac_S2
+  atac_l2_rep1: HS254_L2_JA1_N2_atac_S1
+  atac_l2_rep2a: HS254_L2_JA7_N2_atac_S1
+  atac_l2_rep2b: HS327_crb55_JA7
+  atac_l3_rep1a: HS232_L3_JA8_N2_atac_S1
+  atac_l3_rep1b: HS298_JA8_N2_atac_Sr
+  atac_l3_rep1c: HS327_crb55_JA8
+  atac_l3_rep2a: HS232_L3_JA22_N2_atac_S2
+  atac_l3_rep2b: HS298_JA22_N2_atac_Sr
+  atac_l3_rep2c: HS327_crb55_JA22
+  atac_l4_rep1a: HS232_L4_JA3_N2_atac_S2
+  atac_l4_rep1b: HS327_crb55_JA3
+  atac_l4_rep2a: HS298_JA9_N2_atac_S5
+  atac_l4_rep2b: HS327_crb55_JA9
+  atac_ya_rep1a: HS168_crb55_N702-N503
+  atac_ya_rep1b: HS254_YA_JA4_N2_atac_S2
+  atac_ya_rep1c: HS327_crb55_JA4
+  atac_ya_rep2: HS168_crb55_N701-N503
+
+atac721: # ATAC-seq, aging map, rev1
+  # YA replicate 1: HS456 MS14, HS457 MS20, HS458 MS31
+  # YA replicate 2: HS446 MS4, HS456 MS9
+  # D3 replicate 1: HS456 MS15, HS457 MS21, HS458 MS32
+  # D3 replicate 2: HS446 MS1, HS456 MS8, HS457 MS19
+  # Note -- D7 rep1 discarded; old rep3 is rep2 & old rep2 is rep1
+  # D7 replicate 1: HS446 MS3, HS457 MS24, HS458 MS33
+  # D7 replicate 2: HS462 MS39
+  # D10 replicate 1: HS446 MS2, HS457 MS26, HS458 MS34
+  # D10 replicate 2: HS462 MS40
+  # D14 replicate 1: HS456 MS17, HS456 MS18, HS457 MS28, HS457 MS29, HS458 MS35, HS458 MS36, HS462 MS37, HS462 MS38
+  # D14 replicate 2: HS462 MS41, HS465 MS44, HS470 MS48
+  atac_am1_ya_rep1a: HS456_MS14
+  atac_am1_ya_rep1b: HS457_MS20
+  atac_am1_ya_rep1c: HS458_MS31
+  atac_am1_ya_rep2a: HS446_MS4
+  atac_am1_ya_rep2b: HS456_MS9
+  atac_am1_d3_rep1a: HS456_MS15
+  atac_am1_d3_rep1b: HS457_MS21
+  atac_am1_d3_rep1c: HS458_MS32
+  atac_am1_d3_rep2a: HS446_MS1
+  atac_am1_d3_rep2b: HS456_MS8
+  atac_am1_d3_rep2c: HS457_MS19
+  atac_am1_d7_rep1a: HS446_MS3
+  atac_am1_d7_rep1b: HS457_MS24
+  atac_am1_d7_rep1c: HS458_MS33
+  atac_am1_d7_rep2: HS462_MS39
+  atac_am1_d10_rep1a: HS446_MS2
+  atac_am1_d10_rep1b: HS457_MS26
+  atac_am1_d10_rep1c: HS458_MS34
+  atac_am1_d10_rep2: HS462_MS40
+  atac_am1_d14_rep1a: HS456_MS17
+  atac_am1_d14_rep1b: HS456_MS18
+  atac_am1_d14_rep1c: HS457_MS28
+  atac_am1_d14_rep1d: HS457_MS29
+  atac_am1_d14_rep1e: HS458_MS35
+  atac_am1_d14_rep1f: HS458_MS36
+  atac_am1_d14_rep1g: HS462_MS37
+  atac_am1_d14_rep1h: HS462_MS38
+  atac_am1_d14_rep2a: HS462_MS41
+  atac_am1_d14_rep2b: HS465_MS44
+  atac_am1_d14_rep2c: HS470_MS48
+
+lcap:
+  chen13_lcap_rep1:
+    label: lcap_chen13_rep1
+  chen13_lcap_rep2:
+    label: lcap_chen13_rep2
+  chen13_lcap_extra_emb:
+    label: lcap_chen13_xtra_emb
+  chen13_lcap_extra_l3:
+    label: lcap_chen13_xtra_l3
+  HS434_K19_LibA:
+    label: lcap_HS434_RppH
+  HS434_K19_LibB:
+    label: lcap_HS434_CapClip
+  HS434_K19_LibC:
+    label: lcap_HS434_noDecap
+  #HS352_JA1_lcRNA_S1r_1M:
+  #  label: lcap_l2_rep1_1M
+  #HS352_JA1_lcRNA_S1r_5M:
+  #  label: lcap_l2_rep1_5M
+  #HS352_JA1_lcRNA_S1r_10M:
+  #  label: lcap_l2_rep1_10M
+  #HS352_JA1_lcRNA_S1r_20M:
+  #  label: lcap_l2_rep1_20M
+  #HS352_JA7_lcRNA_S1r_1M:
+  #  label: lcap_l2_rep2_1M
+  #HS352_JA7_lcRNA_S1r_5M:
+  #  label: lcap_l2_rep2_5M
+  #HS352_JA7_lcRNA_S1r_10M:
+  #  label: lcap_l2_rep2_10M
+  #HS352_JA7_lcRNA_S1r_20M:
+  #  label: lcap_l2_rep2_20M
+  HS182_JA26r-N2-lcRNA-S1r:
+    lcap629: lcap629_emb_rep1
+    lcap728: lcap728_emb_rep1a
+  HS485_JA26_lcRNA_S1r:
+    lcap728: lcap728_emb_rep1b
+  HS218_RC20_N2_lcRNA_S3:
+    lcap629: lcap629_emb_rep2
+    lcap728: lcap728_emb_rep2
+  HS352_JA2_lcRNA_S1r:
+    lcap629: lcap629_l1_rep1
+    lcap728: lcap728_l1_rep1a
+  HS485_JA2_lcRNA_S1r2:
+    lcap728: lcap728_l1_rep1b
+  HS352_JA6_lcRNA_S1r:
+    lcap629: lcap629_l1_rep2
+    lcap728: lcap728_l1_rep2a
+  HS485_JA6_lcRNA_S1r2:
+    lcap728: lcap728_l1_rep2b
+  HS352_JA1_lcRNA_S1r:
+    lcap629: lcap629_l2_rep1
+    lcap728: lcap728_l2_rep1
+  HS352_JA7_lcRNA_S1r:
+    lcap629: lcap629_l2_rep2
+    lcap728: lcap728_l2_rep2a
+  HS485_JA7_lcRNA_S1r2:
+    lcap728: lcap728_l2_rep2b
+  HS352_JA8_lcRNA_S1r:
+    lcap629: lcap629_l3_rep1
+    lcap728: lcap728_l3_rep1a
+  HS482_JA8_lcRNA_S1r:
+    lcap728: lcap728_l3_rep1b
+  HS352_JA22_lcRNA_S1r:
+    lcap629: lcap629_l3_rep2
+    lcap728: lcap728_l3_rep2a
+  HS485_JA22_lcRNA_S1r2:
+    lcap728: lcap728_l3_rep2b
+  HS352_JA3_lcRNA_S1r:
+    lcap629: lcap629_l4_rep1
+    lcap728: lcap728_l4_rep1a
+  HS485_JA3_lcRNA_S1r2:
+    lcap728: lcap728_l4_rep1b
+  HS352_JA9_lcRNA_S1r:
+    lcap629: lcap629_l4_rep2
+    lcap728: lcap728_l4_rep2a
+  HS485_JA9_lcRNA_S1r2:
+    lcap728: lcap728_l4_rep2b
+  HS352_JA4_lcRNA_S1r:
+    lcap629: lcap629_ya_rep1
+    lcap728: lcap728_ya_rep1a
+  HS485_JA4_lcRNA_S1r2:
+    lcap728: lcap728_ya_rep1b
+  HS352_JA5_lcRNA_S1r:
+    lcap629: lcap629_ya_rep2
+    lcap728: lcap728_ya_rep2a
+  HS485_JA5_lcRNA_S1r2:
+    lcap728: lcap728_ya_rep2b
+
+# Short cap QC (for choosing scap740)
+# - Two biological replicates for each of the six stages
+# - As many useful reads as possible
+# - Prefer collections matched to other data -- accessibility, long cap, ...
+#     - emb: RC20 and JA26 are matched to long cap
+# - Prefer TAP or Cap-Clip (=not Dpph)
+#     - higher fraction of non-mapping reads in Dpph
+#     - [Dpph may be biased towards specific sequences](https://www.tebu-bio.com/blog/2015/09/03/two-new-enzymes-available-to-replace-tap/)
+#
+# enzyme:
+#   TAP = Tobacco Acid Pyrophosphatase
+#   Cap-Clip = Cap-Clip Acid Pyrophosphatase
+#   Dpph = Decapping Pyrophosphatase -- https://www.tebu-bio.com/blog/2015/09/03/two-new-enzymes-available-to-replace-tap/
+#
+# qc_fail:
+#   under_100k_useful_reads
+#   manual_demultiplex:HS326_crb55_Index8
+
+scap:
+  # Roughly ranked by developmental stage, then by order of the experiments
+  chen13_scap_rep1a:
+    library_series_id: EMB-RonEMB1-N2-scRNA-S1_unsure1
+    collection_id: RonEMB1
+    strain: N2
+    stage: emb
+    enzyme: TAP
+    rna_type: nuclear
+    rna_purification: Phenol-chloroform extraction
+  chen13_scap_rep1b_trim20: #chen13_scap_rep1b: #-- weird replicate/sequencer; force-trim to 20bp
+    library_series_id: EMB-RonEMB1-N2-scRNA-S1_unsure2
+    collection_id: RonEMB1
+    strain: N2
+    stage: emb
+    enzyme: TAP
+    rna_type: nuclear
+    rna_purification: Phenol-chloroform extraction
+  chen13_scap_rep2:
+    library_series_id: EMB-RonEMB2-N2-scRNA-S1_unsure
+    collection_id: RonEMB2
+    strain: N2
+    stage: emb
+    enzyme: TAP
+    rna_type: nuclear
+    rna_purification: Phenol-chloroform extraction
+  chen13_scap_extra_emb:
+    library_series_id: EMB-RonEMB2-N2-scRNA-S2_unsure
+    collection_id: RonEMB2
+    strain: N2
+    stage: emb
+    enzyme: TAP
+    rna_type: nuclear
+    rna_purification: Phenol-chloroform extraction
+    comment: >
+      original_name: s_120607_1.ATCACG
+  HS067_YD100_S16:
+    library_series_id: EMB-JA24-N2-scRNA-S3_1
+    collection_id: JA24
+    strain: N2
+    stage: emb
+    enzyme: TAP
+    rna_type: chromatin-associated
+    rna_purification: Phenol-chloroform extraction
+    comment: >
+      cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS067-15797787/YD100-17055050/YD100_S16_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS067-15797787/YD100-17055050/YD100_S16_L002_R1_001.fastq.gz > ~/relmapping/samples/HS067_YD100_S16.r1.fq.gz
+      cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS067-15797787/YD100-17055050/YD100_S16_L001_R2_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS067-15797787/YD100-17055050/YD100_S16_L002_R2_001.fastq.gz > ~/relmapping/samples/HS067_YD100_S16.r2.fq.gz
+    qc_fail: under_100k_useful_reads
+  HS067_YD101_S17:
+    library_series_id: EMB-JA24-N2-scRNA-S3_2
+    collection_id: JA24
+    strain: N2
+    stage: emb
+    enzyme: TAP
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    comment: >
+      cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS067-15797787/YD101-17067065/YD101_S17_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS067-15797787/YD101-17067065/YD101_S17_L002_R1_001.fastq.gz > ~/relmapping/samples/HS067_YD101_S17.r1.fq.gz
+      cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS067-15797787/YD101-17067065/YD101_S17_L001_R2_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS067-15797787/YD101-17067065/YD101_S17_L002_R2_001.fastq.gz > ~/relmapping/samples/HS067_YD101_S17.r2.fq.gz
+    qc_fail: under_100k_useful_reads
+  HS073_yan-A:
+    library_series_id: EMB-JA24-N2-scRNA-S3_3
+    collection_id: JA24
+    strain: N2
+    stage: emb
+    enzyme: TAP
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    comment: >
+      cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS073-17173161/yan-A-18660648/yan-A_S12_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS073-17173161/yan-A-18660648/yan-A_S12_L002_R1_001.fastq.gz > ~/relmapping/samples/HS073_yan-A.r1.fq.gz
+  HS073_yan-B:
+    library_series_id: EMB-JA24-N2-scRNA-S3_4
+    collection_id: JA24
+    strain: N2
+    stage: emb
+    enzyme: TAP
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    comment: >
+      cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS073-17173161/yan-B-18630630/yan-B_S13_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS073-17173161/yan-B-18630630/yan-B_S13_L002_R1_001.fastq.gz > ~/relmapping/samples/HS073_yan-B.r1.fq.gz
+  HS182_JA25-N2-scRNA-S4r:
+    library_series_id: EMB-JA25-scRNA-S4r_unsure
+    collection_id: JA25
+    strain: N2
+    stage: emb
+    enzyme: TAP
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+  HS182_JA26r-N2-scRNA-S6r:
+    library_series_id: EMB-JA26r-scRNA-S6r_unsure
+    collection_id: JA26
+    strain: N2
+    stage: emb
+    enzyme: TAP
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: emb_rep1
+    scap740: emb_rep1
+  HS182_RC10-cfp1-scRNA-S2r:
+    library_series_id: EMB-RC10-cfp1-scRNA-S2r_unsure
+    collection_id: RC10
+    strain: cfp-1
+    stage: emb
+    enzyme: TAP
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+  HS182_RC8r-cfp1-scRNA-S1r:
+    library_series_id: EMB-RC8r-cfp1-scRNA-S1r_unsure
+    collection_id: RC8
+    strain: cfp-1
+    stage: emb
+    enzyme: TAP
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+  HS218_RC20_N2_scRNA_S7: # has matching lcap
+    library_series_id: EMB-RC20-N2-scRNA-S7
+    collection_id: RC20
+    strain: N2
+    stage: emb
+    enzyme: TAP
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: emb_rep2
+    scap740: emb_rep2
+  HS291_JA2_scRNA_S1:
+    library_series_id: L1-JA2-N2-scRNA-S1
+    collection_id: JA2
+    strain: N2
+    stage: l1
+    enzyme: Dpph
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+  HS308_JA2_scRNA_S2:
+    library_series_id: L1-JA2-N2-scRNA-S2
+    collection_id: JA2
+    strain: N2
+    stage: l1
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: l2_rep1
+    scap740: l1_rep1a
+  HS333_crb55_JA2:
+    library_series_id: L1-JA2-N2-scRNA-S2r
+    collection_id: JA2
+    strain: N2
+    stage: l1
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap740: l1_rep1b
+  HS291_JA6_scRNA_S1:
+    library_series_id: L1-JA6-N2-scRNA-S1
+    collection_id: JA6
+    strain: N2
+    stage: l1
+    enzyme: Dpph
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+  HS308_JA6_scRNA_S2:
+    library_series_id: L1-JA6-N2-scRNA-S2
+    collection_id: JA6
+    strain: N2
+    stage: l1
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: l2_rep2
+    scap740: l1_rep2a
+  HS333_crb55_JA6:
+    library_series_id: L1-JA6-N2-scRNA-S2r
+    collection_id: JA6
+    strain: N2
+    stage: l1
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap740: l1_rep2b
+  HS291_JA1_scRNA_S1:
+    library_series_id: L2-JA1-N2-scRNA-S1
+    collection_id: JA1
+    strain: N2
+    stage: l2
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: l1_rep1
+    scap740: l2_rep1
+  HS308_JA1_scRNA_s1r:
+    library_series_id: L2-JA1-N2-scRNA-S1r_unsure
+    collection_id: JA1
+    strain: N2
+    stage: l2
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    qc_fail: under_100k_useful_reads
+  HS291_JA1_scRNA_S2:
+    library_series_id: L2-JA1-N2-scRNA-S2
+    collection_id: JA1
+    strain: N2
+    stage: l2
+    enzyme: Dpph
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+  HS333_crb55_JA1:
+    library_series_id: L2-JA1-N2-scRNA-S1rr_unsure
+    collection_id: JA1
+    strain: N2
+    stage: l2
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+  HS291_JA7_scRNA_S1:
+    library_series_id: L2-JA7-N2-scRNA-S1
+    collection_id: JA7
+    strain: N2
+    stage: l2
+    enzyme: Dpph
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+  HS308_JA7_scRNA_S2:
+    library_series_id: L2-JA7-N2-scRNA-S2
+    collection_id: JA7
+    strain: N2
+    stage: l2
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: l1_rep2
+    scap740: l2_rep2a
+  HS333_crb55_JA7:
+    library_series_id: L2-JA7-N2-scRNA-S2r
+    collection_id: JA7
+    strain: N2
+    stage: l2
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap740: l2_rep2b
+  chen13_scap_extra_l3:
+    library_series_id: L3-JA34-N2-scRNA-S1
+    collection_id: JA34
+    strain: N2
+    stage: l3
+    enzyme: TAP
+    rna_type: nuclear
+    rna_purification: Phenol-chloroform extraction
+    scap740: l3_rep1
+    comment: >
+      original_name: s_120607_1.CGATGT
+  HS291_JA8_scRNA_S1:
+    library_series_id: L3-JA8-N2-scRNA-S1
+    collection_id: JA8
+    strain: N2
+    stage: l3
+    enzyme: Dpph
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+  HS308_JA8_scRNA_S2:
+    library_series_id: L3-JA8-N2-scRNA-S2
+    collection_id: JA8
+    strain: N2
+    stage: l3
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: l3_rep1
+  HS332_JA8_scRNA_S1:
+    library_series_id: L3-JA8-N2-scRNA-S1r
+    collection_id: JA8
+    strain: N2
+    stage: l3
+    enzyme: Dpph?
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    qc_fail: under_100k_useful_reads
+  HS333_crb55_JA8:
+    library_series_id: L3-JA8-N2-scRNA-S2r
+    collection_id: JA8
+    strain: N2
+    stage: l3
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+  HS252_Yan_S1:
+    library_series_id: L3-JA22-scRNA-S1
+    collection_id: JA22
+    strain: N2
+    stage: l3
+    enzyme: Dpph
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: l3_rep2a
+    scap740: l3_rep2a
+  HS252_Yan_S2:
+    library_series_id: L3-JA22-scRNA-S2
+    collection_id: JA22
+    strain: N2
+    stage: l3
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+  HS308_JA22_scRNA_S3:
+    library_series_id: L3-JA22-scRNA-S3
+    collection_id: JA22
+    strain: N2
+    stage: l3
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: l3_rep2b
+    scap740: l3_rep2b
+  HS333_crb55_JA22:
+    library_series_id: L3-JA22-scRNA-S3r
+    collection_id: JA22
+    strain: N2
+    stage: l3
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap740: l3_rep2c
+  HS291_JA3_scRNA_S1:
+    library_series_id: L4-JA3-scRNA-S1
+    collection_id: JA3
+    strain: N2
+    stage: l4
+    enzyme: Dpph
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+  HS308_JA3_scRNA_S2:
+    library_series_id: L4-JA3-scRNA-S2
+    collection_id: JA3
+    strain: N2
+    stage: l4
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: l4_rep1
+    scap740: l4_rep1a
+  HS333_crb55_JA3:
+    library_series_id: L4-JA3-scRNA-S2r
+    collection_id: JA3
+    strain: N2
+    stage: l4
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap740: l4_rep1b
+  HS326_JA9_scRNA_S1:
+    library_series_id: L4-JA9-scRNA-S1
+    collection_id: JA9
+    strain: N2
+    stage: l4
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    qc_fail: manual_demultiplex:HS326_crb55_Index10
+  HS326_crb55_Index10:
+    library_series_id: L4-JA9-scRNA-S1
+    collection_id: JA9
+    strain: N2
+    stage: l4
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: l4_rep2a
+    scap740: l4_rep2a
+  HS332_JA9_scRNA_S1:
+    library_series_id: L4-JA9-scRNA-S1r
+    collection_id: JA9
+    strain: N2
+    stage: l4
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: l4_rep2b
+    scap740: l4_rep2b
+  HS527_JA9_scRNA_S2:
+    library_series_id: L4-JA9-scRNA-S2
+    collection_id: JA9
+    strain: N2
+    stage: l4
+    enzyme: Tobacco deCap
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+  HS527_JA9_scRNA_S3:
+    library_series_id: L4-JA9-scRNA-S3
+    collection_id: JA9
+    strain: N2
+    stage: l4
+    enzyme: Tobacco deCap
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+  weick2014_ya_n2_tap:
+    library_series_id: YA-RonYA1-N2-scRNA-S1_unsure
+    collection_id: RonYA1
+    strain: N2
+    stage: ya
+    enzyme: TAP
+    rna_type: nuclear?
+    rna_purification: Phenol-chloroform extraction?
+    qc_fail: no_aggregate_bidirect_txn_pattern
+    comment: >
+      https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE49220
+      https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1195515
+      ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByExp/sra/SRX/SRX328/SRX328190/SRR943469/
+      fastq-dump --gzip -O raw_data/fastq-dump SRR943469
+  weick2014_ya_n2_tap_extra:
+    library_series_id: YA-RonYA1-N2-scRNA-S1_unsure
+    collection_id: RonYA1
+    strain: N2
+    stage: ya
+    enzyme: TAP
+    rna_type: nuclear?
+    rna_purification: Phenol-chloroform extraction?
+    scap740: ya_rep1
+    comment: >
+      Re-sequencing of weick2014_ya_n2_tap not included in the original paper; original sample name: HS068-15829816/Ron-old-17103101
+      cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS068-15829816/Ron-old-17103101/Ron-old_S1_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS068-15829816/Ron-old-17103101/Ron-old_S1_L002_R1_001.fastq.gz > ~/relmapping/samples/weick2014_ya_n2_tap_extra.r1.fq.gz
+      cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS068-15829816/Ron-old-17103101/Ron-old_S1_L001_R2_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS068-15829816/Ron-old-17103101/Ron-old_S1_L002_R2_001.fastq.gz > ~/relmapping/samples/weick2014_ya_n2_tap_extra.r2.fq.gz
+  HS053_Yan-02_S16:
+    library_series_id: YA-RonYA2-N2-scRNA-S2_1
+    collection_id: RonYA2
+    strain: N2
+    stage: ya
+    enzyme: TAP
+    rna_type: nuclear
+    rna_purification: Zymo Column
+    comment: >
+      cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS053-12456444/Yan-02-13481478/Yan-02_S16_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS053-12456444/Yan-02-13481478/Yan-02_S16_L002_R1_001.fastq.gz > ~/relmapping/samples/HS053_Yan-02_S16.r1.fq.gz
+  HS053_Yan-03_S17:
+    library_series_id: YA-RonYA2-N2-scRNA-S2_2
+    collection_id: RonYA2
+    strain: N2
+    stage: ya
+    enzyme: TAP
+    rna_type: nuclear
+    rna_purification: Zymo Column
+    comment: >
+      cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS053-12456444/Yan-03-13483476/Yan-03_S17_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS053-12456444/Yan-03-13483476/Yan-03_S17_L002_R1_001.fastq.gz > ~/relmapping/samples/HS053_Yan-03_S17.r1.fq.gz
+  HS057_Yan-C_S12:
+    library_series_id: YA-RonYA2-N2-scRNA-S2_3
+    collection_id: RonYA2
+    strain: N2
+    stage: ya
+    enzyme: TAP
+    rna_type: nuclear
+    rna_purification: 20-100nt RNA by 15pct Gel
+    scap740: ya_rep2
+    comment: >
+      cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS057-13700689/Yan-C-14820825/Yan-C_S12_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS057-13700689/Yan-C-14820825/Yan-C_S12_L002_R1_001.fastq.gz > ~/relmapping/samples/HS057_Yan-C_S12.r1.fq.gz
+  HS057_Yan-T_S11:
+    library_series_id: YA-RonYA2-N2-scRNA-S2_4
+    collection_id: RonYA2
+    strain: N2
+    stage: ya
+    enzyme: TAP
+    rna_type: nuclear
+    rna_purification: 20-100nt RNA by 15pct Gel
+    comment: >
+      cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS057-13700689/Yan-T-14828825/Yan-T_S11_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS057-13700689/Yan-T-14828825/Yan-T_S11_L002_R1_001.fastq.gz > ~/relmapping/samples/HS057_Yan-T_S11.r1.fq.gz
+  HS326_JA4_scRNA_S1:
+    library_series_id: YA-JA4-N2-scRNA-S1
+    collection_id: JA4
+    strain: N2
+    stage: ya
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    qc_fail: manual_demultiplex:HS326_crb55_Index8
+  HS326_crb55_Index8:
+    library_series_id: YA-JA4-N2-scRNA-S1
+    collection_id: JA4
+    strain: N2
+    stage: ya
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: ya_rep1a
+  HS332_JA4_scRNA_S1:
+    library_series_id: YA-JA4-N2-scRNA-S1r
+    collection_id: JA4
+    strain: N2
+    stage: ya
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: ya_rep1b
+  HS326_JA5_scRNA_S1:
+    library_series_id: YA-JA5-N2-scRNA-S1
+    collection_id: JA5
+    strain: N2
+    stage: ya
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    qc_fail: manual_demultiplex:HS326_crb55_Index9
+  HS326_crb55_Index9:
+    library_series_id: YA-JA5-N2-scRNA-S1
+    collection_id: JA5
+    strain: N2
+    stage: ya
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: ya_rep2a
+  HS332_JA5_scRNA_S1:
+    library_series_id: YA-JA5-N2-scRNA-S1r
+    collection_id: JA5
+    strain: N2
+    stage: ya
+    enzyme: Cap-Clip
+    rna_type: chromatin-associated
+    rna_purification: Zymo Column
+    scap649: ya_rep2b
+  HS571_JA1_N2_scRNA:
+    library_series_id: L2-JA1-N2-scRNA-HS571
+    collection_id: JA1
+    strain: N2
+    stage: l2
+    enzyme: TAP
+    rna_type: chromatin?
+    rna_purification: oligodT?
+  HS571_JA2_N2_scRNA:
+    library_series_id: L1-JA2-N2-scRNA-HS571
+    collection_id: JA2
+    strain: N2
+    stage: l1
+    enzyme: TAP
+    rna_type: chromatin?
+    rna_purification: ZymoSmall?
+  HS571_JA9_N2_scRNA:
+    library_series_id: L4-JA9-N2-scRNA-HS571
+    collection_id: JA9
+    strain: N2
+    stage: l4
+    enzyme: TAP
+    rna_type: chromatin?
+    rna_purification: ZymoSmall?
+  HS578_JA2r_N2_scRNA:
+    library_series_id: L1-JA2-N2-scRNA-HS578
+    collection_id: JA2
+    strain: N2
+    stage: l1
+    enzyme: TAP
+    rna_type: chromatin?
+    rna_purification: ZymoSmall?
+  HS578_JA9r_N2_scRNA:
+    library_series_id: L4-JA9-N2-scRNA-HS578
+    collection_id: JA9
+    strain: N2
+    stage: l4
+    enzyme: TAP
+    rna_type: chromatin?
+    rna_purification: ZymoSmall?
+  HS582_JA1r_N2_scRNA:
+    library_series_id: L2-JA1-N2-scRNA-HS582
+    collection_id: JA1
+    strain: N2
+    stage: l2
+    enzyme: TAP
+    rna_type: chromatin?
+    rna_purification: oligodT?
+
+    
+scap_pooled:
+  L1-JA2-scRNA-HS291+308+333:
+    library_series_id: (pooled)
+    strain: N2
+    stage: l1
+    pooled_from: HS291_JA2_scRNA_S1,HS308_JA2_scRNA_S2,HS333_crb55_JA2
+  L1-JA6-scRNA-HS291+308+333:
+    library_series_id: (pooled)
+    strain: N2
+    stage: l1
+    pooled_from: HS291_JA6_scRNA_S1,HS308_JA6_scRNA_S2,HS333_crb55_JA6
+  L3-JA22-scRNA-HS252x2:
+    library_series_id: (pooled)
+    strain: N2
+    stage: l3
+    pooled_from: HS252_Yan_S1,HS252_Yan_S2
+  L4-JA3-scRNA-HS291+308+333:
+    library_series_id: (pooled)
+    strain: N2
+    stage: l4
+    pooled_from: HS291_JA3_scRNA_S1,HS308_JA3_scRNA_S2,HS333_crb55_JA3
+  L4-JA9-scRNA-HS326+332:
+    library_series_id: (pooled)
+    strain: N2
+    stage: l4
+    pooled_from: HS326_crb55_Index10,HS332_JA9_scRNA_S1
+  L4-JA9-scRNA-HS326+332+527x2:
+    library_series_id: (pooled)
+    strain: N2
+    stage: l4
+    pooled_from: HS326_crb55_Index10,HS332_JA9_scRNA_S1,HS527_JA9_scRNA_S2,HS527_JA9_scRNA_S3
+  scap541_emb:
+    library_series_id: (pooled)
+    strain: N2
+    stage: emb
+    pooled_from: HS182_JA25-N2-scRNA-S4r,HS218_RC20_N2_scRNA_S7
+  scap541_l1:
+    library_series_id: (pooled)
+    strain: N2
+    stage: l1
+    pooled_from: HS291_JA2_scRNA_S1,HS308_JA2_scRNA_S2,HS333_crb55_JA2,HS291_JA6_scRNA_S1,HS308_JA6_scRNA_S2,HS333_crb55_JA6
+  scap541_l2:
+    library_series_id: (pooled)
+    strain: N2
+    stage: l2
+    pooled_from: HS291_JA1_scRNA_S1,HS291_JA1_scRNA_S2,HS333_crb55_JA1,HS291_JA7_scRNA_S1,HS308_JA7_scRNA_S2,HS333_crb55_JA7
+  scap541_l3:
+    library_series_id: (pooled)
+    strain: N2
+    stage: l3
+    pooled_from: chen13_scap_extra_l3,HS252_Yan_S1,HS252_Yan_S2
+  scap541_l4:
+    library_series_id: (pooled)
+    strain: N2
+    stage: l4
+    pooled_from: HS291_JA3_scRNA_S1,HS308_JA3_scRNA_S2,HS333_crb55_JA3,HS326_crb55_Index10,HS332_JA9_scRNA_S1
+  scap541_ya:
+    library_series_id: (pooled)
+    strain: N2
+    stage: ya
+    pooled_from: HS057_Yan-C_S12,weick2014_ya_n2_tap_extra
+  scap541_emb_l3_ya:
+    library_series_id: (pooled)
+    strain: N2
+    stage: ya
+    pooled_from: scap541_emb,scap541_l3,scap541_ya
+  scap541_l1_l2_l4:
+    library_series_id: (pooled)
+    strain: N2
+    stage: ya
+    pooled_from: scap541_l1,scap541_l2,scap541_l4
+  scap541_emb_to_ya:
+    library_series_id: (pooled)
+    strain: N2
+    stage: ya
+    pooled_from: scap541_emb,scap541_l1,scap541_l2,scap541_l3,scap541_l4,scap541_ya
+
+hmod749:
+- H3K4me3_wt_emb
+- H3K4me3_wt_l1
+- H3K4me3_wt_l2
+- H3K4me3_wt_l3
+- H3K4me3_wt_l4
+- H3K4me3_wt_ya
+- H3K4me1_wt_emb
+- H3K4me1_wt_l1
+- H3K4me1_wt_l2
+- H3K4me1_wt_l3
+- H3K4me1_wt_l4
+- H3K4me1_wt_ya
+- H3K36me3_wt_emb
+- H3K36me3_wt_l1
+- H3K36me3_wt_l2
+- H3K36me3_wt_l3
+- H3K36me3_wt_l4
+- H3K36me3_wt_ya
+- H3K27me3_wt_emb
+- H3K27me3_wt_l1
+- H3K27me3_wt_l2
+- H3K27me3_wt_l3
+- H3K27me3_wt_l4
+- H3K27me3_wt_ya
+
+hmod:
+    H3K4me3_wt_emb_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA466_aa52_ab8580/H3K4me3^ab8580_aa52^F^N2^MxE_raw^NA^NA_AA466^C4911597.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA466_aa52_ab8580/H3K4me3^ab8580_aa52^F^N2^MxE_BEADSQ10NU^log2^ce10_AA466^Bda48311.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA466_aa52_ab8580/H3K4me3^ab8580_aa52^F^N2^MxE_BEADSQ10NU^log2^ce11_AA466^B2352469.bw
+    H3K4me3_wt_emb_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/RC052_rc12_ab8580/H3K4me3^ab8580_rc12^F^N2^embryo_raw^NA^NA_RC052^C7211304.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/RC052_rc12_ab8580/H3K4me3^ab8580_rc12^F^N2^embryo_BEADSQ10NU^log2^ce10_RC052^Bd959253.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/RC052_rc12_ab8580/H3K4me3^ab8580_rc12^F^N2^embryo_BEADSQ10NU^log2^ce11_RC052^B6a54439.bw
+    H3K4me3_wt_l1_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA515_aa71_ab8580/H3K4me3^ab8580_aa71^F^N2^L1_raw^NA^NA_AA515^Cba31976.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA515_aa71_ab8580/H3K4me3^ab8580_aa71^F^N2^L1_BEADSQ10NU^log2^ce10_AA515^Bd748950.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA515_aa71_ab8580/H3K4me3^ab8580_aa71^F^N2^L1_BEADSQ10NU^log2^ce11_AA515^B2252613.bw
+    H3K4me3_wt_l1_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA694_aa120_ab8580/H3K4me3^ab8580_aa120^F^N2^L1_raw^NA^NA_AA694^Ca439043.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA694_aa120_ab8580/H3K4me3^ab8580_aa120^F^N2^L1_BEADSQ10NU^log2^ce10_AA694^Bd260445.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA694_aa120_ab8580/H3K4me3^ab8580_aa120^F^N2^L1_BEADSQ10NU^log2^ce11_AA694^B9657112.bw
+    H3K4me3_wt_l2_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA519_aa72_ab8580/H3K4me3^ab8580_aa72^F^N2^L2_raw^NA^NA_AA519^C6a31980.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA519_aa72_ab8580/H3K4me3^ab8580_aa72^F^N2^L2_BEADSQ10NU^log2^ce10_AA519^Bc149015.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA519_aa72_ab8580/H3K4me3^ab8580_aa72^F^N2^L2_BEADSQ10NU^log2^ce11_AA519^Bc852619.bw
+    H3K4me3_wt_l2_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA698_aa121_ab8580/H3K4me3^ab8580_aa121^F^N2^L2_raw^NA^NA_AA698^C4d39301.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA698_aa121_ab8580/H3K4me3^ab8580_aa121^F^N2^L2_BEADSQ10NU^log2^ce10_AA698^Bbd60356.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA698_aa121_ab8580/H3K4me3^ab8580_aa121^F^N2^L2_BEADSQ10NU^log2^ce11_AA698^B0c57072.bw
+    H3K4me3_wt_l3_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA449_aa46_ab8580/H3K4me3^ab8580_aa46^F^N2^L3_raw^NA^NA_AA449^Rbf09917.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA449_aa46_ab8580/H3K4me3^ab8580_aa46^F^N2^L3_BEADSQ10NU^log2^ce10_AA449^B3c48049.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA449_aa46_ab8580/H3K4me3^ab8580_aa46^F^N2^L3_BEADSQ10NU^log2^ce11_AA449^B4d52438.bw
+    H3K4me3_wt_l3_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA611_fb24_ab8580/H3K4me3^ab8580_fb24^F^N2^L3_raw^NA^NA_AA611^C8b36048.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA611_fb24_ab8580/H3K4me3^ab8580_fb24^F^N2^L3_BEADSQ10NU^log2^ce10_AA611^B0050284.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA611_fb24_ab8580/H3K4me3^ab8580_fb24^F^N2^L3_BEADSQ10NU^log2^ce11_AA611^B8352878.bw
+    H3K4me3_wt_l4_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA507_aa73_ab8580/H3K4me3^ab8580_aa73^F^N2^L4_raw^NA^NA_AA507^C0f32000.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA507_aa73_ab8580/H3K4me3^ab8580_aa73^F^N2^L4_BEADSQ10NU^log2^ce10_AA507^B0548893.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA507_aa73_ab8580/H3K4me3^ab8580_aa73^F^N2^L4_BEADSQ10NU^log2^ce11_AA507^B7852588.bw
+    H3K4me3_wt_l4_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA523_aa75_ab8580/H3K4me3^ab8580_aa75^F^N2^L4_raw^NA^NA_AA523^Cc932325.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA523_aa75_ab8580/H3K4me3^ab8580_aa75^F^N2^L4_BEADSQ10NU^log2^ce10_AA523^B5949053.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA523_aa75_ab8580/H3K4me3^ab8580_aa75^F^N2^L4_BEADSQ10NU^log2^ce11_AA523^B4652626.bw
+    H3K4me3_wt_ya_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA511_aa74_ab8580/H3K4me3^ab8580_aa74^F^N2^YA_raw^NA^NA_AA511^Cc032028.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA511_aa74_ab8580/H3K4me3^ab8580_aa74^F^N2^YA_BEADSQ10NU^log2^ce10_AA511^B8348897.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA511_aa74_ab8580/H3K4me3^ab8580_aa74^F^N2^YA_BEADSQ10NU^log2^ce11_AA511^Be352594.bw
+    H3K4me3_wt_ya_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA528_aa76_ab8580/H3K4me3^ab8580_aa76^F^N2^YA_raw^NA^NA_AA528^C1732330.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA528_aa76_ab8580/H3K4me3^ab8580_aa76^F^N2^YA_BEADSQ10NU^log2^ce10_AA528^B5849095.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA528_aa76_ab8580/H3K4me3^ab8580_aa76^F^N2^YA_BEADSQ10NU^log2^ce11_AA528^B4452640.bw
+    H3K4me1_wt_emb_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA464_aa52_ab8895/H3K4me1^ab8895_aa52^F^N2^MxE_raw^NA^NA_AA464^Cc811595.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA464_aa52_ab8895/H3K4me1^ab8895_aa52^F^N2^MxE_BEADSQ10NU^log2^ce10_AA464^B9248284.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA464_aa52_ab8895/H3K4me1^ab8895_aa52^F^N2^MxE_BEADSQ10NU^log2^ce11_AA464^B8652460.bw
+    H3K4me1_wt_emb_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/RC050_rc12_ab8895/H3K4me1^ab8895_rc12^F^N2^embryo_raw^NA^NA_RC050^C6911299.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/RC050_rc12_ab8895/H3K4me1^ab8895_rc12^F^N2^embryo_BEADSQ10NU^log2^ce10_RC050^B9b59217.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/RC050_rc12_ab8895/H3K4me1^ab8895_rc12^F^N2^embryo_BEADSQ10NU^log2^ce11_RC050^Bd954436.bw
+    H3K4me1_wt_l1_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA514_aa71_ab8895/H3K4me1^ab8895_aa71^F^N2^L1_raw^NA^NA_AA514^C3531975.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA514_aa71_ab8895/H3K4me1^ab8895_aa71^F^N2^L1_BEADSQ10NU^log2^ce10_AA514^B9248943.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA514_aa71_ab8895/H3K4me1^ab8895_aa71^F^N2^L1_BEADSQ10NU^log2^ce11_AA514^B3752610.bw
+    H3K4me1_wt_l1_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA701_aa120_ab8895/H3K4me1^ab8895_aa120^F^N2^L1_raw^NA^NA_AA701^C4839529.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA701_aa120_ab8895/H3K4me1^ab8895_aa120^F^N2^L1_BEADSQ10NU^log2^ce10_AA701^Bde60496.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA701_aa120_ab8895/H3K4me1^ab8895_aa120^F^N2^L1_BEADSQ10NU^log2^ce11_AA701^Bf357248.bw
+    H3K4me1_wt_l2_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA518_aa72_ab8895/H3K4me1^ab8895_aa72^F^N2^L2_raw^NA^NA_AA518^Cf331979.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA518_aa72_ab8895/H3K4me1^ab8895_aa72^F^N2^L2_BEADSQ10NU^log2^ce10_AA518^B0e49002.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA518_aa72_ab8895/H3K4me1^ab8895_aa72^F^N2^L2_BEADSQ10NU^log2^ce11_AA518^B6652618.bw
+    H3K4me1_wt_l2_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA697_aa121_ab8895/H3K4me1^ab8895_aa121^F^N2^L2_raw^NA^NA_AA697^C7639037.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA697_aa121_ab8895/H3K4me1^ab8895_aa121^F^N2^L2_BEADSQ10NU^log2^ce10_AA697^B5a60612.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA697_aa121_ab8895/H3K4me1^ab8895_aa121^F^N2^L2_BEADSQ10NU^log2^ce11_AA697^B4757075.bw
+    H3K4me1_wt_l3_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA017_mE05_ab8895/H3K4me1^ab8895_mE05^F^N2^L3_raw^NA^NA_AA017^Fxx00655.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA017_mE05_ab8895/H3K4me1^ab8895_mE05^F^N2^L3_BEADSQ10NU^log2^ce10_AA017^B6241005.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA017_mE05_ab8895/H3K4me1^ab8895_mE05^F^N2^L3_BEADSQ10NU^log2^ce11_AA017^B5151098.bw
+    H3K4me1_wt_l3_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA034_mE06_ab8895/H3K4me1^ab8895_mE06^F^N2^L3_raw^NA^NA_AA034^Fxx00686.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA034_mE06_ab8895/H3K4me1^ab8895_mE06^F^N2^L3_BEADSQ10NU^log2^ce10_AA034^B3341126.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA034_mE06_ab8895/H3K4me1^ab8895_mE06^F^N2^L3_BEADSQ10NU^log2^ce11_AA034^B3251136.bw
+    H3K4me1_wt_l4_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA506_aa73_ab8895/H3K4me1^ab8895_aa73^F^N2^L4_raw^NA^NA_AA506^C6a31983.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA506_aa73_ab8895/H3K4me1^ab8895_aa73^F^N2^L4_BEADSQ10NU^log2^ce10_AA506^B7148945.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA506_aa73_ab8895/H3K4me1^ab8895_aa73^F^N2^L4_BEADSQ10NU^log2^ce11_AA506^Be752587.bw
+    H3K4me1_wt_l4_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA522_aa75_ab8895/H3K4me1^ab8895_aa75^F^N2^L4_raw^NA^NA_AA522^Cd632324.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA522_aa75_ab8895/H3K4me1^ab8895_aa75^F^N2^L4_BEADSQ10NU^log2^ce10_AA522^B3249047.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA522_aa75_ab8895/H3K4me1^ab8895_aa75^F^N2^L4_BEADSQ10NU^log2^ce11_AA522^B5a52624.bw
+    H3K4me1_wt_ya_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA510_aa74_ab8895/H3K4me1^ab8895_aa74^F^N2^YA_raw^NA^NA_AA510^C4932016.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA510_aa74_ab8895/H3K4me1^ab8895_aa74^F^N2^YA_BEADSQ10NU^log2^ce10_AA510^B7e48938.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA510_aa74_ab8895/H3K4me1^ab8895_aa74^F^N2^YA_BEADSQ10NU^log2^ce11_AA510^B9b52591.bw
+    H3K4me1_wt_ya_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA527_aa76_ab8895/H3K4me1^ab8895_aa76^F^N2^YA_raw^NA^NA_AA527^Cd432329.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA527_aa76_ab8895/H3K4me1^ab8895_aa76^F^N2^YA_BEADSQ10NU^log2^ce10_AA527^Be149058.bw
+        log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA527_aa76_ab8895/H3K4me1^ab8895_aa76^F^N2^YA_BEADSQ10NU^log2^ce11_AA527^B4b52637.bw
+    H3K36me3_wt_emb_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA535_aa52_ab9050/H3K36me3^ab9050_aa52^F^N2^MxE_raw^NA^NA_AA535^Cef32412.txt.gz
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA535_aa52_ab9050/H3K36me3^ab9050_aa52^F^N2^MxE_BEADSQ10NU^zscore^ce10_AA535^Bf049258.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA535_aa52_ab9050/H3K36me3^ab9050_aa52^F^N2^MxE_BEADSQ10NU^zscore^ce11_AA535^B1843748.bw
+    H3K36me3_wt_emb_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/RC058_rc12_ab9050/H3K36me3^ab9050_rc12^F^N2^embryo_raw^NA^NA_RC058^Ce211314.txt.gz
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/RC058_rc12_ab9050/H3K36me3^ab9050_rc12^F^N2^embryo_BEADSQ10NU^zscore^ce10_RC058^Bc359295.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/RC058_rc12_ab9050/H3K36me3^ab9050_rc12^F^N2^embryo_BEADSQ10NU^zscore^ce11_RC058^Bec49975.bw
+    H3K36me3_wt_l1_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA516_aa71_ab9050/H3K36me3^ab9050_aa71^F^N2^L1_raw^NA^NA_AA516^C2331977.txt.gz
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA516_aa71_ab9050/H3K36me3^ab9050_aa71^F^N2^L1_BEADSQ10NU^zscore^ce10_AA516^B0748949.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA516_aa71_ab9050/H3K36me3^ab9050_aa71^F^N2^L1_BEADSQ10NU^zscore^ce11_AA516^B7a43354.bw
+    H3K36me3_wt_l1_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA695_aa120_ab9050/H3K36me3^ab9050_aa120^F^N2^L1_raw^NA^NA_AA695^Cd539038.txt.gz
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA695_aa120_ab9050/H3K36me3^ab9050_aa120^F^N2^L1_BEADSQ10NU^zscore^ce10_AA695^B7b60597.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA695_aa120_ab9050/H3K36me3^ab9050_aa120^F^N2^L1_BEADSQ10NU^zscore^ce11_AA695^Bd757081.bw
+    H3K36me3_wt_l2_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA520_aa72_ab9050/H3K36me3^ab9050_aa72^F^N2^L2_raw^NA^NA_AA520^Cdd31981.txt.gz
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA520_aa72_ab9050/H3K36me3^ab9050_aa72^F^N2^L2_BEADSQ10NU^zscore^ce10_AA520^Bcf48978.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA520_aa72_ab9050/H3K36me3^ab9050_aa72^F^N2^L2_BEADSQ10NU^zscore^ce11_AA520^Bfb43340.bw
+    H3K36me3_wt_l2_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA699_aa121_ab9050/H3K36me3^ab9050_aa121^F^N2^L2_raw^NA^NA_AA699^C0939302.txt.gz
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA699_aa121_ab9050/H3K36me3^ab9050_aa121^F^N2^L2_BEADSQ10NU^zscore^ce10_AA699^B8a60604.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA699_aa121_ab9050/H3K36me3^ab9050_aa121^F^N2^L2_BEADSQ10NU^zscore^ce11_AA699^B4757074.bw
+    H3K36me3_wt_l3_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA265pe1_fE3_ab9050/H3K36me3^ab9050_fE3^F^N2^L3_raw^NA^NA_AA265pe1^Ra806757.txt.gz
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA265pe1_fE3_ab9050/H3K36me3^ab9050_fE3^F^N2^L3_BEADSQ10NU^zscore^ce10_AA265pe1^B0245585.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA265pe1_fE3_ab9050/H3K36me3^ab9050_fE3^F^N2^L3_BEADSQ10NU^zscore^ce11_AA265pe1^Pfe41328.bw
+    H3K36me3_wt_l3_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA373_fE4_ab9050/H3K36me3^ab9050_fE4^F^N2^L3_raw^NA^NA_AA373^Rb509114.txt.gz
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA373_fE4_ab9050/H3K36me3^ab9050_fE4^F^N2^L3_BEADSQ10NU^zscore^ce10_AA373^B2d47103.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA373_fE4_ab9050/H3K36me3^ab9050_fE4^F^N2^L3_BEADSQ10NU^zscore^ce11_AA373^Pf642302.bw
+    H3K36me3_wt_l4_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA508_aa73_ab9050/H3K36me3^ab9050_aa73^F^N2^L4_raw^NA^NA_AA508^C2b32008.txt.gz
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA508_aa73_ab9050/H3K36me3^ab9050_aa73^F^N2^L4_BEADSQ10NU^zscore^ce10_AA508^B6b48807.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA508_aa73_ab9050/H3K36me3^ab9050_aa73^F^N2^L4_BEADSQ10NU^zscore^ce11_AA508^B4f43349.bw
+    H3K36me3_wt_l4_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA524_aa75_ab9050/H3K36me3^ab9050_aa75^F^N2^L4_raw^NA^NA_AA524^C3032326.txt.gz
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA524_aa75_ab9050/H3K36me3^ab9050_aa75^F^N2^L4_BEADSQ10NU^zscore^ce10_AA524^B6a48966.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA524_aa75_ab9050/H3K36me3^ab9050_aa75^F^N2^L4_BEADSQ10NU^zscore^ce11_AA524^B5943562.bw
+    H3K36me3_wt_ya_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA512_aa74_ab9050/H3K36me3^ab9050_aa74^F^N2^YA_raw^NA^NA_AA512^C7432031.txt.gz
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA512_aa74_ab9050/H3K36me3^ab9050_aa74^F^N2^YA_BEADSQ10NU^zscore^ce10_AA512^Ba748898.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA512_aa74_ab9050/H3K36me3^ab9050_aa74^F^N2^YA_BEADSQ10NU^zscore^ce11_AA512^B7b43377.bw
+    H3K36me3_wt_ya_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA529_aa76_ab9050/H3K36me3^ab9050_aa76^F^N2^YA_raw^NA^NA_AA529^Cc932332.txt.gz
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA529_aa76_ab9050/H3K36me3^ab9050_aa76^F^N2^YA_BEADSQ10NU^zscore^ce10_AA529^B6d49110.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA529_aa76_ab9050/H3K36me3^ab9050_aa76^F^N2^YA_BEADSQ10NU^zscore^ce11_AA529^B4f43673.bw
+    H3K27me3_wt_emb_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA536_aa52_309-95259/H3K27me3^309-95259_aa52^F^N2^MxE_raw^NA^NA_AA536^C9632413.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA536_aa52_309-95259/H3K27me3^309-95259_aa52^F^N2^MxE_BEADSQ10NU^log2^ce10_AA536^B2e49235.bw
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA536_aa52_309-95259/H3K27me3^309-95259_aa52^F^N2^MxE_BEADSQ10NU^zscore^ce10_AA536^Bd049233.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA536_aa52_309-95259/H3K27me3^309-95259_aa52^F^N2^MxE_BEADSQ10NU^zscore^ce11_AA536^B9d43751.bw
+    H3K27me3_wt_emb_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA537_rc12_309-95259/H3K27me3^309-95259_rc12^F^N2^MxE_raw^NA^NA_AA537^C3532414.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA537_rc12_309-95259/H3K27me3^309-95259_rc12^F^N2^MxE_BEADSQ10NU^log2^ce10_AA537^Bf549236.bw
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA537_rc12_309-95259/H3K27me3^309-95259_rc12^F^N2^MxE_BEADSQ10NU^zscore^ce10_AA537^B1f49235.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA537_rc12_309-95259/H3K27me3^309-95259_rc12^F^N2^MxE_BEADSQ10NU^zscore^ce11_AA537^B7d43755.bw
+    H3K27me3_wt_l1_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA517_aa71_309-95259/H3K27me3^309-95259_aa71^F^N2^L1_raw^NA^NA_AA517^C8131978.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA517_aa71_309-95259/H3K27me3^309-95259_aa71^F^N2^L1_BEADSQ10NU^log2^ce10_AA517^B6e48997.bw
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA517_aa71_309-95259/H3K27me3^309-95259_aa71^F^N2^L1_BEADSQ10NU^zscore^ce10_AA517^Ba148989.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA517_aa71_309-95259/H3K27me3^309-95259_aa71^F^N2^L1_BEADSQ10NU^zscore^ce11_AA517^B2443351.bw
+    H3K27me3_wt_l1_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA696_aa120_309-95259/H3K27me3^309-95259_aa120^F^N2^L1_raw^NA^NA_AA696^Ccf39036.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA696_aa120_309-95259/H3K27me3^309-95259_aa120^F^N2^L1_BEADSQ10NU^log2^ce10_AA696^Bf160579.bw
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA696_aa120_309-95259/H3K27me3^309-95259_aa120^F^N2^L1_BEADSQ10NU^zscore^ce10_AA696^B3360567.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA696_aa120_309-95259/H3K27me3^309-95259_aa120^F^N2^L1_BEADSQ10NU^zscore^ce11_AA696^Bb557050.bw
+    H3K27me3_wt_l2_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA521_aa72_309-95259/H3K27me3^309-95259_aa72^F^N2^L2_raw^NA^NA_AA521^C4231982.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA521_aa72_309-95259/H3K27me3^309-95259_aa72^F^N2^L2_BEADSQ10NU^log2^ce10_AA521^B0149011.bw
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA521_aa72_309-95259/H3K27me3^309-95259_aa72^F^N2^L2_BEADSQ10NU^zscore^ce10_AA521^Bfc49008.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA521_aa72_309-95259/H3K27me3^309-95259_aa72^F^N2^L2_BEADSQ10NU^zscore^ce11_AA521^B7743528.bw
+    H3K27me3_wt_l2_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA700_aa121_309-95259/H3K27me3^309-95259_aa121^F^N2^L2_raw^NA^NA_AA700^Cba39300.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA700_aa121_309-95259/H3K27me3^309-95259_aa121^F^N2^L2_BEADSQ10NU^log2^ce10_AA700^B3960542.bw
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA700_aa121_309-95259/H3K27me3^309-95259_aa121^F^N2^L2_BEADSQ10NU^zscore^ce10_AA700^Bcc60534.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA700_aa121_309-95259/H3K27me3^309-95259_aa121^F^N2^L2_BEADSQ10NU^zscore^ce11_AA700^B1d57076.bw
+    H3K27me3_wt_l3_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA030_mE05_HK00013/H3K27me3^HK00013_mE05^F^N2^L3_raw^NA^NA_AA030^Fxx00681.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA030_mE05_HK00013/H3K27me3^HK00013_mE05^F^N2^L3_BEADSQ10NU^log2^ce10_AA030^Bab40925.bw
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA030_mE05_HK00013/H3K27me3^HK00013_mE05^F^N2^L3_BEADSQ10NU^zscore^ce10_AA030^B0940923.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA030_mE05_HK00013/H3K27me3^HK00013_mE05^F^N2^L3_BEADSQ10NU^zscore^ce11_AA030^P0238399.bw
+    H3K27me3_wt_l3_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA039_mE06_HK00013/H3K27me3^HK00013_mE06^F^N2^L3_raw^NA^NA_AA039^Fxx00697.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA039_mE06_HK00013/H3K27me3^HK00013_mE06^F^N2^L3_BEADSQ10NU^log2^ce10_AA039^B3441197.bw
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA039_mE06_HK00013/H3K27me3^HK00013_mE06^F^N2^L3_BEADSQ10NU^zscore^ce10_AA039^Ba341194.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA039_mE06_HK00013/H3K27me3^HK00013_mE06^F^N2^L3_BEADSQ10NU^zscore^ce11_AA039^P1b38461.bw
+    H3K27me3_wt_l4_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA509_aa73_309-95259/H3K27me3^309-95259_aa73^F^N2^L4_raw^NA^NA_AA509^C3032009.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA509_aa73_309-95259/H3K27me3^309-95259_aa73^F^N2^L4_BEADSQ10NU^log2^ce10_AA509^Bc848876.bw
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA509_aa73_309-95259/H3K27me3^309-95259_aa73^F^N2^L4_BEADSQ10NU^zscore^ce10_AA509^B7448873.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA509_aa73_309-95259/H3K27me3^309-95259_aa73^F^N2^L4_BEADSQ10NU^zscore^ce11_AA509^Bed43415.bw
+    H3K27me3_wt_l4_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA525_aa75_309-95259/H3K27me3^309-95259_aa75^F^N2^L4_raw^NA^NA_AA525^C3d32327.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA525_aa75_309-95259/H3K27me3^309-95259_aa75^F^N2^L4_BEADSQ10NU^log2^ce10_AA525^B8049106.bw
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA525_aa75_309-95259/H3K27me3^309-95259_aa75^F^N2^L4_BEADSQ10NU^zscore^ce10_AA525^B7349098.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA525_aa75_309-95259/H3K27me3^309-95259_aa75^F^N2^L4_BEADSQ10NU^zscore^ce11_AA525^B1d43629.bw
+    H3K27me3_wt_ya_rep1:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA513_aa74_309-95259/H3K27me3^309-95259_aa74^F^N2^YA_raw^NA^NA_AA513^C0432032.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA513_aa74_309-95259/H3K27me3^309-95259_aa74^F^N2^YA_BEADSQ10NU^log2^ce10_AA513^Bfa48993.bw
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA513_aa74_309-95259/H3K27me3^309-95259_aa74^F^N2^YA_BEADSQ10NU^zscore^ce10_AA513^B5a48983.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA513_aa74_309-95259/H3K27me3^309-95259_aa74^F^N2^YA_BEADSQ10NU^zscore^ce11_AA513^Bb843362.bw
+    H3K27me3_wt_ya_rep2:
+        reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA530_aa76_309-95259/H3K27me3^309-95259_aa76^F^N2^YA_raw^NA^NA_AA530^C7f32333.txt.gz
+        log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA530_aa76_309-95259/H3K27me3^309-95259_aa76^F^N2^YA_BEADSQ10NU^log2^ce10_AA530^B4749079.bw
+        zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA530_aa76_309-95259/H3K27me3^309-95259_aa76^F^N2^YA_BEADSQ10NU^zscore^ce10_AA530^B4f49076.bw
+        zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA530_aa76_309-95259/H3K27me3^309-95259_aa76^F^N2^YA_BEADSQ10NU^zscore^ce11_AA530^B6d43679.bw
+
+chip:
+- /mnt/jadb2/DBfile/DBfiles/ARP6/N2/AA341_aa43_Q6010/ARP6^Q6010_aa43^EGS3min^N2^L3_BEADSQ10NU^linear^ce10_AA341^B9f46629.bw
+- /mnt/jadb2/DBfile/DBfiles/ARP6/N2/AA399_ME20_Q6010/ARP6^Q6010_ME20^E^N2^L3_BEADSQ10NU^linear^ce10_AA399^B1f47374.bw
+- /mnt/jadb2/DBfile/DBfiles/CFP1-GFP/Cfp1-GFP/RC009_rc03_ab290/CFP1-GFP^ab290_rc03^F^Cfp1-GFP^embryo_BEADSQ10NU^linear^ce10_RC009^Bb058737.bw
+- /mnt/jadb2/DBfile/DBfiles/CFP1-GFP/Cfp1-GFP/RC010_rc04_ab290/CFP1-GFP^ab290_rc04^F^Cfp1-GFP^embryo_BEADSQ10NU^linear^ce10_RC010^Be758702.bw
+- /mnt/jadb2/DBfile/DBfiles/DOT1-1/N2/AA631_aa98_Q3964/DOT1-1^Q3964_aa98^E^N2^starvedL1_BEADSQ10NU^linear^ce10_AA631^Bc550519.bw
+- /mnt/jadb2/DBfile/DBfiles/DOT1-1/N2/AA634_aa102_Q3964/DOT1-1^Q3964_aa102^E^N2^L1_BEADSQ10NU^linear^ce10_AA634^Bdb50568.bw
+- /mnt/jadb2/DBfile/DBfiles/DPL1/N2/IL019_mE01_Q3599/DPL1^Q3599_mE01^F^N2^L3_BEADSQ10NU^linear^ce10_IL019^B6a56015.bw
+- /mnt/jadb2/DBfile/DBfiles/DPL1/N2/IL042_mE02_Q3599/DPL1^Q3599_mE02^F^N2^L3_BEADSQ10NU^linear^ce10_IL042^Bf356406.bw
+- /mnt/jadb2/DBfile/DBfiles/EFL1/N2/MC016_aa33_Q3590/EFL1^Q3590_aa33^E^N2^L3_BEADSQ10NU^linear^ce10_MC016^B4d57062.bw
+- /mnt/jadb2/DBfile/DBfiles/EFL1/N2/MC017_aa31_Q3590/EFL1^Q3590_aa31^E^N2^L3_BEADSQ10NU^linear^ce10_MC017^Bd856981.bw
+- /mnt/jadb2/DBfile/DBfiles/EPC1/N2/PK015_PK02_Q0820/EPC1^Q0820_PK02^E^N2^L3_BEADSQ10NU^linear^ce10_PK015^Bf258323.bw
+- /mnt/jadb2/DBfile/DBfiles/EPC1/N2/PK016_PK03_Q0820/EPC1^Q0820_PK03^E^N2^L3_BEADSQ10NU^linear^ce10_PK016^B0958330.bw
+- /mnt/jadb2/DBfile/DBfiles/GFL1/N2/AA407_ME20_Q6024/GFL1^Q6024_ME20^E^N2^L3_BEADSQ10NU^linear^ce10_AA407^Be847488.bw
+- /mnt/jadb2/DBfile/DBfiles/GFL1/N2/AA429_aa45_Q6024/GFL1^Q6024_aa45^E^N2^L3_BEADSQ10NU^linear^ce10_AA429^Bd947842.bw
+- /mnt/jadb2/DBfile/DBfiles/HCF1/N2/AA346_aa44_Q5985/HCF1^Q5985_aa44^E^N2^L3_BEADSQ10NU^linear^ce10_AA346^Bb246671.bw
+- /mnt/jadb2/DBfile/DBfiles/HCF1/N2/AA403_ME20_Q5985/HCF1^Q5985_ME20^E^N2^L3_BEADSQ10NU^linear^ce10_AA403^B9347410.bw
+- /mnt/jadb2/DBfile/DBfiles/HDA1/N2/IL022_mE12_Q2354/HDA1^Q2354_mE12^E^N2^L3_BEADSQ10NU^linear^ce10_IL022^B5f56111.bw
+- /mnt/jadb2/DBfile/DBfiles/HDA1/N2/MH008_mE08_Q2354/HDA1^Q2354_mE08^E^N2^L3_BEADSQ10NU^linear^ce10_MH008^B4557290.bw
+- /mnt/jadb2/DBfile/DBfiles/HPL2/N2/PK010_mE11_Q2340/HPL2^Q2340_mE11^E^N2^L3_BEADSQ10NU^linear^ce10_PK010^Bfa58261.bw
+- /mnt/jadb2/DBfile/DBfiles/HPL2/N2/PK011_mE08_Q2340/HPL2^Q2340_mE08^E^N2^L3_BEADSQ10NU^linear^ce10_PK011^Bba58368.bw
+- /mnt/jadb2/DBfile/DBfiles/JMJD2/N2/MH004_mE16_Q3951/JMJD2^Q3951_mE16^E^N2^L3_BEADSQ10NU^linear^ce10_MH004^B8257198.bw
+- /mnt/jadb2/DBfile/DBfiles/JMJD2/N2/PK021_mE08_Q3951/JMJD2^Q3951_mE08^E^N2^L3_BEADSQ10NU^linear^ce10_PK021^B9d58483.bw
+- /mnt/jadb2/DBfile/DBfiles/LEO1/N2/AA538_aa78_1083/LEO1^1083_aa78^E^N2^L3_BEADSQ10NU^linear^ce10_AA538^Bfd49253.bw
+- /mnt/jadb2/DBfile/DBfiles/LEO1/N2/AA603_aa90_1083/LEO1^1083_aa90^E^N2^L3_BEADSQ10NU^linear^ce10_AA603^B3c50262.bw
+- /mnt/jadb2/DBfile/DBfiles/LET418/N2/AA136_mE17_Q3861/LET418^Q3861_mE17^E^N2^L3_BEADSQ10NU^linear^ce10_AA136^B2943434.bw
+- /mnt/jadb2/DBfile/DBfiles/LET418/N2/AA618_aa45_Q3861/LET418^Q3861_aa45^E^N2^L3_BEADSQ10NU^linear^ce10_AA618^B4b50449.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN13/N2/AA207_mE19_Q0838/LIN13^Q0838_mE19^E^N2^L3_BEADSQ10NU^linear^ce10_AA207^B4a44517.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN13/N2/PK013_mE08_Q0838/LIN13^Q0838_mE08^E^N2^L3_BEADSQ10NU^linear^ce10_PK013^B7d58343.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN15B/N2/AA657_aa107-20ug_Q2330/LIN15B^Q2330_aa107-20ug^E^N2^starvedL1_BEADSQ10NU^linear^ce10_AA657^Bcd60487.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN15B/N2/CG074_aa106_Q2330/LIN15B^Q2330_aa106^E^N2^starvedL1_BEADSQ10NU^linear^ce10_CG074^B1253783.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN35/N2/AA125_mE16_Q2001/LIN35^Q2001_mE16^E^N2^L3_BEADSQ10NU^linear^ce10_AA125^Be843251.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN35/N2/MC018_aa33_Q2001/LIN35^Q2001_aa33^E^N2^L3_BEADSQ10NU^linear^ce10_MC018^B3b57078.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN37/N2/IL032_mE01_BH00003/LIN37^BH00003_mE01^F^N2^L3_BEADSQ10NU^linear^ce10_IL032^B0656230.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN37/N2/IL047_mE02_BH00003/LIN37^BH00003_mE02^F^N2^L3_BEADSQ10NU^linear^ce10_IL047^B3456457.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN40/N2/AA572_aa80_Q4479/LIN40^Q4479_aa80^E^N2^YA_BEADSQ10NU^linear^ce10_AA572^B1549752.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN40/N2/AA573_aa82_Q4479/LIN40^Q4479_aa82^E^N2^YA_BEADSQ10NU^linear^ce10_AA573^B3449747.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN52/N2/IL017_mE01_BH00001/LIN52^BH00001_mE01^F^N2^L3_BEADSQ10NU^linear^ce10_IL017^B3b55955.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN52/N2/IL048_mE02_BH00001/LIN52^BH00001_mE02^F^N2^L3_BEADSQ10NU^linear^ce10_IL048^Bbe56477.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN53/N2/IL030_mE01_SDQ2370/LIN53^SDQ2370_mE01^F^N2^L3_BEADSQ10NU^linear^ce10_IL030^Be356250.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN53/N2/IL031_mE02_SDQ2370/LIN53^SDQ2370_mE02^F^N2^L3_BEADSQ10NU^linear^ce10_IL031^Ba556276.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN54/N2/IL049_mE02_BH00004/LIN54^BH00004_mE02^F^N2^L3_BEADSQ10NU^linear^ce10_IL049^Bc756452.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN54/N2/IL067_mE05_BH00004/LIN54^BH00004_mE05^F^N2^L3_BEADSQ10NU^linear^ce10_IL067^Bc356767.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN61/N2/AA005_mE11_Q3520/LIN61^Q3520_mE11^E^N2^L3_BEADSQ10NU^linear^ce10_AA005^B0f40788.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN61/N2/AA156_mE16_Q3520/LIN61^Q3520_mE16^E^N2^L3_BEADSQ10NU^linear^ce10_AA156^B3443740.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN8/N2/AA009_mE13_Q3932/LIN8^Q3932_mE13^E^N2^L3_BEADSQ10NU^linear^ce10_AA009^B7140758.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN8/N2/AA209_mE17_Q2932/LIN8^Q2932_mE17^E^N2^L3_BEADSQ10NU^linear^ce10_AA209^B5544508.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN9/N2/IL021_mE01_BH00005/LIN9^BH00005_mE01^F^N2^L3_BEADSQ10NU^linear^ce10_IL021^B8a56023.bw
+- /mnt/jadb2/DBfile/DBfiles/LIN9/N2/IL069_mE02_BH00005/LIN9^BH00005_mE02^F^N2^L3_BEADSQ10NU^linear^ce10_IL069^B8d56748.bw
+- /mnt/jadb2/DBfile/DBfiles/MDT31/N2/AA172_mE16_Q5344/MDT31^Q5344_mE16^E^N2^L3_BEADSQ10NU^linear^ce10_AA172^B5044113.bw
+- /mnt/jadb2/DBfile/DBfiles/MDT31/N2/AA195_mE19_Q5344/MDT31^Q5344_mE19^E^N2^L3_BEADSQ10NU^linear^ce10_AA195^Bce44304.bw
+- /mnt/jadb2/DBfile/DBfiles/MEP1/N2/AA577_aa78_Q4612/MEP1^Q4612_aa78^E^N2^L3_BEADSQ10NU^linear^ce10_AA577^B4e49820.bw
+- /mnt/jadb2/DBfile/DBfiles/MEP1/N2/AA578_aa45_Q4612/MEP1^Q4612_aa45^E^N2^L3_BEADSQ10NU^linear^ce10_AA578^B4149796.bw
+- /mnt/jadb2/DBfile/DBfiles/MET2/N2/AA570_aa80_Q2943/MET2^Q2943_aa80^E^N2^YA_BEADSQ10NU^linear^ce10_AA570^B9d49810.bw
+- /mnt/jadb2/DBfile/DBfiles/MET2/N2/AA571_aa82_Q2943/MET2^Q2943_aa82^E^N2^YA_BEADSQ10NU^linear^ce10_AA571^B2f49857.bw
+- /mnt/jadb2/DBfile/DBfiles/NURF1/N2/AA132_mE16_Q3525/NURF1^Q3525_mE16^E^N2^L3_BEADSQ10NU^linear^ce10_AA132^B0243379.bw
+- /mnt/jadb2/DBfile/DBfiles/NURF1/N2/AA143_mE17_Q3525/NURF1^Q3525_mE17^E^N2^L3_BEADSQ10NU^linear^ce10_AA143^Ba243515.bw
+- /mnt/jadb2/DBfile/DBfiles/SCC1/N2/AA204_mE16_Q0835/SCC1^Q0835_mE16^E^N2^L3_BEADSQ10NU^linear^ce10_AA204^Bfd44479.bw
+- /mnt/jadb2/DBfile/DBfiles/SCC1/N2/AA246_mE20_Q0835/SCC1^Q0835_mE20^E^N2^L3_BEADSQ10NU^linear^ce10_AA246^Beb45058.bw
+- /mnt/jadb2/DBfile/DBfiles/SIN3/N2/AA348_aa44_Q6013/SIN3^Q6013_aa44^E^N2^L3_BEADSQ10NU^linear^ce10_AA348^Bd946714.bw
+- /mnt/jadb2/DBfile/DBfiles/SIN3/N2/AA405_ME20_Q6013/SIN3^Q6013_ME20^E^N2^L3_BEADSQ10NU^linear^ce10_AA405^Bc947449.bw
+- /mnt/jadb2/DBfile/DBfiles/ZFP1/N2/AA539_aa78_Q2059/ZFP1^Q2059_aa78^E^N2^L3_BEADSQ10NU^linear^ce10_AA539^B5449249.bw
+- /mnt/jadb2/DBfile/DBfiles/ZFP1/N2/AA604_aa90_Q2059/ZFP1^Q2059_aa90^E^N2^L3_BEADSQ10NU^linear^ce10_AA604^B6f50268.bw
+- /mnt/jadb2/DBfile/DBfiles/pol2-AMA1/N2/AA287_aa33_Q2358/pol2-AMA1^Q2358_aa33^E^N2^L3_BEADSQ10NU^linear^ce10_AA287^B1946038.bw
+- /mnt/jadb2/DBfile/DBfiles/pol2-AMA1/N2/AA440_mE06_Q2358/pol2-AMA1^Q2358_mE06^F^N2^L3_BEADSQ10NU^linear^ce10_AA440^B1847961.bw
+
+motifs_iupac: 
+    Saito2013_TATA:
+        iupac: TATAAAA
+    Saito2013_Sp1:
+        raw: C?CC?CC
+        iupac: CNCCNCC
+    # Box 1 from ([Roy et al., 2015](https://doi.org/10.1016/j.tibs.2015.01.007))
+    Roy2015_TATA1:
+        raw: TATAAA
+        iupac: TATAAA
+    Roy2015_TATA2:
+        raw: TATATA
+        iupac: TATATA
+    Roy2015_Inr:
+        raw: YYANT/AYY
+        iupac: YYANWYY
+    Roy2015_DPE:
+        raw: A/GGA/TCGTG
+        iupac: RGWCGTG
+    Roy2015_BREu:
+        raw: G/CG/CG/ACGCC
+        iupac: SSRCGCC
+    Roy2015_BREd:
+        raw: G/ATT/AT/GT/GT/GT/G
+        iupac: RTWKKKK
+    Roy2015_DCE_6_11:
+        raw: CTTC
+        iupac: CTTC
+    Roy2015_DCE_16_21:
+        raw: CTGT
+        iupac: CTGT
+    Roy2015_DCE_30_34:
+        raw: AGC
+        iupac: AGC
+    Roy2014_MTE:
+        raw: CG/CAA/GCG/CAACG
+        iupac: CSARCSAACG
+    # Table 1 from ([Sloutskin et al., 2015](https://doi.org/10.1080/21541264.2015.1067286))
+    Sloutskin2015_mammalian_Initiator:
+        iupac: YYANWYY
+    Sloutskin2015_Drosophila_Initiator:
+        iupac: TCAKTY
+    Sloutskin2015_TATA_box:
+        iupac: TATAWAAR
+    Sloutskin2015_BREu:
+        iupac: SSRCGCC
+    Sloutskin2015_BREd:
+        iupac: RTDKKKK
+    Sloutskin2015_DPE:
+        iupac: DSWYVY
+    Sloutskin2015_MTE:
+        iupac: CSARCSSAACGS
+    Sloutskin2015_Bridge18_22:
+        iupac: CGANC
+    Sloutskin2015_Bridge30_33:
+        iupac: WYGT
+    Sloutskin2015_Drosophila_TCT:
+        iupac: YYCTTTYY
+    Sloutskin2015_Human_TCT:
+        iupac: YCTYTYY
+    Sloutskin2015_XCPE1:
+        iupac: DSGYGGRASM
+    Sloutskin2015_XCPE2:
+        iupac: VCYCRTTRCMY

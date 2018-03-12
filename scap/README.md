@@ -1,0 +1,21 @@
+- [`scap_samples.tsv`](scap_samples.tsv) contains a table of metadata on all samples. This is automatically generated from the `scap` section of [`/workflows/config.yaml`](/workflows/config.yaml) that has additional comments, e.g. [how/where certain data were obtained](https://github.com/jurgjn/relmapping/blob/master/workflows/config.yaml#L768-L772)
+  - Column `bid` has a unique string used to identify a specific dataset throughout the computational processing. In most cases, this is directly created from the original file names that came off the sequencer.
+  - Column `scap649` contains short cap samples, as they were used in the thesis. (Note that these have l1/l2 data swapped. As all analyses beyond basic QC use short cap pooled across stages, this swap does not substantially change analyses or conclusions. Other thesis data where the stage actually matters in downstream analyses -- ATAC-seq, long cap -- are labelled correctly.)
+
+- `20171003.scap/` on the datastore has coverage tracks, QC plots, etc
+  - `tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd` (and `_rev`) has quality-filtered stranded read coverage of 5' starts
+  - `tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.scap_hist` plots short cap coverage on top 10k wild-type hypersensitive sites; short cap data from two (Chen et al 2013) replicates is added as reference; this is a useful basic data QC plot to determine whether the data shows the expected bidirectional transcription pattern
+  - `tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10_reversed.firstbp_fwd` (and `_rev`) has all the reads that were discarded at the `rm_q10` filtering step (=multi-mapping and/or low-quality mapping reads) for investigating QC issues
+
+- Current default steps: `tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding`
+  - `tg_se` - trim adapters & low sequencing quality reads using `trim_galore`
+  - `bwa_se` - single-end alignment using `bwa`
+  - `rm_unmapped` - remove unmapped reads
+  - `rm_chrM` - remove mitochondrial reads
+  - `rm_blacklist` - remove reads in modENCODE blacklisted regions
+  - `rm_q10` - remove multi-mapping and low mapping-quality reads
+  - `rm_non_coding` - remove reads mapping to a selection of non-coding (mostly structural) RNAs, similar to ([Chen et al 2013](https://doi.org/10.1101/gr.153668.112)); see rule `scap_rm_non_coding` in [`/workflows/scap.snakefile`](/workflows/scap.snakefile) for further details
+  - `rm_tics_top20` - remove reads from top 20 initiation clusters (identified using a re-implementation of the approach taken in ([Chen et al 2013](https://doi.org/10.1101/gr.153668.112))
+  - `firstbp_fwd` - forward strand coverage, first base pair of the read only
+  - `firstbp_rev` - reverse strand coverage, first base pair of the read only
+  - `rm_exonic_fc_10` - adhoc filtering to discard likely false-positive short cap signal visible at (some) highly transcribed exons; `fc_10` refers to the current default filtering cutoff of `fc_th=10`; see function `scap_rm_exonic_step()` in [`/workflows/scap.snakefile`](/workflows/scap.snakefile) for further details

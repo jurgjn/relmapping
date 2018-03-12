@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+import argparse
+import datetime
+import sys
+import numpy as np
+import pyBigWig
+import twobitreader
+
+from pprint import pprint
+
+def parse_transform(s):
+    d = {
+        # https://www.bioinformatics.org/sms/iupac.html
+        # simple frequencies
+        'A': {'A': 1},
+        'C': {'C': 1},
+        'G': {'G': 1},
+        'T': {'T': 1},
+        'S': {'C': 1, 'G': 1},
+        's': {'C': 1, 'G': 1, 'c': 1, 'g': 1},
+        # mononucleotide
+        'AC': {'A': 1, 'C': -1},
+        'AG': {'A': 1, 'G': -1},
+        'AT': {'A': 1, 'T': -1},
+        'CG': {'C': 1, 'G': -1},
+        'CT': {'C': 1, 'T': -1},
+        'GT': {'G': 1, 'T': -1},
+        # dinucleotide
+        'RY': {'T': 1, 'C': 1, 'G': -1, 'A': -1},
+        'ry': {'T': 1, 'C': 1, 'G': -1, 'A': -1, 't': 1, 'c': 1, 'g': -1, 'a': -1},
+        'KM': {'G': 1, 'T': 1, 'A': -1, 'C': -1},
+        'km': {'G': 1, 'T': 1, 'A': -1, 'C': -1, 'g': 1, 't': 1, 'a': -1, 'c': -1},
+        'SW': {'G': 1, 'C': 1, 'A': -1, 'T': -1},
+        'sw': {'G': 1, 'C': 1, 'A': -1, 'T': -1, 'g': 1, 'c': 1, 'a': -1, 't': -1},
+        # etc
+        'TA': {'T': 1, 'A': -1},
+        'ta': {'T': 1, 'A': -1, 't': 1, 'a': -1},
+        'GC': {'G': 1, 'C': -1},
+        'gc': {'G': 1, 'C': -1, 'g': 1, 'c': -1},
+    }
+    return d[s]
+
+if __name__ == "__main__":
+    (fp_cmd, fp_inp, transform, fp_out) = sys.argv
+    d = parse_transform(transform)
+    fh_inp = twobitreader.TwoBitFile(fp_inp)
+    fh_out = pyBigWig.open(fp_out, 'w')
+    chroms_sorted = sorted(fh_inp.sequence_sizes().keys())
+    chroms_sizes = [(chrom, fh_inp.sequence_sizes()[chrom]) for chrom in chroms_sorted]
+    fh_out.addHeader(chroms_sizes)
+    for chrom, size in chroms_sizes:
+        print(chrom, size)
+        values = np.array([float(d.get(s, 0)) for s in str(fh_inp[chrom])])
+        fh_out.addEntries(chrom, 0, values=values, span=1, step=1)
+    fh_out.close()

@@ -1,0 +1,104 @@
+#!/usr/bin/env ipython
+import os
+
+def macs2(fp_inp, fp_out, macs2_args=''):
+    if os.path.isfile(fp_out + '_peaks.narrowPeak'):
+        print 'exists: %(fp_out)s' % locals()
+        return
+    !macs2 callpeak {macs2_args} \
+        --treatment {fp_inp} \
+        --outdir {os.path.dirname(fp_out)} \
+        --name {os.path.basename(fp_out)} \
+        2>&1 | tee {fp_out + '.stdout_stderr.txt'}
+
+def merge_pseudorep(fp_ina, fp_inb='', fp_out='', pseudorep=None):
+    if os.path.isfile(fp_out):
+        print 'exists: %(fp_out)s' % locals()
+        return
+    if os.path.isfile(fp_inb):
+        cmd_inp = 'samtools merge - %(fp_ina)s %(fp_inb)s | samtools view -h -' % locals()
+    else:
+        cmd_inp = 'samtools view -h %(fp_ina)s' % locals()
+    if pseudorep == 'a':
+        pseudorep_cond = '|| (rand() < .5)'
+    elif pseudorep == 'b':
+        pseudorep_cond = '|| (.5 <= rand())'
+    else: pseudorep_cond = '|| 1'
+    !{cmd_inp} \
+    | awk 'BEGIN{{srand(1);}} substr($$1,1,1) == "@" {pseudorep_cond}' \
+    | samtools view -Sb - > {fp_out}
+
+def macs2_idr_step(fp_ina, fp_inb, fp_out, macs2_args='', idr_step='', fp_idr=''):
+    print 'idr_step=%(idr_step)s' % locals()
+    if idr_step == 'Nt':
+        fp_idr_ina = fp_ina
+        fp_idr_inb = fp_inb
+    else:
+        fp_idr_ina = fp_out + '_a.bam'
+        fp_idr_inb = fp_out + '_b.bam'
+        if idr_step == 'Np':
+            merge_pseudorep(fp_ina, fp_inb, fp_idr_ina, pseudorep='a')
+            merge_pseudorep(fp_ina, fp_inb, fp_idr_inb, pseudorep='b')
+        elif idr_step == 'N1':
+            merge_pseudorep(fp_ina, '', fp_idr_ina, pseudorep='a')
+            merge_pseudorep(fp_ina, '', fp_idr_inb, pseudorep='b')
+        elif idr_step == 'N2':
+            merge_pseudorep(fp_inb, '', fp_idr_ina, pseudorep='a')
+            merge_pseudorep(fp_inb, '', fp_idr_inb, pseudorep='b')
+
+    macs2(fp_idr_ina, fp_out + '_a', macs2_args)
+    macs2(fp_idr_inb, fp_out + '_b', macs2_args)
+
+    # IDR assumes it's run from the directory that contains batch-consistency-analysis.r
+    # Note you also need to set the genome file in idrCode/genome_table.txt
+    cmd_idr = 'cd %s; Rscript %s' % (os.path.dirname(fp_idr), os.path.basename(fp_idr))
+    fp_ina_idr = os.path.abspath(fp_out + '_a_peaks.narrowPeak')
+    fp_inb_idr = os.path.abspath(fp_out + '_b_peaks.narrowPeak')
+    fp_out_idr = os.path.abspath(fp_out)
+    if not os.path.isfile(fp_out + '-Rout.txt'):
+        !{cmd_idr} {fp_ina_idr} {fp_inb_idr} -1 {fp_out_idr} 0 F p.value
+
+def macs2_idr(fp_ina, fp_inb, fp_out, macs2_args, idr_th, fp_idr):
+    for idr_step in ['Nt', 'Np', 'N1', 'N2']:
+        macs2_idr_step(fp_ina, fp_inb, '%(fp_out)s_%(idr_step)s' % locals(), macs2_args, idr_step, fp_idr)
+
+    # Final peak calls on pooled data
+    merge_pseudorep(fp_ina, fp_inb, '%(fp_out)s_final.bam' % locals())
+    macs2('%(fp_out)s_final.bam' % locals(), '%(fp_out)s_final' % locals(), macs2_args)
+
+    # Statistics at 0.05 from all calls
+    def parse_idr_out(fp, idr_th):
+        out = !cat {fp + '-npeaks-aboveIDR.txt'} | awk '$$3 == {idr_th} {{print $$4}}'
+        return int(out[0])
+
+    N1 = parse_idr_out(fp_out + '_N1', idr_th)
+    N2 = parse_idr_out(fp_out + '_N2', idr_th)
+    Nt = parse_idr_out(fp_out + '_Nt', idr_th)
+    Np = parse_idr_out(fp_out + '_Np', idr_th)
+    N = max(Nt, Np)
+    print 'N1:\t%(N1)s' % locals()
+    print 'N2:\t%(N2)s' % locals()
+    print 'Nt:\t%(Nt)s' % locals()
+    print 'Np:\t%(Np)s' % locals()
+    print 'N:\t%(N)s' % locals()
+    print 'N1/N2:\t%.2f' % (N1/float(N2),)
+    print 'N2/N1:\t%.2f' % (N2/float(N1),)
+    print 'Nt/Np:\t%.2f' % (Nt/float(Np),)
+    print 'Np/Nt:\t%.2f' % (Np/float(Nt),)
+
+    fp_out_final = '%(fp_out)s_final_peaks_%(idr_th)s.narrowPeak' % locals()
+    if not os.path.isfile(fp_out_final):
+        !cat {fp_out + '_final_peaks.narrowPeak'} | sort -k8n,8n | tail -n {N} | sort -k1,1 -k2,2n -k3,3n - > {fp_out_final}
+
+if __name__ == "__main__":
+    """
+    macs2_idr(
+        '/home/jj374/lab/raw_data/Chen2014_Cfp1/CFP1-GFP^GFP-tapM_F52B11.1A-GFP-A^NA^NA^NA_aligned^NA^NA_RC003^Fae04996.bam',
+        '/home/jj374/lab/raw_data/Chen2014_Cfp1/CFP1-GFP^GFP-tapM_F52B11.1A-GFP-B^NA^NA^NA_aligned^NA^NA_RC004^Fb704996.bam',
+        '/home/jj374/repos/biokludge/macs2_idr/CFP1_test/CFP1_idr',
+        macs2_args='--gsize ce --format BAM -q 0.70 -B --SPMR',
+        idr_th=0.05,
+        fp_idr='/home/jj374/opt-wheezy/idrCode/batch-consistency-analysis.r'
+    )
+    """
+    pass

@@ -1,0 +1,79 @@
+#!/usr/bin/env python
+"""
+Convolve bedGraph signal
+    scripts/bigWigConvolve seq_tracks/ce10.cg_frac.bw ricker_1e1 seq_tracks/ce10.cg_frac.ricker_1e1.bw &
+    scripts/bigWigConvolve seq_tracks/ce10.cg_frac.bw ricker_1e2 seq_tracks/ce10.cg_frac.ricker_1e2.bw &
+    scripts/bigWigConvolve seq_tracks/ce10.cg_frac.bw ricker_1e3 seq_tracks/ce10.cg_frac.ricker_1e3.bw &
+    scripts/bigWigConvolve seq_tracks/ce10.cg_frac.bw ricker_1e4 seq_tracks/ce10.cg_frac.ricker_1e4.bw &
+    scripts/bigWigConvolve seq_tracks/ce10.cg_frac.bw ricker_1e5 seq_tracks/ce10.cg_frac.ricker_1e5.bw &
+    scripts/bigWigConvolve seq_tracks/ce10.cg_frac.bw ricker_3e1 seq_tracks/ce10.cg_frac.ricker_3e1.bw &
+    scripts/bigWigConvolve seq_tracks/ce10.cg_frac.bw ricker_3e2 seq_tracks/ce10.cg_frac.ricker_3e2.bw &
+    scripts/bigWigConvolve seq_tracks/ce10.cg_frac.bw ricker_3e3 seq_tracks/ce10.cg_frac.ricker_3e3.bw &
+    scripts/bigWigConvolve seq_tracks/ce10.cg_frac.bw ricker_3e4 seq_tracks/ce10.cg_frac.ricker_3e4.bw &
+    scripts/bigWigConvolve seq_tracks/ce10.cg_frac.bw ricker_3e5 seq_tracks/ce10.cg_frac.ricker_3e5.bw &
+
+"""
+import argparse
+import datetime
+import sys
+import numpy as np
+import pyBigWig
+import os
+import scipy.signal
+
+from pprint import pprint
+
+"""
+Eight-order approximation centered at grid point derived from:
+    Fornberg, Bengt (1988), "Generation of Finite Difference Formulas on Arbitrarily Spaced Grids",
+        Mathematics of Computation 51 (184): 699-706, doi:10.1090/S0025-5718-1988-0935077-0
+"""
+def D2_kernel(): return [-1.0/560, 8.0/315, -1.0/5, 8.0/5, -205.0/72, 8.0/5, -1.0/5, 8.0/315, -1.0/560]
+
+def rolling_mean_kernel(width): return np.ones(width) / float(width)
+
+def parse_kernel(s):
+    if os.path.isfile(s):
+        return np.loadtxt(s)
+    else:
+        d = {
+            'mean10': rolling_mean_kernel(10),
+            'mean25': rolling_mean_kernel(25),
+            'mean50': rolling_mean_kernel(50),
+            'mean100': rolling_mean_kernel(100),
+            'mean150': rolling_mean_kernel(150),
+            'mean200': rolling_mean_kernel(200),
+            # http://terpconnect.umd.edu/~toh/spectrum/Differentiation.html#Smoothing
+            'D2_s3x150_1E6': 1E6 * np.convolve(np.convolve(np.convolve(D2_kernel(),
+                                                            rolling_mean_kernel(150)),
+                                                            rolling_mean_kernel(150)),
+                                                            rolling_mean_kernel(150)),
+            #https://github.com/scipy/scipy/blob/v0.16.1/scipy/signal/wavelets.py#L358
+            'ricker_1e1': scipy.signal.ricker(1e1*10, 1e1),
+            'ricker_1e2': scipy.signal.ricker(1e2*10, 1e2),
+            'ricker_1e3': scipy.signal.ricker(1e3*10, 1e3),
+            'ricker_1e4': scipy.signal.ricker(1e4*10, 1e4),
+            'ricker_1e5': scipy.signal.ricker(1e5*10, 1e5),
+            'ricker_3e1': scipy.signal.ricker(3e1*10, 3e1),
+            'ricker_3e2': scipy.signal.ricker(3e2*10, 3e2),
+            'ricker_3e3': scipy.signal.ricker(3e3*10, 3e3),
+            'ricker_3e4': scipy.signal.ricker(3e4*10, 3e4),
+            'ricker_3e5': scipy.signal.ricker(3e5*10, 3e5),
+        }
+        return d[s]
+
+if __name__ == "__main__":
+    (fp_cmd, fp_inp, kernel_str, fp_out) = sys.argv
+    kernel = parse_kernel(kernel_str)
+    fh_inp = pyBigWig.open(fp_inp)
+    fh_out = pyBigWig.open(fp_out, 'w')
+    chroms_sorted = sorted(fh_inp.chroms().keys())
+    fh_out.addHeader([(chrom, fh_inp.chroms()[chrom]) for chrom in chroms_sorted])
+    for chrom in chroms_sorted:
+        size = fh_inp.chroms()[chrom]
+        print('chrom=%(chrom)s\tsize=%(size)d' % locals())
+        values_raw = fh_inp.values(chrom, 0, size)
+        values_con = np.convolve(values_raw, kernel[::-1], mode='same')
+        fh_out.addEntries(chrom, 0, values=list(values_con), span=1, step=1)
+    fh_inp.close()
+    fh_out.close()

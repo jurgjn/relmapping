@@ -1,0 +1,71 @@
+bid	collection_id	comment	enzyme	library_series_id	qc_fail	rna_purification	rna_type	scap649	scap740	stage	strain	raw_reads	adapter_or_lowqual	unmapped	mitochondrial	blacklist	mapq_lt10	non_coding	useful_reads	inr_sites
+chen13_scap_rep1a	RonEMB1		TAP	EMB-RonEMB1-N2-scRNA-S1_unsure1		Phenol-chloroform extraction	nuclear			emb	N2	23,498,225	3.25%	2.82%	0.02%	0.43%	4.72%	79.93%	4,206,000	8,109
+chen13_scap_rep1b_trim20	RonEMB1		TAP	EMB-RonEMB1-N2-scRNA-S1_unsure2		Phenol-chloroform extraction	nuclear			emb	N2	29,005,732	58.91%	2.86%	0.07%	1.33%	5.31%	89.71%	1,112,488	7,710
+chen13_scap_rep2	RonEMB2		TAP	EMB-RonEMB2-N2-scRNA-S1_unsure		Phenol-chloroform extraction	nuclear			emb	N2	11,244,538	1.00%	4.57%	0.04%	0.88%	8.63%	78.01%	2,114,692	6,665
+chen13_scap_extra_emb	RonEMB2	"original_name: s_120607_1.ATCACG
+"	TAP	EMB-RonEMB2-N2-scRNA-S2_unsure		Phenol-chloroform extraction	nuclear			emb	N2	69,331,581	0.14%	1.89%	0.00%	0.35%	11.08%	79.77%	12,179,447	7,722
+HS067_YD100_S16												350	3.43%	85.80%	0.00%	2.08%	2.13%	0.00%	46	0
+HS067_YD101_S17												57,679	0.35%	83.20%	0.48%	4.00%	8.45%	3.93%	8,115	27
+HS073_yan-A	JA24	"cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS073-17173161/yan-A-18660648/yan-A_S12_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS073-17173161/yan-A-18660648/yan-A_S12_L002_R1_001.fastq.gz > ~/relmapping/samples/HS073_yan-A.r1.fq.gz
+"	TAP	EMB-JA24-N2-scRNA-S3_3		Zymo Column	chromatin-associated			emb	N2	41,930,701	5.00%	4.51%	0.02%	3.19%	82.70%	74.32%	1,636,251	1,621
+HS073_yan-B	JA24	"cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS073-17173161/yan-B-18630630/yan-B_S13_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS073-17173161/yan-B-18630630/yan-B_S13_L002_R1_001.fastq.gz > ~/relmapping/samples/HS073_yan-B.r1.fq.gz
+"	TAP	EMB-JA24-N2-scRNA-S3_4		Zymo Column	chromatin-associated			emb	N2	11,434,723	3.57%	7.58%	0.01%	3.43%	88.88%	74.36%	280,453	787
+HS182_JA25-N2-scRNA-S4r	JA25		TAP	EMB-JA25-scRNA-S4r_unsure		Zymo Column	chromatin-associated			emb	N2	27,945,692	38.37%	13.11%	0.17%	14.95%	26.22%	43.72%	5,275,874	9,072
+HS182_JA26r-N2-scRNA-S6r	JA26		TAP	EMB-JA26r-scRNA-S6r_unsure		Zymo Column	chromatin-associated	emb_rep1	emb_rep1	emb	N2	28,263,219	40.40%	17.57%	0.09%	25.94%	23.77%	58.87%	3,221,572	8,531
+HS182_RC10-cfp1-scRNA-S2r												34,403,128	24.48%	9.36%	0.13%	35.23%	42.08%	50.69%	4,350,598	10,505
+HS182_RC8r-cfp1-scRNA-S1r												27,350,664	32.69%	10.44%	0.12%	39.43%	37.69%	52.28%	2,965,709	8,706
+HS218_RC20_N2_scRNA_S7	RC20		TAP	EMB-RC20-N2-scRNA-S7		Zymo Column	chromatin-associated	emb_rep2	emb_rep2	emb	N2	55,939,169	33.72%	11.19%	0.03%	3.80%	13.30%	58.98%	11,263,846	9,854
+HS291_JA2_scRNA_S1	JA2		Dpph	L1-JA2-N2-scRNA-S1		Zymo Column	chromatin-associated			l1	N2	26,869,952	17.29%	69.66%	0.03%	23.36%	31.76%	43.65%	1,986,308	2,905
+HS308_JA2_scRNA_S2	JA2		Cap-Clip	L1-JA2-N2-scRNA-S2		Zymo Column	chromatin-associated	l2_rep1	l1_rep1a	l1	N2	16,662,013	21.76%	7.09%	0.01%	2.85%	28.61%	62.22%	3,173,445	4,857
+HS333_crb55_JA2	JA2		Cap-Clip	L1-JA2-N2-scRNA-S2r		Zymo Column	chromatin-associated		l1_rep1b	l1	N2	18,330,944	23.48%	7.02%	0.01%	2.96%	29.75%	63.31%	3,261,366	5,015
+HS291_JA6_scRNA_S1	JA6		Dpph	L1-JA6-N2-scRNA-S1		Zymo Column	chromatin-associated			l1	N2	24,209,236	31.09%	73.32%	0.04%	15.37%	46.10%	42.49%	1,167,151	2,825
+HS308_JA6_scRNA_S2	JA6		Cap-Clip	L1-JA6-N2-scRNA-S2		Zymo Column	chromatin-associated	l2_rep2	l1_rep2a	l1	N2	21,128,765	39.69%	15.32%	0.02%	11.01%	23.13%	65.29%	2,561,765	2,150
+HS333_crb55_JA6	JA6		Cap-Clip	L1-JA6-N2-scRNA-S2r		Zymo Column	chromatin-associated		l1_rep2b	l1	N2	13,982,431	41.83%	15.39%	0.02%	11.24%	24.06%	66.45%	1,555,897	2,123
+HS291_JA1_scRNA_S1	JA1		Cap-Clip	L2-JA1-N2-scRNA-S1		Zymo Column	chromatin-associated	l1_rep1	l2_rep1	l2	N2	24,556,206	37.44%	12.58%	0.05%	8.87%	33.89%	45.60%	4,398,891	5,967
+HS308_JA1_scRNA_s1r												66,811	38.95%	27.02%	0.12%	4.77%	17.83%	25.91%	17,237	112
+HS291_JA1_scRNA_S2	JA1		Dpph	L2-JA1-N2-scRNA-S2		Zymo Column	chromatin-associated			l2	N2	23,224,748	52.75%	75.44%	0.05%	22.17%	32.19%	29.38%	1,003,837	1,876
+HS333_crb55_JA1	JA1		Cap-Clip	L2-JA1-N2-scRNA-S1rr_unsure		Zymo Column	chromatin-associated			l2	N2	24,154,522	51.57%	75.50%	0.07%	22.69%	33.13%	29.55%	1,042,963	1,898
+HS291_JA7_scRNA_S1	JA7		Dpph	L2-JA7-N2-scRNA-S1		Zymo Column	chromatin-associated			l2	N2	26,032,215	32.09%	62.73%	0.03%	11.01%	58.06%	49.89%	1,232,211	2,342
+HS308_JA7_scRNA_S2	JA7		Cap-Clip	L2-JA7-N2-scRNA-S2		Zymo Column	chromatin-associated	l1_rep2	l2_rep2a	l2	N2	28,815,941	42.62%	10.12%	0.02%	9.32%	19.98%	53.50%	5,014,107	4,148
+HS333_crb55_JA7	JA7		Cap-Clip	L2-JA7-N2-scRNA-S2r		Zymo Column	chromatin-associated		l2_rep2b	l2	N2	35,889,329	44.38%	9.71%	0.02%	9.67%	21.23%	55.14%	5,750,844	4,095
+chen13_scap_extra_l3	JA34	"original_name: s_120607_1.CGATGT
+"	TAP	L3-JA34-N2-scRNA-S1		Phenol-chloroform extraction	nuclear		l3_rep1	l3	N2	89,207,448	0.08%	2.27%	0.01%	0.14%	4.11%	86.75%	11,054,097	6,478
+HS291_JA8_scRNA_S1	JA8		Dpph	L3-JA8-N2-scRNA-S1		Zymo Column	chromatin-associated			l3	N2	26,498,995	28.69%	69.92%	0.04%	17.47%	33.65%	36.80%	1,965,846	4,088
+HS308_JA8_scRNA_S2	JA8		Cap-Clip	L3-JA8-N2-scRNA-S2		Zymo Column	chromatin-associated	l3_rep1		l3	N2	13,181,888	17.07%	3.93%	0.00%	7.32%	15.56%	80.60%	1,594,640	1,677
+HS332_JA8_scRNA_S1												104,722	48.43%	70.04%	0.08%	15.24%	31.66%	34.03%	6,178	108
+HS333_crb55_JA8	JA8		Cap-Clip	L3-JA8-N2-scRNA-S2r		Zymo Column	chromatin-associated			l3	N2	13,328,550	18.42%	3.73%	0.00%	7.50%	16.05%	81.12%	1,534,555	1,678
+HS252_Yan_S1	JA22		Dpph	L3-JA22-scRNA-S1		Zymo Column	chromatin-associated	l3_rep2a	l3_rep2a	l3	N2	28,638,004	10.67%	23.38%	0.01%	4.99%	8.94%	68.78%	5,294,005	3,969
+HS252_Yan_S2	JA22		Cap-Clip	L3-JA22-scRNA-S2		Zymo Column	chromatin-associated			l3	N2	29,044,176	7.69%	25.82%	0.01%	6.76%	7.37%	74.72%	4,341,131	3,730
+HS308_JA22_scRNA_S3	JA22		Cap-Clip	L3-JA22-scRNA-S3		Zymo Column	chromatin-associated	l3_rep2b	l3_rep2b	l3	N2	11,866,124	23.67%	4.16%	0.00%	7.51%	31.29%	84.20%	871,342	1,730
+HS333_crb55_JA22	JA22		Cap-Clip	L3-JA22-scRNA-S3r		Zymo Column	chromatin-associated		l3_rep2c	l3	N2	13,949,502	26.13%	3.87%	0.01%	7.69%	31.88%	84.88%	941,422	1,773
+HS291_JA3_scRNA_S1	JA3		Dpph	L4-JA3-scRNA-S1		Zymo Column	chromatin-associated			l4	N2	22,277,955	33.03%	69.68%	0.02%	19.41%	22.00%	58.67%	1,174,886	2,763
+HS308_JA3_scRNA_S2	JA3		Cap-Clip	L4-JA3-scRNA-S2		Zymo Column	chromatin-associated	l4_rep1	l4_rep1a	l4	N2	27,989,529	10.86%	9.63%	0.01%	6.77%	11.82%	69.11%	5,724,677	3,409
+HS333_crb55_JA3	JA3		Cap-Clip	L4-JA3-scRNA-S2r		Zymo Column	chromatin-associated		l4_rep1b	l4	N2	37,285,521	11.93%	10.00%	0.01%	7.06%	12.59%	70.05%	7,190,129	3,408
+HS326_JA9_scRNA_S1												16,944,686	75.77%	14.70%	0.00%	46.19%	43.80%	82.56%	184,715	612
+HS326_crb55_Index10	JA9		Cap-Clip	L4-JA9-scRNA-S1		Zymo Column	chromatin-associated	l4_rep2a	l4_rep2a	l4	N2	17,667,118	44.04%	7.69%	0.00%	20.76%	74.85%	58.87%	747,846	778
+HS332_JA9_scRNA_S1	JA9		Cap-Clip	L4-JA9-scRNA-S1r		Zymo Column	chromatin-associated	l4_rep2b	l4_rep2b	l4	N2	26,380,087	44.42%	8.33%	0.00%	21.33%	74.34%	58.88%	1,115,464	780
+HS527_JA9_scRNA_S2	JA9		Tobacco deCap	L4-JA9-scRNA-S2		Zymo Column	chromatin-associated			l4	N2	15,953,130	11.90%	1.57%	0.02%	55.63%	78.59%	73.11%	353,323	588
+HS527_JA9_scRNA_S3	JA9		Tobacco deCap	L4-JA9-scRNA-S3		Zymo Column	chromatin-associated			l4	N2	20,554,022	17.47%	2.77%	0.03%	42.77%	69.62%	76.83%	664,362	807
+weick2014_ya_n2_tap												8,867,181	8.27%	4.16%	0.30%	4.88%	12.86%	24.22%	4,881,784	1,146
+weick2014_ya_n2_tap_extra	RonYA1	"Re-sequencing of weick2014_ya_n2_tap not included in the original paper; original sample name: HS068-15829816/Ron-old-17103101 cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS068-15829816/Ron-old-17103101/Ron-old_S1_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS068-15829816/Ron-old-17103101/Ron-old_S1_L002_R1_001.fastq.gz > ~/relmapping/samples/weick2014_ya_n2_tap_extra.r1.fq.gz cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS068-15829816/Ron-old-17103101/Ron-old_S1_L001_R2_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS068-15829816/Ron-old-17103101/Ron-old_S1_L002_R2_001.fastq.gz > ~/relmapping/samples/weick2014_ya_n2_tap_extra.r2.fq.gz
+"	TAP	YA-RonYA1-N2-scRNA-S1_unsure		Phenol-chloroform extraction?	nuclear?		ya_rep1	ya	N2	46,069,337	0.96%	3.19%	0.02%	0.46%	31.80%	85.99%	4,199,280	6,095
+HS053_Yan-02_S16	RonYA2	"cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS053-12456444/Yan-02-13481478/Yan-02_S16_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS053-12456444/Yan-02-13481478/Yan-02_S16_L002_R1_001.fastq.gz > ~/relmapping/samples/HS053_Yan-02_S16.r1.fq.gz
+"	TAP	YA-RonYA2-N2-scRNA-S2_1		Zymo Column	nuclear			ya	N2	25,888,533	30.92%	12.83%	0.13%	9.12%	29.64%	64.94%	3,490,266	4,638
+HS053_Yan-03_S17	RonYA2	"cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS053-12456444/Yan-03-13483476/Yan-03_S17_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS053-12456444/Yan-03-13483476/Yan-03_S17_L002_R1_001.fastq.gz > ~/relmapping/samples/HS053_Yan-03_S17.r1.fq.gz
+"	TAP	YA-RonYA2-N2-scRNA-S2_2		Zymo Column	nuclear			ya	N2	27,880,218	15.99%	11.83%	0.20%	8.89%	38.90%	61.34%	4,435,870	5,219
+HS057_Yan-C_S12	RonYA2	"cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS057-13700689/Yan-C-14820825/Yan-C_S12_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS057-13700689/Yan-C-14820825/Yan-C_S12_L002_R1_001.fastq.gz > ~/relmapping/samples/HS057_Yan-C_S12.r1.fq.gz
+"	TAP	YA-RonYA2-N2-scRNA-S2_3		20-100nt RNA by 15pct Gel	nuclear		ya_rep2	ya	N2	50,564,711	4.66%	5.46%	0.13%	1.55%	11.67%	67.14%	13,006,937	6,194
+HS057_Yan-T_S11	RonYA2	"cat /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS057-13700689/Yan-T-14828825/Yan-T_S11_L001_R1_001.fastq.gz /mnt/Sequencing/Ahringer\ Group/Basespace\ FASTQ/HS057-13700689/Yan-T-14828825/Yan-T_S11_L002_R1_001.fastq.gz > ~/relmapping/samples/HS057_Yan-T_S11.r1.fq.gz
+"	TAP	YA-RonYA2-N2-scRNA-S2_4		20-100nt RNA by 15pct Gel	nuclear			ya	N2	45,068,494	55.75%	24.22%	0.18%	2.94%	13.15%	65.32%	4,410,078	2,202
+HS326_JA4_scRNA_S1												21,092,587	41.71%	8.21%	0.00%	56.64%	65.99%	81.10%	314,582	790
+HS326_crb55_Index8	JA4		Cap-Clip	YA-JA4-N2-scRNA-S1		Zymo Column	chromatin-associated	ya_rep1a		ya	N2	21,921,775	15.08%	6.97%	0.00%	41.74%	53.54%	34.23%	3,083,112	995
+HS332_JA4_scRNA_S1	JA4		Cap-Clip	YA-JA4-N2-scRNA-S1r		Zymo Column	chromatin-associated	ya_rep1b		ya	N2	30,290,683	15.12%	8.58%	0.00%	42.77%	52.33%	34.80%	4,180,769	992
+HS326_JA5_scRNA_S1												17,121,962	50.39%	16.27%	0.01%	55.84%	58.73%	82.17%	231,080	790
+HS326_crb55_Index9	JA5		Cap-Clip	YA-JA5-N2-scRNA-S1		Zymo Column	chromatin-associated	ya_rep2a		ya	N2	17,883,899	30.73%	14.76%	0.01%	45.39%	46.22%	39.56%	1,874,170	991
+HS332_JA5_scRNA_S1	JA5		Cap-Clip	YA-JA5-N2-scRNA-S1r		Zymo Column	chromatin-associated	ya_rep2b		ya	N2	31,184,913	30.61%	15.25%	0.01%	46.14%	45.78%	39.81%	3,223,547	1,069
+HS571_JA1_N2_scRNA	JA1		TAP	L2-JA1-N2-scRNA-HS571		oligodT?	chromatin?			l2	N2	24,294,801	9.36%	2.19%	0.01%	1.58%	21.10%	65.22%	5,816,943	7,090
+HS571_JA2_N2_scRNA	JA2		TAP	L1-JA2-N2-scRNA-HS571		ZymoSmall?	chromatin?			l1	N2	26,641,388	5.10%	1.92%	0.01%	7.63%	67.97%	64.39%	2,612,224	6,410
+HS571_JA9_N2_scRNA	JA9		TAP	L4-JA9-N2-scRNA-HS571		ZymoSmall?	chromatin?			l4	N2	12,922,123	7.60%	2.21%	0.01%	23.33%	41.85%	61.29%	2,014,590	3,064
+HS578_JA2r_N2_scRNA	JA2		TAP	L1-JA2-N2-scRNA-HS578		ZymoSmall?	chromatin?			l1	N2	41,097,463	5.48%	2.30%	0.02%	8.60%	65.44%	63.19%	4,411,557	7,096
+HS578_JA9r_N2_scRNA	JA9		TAP	L4-JA9-N2-scRNA-HS578		ZymoSmall?	chromatin?			l4	N2	16,052,573	7.91%	2.45%	0.01%	23.87%	41.40%	60.85%	2,518,052	3,234
+HS582_JA1r_N2_scRNA	JA1		TAP	L2-JA1-N2-scRNA-HS582		oligodT?	chromatin?			l2	N2	39,748,592	9.17%	2.27%	0.01%	1.58%	22.17%	64.96%	9,471,025	7,841

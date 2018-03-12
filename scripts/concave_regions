@@ -1,0 +1,123 @@
+#!/usr/bin/env python
+'''
+This is a generic "peak caller" for ATAC/DNase/MNase/ChIP genomic HTS data.
+It finds regions of concave curvature as defined by the sign of the (heavily
+smoothed) second derivative (a well-known classic approach from signal processing).
+
+It works well in situations where peaks have a characteristic width, and was
+written with the aim of "post-processing" peak calls from a statistical caller
+(MACS2) in order to separate neighbouring peaks that are incorrectly
+identified as a single peak by the statistical approach.
+
+1. Call peaks using MACS2
+2. Call concave regions using concavePeaks:
+    concavePeaks ChIP_track.bw > ChIP_track.bed
+
+3. Discard concave regions that do not overlap a MACS2 peak (e.g. bedtools subtract)
+4. Filter peaks by the "curvature index" (column 5 in the output) to remove
+visually non-compelling noise.
+
+Usage: concavePeaks [--fill] [-w <width>] [-m <smtime>] <input>
+
+Options:
+    --fill          fill gaps with average values from flanking bp
+    -w <width>      smooth window width in bp [default: 150]
+    -m <smtime>     apply smoothing this number of times [default: 3]
+    <input>         input bigwig
+
+- It may is possible to use concave regions directly as IDR input, ranking
+concave regions by the "curvature index". The "curvature index" is dependant
+both on the shape as well as the height of a peak, and is generally unique to
+a peak (=very few tied ranks which is good for the IDR model). In addition,
+concave regions by default contain sensible as well as very weak peaks, which is
+again required for IDR analysis.
+- The method finds a very large number of (raw) peaks. This high sensitivity is 
+useful for simultaneously identifying representative peaks in multiple conditions
+(such as developmental time series data).
+- The method is sensitive to the choice of the smoothing window. It could, in theory,
+be further improved by utilising multiple windows (and wavelets), as has been previously 
+done for mass spectrometry data in ([Du et al 2006](https://doi.org/10.1093/bioinformatics/btl355)).
+
+'''
+
+from __future__ import division
+from __future__ import print_function
+from builtins import range
+from future.utils import iteritems
+import sys
+import signal
+import logging
+signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s; %(levelname)s; %(funcName)s; %(message)s',
+        datefmt='%y-%m-%d %H:%M:%S')
+import numpy as np
+import pyBigWig
+
+"""
+Eight-order approximation centered at grid point derived from:
+    Fornberg, Bengt (1988), "Generation of Finite Difference Formulas on Arbitrarily Spaced Grids",
+        Mathematics of Computation 51 (184): 699-706, doi:10.1090/S0025-5718-1988-0935077-0
+"""
+def prepare_second_derivative_kernel(width, times):
+    kernel = np.array([-1.0/560, 8.0/315, -1.0/5, 8.0/5, -205.0/72, 8.0/5, -1.0/5, 8.0/315, -1.0/560])
+    rolling_mean_kernel = np.ones(width)/float(width)
+    for i in range(times):
+        kernel = np.convolve(kernel, rolling_mean_kernel)
+    return 1e6*kernel[::-1]
+
+def fill_gap(y):
+    y[np.isnan(y)] = 0
+    s = np.where(np.diff(y) < 0)[0] + 1
+    e = np.where(np.diff(y) > 0)[0] + 1
+    if s[0] > e[0]:
+        e = e[1:]
+    if s[-1] > e[-1]:
+        s = s[0:(len(s)-1)]
+    for i,j in zip(s,e):
+        y[i:j] = (y[i-1]+y[j])/2
+    return y
+
+def find_concave_regions(y, kernel, chrom='.', tol=1e-10):
+    d2y = np.convolve(y, kernel, mode='same')
+    s = np.where(np.diff((d2y < tol).astype(int))==1)[0] + 1
+    e = np.where(np.diff((d2y < tol).astype(int))==-1)[0] + 1
+    if s[0] > e[0]:
+        s = np.insert(s, 0, 0)
+    if s[-1] > e[-1]:
+        e = np.insert(e, len(e), len(y))
+    v = [-np.mean(d2y[i:j]) for i,j in zip(s,e)]
+    regions = np.array(list(zip([chrom]*len(s),s,e,v)), dtype=[('chrom',np.unicode_,8),('start',int),('end',int),('value',float)])
+    return regions
+
+def main(args):
+    logging.info(args)
+    inbw = args['input']
+    smtime = int(args['m'])
+    smwidth = int(args['w'])
+    fill = bool(args['fill'])
+
+    kernel = prepare_second_derivative_kernel(smwidth, smtime)
+
+    stdout = getattr(sys.stdout, 'buffer', sys.stdout)
+    bw = pyBigWig.open(inbw)
+    chroms = bw.chroms()
+    for (chrom,cLen) in iteritems(chroms):
+        y = bw.values(chrom, 0, cLen, numpy=True)
+        if fill:
+            y = fill_gap(y)
+        concave_regions = find_concave_regions(y, kernel, chrom=chrom)
+        np.savetxt(stdout, concave_regions, fmt=['%s','%d','%d','%.4f'], delimiter='\t')
+    bw.close()
+
+
+if __name__ == '__main__':
+    from docopt import docopt
+    args = docopt(__doc__)
+    args = {k.lstrip('-<').rstrip('>'):args[k] for k in args}
+    try:
+        main(args)
+    except KeyboardInterrupt:
+        logging.warning('Interrupted')
+        sys.exit(1)

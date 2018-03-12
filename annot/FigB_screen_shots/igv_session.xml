@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Session genome="ce10" hasGeneTrack="false" hasSequenceTrack="true" locus="chrIV:13369399-13373189" nextAutoscaleGroup="2" path="/Users/jj374/cb-head2/relmapping/annot/FigB_screen_shots/igv_session.xml" version="8">
+    <Resources>
+        <Resource path="/Users/jj374/cb-head2/relmapping/annot/FigB_chromatin_states/Evans2016_L3.bed"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/WS260_ce10/WS260_ce10.transcripts.annot.gtf.gz"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/annot/S2_regulatory_annotation/S2_regulatory_annotation_6Dec17.bed"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_rev_neg/lcap_wt_l2_rev_neg.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/annot/FigB_chromatin_states/Evans2016_EE.bed"/>
+        <Resource path="/Volumes/ahringer/Jurgen Janes/20171221.scap_geo/scap541_emb_l3_ya.tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.firstbp_fwd.rm_exonic.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_fwd/lcap_wt_emb_fwd.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_rev_neg/lcap_wt_l3_rev_neg.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_fwd/lcap_wt_l2_fwd.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_rev_neg/lcap_wt_l4_rev_neg.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_fwd/lcap_wt_l3_fwd.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_rev_neg/lcap_wt_emb_rev_neg.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/annot/FigB_chromatin_states/Ho2014_EE.bed"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/scap_geo/scap541_emb_l3_ya.tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.firstbp_rev.rm_exonic.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_fwd/lcap_wt_l1_fwd.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_fwd/lcap_wt_l4_fwd.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_fwd/lcap_wt_ya_fwd.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_rev_neg/lcap_wt_l1_rev_neg.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_rev_neg/lcap_wt_ya_rev_neg.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/annot/FigB_chromatin_states/Ho2014_L3.bed"/>
+    </Resources>
+    <Panel height="778" name="DataPanel" width="1423">
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" id="/Users/jj374/cb-head2/relmapping/WS260_ce10/WS260_ce10.transcripts.annot.gtf.gz" name="Annotated transcripts" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="25" id="/Volumes/ahringer/Jurgen Janes/20171221.scap_geo/scap541_emb_l3_ya.tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.firstbp_fwd.rm_exonic.bw" name="Txn initiation fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="30.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="25" id="/Users/jj374/cb-head2/relmapping/scap_geo/scap541_emb_l3_ya.tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.firstbp_rev.rm_exonic.bw" name="Txn initiation rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="30.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" colorScale="ContinuousColorScale;0.0;20.0;255,255,255;0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="25" id="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_fwd/lcap_wt_emb_fwd.bw" name="Txn elongation Emb fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1000.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="178,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="25" id="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_rev_neg/lcap_wt_emb_rev_neg.bw" name="Txn elongation Emb rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.4E-45" minimum="-1000.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="25" id="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_fwd/lcap_wt_l1_fwd.bw" name="Txn elongation L1 fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1000.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="178,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="25" id="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_rev_neg/lcap_wt_l1_rev_neg.bw" name="Txn elongation L1 rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.4E-45" minimum="-1000.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="25" id="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_fwd/lcap_wt_l2_fwd.bw" name="Txn elongation L2 fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1000.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="178,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="25" id="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_rev_neg/lcap_wt_l2_rev_neg.bw" name="Txn elongation L2 rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.4E-45" minimum="-1000.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="25" id="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_fwd/lcap_wt_l3_fwd.bw" name="Txn elongation L3 fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1000.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="178,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="25" id="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_rev_neg/lcap_wt_l3_rev_neg.bw" name="Txn elongation L3 rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.4E-45" minimum="-1000.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="25" id="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_fwd/lcap_wt_l4_fwd.bw" name="Txn elongation L4 fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1000.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="178,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="25" id="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_rev_neg/lcap_wt_l4_rev_neg.bw" name="Txn elongation L4 rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.4E-45" minimum="-1000.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="25" id="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_fwd/lcap_wt_ya_fwd.bw" name="Txn elongation YA fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1000.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="178,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="25" id="/Users/jj374/cb-head2/relmapping/lcap_geo/tracks_rev_neg/lcap_wt_ya_rev_neg.bw" name="Txn elongation YA rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.4E-45" minimum="-1000.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" id="/Users/jj374/cb-head2/relmapping/annot/S2_regulatory_annotation/S2_regulatory_annotation_6Dec17.bed" name="Annotated accessible sites" renderer="BASIC_FEATURE" sortable="true" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="EXPANDED" featureVisibilityWindow="-1" fontSize="12" height="80" id="/Users/jj374/cb-head2/relmapping/annot/FigB_chromatin_states/Ho2014_EE.bed" name="(Ho et al., 2014) EE states" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="EXPANDED" featureVisibilityWindow="-1" fontSize="12" height="80" id="/Users/jj374/cb-head2/relmapping/annot/FigB_chromatin_states/Ho2014_L3.bed" name="(Ho et al., 2014) L3 states" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="EXPANDED" featureVisibilityWindow="-1" fontSize="12" height="80" id="/Users/jj374/cb-head2/relmapping/annot/FigB_chromatin_states/Evans2016_EE.bed" name="(Evans et al., 2016) EE states" renderer="BASIC_FEATURE" sortable="true" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="EXPANDED" featureVisibilityWindow="-1" fontSize="12" height="80" id="/Users/jj374/cb-head2/relmapping/annot/FigB_chromatin_states/Evans2016_L3.bed" name="(Evans et al., 2016) L3 states" renderer="BASIC_FEATURE" sortable="true" visible="true" windowFunction="count"/>
+    </Panel>
+    <Panel height="20" name="FeaturePanel" width="1423">
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="Reference sequence" name="Reference sequence" sortable="false" visible="true"/>
+    </Panel>
+    <PanelLayout dividerFractions="0.9860935524652339"/>
+</Session>
