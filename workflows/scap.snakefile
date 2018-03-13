@@ -113,8 +113,8 @@ rule tics:
     output:
         pf('{bid}', '{step}.tics', '.bed', 'scap'),
     shell: '''
-        bigWigToBedGraph {input[0]} stdout | bedtools merge -i stdin -d 50 -o sum -c 4 | awk -F'\\t' -v OFS='\\t' '{{print $1,$2,$3,"tic",$4,"+"}}' > {output}
-        bigWigToBedGraph {input[1]} stdout | bedtools merge -i stdin -d 50 -o sum -c 4 | awk -F'\\t' -v OFS='\\t' '{{print $1,$2,$3,"tic",$4,"-"}}' >> {output}
+        bigWigToBedGraph {input[0]} stdout | awk '(int($4)) > 0' | bedtools merge -i stdin -d 50 -o sum -c 4 | awk -F'\\t' -v OFS='\\t' '{{print $1,$2,$3,"tic",$4,"+"}}' > {output}
+        bigWigToBedGraph {input[1]} stdout | awk '(int($4)) > 0' | bedtools merge -i stdin -d 50 -o sum -c 4 | awk -F'\\t' -v OFS='\\t' '{{print $1,$2,$3,"tic",$4,"-"}}' >> {output}
         sort -k1,1 -k2,2n -k3,3n -k6,6 {output} -o {output}
     '''
 
@@ -393,6 +393,8 @@ rule scap:
         #expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.firstbp_rev.rm_exonic', '.bw', 'scap'), bid=['scap541_emb_l3_ya']),
         #expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10_reversed.firstbp_fwd', '.bw', 'scap'), bid=scap_samples_unpooled_rm_qcfail()),
         #expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10_reversed.firstbp_rev', '.bw', 'scap'), bid=scap_samples_unpooled_rm_qcfail()),
+        expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.tics', '.bed', 'scap'), bid=['scap541_emb_l3_ya']),
+        expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.tics_top100', '.bed', 'scap'), bid=['scap541_emb_l3_ya']),
 
 rule scap751:
     input:
