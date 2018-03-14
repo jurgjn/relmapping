@@ -4,17 +4,17 @@ fp <- snakemake@input[[1]]
 countData <- read.table(fp, header=TRUE, sep="\t", row.names=1)
 
 cond <- relevel(factor(c( # Hard-coded(!) unlist(lapply(colnames(countData), function(s) substr(s, 1, nchar(s) - 5)))
-    "lcap728_wt_emb", "lcap728_wt_emb",
-    "lcap728_wt_l1", "lcap728_wt_l1",
-    "lcap728_wt_l2", "lcap728_wt_l2",
-    "lcap728_wt_l3", "lcap728_wt_l3",
-    "lcap728_wt_l4", "lcap728_wt_l4",
-    "lcap728_wt_ya", "lcap728_wt_ya",
-    "lcap728_glp1_ya", "lcap728_glp1_ya",
-    "lcap728_glp1_d3", "lcap728_glp1_d3",
-    "lcap728_glp1_d7", "lcap728_glp1_d7",
-    "lcap728_glp1_d10", "lcap728_glp1_d10",
-    "lcap728_glp1_d14", "lcap728_glp1_d14")), "lcap728_wt_emb")
+    "lcap808_wt_emb", "lcap808_wt_emb",
+    "lcap808_wt_l1", "lcap808_wt_l1",
+    "lcap808_wt_l2", "lcap808_wt_l2",
+    "lcap808_wt_l3", "lcap808_wt_l3",
+    "lcap808_wt_l4", "lcap808_wt_l4",
+    "lcap808_wt_ya", "lcap808_wt_ya",
+    "lcap808_glp1_d1", "lcap808_glp1_d1",
+    "lcap808_glp1_d2", "lcap808_glp1_d2",
+    "lcap808_glp1_d6", "lcap808_glp1_d6",
+    "lcap808_glp1_d9", "lcap808_glp1_d9",
+    "lcap808_glp1_d13", "lcap808_glp1_d13")), "lcap808_wt_emb")
 
 colData <- data.frame(row.names=colnames(countData), condition=cond)
 

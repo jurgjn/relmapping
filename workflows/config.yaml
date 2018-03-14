@@ -26,19 +26,6 @@ stages:
 - wt_l3
 - wt_l4
 - wt_ya
-- glp1_ya
-- glp1_d3
-- glp1_d7
-- glp1_d10
-- glp1_d14
-
-stages728:
-- wt_emb
-- wt_l1
-- wt_l2
-- wt_l3
-- wt_l4
-- wt_ya
 - glp1_d1
 - glp1_d2
 - glp1_d6
@@ -59,13 +46,6 @@ stages_glp1:
 - glp1_d6
 - glp1_d9
 - glp1_d13
-
-stages728_glp1:
-- glp1_ya
-- glp1_d3
-- glp1_d7
-- glp1_d10
-- glp1_d14
 
 stages_rep:
 - wt_emb_rep1
@@ -131,21 +111,6 @@ stages_atac:
 - glp1_d13
 - gon2gem1_d1
 - gon2gem1_d2
-
-stages728_atac:
-- wt_emb
-- wt_l1
-- wt_l2
-- wt_l3
-- wt_l4
-- wt_ya
-- glp1_ya
-- glp1_d3
-- glp1_d7
-- glp1_d10
-- glp1_d14
-- gon2gem1_ya
-- gon2gem1_d3
 
 stages_atac_rep:
 - wt_emb_rep1
@@ -370,6 +335,38 @@ atac808_pe:
   wt_ya_rep1b: HS254_YA_JA4_N2_atac_S2
   wt_ya_rep1c: HS327_crb55_JA4
   wt_ya_rep2: HS168_crb55_N701-N503
+
+atac808_se:
+  glp1_d1_rep1a: HS456_MS14
+  glp1_d1_rep1b: HS457_MS20
+  glp1_d1_rep1c: HS458_MS31
+  glp1_d1_rep2a: HS446_MS4
+  glp1_d1_rep2b: HS456_MS9
+  glp1_d2_rep1a: HS456_MS15
+  glp1_d2_rep1b: HS457_MS21
+  glp1_d2_rep1c: HS458_MS32
+  glp1_d2_rep2a: HS446_MS1
+  glp1_d2_rep2b: HS456_MS8
+  glp1_d2_rep2c: HS457_MS19
+  glp1_d6_rep1a: HS446_MS3
+  glp1_d6_rep1b: HS457_MS24
+  glp1_d6_rep1c: HS458_MS33
+  glp1_d6_rep2: HS462_MS39
+  glp1_d9_rep1a: HS446_MS2
+  glp1_d9_rep1b: HS457_MS26
+  glp1_d9_rep1c: HS458_MS34
+  glp1_d9_rep2: HS462_MS40
+  glp1_d13_rep1a: HS456_MS17
+  glp1_d13_rep1b: HS456_MS18
+  glp1_d13_rep1c: HS457_MS28
+  glp1_d13_rep1d: HS457_MS29
+  glp1_d13_rep1e: HS458_MS35
+  glp1_d13_rep1f: HS458_MS36
+  glp1_d13_rep1e: HS462_MS37
+  glp1_d13_rep1f: HS462_MS38
+  glp1_d13_rep2a: HS462_MS41
+  glp1_d13_rep2b: HS465_MS44
+  glp1_d13_rep2c: HS470_MS48
 
 atac749:
   wt_emb_rep1: HS086_Caro-A

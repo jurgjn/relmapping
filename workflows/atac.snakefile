@@ -180,40 +180,6 @@ rule atac728_geo:
         expand(pf('atac_{sample}', 'alignment_q10_reads_by_rep', '.bam.bai', 'atac_geo'), sample=config['stages_atac_by_rep']),
         expand(pf('atac_{sample}', 'alignment_raw_reads_by_rep', '.bam.bai', 'atac_geo'), sample=config['stages_atac_by_rep']),
 
-rule atac749_read1:
-    input:
-        'samples/atac728_{sample}.r1.fq.gz'
-    output:
-        'atac749/reads/atac_{sample}.read1.fastq.gz'
-    shell:
-        'cp {input} {output}'
-
-rule atac749_read2:
-    input:
-        'samples/atac728_{sample}.r2.fq.gz'
-    output:
-        'atac749/reads/atac_{sample}.read2.fastq.gz'
-    shell:
-        'cp {input} {output}'
-
-rule atac749_fastq:
-    input:
-        'samples/atac728_{sample}.r1.fq.gz'
-    output:
-        'atac749/reads/atac_{sample}.fastq.gz'
-    shell:
-        'cp {input} {output}'
-
-rule atac749_tracks:
-    input:
-        pf('atac728_{sample}_rep1', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR.sfnorm', '.bw', 'atac728'),
-        pf('atac728_{sample}_rep2', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR.sfnorm', '.bw', 'atac728'),
-    output:
-        'atac749/tracks/atac_{sample}.bw',
-    shell: '''
-        scripts/bigWiggleTools.ipy write {output[0]} scale 0.1 bin 10 mean {input[0]} {input[1]}
-        '''
-
 rule atac749:
     input:
         expand('atac749/reads/atac_{sample}.read1.fastq.gz', sample=config['atac749_pe']),
@@ -221,6 +187,49 @@ rule atac749:
         expand('atac749/reads/atac_{sample}.fastq.gz', sample=config['atac749_se']),
         expand('atac749/tracks/atac_{sample}.bw', sample=config['stages_wt'] + config['stages_glp1']),
 """
+
+rule atac808_read1: #https://bitbucket.org/snakemake/snakemake/issues/397/unable-to-set-utime-on-symlink-your-python
+    input:
+        'samples/atac808_{sample}.r1.fq.gz'
+    output:
+        'atac808_geo/reads/atac_{sample}.read1.fastq.gz'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule atac808_read2: #https://bitbucket.org/snakemake/snakemake/issues/397/unable-to-set-utime-on-symlink-your-python
+    input:
+        'samples/atac808_{sample}.r2.fq.gz'
+    output:
+        'atac808_geo/reads/atac_{sample}.read2.fastq.gz'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule atac808_fastq: #https://bitbucket.org/snakemake/snakemake/issues/397/unable-to-set-utime-on-symlink-your-python
+    input:
+        'samples/atac808_{sample}.r1.fq.gz'
+    output:
+        'atac808_geo/reads/atac_{sample}.fastq.gz'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule atac808_tracks:
+    input:
+        pf('atac808_{sample}_rep1', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac808'),
+        pf('atac808_{sample}_rep2', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac808'),
+    output:
+        'atac808_geo/tracks/atac_{sample}.bw',
+    shell: '''
+        scripts/bigWiggleTools.ipy write {output[0]} scale 0.1 bin 10 mean {input[0]} {input[1]}
+        '''
 
 rule atac808:
     input:
@@ -234,3 +243,8 @@ rule atac808:
         expand(pf('atac808_{sample}', 'c_r2', '.txt', 'atac808'), sample=config['stages_wt_rep']),
         expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac808'), sample=config['stages_rep']),
         expand(pf('atac808_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac808'), sample=config['stages_wt_rep']),
+        # raw reads & final tracks; final "geo" names
+        expand('atac808_geo/reads/atac_{sample}.read1.fastq.gz', sample=config['atac808_pe']),
+        expand('atac808_geo/reads/atac_{sample}.read2.fastq.gz', sample=config['atac808_pe']),
+        expand('atac808_geo/reads/atac_{sample}.fastq.gz', sample=config['atac808_se']),
+        expand('atac808_geo/tracks/atac_{sample}.bw', sample=config['stages']),

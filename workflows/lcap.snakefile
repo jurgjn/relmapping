@@ -1,15 +1,6 @@
 # Long cap-specific processing
-def df_samples(cid, sec='lcap'):
-    with open('workflows/config.yaml') as fh:
-        samples = collections.OrderedDict([(k, v) for k, v in yaml.load(fh).items()])[sec]
-    samples_cid = collections.OrderedDict([(k, v[cid]) for k, v in samples.items() if cid in v.keys()])
-    df_ = pd.DataFrame({'bid': list(samples_cid.keys()), 'bid_sample': list(samples_cid.values())})
-    def sample_(s): return s if s[-1].isdigit() else s[:-1]
-    df_['sample'] = list(map(sample_, df_['bid_sample']))
-    return df_.sort_values(['bid_sample']).reset_index(drop=True)
-    #return sorted(samples_cid.items(), key=operator.itemgetter(1))
 
-rule htseq_counts:
+rule htseq_counts_lcap:
     input:
         pf('{bid}', '{step}', '.bam', '{prefix}'),
     output:
@@ -319,90 +310,7 @@ rule lcap_nreads_vs_outron_coverage:
         plt.gca().set_ylabel('Fwd promoters with continuous signal')
         plt.savefig(output[0], bbox_inches='tight')
 
-def bid_pooled(l):
-    def sample_(s): return s if s[-1].isdigit() else s[:-1]
-    return set(map(sample_, l))
-
-lcap728_samples = sorted(set(config['lcap728'].keys()) | bid_pooled(config['lcap728'].keys()))
-#lcap728_samples = ['lcap728_wt_ya_rep2a_1M', 'lcap728_wt_ya_rep2b_1M']
-
-l_lcap_pooled = [
-  'lcap728_wt_emb_rep1',
-  'lcap728_wt_emb_rep2',
-  'lcap728_wt_l1_rep1',
-  'lcap728_wt_l1_rep2',
-  'lcap728_wt_l2_rep1',
-  'lcap728_wt_l2_rep2',
-  'lcap728_wt_l3_rep1',
-  'lcap728_wt_l3_rep2',
-  'lcap728_wt_l4_rep1',
-  'lcap728_wt_l4_rep2',
-  'lcap728_wt_ya_rep1',
-  'lcap728_wt_ya_rep2',
-  'lcap728_glp1_ya_rep1',
-  'lcap728_glp1_ya_rep2',
-  'lcap728_glp1_d3_rep1',
-  'lcap728_glp1_d3_rep2',
-  'lcap728_glp1_d7_rep1',
-  'lcap728_glp1_d7_rep2',
-  'lcap728_glp1_d10_rep1',
-  'lcap728_glp1_d10_rep2',
-  'lcap728_glp1_d14_rep1',
-  'lcap728_glp1_d14_rep2',
-]
-
-rule sizefactors_lcap728_counts:
-    input:
-        expand(pf('{bid}', '{{step}}.htseq_counts', '.tsv', 'lcap728'), bid=l_lcap_pooled),
-    output:
-        pf('lcap728', '{step}.sizefactors_lcap728', '_counts.tsv', 'lcap728'),
-    run:
-        def counts_(fp): return pd.read_csv(fp, sep='\t', names=('gene_id', 'counts'))['counts'].tolist()
-        df = pd.DataFrame(collections.OrderedDict([(parse_pf(input_)[0], counts_(input_)) for input_ in input]),
-            index=pd.read_csv(input[0], sep='\t', names=('gene_id', 'counts'))['gene_id'].tolist())\
-            .drop(['__no_feature', '__ambiguous', '__too_low_aQual', '__not_aligned', '__alignment_not_unique'])\
-            .to_csv(output[0], sep='\t')
-
-rule sizefactors_lcap728_deseq:
-    input:
-        pf('lcap728', '{step}.sizefactors_lcap728', '_counts.tsv', 'lcap728')
-    output:
-        pf('lcap728', '{step}.sizefactors_lcap728', '_sizefactors.tsv', 'lcap728')
-    script:
-        'sizefactors_lcap728_deseq.R'
-
-rule filled_fwd_lcap_sfnorm:
-    input:
-        pf('{bid}', '{step}', '.bam', '{prefix}'),
-        pf('lcap728', '{step}.sizefactors_lcap728', '_sizefactors.tsv', 'lcap728'),
-    output:
-        temp(pf('{bid}', '{step}.filled_fwd_sfnorm', '.bedGraph', '{prefix}')),
-        pf('{bid}', '{step}.filled_fwd_sfnorm', '.bw', '{prefix}'),
-    shell:
-        '''
-        sample=$(basename "{input[0]}" | cut -f1 -d".")
-        sf=$(cat {input[1]} | awk -F'\\t' -v OFS='\\t' -v sample=$sample '($1 == sample) {{print 1/$2}}')
-        samtools view -b -u {input[0]} | bedtools genomecov -ibam stdin -bg -pc -strand - -scale $sf > {output[0]}
-        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
-        bedGraphToBigWig {output[0]} <(samtools view -H {input} | awk 'substr($2,1,2)=="SN" {{print substr($2, 4),substr($3, 4)}}') {output[1]}
-        '''
-
-rule filled_rev_lcap_sfnorm:
-    input:
-        pf('{bid}', '{step}', '.bam', '{prefix}'),
-        pf('lcap728', '{step}.sizefactors_lcap728', '_sizefactors.tsv', 'lcap728'),
-    output:
-        temp(pf('{bid}', '{step}.filled_rev_sfnorm', '.bedGraph', '{prefix}')),
-        pf('{bid}', '{step}.filled_rev_sfnorm', '.bw', '{prefix}'),
-    shell:
-        '''
-        sample=$(basename "{input[0]}" | cut -f1 -d".")
-        sf=$(cat {input[1]} | awk -F'\\t' -v OFS='\\t' -v sample=$sample '($1 == sample) {{print 1/$2}}')
-        samtools view -b -u {input[0]} | bedtools genomecov -ibam stdin -bg -pc -strand + -scale $sf > {output[0]}
-        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
-        bedGraphToBigWig {output[0]} <(samtools view -H {input} | awk 'substr($2,1,2)=="SN" {{print substr($2, 4),substr($3, 4)}}') {output[1]}
-        '''
-
+"""
 rule lcap728:
     input:
         expand(pf('{bid}', 'c_r1', '.txt', 'lcap728'), bid=lcap728_samples),
@@ -479,6 +387,7 @@ rule lcap728_qc:
         )
         df_['useful_reads'] = df['trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.c_r1'].astype(int)
         df_.sort_index().to_csv(output[1], sep='\t')
+"""
 
 rule lcap805:
     input:
@@ -512,12 +421,113 @@ rule lcap805:
         #expand(pf('{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.startbp_rev', '.bw', 'lcap728'), bid=lcap728_samples),
         #expand(pf('{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.rafts', '_raw.bed', 'lcap728'), bid=lcap728_samples),
 
+rule lcap808_read1: #https://bitbucket.org/snakemake/snakemake/issues/397/unable-to-set-utime-on-symlink-your-python
+    input:
+        'samples/lcap808_{sample}.r1.fq.gz'
+    output:
+        'lcap808_geo/reads/lcap_{sample}.read1.fastq.gz'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule lcap808_read2: #https://bitbucket.org/snakemake/snakemake/issues/397/unable-to-set-utime-on-symlink-your-python
+    input:
+        'samples/lcap808_{sample}.r2.fq.gz'
+    output:
+        'lcap808_geo/reads/lcap_{sample}.read2.fastq.gz'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule sizefactors_lcap808_counts:
+    input:
+        expand(pf('lcap808_{sample}', '{{step}}.htseq_counts', '.tsv', 'lcap808'), sample=config['stages_rep']),
+    output:
+        pf('lcap808', '{step}.sizefactors_lcap808', '_counts.tsv', 'lcap808'),
+    run:
+        def counts_(fp): return pd.read_csv(fp, sep='\t', names=('gene_id', 'counts'))['counts'].tolist()
+        df = pd.DataFrame(collections.OrderedDict([(parse_pf(input_)[0], counts_(input_)) for input_ in input]),
+            index=pd.read_csv(input[0], sep='\t', names=('gene_id', 'counts'))['gene_id'].tolist())\
+            .drop(['__no_feature', '__ambiguous', '__too_low_aQual', '__not_aligned', '__alignment_not_unique'])\
+            .to_csv(output[0], sep='\t')
+
+rule sizefactors_lcap808_deseq:
+    input:
+        pf('lcap808', '{step}.sizefactors_lcap808', '_counts.tsv', 'lcap808')
+    output:
+        pf('lcap808', '{step}.sizefactors_lcap808', '_sizefactors.tsv', 'lcap808')
+    script:
+        'sizefactors_lcap808_deseq.R'
+
+rule filled_fwd_lcap808_sfnorm:
+    input:
+        pf('{bid}', '{step}', '.bam', '{prefix}'),
+        pf('lcap808', '{step}.sizefactors_lcap808', '_sizefactors.tsv', 'lcap808'),
+    output:
+        temp(pf('{bid}', '{step}.filled_fwd_sfnorm', '.bedGraph', '{prefix}')),
+        pf('{bid}', '{step}.filled_fwd_sfnorm', '.bw', '{prefix}'),
+    shell:
+        '''
+        sample=$(basename "{input[0]}" | cut -f1 -d".")
+        sf=$(cat {input[1]} | awk -F'\\t' -v OFS='\\t' -v sample=$sample '($1 == sample) {{print 1/$2}}')
+        samtools view -b -u {input[0]} | bedtools genomecov -ibam stdin -bg -pc -strand - -scale $sf > {output[0]}
+        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        bedGraphToBigWig {output[0]} <(samtools view -H {input} | awk 'substr($2,1,2)=="SN" {{print substr($2, 4),substr($3, 4)}}') {output[1]}
+        '''
+
+rule filled_rev_lcap808_sfnorm:
+    input:
+        pf('{bid}', '{step}', '.bam', '{prefix}'),
+        pf('lcap808', '{step}.sizefactors_lcap808', '_sizefactors.tsv', 'lcap808'),
+    output:
+        temp(pf('{bid}', '{step}.filled_rev_sfnorm', '.bedGraph', '{prefix}')),
+        pf('{bid}', '{step}.filled_rev_sfnorm', '.bw', '{prefix}'),
+    shell:
+        '''
+        sample=$(basename "{input[0]}" | cut -f1 -d".")
+        sf=$(cat {input[1]} | awk -F'\\t' -v OFS='\\t' -v sample=$sample '($1 == sample) {{print 1/$2}}')
+        samtools view -b -u {input[0]} | bedtools genomecov -ibam stdin -bg -pc -strand + -scale $sf > {output[0]}
+        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        bedGraphToBigWig {output[0]} <(samtools view -H {input} | awk 'substr($2,1,2)=="SN" {{print substr($2, 4),substr($3, 4)}}') {output[1]}
+        '''
+
+rule mean_by_stage:
+    input:
+        pf('{bid}_rep1', '{step}', '.bw', '{prefix}'),
+        pf('{bid}_rep2', '{step}', '.bw', '{prefix}'),
+    output:
+        pf('{bid}', '{step}.mean_by_stage', '.bw', '{prefix}'),
+    shell: '''
+        scripts/bigWiggleTools.ipy write_bg {output[0]} mean {input[0]} {input[1]}
+    '''
+
 rule lcap808:
     input:
+        # raw read counts
         expand(pf('lcap808_{bid}', 'c_r1', '.txt', 'lcap808'), bid=config['stages_rep']),
         expand(pf('lcap808_{bid}', 'c_r2', '.txt', 'lcap808'), bid=config['stages_rep']),
         # Coverage tracks, q10
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd', '.bw', 'lcap808'), bid=config['stages_rep']),
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev', '.bw', 'lcap808'), bid=config['stages_rep']),
+        # Coverage tracks, q10, mean by stage
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd.mean_by_stage', '.bw', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev.mean_by_stage', '.bw', 'lcap808'), bid=config['stages']),
         # WS260_ce10 exon counts
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.htseq_counts', '.tsv', 'lcap808'), bid=config['stages_rep']),
+        # Startbp tracks for jump/incr tests
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.startbp_fwd', '.bw', 'lcap808'), bid=config['stages_rep']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.startbp_rev', '.bw', 'lcap808'), bid=config['stages_rep']),
+        # raw reads & final tracks; final "geo" names
+        expand('lcap808_geo/reads/lcap_{sample}.read1.fastq.gz', sample=list(config['lcap808'].keys())),
+        expand('lcap808_geo/reads/lcap_{sample}.read2.fastq.gz', sample=list(config['lcap808'].keys())),
+        # calculate sizeFactors from gene-level read counts using DESeq2
+        pf('lcap808', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.sizefactors_lcap808', '_counts.tsv', 'lcap808'),
+        pf('lcap808', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.sizefactors_lcap808', '_sizefactors.tsv', 'lcap808'),
+        # normalise tracks by sizeFactors
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_sfnorm', '.bw', 'lcap808'), bid=config['stages_rep']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_sfnorm', '.bw', 'lcap808'), bid=config['stages_rep']),
+
