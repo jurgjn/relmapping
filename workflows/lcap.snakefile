@@ -505,6 +505,15 @@ rule mean_by_stage:
         scripts/bigWiggleTools.ipy write_bg {output[0]} mean {input[0]} {input[1]}
     '''
 
+rule log2p:
+    input:
+        pf('{bid}', '{step}', '.bw', '{prefix}'),
+    output:
+        pf('{bid}', '{step}.log2p', '.bw', '{prefix}'),
+    shell: '''
+        scripts/bigWiggleTools.ipy write_bg {output[0]} log 2 offset 1 {input[0]}
+    '''
+
 rule lcap808:
     input:
         # raw read counts
@@ -530,4 +539,10 @@ rule lcap808:
         # normalise tracks by sizeFactors
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_sfnorm', '.bw', 'lcap808'), bid=config['stages_rep']),
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_sfnorm', '.bw', 'lcap808'), bid=config['stages_rep']),
+        # Mean across replicates
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_sfnorm.mean_by_stage', '.bw', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_sfnorm.mean_by_stage', '.bw', 'lcap808'), bid=config['stages']),
+        # normalise tracks by sizeFactors
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_sfnorm.mean_by_stage.log2p', '.bw', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_sfnorm.mean_by_stage.log2p', '.bw', 'lcap808'), bid=config['stages']),
 
