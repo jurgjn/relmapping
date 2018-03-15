@@ -6,7 +6,7 @@ Preliminary code and results related to mapping regulatory elements; currently n
 - [WS260_ce10 gene annotations used in e.g. promoter assignments](/WS260_ce10) ([direct link to .gtf-file](WS260_ce10/WS260_ce10.transcripts.annot.gtf.gz))
 
 ## Notes
-- Genomic coordinates are in [`WBcel215/ce10`](http://hgdownload.soe.ucsc.edu/goldenPath/ce10/bigZips/) ([`WS220'](https://github.com/WormBase/website/issues/2003))
+- Genomic coordinates are in [`WBcel215/ce10`](http://hgdownload.soe.ucsc.edu/goldenPath/ce10/bigZips/) ([`WS220`](https://github.com/WormBase/website/issues/2003))
 - Gene annotations are a subset of WS260 with coordinates backlifted to `WBcel215/ce10` ([`WS260_ce10`](/WS260_ce10))
 - Abbreviations used when describing column names:
     - `%stage` quantities defined for multiple stages(/strains):

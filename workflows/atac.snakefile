@@ -221,6 +221,16 @@ rule atac808_fastq: #https://bitbucket.org/snakemake/snakemake/issues/397/unable
         touch -h `pwd`/{output}
         '''
 
+rule atac808_mean_by_stage_treat_pileup:
+    input:
+        pf('atac808_{bid}_rep1', '{step}', '_treat_pileup.bw', 'atac808'),
+        pf('atac808_{bid}_rep2', '{step}', '_treat_pileup.bw', 'atac808'),
+    output:
+        pf('atac808_{bid}', '{step}.mean_by_stage', '_treat_pileup.bw', 'atac808'),
+    shell: '''
+        scripts/bigWiggleTools.ipy write_bg {output[0]} mean {input[0]} {input[1]}
+    '''
+
 rule atac808_tracks:
     input:
         pf('atac808_{sample}_rep1', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac808'),
@@ -230,6 +240,23 @@ rule atac808_tracks:
     shell: '''
         scripts/bigWiggleTools.ipy write {output[0]} scale 0.1 bin 10 mean {input[0]} {input[1]}
         '''
+
+def df_atac_make():
+    df_atac = pd.read_csv('annot/S1_accessible_sites/S1a_accessible_sites.tsv' % locals(), sep='\t')
+    return df_atac[yp.NAMES_BED3]
+
+rule atac808_nanmax:
+    input:
+        pf('atac808_{sample}', '{step}', '_treat_pileup.bw', 'atac808'),
+    output:
+        pf('atac808_{sample}', '{step}.atac_nanmax', '.tsv', 'atac808'),
+        pf('atac808_{sample}', '{step}.atac_nanmax', '.bed', 'atac808'),
+    run:
+        col_ = 'atac_%s_nanmax' % (wildcards.sample,)
+        df_sites = df_atac_make()
+        df_sites[col_] = list(map(lambda c: int(np.nanmax(c)), yp.read_regions(input[0], df_sites.chrom.tolist(), df_sites.start.tolist(), df_sites.end.tolist())))
+        df_sites[[col_]].to_csv(output[0], sep='\t', index=False)
+        df_sites[yp.NAMES_BED3 + [col_]].to_csv(output[1], sep='\t', index=False, header=False)
 
 rule atac808:
     input:
@@ -242,9 +269,14 @@ rule atac808:
         expand(pf('atac808_{sample}', 'c_r1', '.txt', 'atac808'), sample=config['stages_rep']),
         expand(pf('atac808_{sample}', 'c_r2', '.txt', 'atac808'), sample=config['stages_wt_rep']),
         expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac808'), sample=config['stages_rep']),
+        expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR', '_treat_pileup.bw', 'atac808'), sample=config['stages_rep']),
         expand(pf('atac808_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac808'), sample=config['stages_wt_rep']),
         # raw reads & final tracks; final "geo" names
         expand('atac808_geo/reads/atac_{sample}.read1.fastq.gz', sample=config['atac808_pe']),
         expand('atac808_geo/reads/atac_{sample}.read2.fastq.gz', sample=config['atac808_pe']),
         expand('atac808_geo/reads/atac_{sample}.fastq.gz', sample=config['atac808_se']),
         expand('atac808_geo/tracks/atac_{sample}.bw', sample=config['stages']),
+        # raw sample-based peak heights for differential accessibility tests
+        expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR.atac_nanmax', '.tsv', 'atac808'), sample=config['stages_rep']),
+        # normalised stage-specific peak heights for clustering & other downstream analyses
+        expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_stage.atac_nanmax', '.tsv', 'atac808'), sample=config['stages']),
