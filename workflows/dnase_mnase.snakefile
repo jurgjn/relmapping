@@ -46,6 +46,61 @@ rule dnase_mnase_labelled_spmr_lt300:
         touch -h `pwd`/{output}
         '''
 
+rule dnase_mnase_qc:
+    input:
+        expand(pf('{bid}', '{step}', '.txt', 'dnase_mnase'), bid=l_dnase_mnase_samples(),
+            step=[
+                'c_r1',
+                'tg_pe.bwa_pe.c_r1',
+                'tg_pe.bwa_pe.rm_unmapped_pe.c_r1',
+                'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.c_r1',
+                'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.c_r1',
+                'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.c_r1',
+                'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.c_fr',
+                'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.c_fr_rmdup',
+                ]),
+"""
+    output:
+        'atac_cfp1/atac_qc_counts.tsv',
+        'atac_cfp1/atac_qc_passed.tsv',
+    run:
+        df = pd.DataFrame()
+        df.index.name = 'sample'
+        for (bid, step, suffix, prefix) in map(parse_pf, input):
+            df.ix[bid, step] = read_int(pf(bid, step, suffix, prefix))
+        df.to_csv(output[0], sep='\t')
+
+        def pct_(a, b): return list(map(lambda a_i, b_i: '%.01f%%' % (100.0 * a_i / b_i,), a, b))
+        def loss_pct_(col_a, col_b): return list(map(lambda a_i, b_i: '%.02f%%' % (100.0 * (a_i - b_i) / a_i,), df[col_a], df[col_b]))
+        def keep_pct_(col_a, col_b): return list(map(lambda a_i, b_i: '%.02f%%' % (100.0 * b_i / a_i,), df[col_a], df[col_b]))
+
+        df_ = pd.DataFrame()
+        df_['raw_reads'] = df['c_r1'].astype(int)
+        df_['mapped'] = keep_pct_(
+                'tg_pe.bwa_pe.c_r1',
+                'tg_pe.bwa_pe.rm_unmapped_pe.c_r1',
+        )
+        df_['not mitochondrial'] = keep_pct_(
+                'tg_pe.bwa_pe.rm_unmapped_pe.c_r1',
+                'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.c_r1',
+        )
+        df_['not blacklisted'] = keep_pct_(
+                'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.c_r1',
+                'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.c_r1',
+        )
+        df_['mapq10'] = keep_pct_(
+                'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.c_r1',
+                'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.c_r1',
+        )
+        df_['useful_reads'] = df['tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.c_r1'].astype(int)
+        
+        df_['complexity'] = (df['tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.c_fr_rmdup'].astype(int) \
+                           / df['tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.c_fr'].astype(int)).map('{:,.02f}'.format)
+
+        df_.sort_index().to_csv(output[1], sep='\t')
+
+"""
+
 rule dnase_mnase:
     input:
         expand(pf('{bid}', 'c_r1', '.txt', 'dnase_mnase'), bid=l_dnase_mnase_samples()),
