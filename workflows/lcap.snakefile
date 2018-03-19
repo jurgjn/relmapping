@@ -495,12 +495,12 @@ rule filled_rev_lcap808_sfnorm:
         bedGraphToBigWig {output[0]} <(samtools view -H {input} | awk 'substr($2,1,2)=="SN" {{print substr($2, 4),substr($3, 4)}}') {output[1]}
         '''
 
-rule mean_by_stage:
+rule lcap808_mean_by_stage:
     input:
-        pf('{bid}_rep1', '{step}', '.bw', '{prefix}'),
-        pf('{bid}_rep2', '{step}', '.bw', '{prefix}'),
+        pf('{bid}_rep1', '{step}', '.bw', 'lcap808'),
+        pf('{bid}_rep2', '{step}', '.bw', 'lcap808'),
     output:
-        pf('{bid}', '{step}.mean_by_stage', '.bw', '{prefix}'),
+        pf('{bid}', '{step}.mean_by_stage', '.bw', 'lcap808'),
     shell: '''
         scripts/bigWiggleTools.ipy write_bg {output[0]} mean {input[0]} {input[1]}
     '''
