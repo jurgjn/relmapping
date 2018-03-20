@@ -498,6 +498,12 @@ def to_wbgtf(df, fp, **kwargs):
     df_out['attribute'] = df[l_attr].apply(gtf_attr_string, axis=1, reduce=False, raw=True)
     df_out.sort_values(['chrom', 'start', 'end', 'strand']).to_csv(fp, sep='\t', index=False, header=False, quoting=csv.QUOTE_NONE, **kwargs)
 
+def to_csv_gz(fp, df, track_line=b'##displayName=locus_id\n', *args, **kwargs):
+    fh = gzip.open(fp, 'wb')
+    fh.write(track_line)
+    fh.write(df.to_csv(*args, **kwargs).encode())
+    fh.close()
+
 def to_gffbed(df_inp, fp, bed_cols=None, trackline='#track gffTags=on', v=False):
     """
     trackline='#track gffTags=on useScore=1'
