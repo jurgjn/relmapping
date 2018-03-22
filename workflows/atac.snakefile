@@ -231,6 +231,24 @@ rule atac808_mean_by_stage_treat_pileup:
         scripts/bigWiggleTools.ipy write_bg {output[0]} mean {input[0]} {input[1]}
     '''
 
+rule atac808_mean_by_series_wt:
+    input:
+        expand(pf('atac808_{sample}', '{{step}}', '_treat_pileup.bw', 'atac808'), sample=config['stages_wt_rep']),
+    output:
+        pf('atac808_wt', '{step}.mean_by_series', '_treat_pileup.bw', 'atac808'),
+    shell: '''
+        scripts/bigWiggleTools.ipy write_bg {output[0]} mean {input[0]} {input[1]} {input[2]} {input[3]} {input[4]} {input[5]} {input[6]} {input[7]} {input[8]} {input[9]} {input[10]} {input[11]}
+    '''
+
+rule atac808_mean_by_series_glp1:
+    input:
+        expand(pf('atac808_{sample}', '{{step}}', '_treat_pileup.bw', 'atac808'), sample=config['stages_glp1_rep']),
+    output:
+        pf('atac808_glp1', '{step}.mean_by_series', '_treat_pileup.bw', 'atac808'),
+    shell: '''
+        scripts/bigWiggleTools.ipy write_bg {output[0]} mean {input[0]} {input[1]} {input[2]} {input[3]} {input[4]} {input[5]} {input[6]} {input[7]} {input[8]} {input[9]}
+    '''
+
 rule atac808_tracks:
     input:
         pf('atac808_{sample}_rep1', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac808'),
@@ -280,3 +298,7 @@ rule atac808:
         expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR.atac_nanmax', '.tsv', 'atac808'), sample=config['stages_rep']),
         # normalised stage-specific peak heights for clustering & other downstream analyses
         expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_stage.atac_nanmax', '.tsv', 'atac808'), sample=config['stages']),
+        # pooled by series
+        pf('atac808_wt', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.mean_by_series', '_treat_pileup.bw', 'atac808'),
+        pf('atac808_wt', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_series', '_treat_pileup.bw', 'atac808'),
+        pf('atac808_glp1', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_series', '_treat_pileup.bw', 'atac808'),
