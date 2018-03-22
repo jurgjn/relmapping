@@ -289,6 +289,7 @@ rule atac808:
         expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac808'), sample=config['stages_rep']),
         expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR', '_treat_pileup.bw', 'atac808'), sample=config['stages_rep']),
         expand(pf('atac808_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac808'), sample=config['stages_wt_rep']),
+        expand(pf('atac808_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.mean_by_stage', '_treat_pileup.bw', 'atac808'), sample=config['stages_wt']),
         # raw reads & final tracks; final "geo" names
         expand('atac808_geo/reads/atac_{sample}.read1.fastq.gz', sample=config['atac808_pe']),
         expand('atac808_geo/reads/atac_{sample}.read2.fastq.gz', sample=config['atac808_pe']),
