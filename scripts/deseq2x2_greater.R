@@ -8,5 +8,5 @@ colData <- data.frame(row.names=colnames(countData),
 dds <- DESeqDataSetFromMatrix(countData=countData, colData=colData, design=~condition)
 #suppressMessages(dds <- DESeq(dds))
 dds <- DESeq(dds)
-res <- results(dds, altHypothesis="greater")
+res <- results(dds, altHypothesis="greater")#, independentFiltering=FALSE)
 as.data.frame(res)
