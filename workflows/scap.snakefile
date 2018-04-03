@@ -18,14 +18,6 @@ def scap_bid_from_lsid(lsid):
     d_lsid_bid = {config['scap'][bid]['library_series_id']: bid for bid in scap_samples_unpooled()}
     return d_lsid_bid[lsid]
 
-rule scap_lsid_bw:
-    input:
-        lambda wildcards: pf(scap_bid_from_lsid(wildcards.lsid), wildcards.step, '.bw', 'scap'),
-    output:
-        pf('{lsid}', '{step}.lsid', '.bw', 'scap'),
-    shell:
-        'cp {input} {output}'
-
 rule firstbp_fwd_scap:
     input: pf('{bid}', '{step}', '.bam', 'scap')
     output:
@@ -268,7 +260,7 @@ rule c_TCA:
 
 rule scap_qc:
     input:
-        expand(pf('{bid}', '{step}', '.txt', 'scap'), bid=scap_samples_unpooled(),
+        expand(pf('{bid}', '{step}', '.txt', 'scap'), bid=config['scap'].keys(),
             step=[
                 'c_r1', # Total reads
                 'tg_se.c_r1', # Adapter-trimmed + quality-trimmed reads (#1)
@@ -289,9 +281,6 @@ rule scap_qc:
                 #'tg_se_q15.bwa_se.q10_keep.c',
                 #'tg_se_q20.bwa_se.q10_keep.c',
                 #'tg_se_len16.bwa_se.q10_keep.c'
-                ]),
-        expand(pf('{bid}', '{step}', '.txt', 'scap'), bid=scap_samples_unpooled(),
-            step=[
                 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c',
                 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.c', # Highly abundant, non-coding
                 #'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_rm_tics_top5',
@@ -381,12 +370,13 @@ rule scap_samples:
 rule scap:
     input:
         'scap/scap_samples.tsv',
-        expand(pf('{bid}', 'c_r1', '.txt', 'scap'), bid=scap_samples_unpooled()),
-        expand(pf('{bid}', 'tg_se.bwa_se', '.bam', 'scap'), bid=scap_samples_unpooled()),
-        expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist', '.bam.bai', 'scap'), bid=scap_samples_unpooled()),
-        expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10', '.bam.bai', 'scap'), bid=scap_samples_all()),
-        expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd', '.bw', 'scap'), bid=scap_samples_all()),
-        expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev', '.bw', 'scap'), bid=scap_samples_all()),
+        expand(pf('{bid}', 'c_r1', '.txt', 'scap'), bid=config['scap'].keys()),
+        expand(pf('{bid}', 'tg_se.bwa_se', '.bam', 'scap'), bid=config['scap'].keys()),
+        expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist', '.bam.bai', 'scap'), bid=config['scap'].keys()),
+        expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10', '.bam.bai', 'scap'), bid=config['scap'].keys()),
+        expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd', '.bw', 'scap'), bid=config['scap'].keys()),
+        expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev', '.bw', 'scap'), bid=config['scap'].keys()),
+        """
         expand(pf('{lsid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd.lsid', '.bw', 'scap'), lsid=scap_samples_unpooled_rm_qcfail_lsid()),
         expand(pf('{lsid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.lsid', '.bw', 'scap'), lsid=scap_samples_unpooled_rm_qcfail_lsid()),
         #expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.firstbp_fwd.rm_exonic', '.bw', 'scap'), bid=['scap541_emb_l3_ya']),
@@ -395,9 +385,19 @@ rule scap:
         #expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10_reversed.firstbp_rev', '.bw', 'scap'), bid=scap_samples_unpooled_rm_qcfail()),
         expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.tics', '.bed', 'scap'), bid=['scap541_emb_l3_ya']),
         expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.tics_top100', '.bed', 'scap'), bid=['scap541_emb_l3_ya']),
+        """
 
+"""
 rule scap751:
     input:
         expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.firstbp_fwd.rm_exonic', '.bw', 'scap'), bid=['scap541_emb_l3_ya']),
         expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.firstbp_rev.rm_exonic', '.bw', 'scap'), bid=['scap541_emb_l3_ya']),
         expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.firstbp_rev.rm_exonic.neg', '.bw', 'scap'), bid=['scap541_emb_l3_ya']),
+
+l_bid = ['HS604_scRNA_JA3_L4', 'HS604_scRNA_JA4_YA', 'HS604_scRNA_JA5_YA', 'HS604_scRNA_JA6_L1']
+
+rule scap_hs604:
+    input:
+        expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd', '.bw', 'scap'), bid=l_bid),
+        expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev', '.bw', 'scap'), bid=l_bid),
+"""

@@ -1591,7 +1591,38 @@ scap:
     enzyme: TAP
     rna_type: chromatin?
     rna_purification: oligodT?
-
+  HS604_scRNA_JA3_L4:
+    library_series_id: L4-JA3-N2-scRNA-HS604
+    collection_id: JA3
+    strain: N2
+    stage: l4
+    enzyme: TAP
+    rna_type: chromatin
+    rna_purification: ZymoSmall
+  HS604_scRNA_JA4_YA:
+    library_series_id: YA-JA4-N2-scRNA-HS604
+    collection_id: JA4
+    strain: N2
+    stage: ya
+    enzyme: TAP
+    rna_type: chromatin
+    rna_purification: ZymoSmall
+  HS604_scRNA_JA5_YA:
+    library_series_id: YA-JA5-N2-scRNA-HS604
+    collection_id: JA5
+    strain: N2
+    stage: ya
+    enzyme: TAP
+    rna_type: chromatin
+    rna_purification: ZymoSmall
+  HS604_scRNA_JA6_L1:
+    library_series_id: L1-JA6-N2-scRNA-HS604
+    collection_id: JA6
+    strain: N2
+    stage: l1
+    enzyme: TAP
+    rna_type: chromatin
+    rna_purification: ZymoSmall
     
 scap_pooled:
   L1-JA2-scRNA-HS291+308+333:

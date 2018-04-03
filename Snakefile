@@ -30,6 +30,7 @@ include: 'workflows/lcap_geo.snakefile'
 include: 'workflows/scap.snakefile'
 include: 'workflows/scap_rm_non_coding.snakefile'
 include: 'workflows/scap_rm_exonic.snakefile'
+include: 'workflows/scap_labelled.snakefile'
 
 include: 'workflows/hmod.snakefile'
 
