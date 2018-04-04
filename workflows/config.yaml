@@ -1624,7 +1624,7 @@ scap:
     rna_type: chromatin
     rna_purification: ZymoSmall
     
-scap_pooled:
+scap541:
   L1-JA2-scRNA-HS291+308+333:
     library_series_id: (pooled)
     strain: N2
@@ -1700,6 +1700,25 @@ scap_pooled:
     strain: N2
     stage: ya
     pooled_from: scap541_emb,scap541_l1,scap541_l2,scap541_l3,scap541_l4,scap541_ya
+
+scap814:
+    wt_emb_rep1: HS182_JA25-N2-scRNA-S4r
+    wt_emb_rep2: HS218_RC20_N2_scRNA_S7
+    wt_l1_rep1a: HS571_JA2_N2_scRNA
+    wt_l1_rep1b: HS578_JA2r_N2_scRNA
+    wt_l1_rep2: HS604_scRNA_JA6_L1
+    wt_l2_rep1a: HS571_JA1_N2_scRNA
+    wt_l2_rep1b: HS582_JA1r_N2_scRNA
+    wt_l2_rep2a: HS308_JA7_scRNA_S2
+    wt_l2_rep2b: HS333_crb55_JA7
+    wt_l3_rep1: chen13_scap_extra_l3
+    wt_l3_rep2a: HS252_Yan_S1
+    wt_l3_rep2b: HS252_Yan_S2
+    wt_l4_rep1: HS604_scRNA_JA3_L4
+    wt_l4_rep2a: HS571_JA9_N2_scRNA
+    wt_l4_rep2b: HS578_JA9r_N2_scRNA
+    wt_ya_rep1: HS604_scRNA_JA4_YA
+    wt_ya_rep2: HS604_scRNA_JA5_YA
 
 hmod749:
 - H3K4me3_wt_emb
