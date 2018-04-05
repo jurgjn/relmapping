@@ -168,7 +168,7 @@ stages728_atac_rep:
 - gon2gem1_d3_rep1
 - gon2gem1_d3_rep2
 
-atac809:
+atac814: # extra d6 replicate
   wt_emb_rep1: HS086_Caro-A
   wt_emb_rep2: HS086_Caro-E
   wt_l1_rep1: HS232_L1_JA2_N2_atac-S1
@@ -201,6 +201,8 @@ atac809:
   glp1_d2_rep2a: HS446_MS1
   glp1_d2_rep2b: HS456_MS8
   glp1_d2_rep2c: HS457_MS19
+  glp1_d6_rep0a: HS456_MS10
+  glp1_d6_rep0b: HS457_MS27
   glp1_d6_rep1a: HS446_MS3
   glp1_d6_rep1b: HS457_MS24
   glp1_d6_rep1c: HS458_MS33
@@ -228,29 +230,6 @@ atac809:
   gon2gem1_d2_rep1b: HS462_MS42
   gon2gem1_d2_rep2a: HS474_MS50
   gon2gem1_d2_rep2b: HS476_MS52
-
-atac809_pe:
-  wt_emb_rep1: HS086_Caro-A
-  wt_emb_rep2: HS086_Caro-E
-  wt_l1_rep1: HS232_L1_JA2_N2_atac-S1
-  wt_l1_rep2: HS232_L1_JA6_N2_atac_S2
-  wt_l2_rep1: HS254_L2_JA1_N2_atac_S1
-  wt_l2_rep2a: HS254_L2_JA7_N2_atac_S1
-  wt_l2_rep2b: HS327_crb55_JA7
-  wt_l3_rep1a: HS232_L3_JA8_N2_atac_S1
-  wt_l3_rep1b: HS298_JA8_N2_atac_Sr
-  wt_l3_rep1c: HS327_crb55_JA8
-  wt_l3_rep2a: HS232_L3_JA22_N2_atac_S2
-  wt_l3_rep2b: HS298_JA22_N2_atac_Sr
-  wt_l3_rep2c: HS327_crb55_JA22
-  wt_l4_rep1a: HS232_L4_JA3_N2_atac_S2
-  wt_l4_rep1b: HS327_crb55_JA3
-  wt_l4_rep2a: HS298_JA9_N2_atac_S5
-  wt_l4_rep2b: HS327_crb55_JA9
-  wt_ya_rep1a: HS168_crb55_N702-N503
-  wt_ya_rep1b: HS254_YA_JA4_N2_atac_S2
-  wt_ya_rep1c: HS327_crb55_JA4
-  wt_ya_rep2: HS168_crb55_N701-N503
 
 atac808:
   wt_emb_rep1: HS086_Caro-A

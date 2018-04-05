@@ -303,3 +303,7 @@ rule atac808:
         pf('atac808_wt', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.mean_by_series', '_treat_pileup.bw', 'atac808'),
         pf('atac808_wt', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_series', '_treat_pileup.bw', 'atac808'),
         pf('atac808_glp1', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_series', '_treat_pileup.bw', 'atac808'),
+
+rule atac814:
+    input:
+        expand(pf('atac814_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'), sample=techreps_collapse(config['atac814'].keys())),
