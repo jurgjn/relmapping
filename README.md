@@ -1,7 +1,7 @@
 Preliminary code and results related to mapping regulatory elements; currently not aimed at any use beyond the lab.
 
-- [S1 Identification of accessible sites](annot/S1_accessible_sites)
-- [S2 Regulatory annotation of accessible sites](annot/S2_regulatory_annotation)
+- [Fig1D1 Identification of accessible sites](annot/Fig1D1_accessible_sites)
+- [Fig2D2 Regulatory annotation of accessible sites](annot/S2_regulatory_annotation)
 - [S3 Genome partitioned into outronic, exonic, intronic, intergenic](annot/S3_genomic_regions)
 - [WS260_ce10 gene annotations used in e.g. promoter assignments](/WS260_ce10) ([direct link to .gtf-file](WS260_ce10/WS260_ce10.transcripts.annot.gtf.gz))
 
