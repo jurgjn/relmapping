@@ -222,14 +222,14 @@ atac814: # extra d6 replicate
   glp1_d13_rep2a: HS462_MS41
   glp1_d13_rep2b: HS465_MS44
   glp1_d13_rep2c: HS470_MS48
-  gon2gem1_d1_rep1a: HS457_MS23
-  gon2gem1_d1_rep1b: HS462_MS43
-  gon2gem1_d1_rep2a: HS474_MS49
-  gon2gem1_d1_rep2b: HS476_MS51
-  gon2gem1_d2_rep1a: HS457_MS22
-  gon2gem1_d2_rep1b: HS462_MS42
-  gon2gem1_d2_rep2a: HS474_MS50
-  gon2gem1_d2_rep2b: HS476_MS52
+  #gon2gem1_d1_rep1a: HS457_MS23
+  #gon2gem1_d1_rep1b: HS462_MS43
+  #gon2gem1_d1_rep2a: HS474_MS49
+  #gon2gem1_d1_rep2b: HS476_MS51
+  #gon2gem1_d2_rep1a: HS457_MS22
+  #gon2gem1_d2_rep1b: HS462_MS42
+  #gon2gem1_d2_rep2a: HS474_MS50
+  #gon2gem1_d2_rep2b: HS476_MS52
 
 atac808:
   wt_emb_rep1: HS086_Caro-A

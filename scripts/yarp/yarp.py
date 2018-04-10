@@ -181,7 +181,7 @@ def read_regions(fp, chroms, starts, ends, v=False):
             r = np.zeros(end - start) # Should get the partial signal
             n_clip += 1
 
-        yield r
+        yield np.array(r)
     fh.close()
     if v: print(n_clip, 'clipped regions')
 
@@ -729,7 +729,7 @@ class GenomicDataFrameTrack(object):
         else:
             raise Exception('chrom=%(chrom)s not found in %(chroms)s' % locals())
 
-    def m_from_bw(self, chroms, poss, fp, bin_skew=False, f_bin=np.mean):
+    def m_from_bw(self, chroms, poss, fp, bin_skew=False, f_bin=np.mean, memoized=True, rememoize=False):
         flank_adj = self.flank_len + int(self.bin_size) // 2
         l_chrom = chroms
         l_start = []
@@ -745,10 +745,16 @@ class GenomicDataFrameTrack(object):
             def bin_signal(raw_signal_at_iv): return f_bin(raw_signal_at_iv.reshape(-1, self.bin_size), 1)
         elif bin_skew:
             def bin_signal(raw_signal_at_iv): return skew(raw_signal_at_iv.reshape(-1, self.bin_size), 1)
-
-        for (i, bin_signal_at_iv) in enumerate(itertools.islice(map(bin_signal, mread_regions(fp, l_chrom, l_start, l_end)), None)):
-            self.m[i,] = bin_signal_at_iv
-            n_pass += 1
+        
+        if memoized:
+            for (i, bin_signal_at_iv) in enumerate(itertools.islice(map(bin_signal, mread_regions(fp, l_chrom, l_start, l_end, rememoize=rememoize)), None)):
+                self.m[i,] = bin_signal_at_iv
+                n_pass += 1
+        else:
+            for (i, bin_signal_at_iv) in enumerate(itertools.islice(map(bin_signal, read_regions(fp, l_chrom, l_start, l_end)), None)):
+                self.m[i,] = bin_signal_at_iv
+                n_pass += 1
+        
         # brute-force NaN
         self.m = np.nan_to_num(self.m)
         wct = (datetime.datetime.now() - t0)
