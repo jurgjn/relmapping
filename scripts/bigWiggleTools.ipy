@@ -41,10 +41,12 @@ print('wiggletools: ' + cmd)
 !{cmd}
 
 if wt_cmd == 'write':
-    !wigToBigWig -clip {fp_tmp_wtools} {fp_tmp_chroms} {fp_out}
+    #!wigToBigWig -clip {fp_tmp_wtools} {fp_tmp_chroms} {fp_out}
+    !wigToBigWig -clip {fp_tmp_wtools} shared/ce10.chroms {fp_out}    
 else:
     !sort -k1,1 -k2,2n -o {fp_tmp_wtools} {fp_tmp_wtools}
-    !bedGraphToBigWig {fp_tmp_wtools} {fp_tmp_chroms} {fp_out}
+    #!bedGraphToBigWig {fp_tmp_wtools} {fp_tmp_chroms} {fp_out}
+    !bedGraphToBigWig {fp_tmp_wtools} shared/ce10.chroms {fp_out}
 
 !rm {fp_tmp_wtools}
 !rm {fp_tmp_chroms}
