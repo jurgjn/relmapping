@@ -26,9 +26,14 @@ rule scap814:
     input:
         expand(pf('scap814_{sample}', 'tg_se.bwa_se', '.bam', 'scap814'), sample=techreps_collapse(config['scap814'].keys())),
 
-# snakemake  --use-conda --cores 12 -s workflows/scap814_pool.snakefile atac814 --dryrun
+# snakemake --use-conda --cores 12 -s workflows/pool_by_sample.snakefile atac814 --dryrun
 def atac814_r1_input(wildcards):
     l_ = ['samples/%s.r1.fq.gz' % (bid,) for bid in techreps_retrieve(wildcards.sample, config['atac814'])]
+    assert len(l_) > 0
+    return l_
+
+def atac814_r2_input(wildcards):
+    l_ = ['samples/%s.r2.fq.gz' % (bid,) for bid in techreps_retrieve(wildcards.sample, config['atac814'])]
     assert len(l_) > 0
     return l_
 
@@ -46,9 +51,24 @@ rule atac814_r1_:
             arg_input = ' '.join(input)
             shell('cat %(arg_input)s > %(output)s' % locals())
 
-rule atac814_r1:
+rule atac814_r2_:
     input:
-        expand('samples/atac814_{sample}.r1.fq.gz', sample=techreps_collapse(config['atac814'].keys())),
+        atac814_r2_input,
+    output:
+        'samples/atac814_{sample}.r2.fq.gz'
+    run:
+        print(input, output)
+        if os.path.isfile(str(input)):
+            shell("ln -s `pwd`/{input} `pwd`/{output}")
+            shell("touch -h `pwd`/{output}")
+        else:
+            arg_input = ' '.join(input)
+            shell('cat %(arg_input)s > %(output)s' % locals())
+
+rule atac814:
+    input:
+        expand('samples/atac814_{sample}.r1.fq.gz', sample=techreps_collapse(config['atac814'].keys(), include_raw=True)),
+        expand('samples/atac814_{sample}.r2.fq.gz', sample=techreps_collapse(config['atac814_pe'].keys(), include_raw=True)),
 
 # snakemake --use-conda --cores 12 -s workflows/pool_by_sample.snakefile scap815_r1 --dryrun
 def scap815_r1_input(wildcards):

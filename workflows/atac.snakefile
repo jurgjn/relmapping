@@ -188,45 +188,29 @@ rule atac749:
         expand('atac749/tracks/atac_{sample}.bw', sample=config['stages_wt'] + config['stages_glp1']),
 """
 
-rule atac808_read1: #https://bitbucket.org/snakemake/snakemake/issues/397/unable-to-set-utime-on-symlink-your-python
-    input:
-        'samples/atac808_{sample}.r1.fq.gz'
-    output:
-        'atac808_geo/reads/atac_{sample}.read1.fastq.gz'
-    shell:
-        '''
-        ln -s `pwd`/{input} `pwd`/{output}
-        touch -h `pwd`/{output}
-        '''
+def df_atac_make():
+    df_atac = pd.read_csv('annot/S1_accessible_sites/S1a_accessible_sites.tsv' % locals(), sep='\t')
+    return df_atac[yp.NAMES_BED3]
 
-rule atac808_read2: #https://bitbucket.org/snakemake/snakemake/issues/397/unable-to-set-utime-on-symlink-your-python
+rule atac808_nanmax:
     input:
-        'samples/atac808_{sample}.r2.fq.gz'
+        pf('atac808_{sample}', '{step}', '_treat_pileup.bw', 'atac808'),
     output:
-        'atac808_geo/reads/atac_{sample}.read2.fastq.gz'
-    shell:
-        '''
-        ln -s `pwd`/{input} `pwd`/{output}
-        touch -h `pwd`/{output}
-        '''
+        pf('atac808_{sample}', '{step}.atac_nanmax', '.tsv', 'atac808'),
+        pf('atac808_{sample}', '{step}.atac_nanmax', '.bed', 'atac808'),
+    run:
+        col_ = 'atac_%s_nanmax' % (wildcards.sample,)
+        df_sites = df_atac_make()
+        df_sites[col_] = list(map(lambda c: int(np.nanmax(c)), yp.read_regions(input[0], df_sites.chrom.tolist(), df_sites.start.tolist(), df_sites.end.tolist())))
+        df_sites[[col_]].to_csv(output[0], sep='\t', index=False)
+        df_sites[yp.NAMES_BED3 + [col_]].to_csv(output[1], sep='\t', index=False, header=False)
 
-rule atac808_fastq: #https://bitbucket.org/snakemake/snakemake/issues/397/unable-to-set-utime-on-symlink-your-python
+rule atac814_mean_by_stage_treat_pileup:
     input:
-        'samples/atac808_{sample}.r1.fq.gz'
+        pf('atac814_{stage}_rep1', '{step}', '_treat_pileup.bw', 'atac814'),
+        pf('atac814_{stage}_rep2', '{step}', '_treat_pileup.bw', 'atac814'),
     output:
-        'atac808_geo/reads/atac_{sample}.fastq.gz'
-    shell:
-        '''
-        ln -s `pwd`/{input} `pwd`/{output}
-        touch -h `pwd`/{output}
-        '''
-
-rule atac808_mean_by_stage_treat_pileup:
-    input:
-        pf('atac808_{bid}_rep1', '{step}', '_treat_pileup.bw', 'atac808'),
-        pf('atac808_{bid}_rep2', '{step}', '_treat_pileup.bw', 'atac808'),
-    output:
-        pf('atac808_{bid}', '{step}.mean_by_stage', '_treat_pileup.bw', 'atac808'),
+        pf('atac814_{stage}', '{step}.mean_by_stage', '_treat_pileup.bw', 'atac814'),
     shell: '''
         scripts/bigWiggleTools.ipy write_bg {output[0]} mean {input[0]} {input[1]}
     '''
@@ -249,61 +233,64 @@ rule atac808_mean_by_series_glp1:
         scripts/bigWiggleTools.ipy write_bg {output[0]} mean {input[0]} {input[1]} {input[2]} {input[3]} {input[4]} {input[5]} {input[6]} {input[7]} {input[8]} {input[9]}
     '''
 
-rule atac808_tracks:
+rule atac814_read1: #https://bitbucket.org/snakemake/snakemake/issues/397/unable-to-set-utime-on-symlink-your-python
     input:
-        pf('atac808_{sample}_rep1', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac808'),
-        pf('atac808_{sample}_rep2', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac808'),
+        'samples/atac814_{sample}.r1.fq.gz'
     output:
-        'atac808_geo/tracks/atac_{sample}.bw',
+        'atac814_geo/reads/atac_{sample}.read1.fastq.gz'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule atac814_read2: #https://bitbucket.org/snakemake/snakemake/issues/397/unable-to-set-utime-on-symlink-your-python
+    input:
+        'samples/atac814_{sample}.r2.fq.gz'
+    output:
+        'atac814_geo/reads/atac_{sample}.read2.fastq.gz'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule atac814_tracks:
+    input:
+        pf('atac814_{sample}_rep1', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'),
+        pf('atac814_{sample}_rep2', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'),
+    output:
+        'atac814_geo/tracks/atac_{sample}.bw',
     shell: '''
         scripts/bigWiggleTools.ipy write {output[0]} scale 0.1 bin 10 mean {input[0]} {input[1]}
         '''
 
-def df_atac_make():
-    df_atac = pd.read_csv('annot/S1_accessible_sites/S1a_accessible_sites.tsv' % locals(), sep='\t')
-    return df_atac[yp.NAMES_BED3]
-
-rule atac808_nanmax:
-    input:
-        pf('atac808_{sample}', '{step}', '_treat_pileup.bw', 'atac808'),
-    output:
-        pf('atac808_{sample}', '{step}.atac_nanmax', '.tsv', 'atac808'),
-        pf('atac808_{sample}', '{step}.atac_nanmax', '.bed', 'atac808'),
-    run:
-        col_ = 'atac_%s_nanmax' % (wildcards.sample,)
-        df_sites = df_atac_make()
-        df_sites[col_] = list(map(lambda c: int(np.nanmax(c)), yp.read_regions(input[0], df_sites.chrom.tolist(), df_sites.start.tolist(), df_sites.end.tolist())))
-        df_sites[[col_]].to_csv(output[0], sep='\t', index=False)
-        df_sites[yp.NAMES_BED3 + [col_]].to_csv(output[1], sep='\t', index=False, header=False)
-
-rule atac808:
-    input:
-        # techreps separately:
-        expand(pf('atac808_{sample}', 'c_r1', '.txt', 'atac808'), sample=config['atac808'].keys()),
-        expand(pf('atac808_{sample}', 'c_r2', '.txt', 'atac808'), sample=config['atac808_pe'].keys()),
-        expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac808'), sample=config['atac808'].keys()),
-        expand(pf('atac808_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac808'), sample=config['atac808_pe'].keys()),
-        # techreps pooled by biological sample:
-        expand(pf('atac808_{sample}', 'c_r1', '.txt', 'atac808'), sample=config['stages_rep']),
-        expand(pf('atac808_{sample}', 'c_r2', '.txt', 'atac808'), sample=config['stages_wt_rep']),
-        expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac808'), sample=config['stages_rep']),
-        expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR', '_treat_pileup.bw', 'atac808'), sample=config['stages_rep']),
-        expand(pf('atac808_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac808'), sample=config['stages_wt_rep']),
-        expand(pf('atac808_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.mean_by_stage', '_treat_pileup.bw', 'atac808'), sample=config['stages_wt']),
-        # raw reads & final tracks; final "geo" names
-        expand('atac808_geo/reads/atac_{sample}.read1.fastq.gz', sample=config['atac808_pe']),
-        expand('atac808_geo/reads/atac_{sample}.read2.fastq.gz', sample=config['atac808_pe']),
-        expand('atac808_geo/reads/atac_{sample}.fastq.gz', sample=config['atac808_se']),
-        expand('atac808_geo/tracks/atac_{sample}.bw', sample=config['stages']),
-        # raw sample-based peak heights for differential accessibility tests
-        expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR.atac_nanmax', '.tsv', 'atac808'), sample=config['stages_rep']),
-        # normalised stage-specific peak heights for clustering & other downstream analyses
-        expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_stage.atac_nanmax', '.tsv', 'atac808'), sample=config['stages']),
-        # pooled by series
-        pf('atac808_wt', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.mean_by_series', '_treat_pileup.bw', 'atac808'),
-        pf('atac808_wt', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_series', '_treat_pileup.bw', 'atac808'),
-        pf('atac808_glp1', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_series', '_treat_pileup.bw', 'atac808'),
-
 rule atac814:
     input:
+        # techreps separately:
+        #expand(pf('atac808_{sample}', 'c_r1', '.txt', 'atac808'), sample=config['atac808'].keys()),
+        #expand(pf('atac808_{sample}', 'c_r2', '.txt', 'atac808'), sample=config['atac808_pe'].keys()),
+        #expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac808'), sample=config['atac808'].keys()),
+        #expand(pf('atac808_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac808'), sample=config['atac808_pe'].keys()),
+        # techreps pooled by biological sample:
+        #expand(pf('atac808_{sample}', 'c_r1', '.txt', 'atac808'), sample=config['stages_rep']),
+        #expand(pf('atac808_{sample}', 'c_r2', '.txt', 'atac808'), sample=config['stages_wt_rep']),
+        #expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac808'), sample=config['stages_rep']),
+        #expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR', '_treat_pileup.bw', 'atac808'), sample=config['stages_rep']),
+        #expand(pf('atac808_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac808'), sample=config['stages_wt_rep']),
+        #expand(pf('atac808_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.mean_by_stage', '_treat_pileup.bw', 'atac808'), sample=config['stages_wt']),
         expand(pf('atac814_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'), sample=techreps_collapse(config['atac814'].keys())),
+        expand(pf('atac814_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_stage', '_treat_pileup.bw', 'atac814'), stage=config['stages']),
+        # raw sample-based peak heights for differential accessibility tests
+        #expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR.atac_nanmax', '.tsv', 'atac808'), sample=config['stages_rep']),
+        # normalised stage-specific peak heights for clustering & other downstream analyses
+        #expand(pf('atac808_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_stage.atac_nanmax', '.tsv', 'atac808'), sample=config['stages']),
+        # pooled by series
+        #pf('atac808_wt', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.mean_by_series', '_treat_pileup.bw', 'atac808'),
+        #pf('atac808_wt', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_series', '_treat_pileup.bw', 'atac808'),
+        #pf('atac808_glp1', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_series', '_treat_pileup.bw', 'atac808'),
+        # GEO submission -- reads
+        expand('atac814_geo/reads/atac_{sample}.read1.fastq.gz', sample=config['atac814'].keys()),
+        expand('atac814_geo/reads/atac_{sample}.read2.fastq.gz', sample=config['atac814_pe'].keys()),
+        # GEO submission -- coverage tracks
+        expand('atac814_geo/tracks/atac_{sample}.bw', sample=config['stages']),
