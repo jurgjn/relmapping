@@ -514,6 +514,42 @@ rule log2p:
         scripts/bigWiggleTools.ipy write_bg {output[0]} log 2 offset 1 {input[0]}
     '''
 
+rule lcap808_linear_fwd:
+    input:
+        pf('lcap808_{sample}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_sfnorm.mean_by_stage', '.bw', 'lcap808'),
+    output:
+        'lcap808_geo/tracks_linear_fwd/lcap_{sample}_linear_fwd.bw',
+    shell: '''
+        scripts/bigWiggleTools.ipy write {output[0]} scale 0.1 bin 10 {input[0]}
+        '''
+
+rule lcap808_linear_rev:
+    input:
+        pf('lcap808_{sample}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_sfnorm.mean_by_stage', '.bw', 'lcap808'),
+    output:
+        'lcap808_geo/tracks_linear_rev/lcap_{sample}_linear_rev.bw',
+    shell: '''
+        scripts/bigWiggleTools.ipy write {output[0]} "scale -0.1" bin 10 {input[0]}
+        '''
+
+rule lcap808_log2_fwd:
+    input:
+        pf('lcap808_{sample}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_sfnorm.mean_by_stage.log2p', '.bw', 'lcap808'),
+    output:
+        'lcap808_geo/tracks_log2_fwd/lcap_{sample}_log2_fwd.bw',
+    shell: '''
+        scripts/bigWiggleTools.ipy write {output[0]} scale 0.1 bin 10 {input[0]}
+        '''
+
+rule lcap808_log2_rev:
+    input:
+        pf('lcap808_{sample}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_sfnorm.mean_by_stage.log2p', '.bw', 'lcap808'),
+    output:
+        'lcap808_geo/tracks_log2_rev/lcap_{sample}_log2_rev.bw',
+    shell: '''
+        scripts/bigWiggleTools.ipy write {output[0]} "scale -0.1" bin 10 {input[0]}
+        '''
+
 rule lcap808:
     input:
         # raw read counts
@@ -530,9 +566,6 @@ rule lcap808:
         # Startbp tracks for jump/incr tests
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.startbp_fwd', '.bw', 'lcap808'), bid=config['stages_rep']),
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.startbp_rev', '.bw', 'lcap808'), bid=config['stages_rep']),
-        # raw reads & final tracks; final "geo" names
-        expand('lcap808_geo/reads/lcap_{sample}.read1.fastq.gz', sample=list(config['lcap808'].keys())),
-        expand('lcap808_geo/reads/lcap_{sample}.read2.fastq.gz', sample=list(config['lcap808'].keys())),
         # calculate sizeFactors from gene-level read counts using DESeq2
         pf('lcap808', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.sizefactors_lcap808', '_counts.tsv', 'lcap808'),
         pf('lcap808', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.sizefactors_lcap808', '_sizefactors.tsv', 'lcap808'),
@@ -545,4 +578,12 @@ rule lcap808:
         # normalise tracks by sizeFactors
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_sfnorm.mean_by_stage.log2p', '.bw', 'lcap808'), bid=config['stages']),
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_sfnorm.mean_by_stage.log2p', '.bw', 'lcap808'), bid=config['stages']),
-
+        # GEO -- raw reads
+        expand('lcap808_geo/reads/lcap_{sample}.read1.fastq.gz', sample=list(config['lcap808'].keys())),
+        expand('lcap808_geo/reads/lcap_{sample}.read2.fastq.gz', sample=list(config['lcap808'].keys())),
+        # GEO -- linear tracks
+        expand('lcap808_geo/tracks_linear_fwd/lcap_{stage}_linear_fwd.bw', stage=config['stages']),
+        expand('lcap808_geo/tracks_linear_rev/lcap_{stage}_linear_rev.bw', stage=config['stages']),
+        # GEO -- log2 tracks
+        expand('lcap808_geo/tracks_log2_fwd/lcap_{stage}_log2_fwd.bw', stage=config['stages']),
+        expand('lcap808_geo/tracks_log2_rev/lcap_{stage}_log2_rev.bw', stage=config['stages']),
