@@ -456,8 +456,8 @@ rule scap815_gt0x2:
         pf('scap815_wt_all', '{step}.gt0x2', '_gt0_count.bw', 'scap815'), # number of replicates with non-zero signal
         pf('scap815_wt_all', '{step}.gt0x2', '.bw', 'scap815'), # summed signal from base pairs with non-zero coverage in at least two replicates
     shell: '''
-        scripts/bigWiggleTools.ipy write_bg {output[0]} sum {input[0]} {input[1]} {input[2]} {input[3]} {input[4]} {input[5]} {input[6]} {input[7]} {input[8]} {input[9]} {input[10]} {input[11]}
-        scripts/bigWiggleTools.ipy write_bg {output[1]} sum gt 0 {input[0]} gt 0 {input[1]} gt 0 {input[2]} gt 0 {input[3]} gt 0 {input[4]} gt 0 {input[5]} gt 0 {input[6]} gt 0 {input[7]} gt 0 {input[8]} gt 0 {input[9]} gt 0 {input[10]} gt 0 {input[11]}
+        scripts/bigWiggleTools.ipy write_bg {output[0]} sum {input[0]} {input[1]} {input[2]} {input[3]} {input[4]} {input[5]} {input[6]} {input[7]} {input[8]} {input[9]} {input[10]} {input[11]} {input[12]} {input[13]}
+        scripts/bigWiggleTools.ipy write_bg {output[1]} sum gt 0 {input[0]} gt 0 {input[1]} gt 0 {input[2]} gt 0 {input[3]} gt 0 {input[4]} gt 0 {input[5]} gt 0 {input[6]} gt 0 {input[7]} gt 0 {input[8]} gt 0 {input[9]} gt 0 {input[10]} gt 0 {input[11]} gt 0 {input[12]} gt 0 {input[13]}
         scripts/bigWiggleTools.ipy write_bg {output[2]} mult {output[0]} gt 1 {output[1]}
     '''
 
@@ -520,6 +520,7 @@ rule scap815:
     input:
         expand(pf('scap815_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
         expand(pf('scap815_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
+        expand(pf('scap815_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.c', '.txt', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
         expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd.sum_by_stage', '.bw', 'scap815'), stage=config['stages_wt']),
         expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.sum_by_stage', '.bw', 'scap815'), stage=config['stages_wt']),
         expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.sum_by_stage.neg', '.bw', 'scap815'), stage=config['stages_wt']),
