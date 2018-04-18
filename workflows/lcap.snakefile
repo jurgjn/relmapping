@@ -550,6 +550,95 @@ rule lcap808_log2_rev:
         scripts/bigWiggleTools.ipy write {output[0]} "scale -0.1" bin 10 {input[0]}
         '''
 
+rule lcap808_pooled_rafts_raw:
+    input:
+        pf('{bid}_rep1', '{step}', '.bam', 'lcap808'),
+        pf('{bid}_rep2', '{step}', '.bam', 'lcap808'),
+    output:
+        temp(pf('{bid}', '{step}.pooled_rafts', '_namesorted.bam', '{prefix}')),
+        pf('{bid}', '{step}.pooled_rafts', '_raw.bed', '{prefix}'),
+    threads: 10
+    shell: '''
+        samtools cat {input[0]} {input[1]} | samtools sort -n --threads {threads} - > {output[0]}
+        bedtools bamtobed -bedpe -mate1 -i {output[0]} \
+        | awk -F'\\t' -v OFS='\\t' '{{print $1,$2<$5?$2:$5,$3<$6?$6:$3,$7,$8,$10}}' | sort -k 1,1 -k 2,2n -k 3,3n -k6,6 \
+        | bedtools merge -s -c 1 -o count -i stdin > {output[1]}
+    '''
+
+rule lcap808_pooled_rafts_3_fwd:
+    input:
+        pf('{bid}', '{step}.pooled_rafts', '_raw.bed', '{prefix}'),
+    output:
+        pf('{bid}', '{step}.pooled_rafts', '_3_fwd.bed', '{prefix}'),
+    shell: '''
+        cat {input} | awk -F'\\t' -v OFS='\\t' '(($4 == "+") && ($5 <= 3))' > {output}
+    '''
+
+rule lcap808_pooled_rafts_3_rev:
+    input:
+        pf('{bid}', '{step}.pooled_rafts', '_raw.bed', '{prefix}'),
+    output:
+        pf('{bid}', '{step}.pooled_rafts', '_3_rev.bed', '{prefix}'),
+    shell: '''
+        cat {input} | awk -F'\\t' -v OFS='\\t' '(($4 == "-") && ($5 <= 3))' > {output}
+    '''
+
+rule lcap808_rep1_filled_fwd_rafts3:
+    input:
+        pf('{bid}_rep1', '{step}.filled_fwd', '.bw', '{prefix}'),
+        pf('{bid}', '{step}.pooled_rafts', '_3_fwd.bed', '{prefix}'),
+    output:
+        temp(pf('{bid}_rep1', '{step}.filled_fwd_rafts3', '.bedGraph', '{prefix}')),
+        pf('{bid}_rep1', '{step}.filled_fwd_rafts3', '.bw', '{prefix}'),
+    shell:
+        '''
+        bigWigToBedGraph {input[0]} stdout | bedtools subtract -a stdin -b {input[1]} > {output[0]}
+        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        bedGraphToBigWig {output[0]} shared/ce10.chroms {output[1]}
+        '''
+
+rule lcap808_rep2_filled_fwd_rafts3:
+    input:
+        pf('{bid}_rep2', '{step}.filled_fwd', '.bw', '{prefix}'),
+        pf('{bid}', '{step}.pooled_rafts', '_3_fwd.bed', '{prefix}'),
+    output:
+        temp(pf('{bid}_rep2', '{step}.filled_fwd_rafts3', '.bedGraph', '{prefix}')),
+        pf('{bid}_rep2', '{step}.filled_fwd_rafts3', '.bw', '{prefix}'),
+    shell:
+        '''
+        bigWigToBedGraph {input[0]} stdout | bedtools subtract -a stdin -b {input[1]} > {output[0]}
+        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        bedGraphToBigWig {output[0]} shared/ce10.chroms {output[1]}
+        '''
+
+rule lcap808_rep1_filled_rev_rafts3:
+    input:
+        pf('{bid}_rep1', '{step}.filled_rev', '.bw', '{prefix}'),
+        pf('{bid}', '{step}.pooled_rafts', '_3_rev.bed', '{prefix}'),
+    output:
+        temp(pf('{bid}_rep1', '{step}.filled_rev_rafts3', '.bedGraph', '{prefix}')),
+        pf('{bid}_rep1', '{step}.filled_rev_rafts3', '.bw', '{prefix}'),
+    shell:
+        '''
+        bigWigToBedGraph {input[0]} stdout | bedtools subtract -a stdin -b {input[1]} > {output[0]}
+        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        bedGraphToBigWig {output[0]} shared/ce10.chroms {output[1]}
+        '''
+
+rule lcap808_rep2_filled_rev_rafts3:
+    input:
+        pf('{bid}_rep2', '{step}.filled_rev', '.bw', '{prefix}'),
+        pf('{bid}', '{step}.pooled_rafts', '_3_rev.bed', '{prefix}'),
+    output:
+        temp(pf('{bid}_rep2', '{step}.filled_rev_rafts3', '.bedGraph', '{prefix}')),
+        pf('{bid}_rep2', '{step}.filled_rev_rafts3', '.bw', '{prefix}'),
+    shell:
+        '''
+        bigWigToBedGraph {input[0]} stdout | bedtools subtract -a stdin -b {input[1]} > {output[0]}
+        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        bedGraphToBigWig {output[0]} shared/ce10.chroms {output[1]}
+        '''
+
 rule lcap808:
     input:
         # raw read counts
@@ -587,3 +676,11 @@ rule lcap808:
         # GEO -- log2 tracks
         expand('lcap808_geo/tracks_log2_fwd/lcap_{stage}_log2_fwd.bw', stage=config['stages']),
         expand('lcap808_geo/tracks_log2_rev/lcap_{stage}_log2_rev.bw', stage=config['stages']),
+        # Rafts (testing)
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.pooled_rafts', '_raw.bed', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.pooled_rafts', '_3_fwd.bed', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.pooled_rafts', '_3_rev.bed', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}_rep1', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_rafts3', '.bw', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}_rep2', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_rafts3', '.bw', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}_rep1', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_rafts3', '.bw', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}_rep2', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_rafts3', '.bw', 'lcap808'), bid=config['stages']),
