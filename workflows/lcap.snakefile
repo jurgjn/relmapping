@@ -639,6 +639,80 @@ rule lcap808_rep2_filled_rev_rafts3:
         bedGraphToBigWig {output[0]} shared/ce10.chroms {output[1]}
         '''
 
+rule lcap808_pooled_rafts_5_fwd:
+    input:
+        pf('{bid}', '{step}.pooled_rafts', '_raw.bed', '{prefix}'),
+    output:
+        pf('{bid}', '{step}.pooled_rafts', '_5_fwd.bed', '{prefix}'),
+    shell: '''
+        cat {input} | awk -F'\\t' -v OFS='\\t' '(($4 == "+") && ($5 <= 5))' > {output}
+    '''
+
+rule lcap808_pooled_rafts_5_rev:
+    input:
+        pf('{bid}', '{step}.pooled_rafts', '_raw.bed', '{prefix}'),
+    output:
+        pf('{bid}', '{step}.pooled_rafts', '_5_rev.bed', '{prefix}'),
+    shell: '''
+        cat {input} | awk -F'\\t' -v OFS='\\t' '(($4 == "-") && ($5 <= 5))' > {output}
+    '''
+
+rule lcap808_rep1_filled_fwd_rafts5:
+    input:
+        pf('{bid}_rep1', '{step}.filled_fwd', '.bw', '{prefix}'),
+        pf('{bid}', '{step}.pooled_rafts', '_5_fwd.bed', '{prefix}'),
+    output:
+        temp(pf('{bid}_rep1', '{step}.filled_fwd_rafts5', '.bedGraph', '{prefix}')),
+        pf('{bid}_rep1', '{step}.filled_fwd_rafts5', '.bw', '{prefix}'),
+    shell:
+        '''
+        bigWigToBedGraph {input[0]} stdout | bedtools subtract -a stdin -b {input[1]} > {output[0]}
+        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        bedGraphToBigWig {output[0]} shared/ce10.chroms {output[1]}
+        '''
+
+rule lcap808_rep2_filled_fwd_rafts5:
+    input:
+        pf('{bid}_rep2', '{step}.filled_fwd', '.bw', '{prefix}'),
+        pf('{bid}', '{step}.pooled_rafts', '_5_fwd.bed', '{prefix}'),
+    output:
+        temp(pf('{bid}_rep2', '{step}.filled_fwd_rafts5', '.bedGraph', '{prefix}')),
+        pf('{bid}_rep2', '{step}.filled_fwd_rafts5', '.bw', '{prefix}'),
+    shell:
+        '''
+        bigWigToBedGraph {input[0]} stdout | bedtools subtract -a stdin -b {input[1]} > {output[0]}
+        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        bedGraphToBigWig {output[0]} shared/ce10.chroms {output[1]}
+        '''
+
+rule lcap808_rep1_filled_rev_rafts5:
+    input:
+        pf('{bid}_rep1', '{step}.filled_rev', '.bw', '{prefix}'),
+        pf('{bid}', '{step}.pooled_rafts', '_5_rev.bed', '{prefix}'),
+    output:
+        temp(pf('{bid}_rep1', '{step}.filled_rev_rafts5', '.bedGraph', '{prefix}')),
+        pf('{bid}_rep1', '{step}.filled_rev_rafts5', '.bw', '{prefix}'),
+    shell:
+        '''
+        bigWigToBedGraph {input[0]} stdout | bedtools subtract -a stdin -b {input[1]} > {output[0]}
+        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        bedGraphToBigWig {output[0]} shared/ce10.chroms {output[1]}
+        '''
+
+rule lcap808_rep2_filled_rev_rafts5:
+    input:
+        pf('{bid}_rep2', '{step}.filled_rev', '.bw', '{prefix}'),
+        pf('{bid}', '{step}.pooled_rafts', '_5_rev.bed', '{prefix}'),
+    output:
+        temp(pf('{bid}_rep2', '{step}.filled_rev_rafts5', '.bedGraph', '{prefix}')),
+        pf('{bid}_rep2', '{step}.filled_rev_rafts5', '.bw', '{prefix}'),
+    shell:
+        '''
+        bigWigToBedGraph {input[0]} stdout | bedtools subtract -a stdin -b {input[1]} > {output[0]}
+        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        bedGraphToBigWig {output[0]} shared/ce10.chroms {output[1]}
+        '''
+
 rule lcap808:
     input:
         # raw read counts
@@ -684,3 +758,7 @@ rule lcap808:
         expand(pf('lcap808_{bid}_rep2', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_rafts3', '.bw', 'lcap808'), bid=config['stages']),
         expand(pf('lcap808_{bid}_rep1', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_rafts3', '.bw', 'lcap808'), bid=config['stages']),
         expand(pf('lcap808_{bid}_rep2', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_rafts3', '.bw', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}_rep1', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_rafts5', '.bw', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}_rep2', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_rafts5', '.bw', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}_rep1', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_rafts5', '.bw', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}_rep2', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_rafts5', '.bw', 'lcap808'), bid=config['stages']),
