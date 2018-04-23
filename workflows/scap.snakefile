@@ -448,7 +448,7 @@ rule scap815_sum_by_stage:
         scripts/bigWiggleTools.ipy write_bg {output[0]} sum {input[0]} {input[1]}
     '''
 
-rule scap815_gt0x2:
+rule scap815_gt0x2_all:
     input:
         expand(pf('scap815_{stage}', '{{step}}', '.bw', 'scap815'), stage=config['stages_wt_rep_scap815']),
     output:
@@ -458,6 +458,84 @@ rule scap815_gt0x2:
     shell: '''
         scripts/bigWiggleTools.ipy write_bg {output[0]} sum {input[0]} {input[1]} {input[2]} {input[3]} {input[4]} {input[5]} {input[6]} {input[7]} {input[8]} {input[9]} {input[10]} {input[11]} {input[12]} {input[13]}
         scripts/bigWiggleTools.ipy write_bg {output[1]} sum gt 0 {input[0]} gt 0 {input[1]} gt 0 {input[2]} gt 0 {input[3]} gt 0 {input[4]} gt 0 {input[5]} gt 0 {input[6]} gt 0 {input[7]} gt 0 {input[8]} gt 0 {input[9]} gt 0 {input[10]} gt 0 {input[11]} gt 0 {input[12]} gt 0 {input[13]}
+        scripts/bigWiggleTools.ipy write_bg {output[2]} mult {output[0]} gt 1 {output[1]}
+    '''
+
+rule scap815_gt0x2_emb:
+    input:
+        expand(pf('scap815_wt_emb_{rep}', '{{step}}', '.bw', 'scap815'), rep=['rep1', 'rep2', 'rep3', 'rep4']),
+    output:
+        pf('scap815_wt_emb', '{step}.gt0x2', '_sum.bw', 'scap815'), # sum of signal across all replicates
+        pf('scap815_wt_emb', '{step}.gt0x2', '_gt0_count.bw', 'scap815'), # number of replicates with non-zero signal
+        pf('scap815_wt_emb', '{step}.gt0x2', '.bw', 'scap815'), # summed signal from base pairs with non-zero coverage in at least two replicates
+    shell: '''
+        scripts/bigWiggleTools.ipy write_bg {output[0]} sum {input[0]} {input[1]} {input[2]} {input[3]}
+        scripts/bigWiggleTools.ipy write_bg {output[1]} sum gt 0 {input[0]} gt 0 {input[1]} gt 0 {input[2]} gt 0 {input[3]}
+        scripts/bigWiggleTools.ipy write_bg {output[2]} mult {output[0]} gt 1 {output[1]}
+    '''
+
+rule scap815_gt0x2_l1:
+    input:
+        expand(pf('scap815_wt_l1_{rep}', '{{step}}', '.bw', 'scap815'), rep=['rep1', 'rep2']),
+    output:
+        pf('scap815_wt_l1', '{step}.gt0x2', '_sum.bw', 'scap815'), # sum of signal across all replicates
+        pf('scap815_wt_l1', '{step}.gt0x2', '_gt0_count.bw', 'scap815'), # number of replicates with non-zero signal
+        pf('scap815_wt_l1', '{step}.gt0x2', '.bw', 'scap815'), # summed signal from base pairs with non-zero coverage in at least two replicates
+    shell: '''
+        scripts/bigWiggleTools.ipy write_bg {output[0]} sum {input[0]} {input[1]}
+        scripts/bigWiggleTools.ipy write_bg {output[1]} sum gt 0 {input[0]} gt 0 {input[1]}
+        scripts/bigWiggleTools.ipy write_bg {output[2]} mult {output[0]} gt 1 {output[1]}
+    '''
+
+rule scap815_gt0x2_l2:
+    input:
+        expand(pf('scap815_wt_l2_{rep}', '{{step}}', '.bw', 'scap815'), rep=['rep1', 'rep2']),
+    output:
+        pf('scap815_wt_l2', '{step}.gt0x2', '_sum.bw', 'scap815'), # sum of signal across all replicates
+        pf('scap815_wt_l2', '{step}.gt0x2', '_gt0_count.bw', 'scap815'), # number of replicates with non-zero signal
+        pf('scap815_wt_l2', '{step}.gt0x2', '.bw', 'scap815'), # summed signal from base pairs with non-zero coverage in at least two replicates
+    shell: '''
+        scripts/bigWiggleTools.ipy write_bg {output[0]} sum {input[0]} {input[1]}
+        scripts/bigWiggleTools.ipy write_bg {output[1]} sum gt 0 {input[0]} gt 0 {input[1]}
+        scripts/bigWiggleTools.ipy write_bg {output[2]} mult {output[0]} gt 1 {output[1]}
+    '''
+
+rule scap815_gt0x2_l3:
+    input:
+        expand(pf('scap815_wt_l3_{rep}', '{{step}}', '.bw', 'scap815'), rep=['rep1', 'rep2']),
+    output:
+        pf('scap815_wt_l3', '{step}.gt0x2', '_sum.bw', 'scap815'), # sum of signal across all replicates
+        pf('scap815_wt_l3', '{step}.gt0x2', '_gt0_count.bw', 'scap815'), # number of replicates with non-zero signal
+        pf('scap815_wt_l3', '{step}.gt0x2', '.bw', 'scap815'), # summed signal from base pairs with non-zero coverage in at least two replicates
+    shell: '''
+        scripts/bigWiggleTools.ipy write_bg {output[0]} sum {input[0]} {input[1]}
+        scripts/bigWiggleTools.ipy write_bg {output[1]} sum gt 0 {input[0]} gt 0 {input[1]}
+        scripts/bigWiggleTools.ipy write_bg {output[2]} mult {output[0]} gt 1 {output[1]}
+    '''
+
+rule scap815_gt0x2_l4:
+    input:
+        expand(pf('scap815_wt_l4_{rep}', '{{step}}', '.bw', 'scap815'), rep=['rep1', 'rep2']),
+    output:
+        pf('scap815_wt_l4', '{step}.gt0x2', '_sum.bw', 'scap815'), # sum of signal across all replicates
+        pf('scap815_wt_l4', '{step}.gt0x2', '_gt0_count.bw', 'scap815'), # number of replicates with non-zero signal
+        pf('scap815_wt_l4', '{step}.gt0x2', '.bw', 'scap815'), # summed signal from base pairs with non-zero coverage in at least two replicates
+    shell: '''
+        scripts/bigWiggleTools.ipy write_bg {output[0]} sum {input[0]} {input[1]}
+        scripts/bigWiggleTools.ipy write_bg {output[1]} sum gt 0 {input[0]} gt 0 {input[1]}
+        scripts/bigWiggleTools.ipy write_bg {output[2]} mult {output[0]} gt 1 {output[1]}
+    '''
+
+rule scap815_gt0x2_ya:
+    input:
+        expand(pf('scap815_wt_ya_{rep}', '{{step}}', '.bw', 'scap815'), rep=['rep1', 'rep2']),
+    output:
+        pf('scap815_wt_ya', '{step}.gt0x2', '_sum.bw', 'scap815'), # sum of signal across all replicates
+        pf('scap815_wt_ya', '{step}.gt0x2', '_gt0_count.bw', 'scap815'), # number of replicates with non-zero signal
+        pf('scap815_wt_ya', '{step}.gt0x2', '.bw', 'scap815'), # summed signal from base pairs with non-zero coverage in at least two replicates
+    shell: '''
+        scripts/bigWiggleTools.ipy write_bg {output[0]} sum {input[0]} {input[1]}
+        scripts/bigWiggleTools.ipy write_bg {output[1]} sum gt 0 {input[0]} gt 0 {input[1]}
         scripts/bigWiggleTools.ipy write_bg {output[2]} mult {output[0]} gt 1 {output[1]}
     '''
 
@@ -527,6 +605,9 @@ rule scap815:
         pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd.gt0x2', '.bw', 'scap815'),
         pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.gt0x2', '.bw', 'scap815'),
         pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.gt0x2.neg', '.bw', 'scap815'),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd.gt0x2', '.bw', 'scap815'), stage=config['stages_wt']),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.gt0x2', '.bw', 'scap815'), stage=config['stages_wt']),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.gt0x2.neg', '.bw', 'scap815'), stage=config['stages_wt']),
         # GEO submission -- reads
         expand('scap815_geo/reads/scap_{replicate}.read1.fastq.gz', replicate=config['scap815'].keys()),
         # GEO submission -- coverage tracks
