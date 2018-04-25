@@ -587,3 +587,5 @@ rule lcap808:
         # GEO -- log2 tracks
         expand('lcap808_geo/tracks_log2_fwd/lcap_{stage}_log2_fwd.bw', stage=config['stages']),
         expand('lcap808_geo/tracks_log2_rev/lcap_{stage}_log2_rev.bw', stage=config['stages']),
+        # Indexes for browsing raw alignments
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10', '.bam.bai', 'lcap808'), bid=config['stages_rep']),
