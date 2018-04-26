@@ -26,9 +26,7 @@ We aim to annotate accessible sites with regulatory type based on patterns of in
 
 ## Individual tests
 All tests are performed separately on both strands; tests that use short/long cap data are performed on both strands, and all stages.
-- Identification of **proximal exons**:
-  - **closest first exon:** closest first exon of a `coding_promoter` or `pseudogene` within 250bp upstream to anywhere downstream of peak accessibility
-  - **closest other exon:** closest non-first exon of a `coding_promoter` or `pseudogene`
+
 - Tests for a **local increase in elongation**:
   - estimate transcription elongation upstream, and downstream of a site by counting 5' ends of long cap reads within `-250:-75` and `+75:+250` of peak accessibility
   -  `jump` method: test for an increase in downstream signal against upstream signal using DESeq2 (one-sided test, significance thresholds set to `log2FoldChange > 1.5`, and `padj < 0.1`)
@@ -36,35 +34,36 @@ All tests are performed separately on both strands; tests that use short/long ca
     - upstream counts `0` (zero) in both replicates
     - downstream counts `>=1` in both replicates individually
     - downstream counts `>=3` when pooled across replicates
-- Test for **reproducible transcription initiation**:
-  - calculate maximum short cap signal (pooled across stages) within 125bp of peak accessibility
-  - sites with at non-singleton short cap stack (minimum criteria to define a TIC in ([Chen et al. 2013](https://doi.org/10.1101/gr.153668.112))) are considered to have reproducible transcription initiation
+- Test for **reproducible transcription initiation**: check for a non-singleton short cap stack within 125bp of peak accessibility (in short cap signal pooled across all replicates/stages, and filtered for reproducibility)
 - Identification of the **transcription initiation mode**:
-  - sites with reproducible short cap are assigned the position with maximum signal
-  - sites without reproducible short cap are assigned an extrapolated, best-guess position of 60bp downstream of peak accessibility
+  - sites with reproducible short cap are assigned the position with maximum short cap signal
+  - sites without reproducible short cap are assigned an extrapolated, "best-guess" position of 60bp downstream of peak accessibility
+- Identification of **proximal exons**:
+  - **closest first exon:** closest first exon of a `coding_promoter` or `pseudogene` within 250bp upstream to anywhere downstream of peak accessibility
+  - **closest other exon:** closest non-first exon of a `coding_promoter` or `pseudogene`
 
 ## Stage/strand-specific annotation
 - `coding_promoter`, `pseudogene_promoter`:
   - site is either "close to a first exon" or "away from any other exon"
-    - "close to a first exon" = 5' end of the closest first exon within 250bp of peak accessibility
-    - "away from any other exon" = 5' end of the closest other exon further than 250bp away from peak accessibility
-  - region between peak accessibility and the TSS does not contain the 5' end of an other exon
+    - "close to a first exon" = 5' end of the closest first exon is within 250bp of peak accessibility
+    - "away from any other exon" = 5' end of the closest other exon is further than 250bp away from peak accessibility
+  - region between peak accessibility and the 5' end of the closest first exon does not contain the 5' end of an other exon
   - transcription initiation mode is located "properly relative to the TSS"
     - "properly relative to the TSS" = transcription initiation mode is either upstream of the annotated transcript start site, or, in the presence of a UTR, up to 250bp downstream of the annotated transcript start site, within the UTR
   - "if distal, site has continuous transcription": for sites further than 250bp upstream of the closest first exon, check for continuous long cap coverage from 250bp downstream of peak accessibility to the 5' end of the closest first exon
-  - annotate as non-low confidence `coding_promoter` or `pseudogene_promoter` if at least one of the three criteria is fulfilled:
+  - annotate as (**non**-low confidence) `coding_promoter` or `pseudogene_promoter` if any of the following:
     - has transcription initiation, and passes the jump test
     - has transcription initiation, and passes the incr test
     - passes the jump and incr tests
   - annotate as low-confidence `coding_promoter` or `pseudogene_promoter` if:
     - target gene does not get any promoters using the other methods
-    - site is "not genic":
-      - "not genic" =
-    - long cap log2FoldChange > 1
+    - site is either intergenic, or within the first 250bp of a gene
+    - site has a long cap log2FoldChange > 1
     - site has the highest log2FoldChange out of all sites that fulfil all other criteria
 - `non-coding_RNA`: closest downstream first exon of a `tRNA`, `snoRNA`, `miRNA`, `snRNA` or `rRNA` is within 250bp of peak accessibility
 - `unknown_promoter`:
-  - at least 250bp away from the 5' end of the any (first or other) exon
+  - site is at least 250bp away from the 5' end of the any (first or other) exon
+  - site is intergenic: peak accessibility is not within a gene body
   - has transcription initiation
   - passes the jump test
 - `transcription_initiation`: has transcription initiation
