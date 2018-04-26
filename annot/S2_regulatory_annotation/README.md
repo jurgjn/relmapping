@@ -25,8 +25,7 @@ We aim to annotate accessible sites with regulatory type based on patterns of in
 3. Aggregate strand/stage specific patterns across stages, and then across the two strands, to determine the final type: `coding_promoter`, `pseudogene_promoter`, `non-coding_RNA`, `unknown_promoter`, `putative_enhancer` or `other_element`
 
 ## Individual tests
-All tests are performed separately on both strands; tests that use short/long cap data are performed on both strands, and all stages.
-
+All tests/metrics are performed/calculated separately for every site and on both strands. Tests that use short/long cap data are performed on both strands, and all stages.
 - Tests for a **local increase in elongation**:
   - estimate transcription elongation upstream, and downstream of a site by counting 5' ends of long cap reads within `-250:-75` and `+75:+250` of peak accessibility
   -  `jump` method: test for an increase in downstream signal against upstream signal using DESeq2 (one-sided test, significance thresholds set to `log2FoldChange > 1.5`, and `padj < 0.1`)
@@ -34,13 +33,13 @@ All tests are performed separately on both strands; tests that use short/long ca
     - upstream counts `0` (zero) in both replicates
     - downstream counts `>=1` in both replicates individually
     - downstream counts `>=3` when pooled across replicates
-- Test for **reproducible transcription initiation**: check for a non-singleton short cap stack within 125bp of peak accessibility (in short cap signal pooled across all replicates/stages, and filtered for reproducibility)
+- Test for **reproducible transcription initiation**: check for a non-singleton short cap stack within 125bp of peak accessibility (using short cap signal pooled across all replicates/stages, and filtered for reproducibility)
 - Identification of the **transcription initiation mode**:
   - sites with reproducible short cap are assigned the position with maximum short cap signal
-  - sites without reproducible short cap are assigned an extrapolated, "best-guess" position of 60bp downstream of peak accessibility
+  - sites without reproducible short cap are assigned an extrapolated, "best-guess" position of 60bp downstream of peak accessibility (motivated by the global genome-wide short cap distribution at accessible sites)
 - Identification of **proximal exons**:
-  - **closest first exon:** closest first exon of a `coding_promoter` or `pseudogene` within 250bp upstream to anywhere downstream of peak accessibility
-  - **closest other exon:** closest non-first exon of a `coding_promoter` or `pseudogene`
+  - **closest first exon**: closest first exon of a `coding_promoter` or `pseudogene` within 250bp upstream to anywhere downstream of peak accessibility
+  - **closest other exon**: closest non-first exon of a `coding_promoter` or `pseudogene`
 
 ## Stage/strand-specific annotation
 - `coding_promoter`, `pseudogene_promoter`:
