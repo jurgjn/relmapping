@@ -550,6 +550,17 @@ rule lcap808_log2_rev:
         scripts/bigWiggleTools.ipy write {output[0]} "scale -0.1" bin 10 {input[0]}
         '''
 
+rule lcap808_gene_level_read_counts:
+    input:
+        pf('lcap808_{sample}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.htseq_counts', '.tsv', 'lcap808'),
+    output:
+        'lcap808_geo/gene_level_read_counts/lcap_{sample}.tsv'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
 rule lcap808:
     input:
         # raw read counts
@@ -589,3 +600,5 @@ rule lcap808:
         expand('lcap808_geo/tracks_log2_rev/lcap_{stage}_log2_rev.bw', stage=config['stages']),
         # Indexes for browsing raw alignments
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10', '.bam.bai', 'lcap808'), bid=config['stages_rep']),
+        # Gene-level read counts (for accessibility dynamics)
+        expand('lcap808_geo/gene_level_read_counts/lcap_{sample}.tsv', sample=config['stages_rep']),

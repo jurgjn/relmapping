@@ -265,6 +265,17 @@ rule atac814_tracks:
         scripts/bigWiggleTools.ipy write {output[0]} scale 0.1 bin 10 mean {input[0]} {input[1]}
         '''
 
+rule atac814_alignments:
+    input:
+        pf('atac814_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10', '.bam', 'atac814'),
+    output:
+        'atac814_geo/alignments/atac_{sample}.bam',
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
 rule atac814:
     input:
         # techreps separately:
@@ -294,3 +305,5 @@ rule atac814:
         expand('atac814_geo/reads/atac_{sample}.read2.fastq.gz', sample=config['atac814_pe'].keys()),
         # GEO submission -- coverage tracks
         expand('atac814_geo/tracks/atac_{sample}.bw', sample=config['stages']),
+        # alignments (to match GEO submission)
+        expand('atac814_geo/alignments/atac_{sample}.bam', sample=config['stages_rep']),
