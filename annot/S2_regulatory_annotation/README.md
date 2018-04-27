@@ -43,18 +43,19 @@ All tests/metrics are performed/calculated separately for every site and on both
 
 ## Stage/strand-specific annotation
 - `coding_promoter`, `pseudogene_promoter`:
-  - site is either "close to a first exon" or "away from any other exon"
-    - "close to a first exon" = 5' end of the closest first exon is within 250bp of peak accessibility
-    - "away from any other exon" = 5' end of the closest other exon is further than 250bp away from peak accessibility
-  - region between peak accessibility and the 5' end of the closest first exon does not contain the 5' end of an other exon
-  - transcription initiation mode is located "properly relative to the TSS"
-    - "properly relative to the TSS" = transcription initiation mode is either upstream of the annotated transcript start site, or, in the presence of a UTR, up to 250bp downstream of the annotated transcript start site, within the UTR
-  - "if distal, site has continuous transcription": for sites further than 250bp upstream of the closest first exon, check for continuous long cap coverage from 250bp downstream of peak accessibility to the 5' end of the closest first exon
-  - annotate as (**non**-low confidence) `coding_promoter` or `pseudogene_promoter` if any of the following:
+  - **joint criteria**, regardless of confidence levels:
+    - site is either "close to a first exon" or "away from any other exon"
+      - "close to a first exon" = 5' end of the closest first exon is within 250bp of peak accessibility
+      - "away from any other exon" = 5' end of the closest other exon is further than 250bp away from peak accessibility
+    - region between peak accessibility and the 5' end of the closest exon 1 does not contain the 5' end of a non-first exon
+    - transcription initiation mode is located "properly relative to the TSS"
+      - "properly relative to the TSS" = transcription initiation mode is either upstream of the annotated transcript start site, or, in the presence of a UTR, up to 250bp downstream of the annotated transcript start site, within the UTR
+    - "if distal, site has continuous transcription": for sites further than 250bp upstream of the closest first exon, check for continuous long cap coverage from 250bp downstream of peak accessibility to the 5' end of the closest first exon
+  - **non-low confidence** `coding_promoter` or `pseudogene_promoter` if any of the following:
     - has transcription initiation, and passes the jump test
     - has transcription initiation, and passes the incr test
     - passes the jump and incr tests
-  - annotate as low-confidence `coding_promoter` or `pseudogene_promoter` if:
+  - **low-confidence** `coding_promoter` or `pseudogene_promoter` if:
     - target gene does not get any promoters using the other methods
     - site is either intergenic, or within the first 250bp of a gene
     - site has a long cap log2FoldChange > 1
@@ -62,7 +63,7 @@ All tests/metrics are performed/calculated separately for every site and on both
 - `non-coding_RNA`: closest downstream first exon of a `tRNA`, `snoRNA`, `miRNA`, `snRNA` or `rRNA` is within 250bp of peak accessibility
 - `unknown_promoter`:
   - site is at least 250bp away from the 5' end of the any (first or other) exon
-  - site is intergenic: peak accessibility is not within a gene body
+  - site is intergenic: peak accessibility is not within a (sense-strand) gene body
   - has transcription initiation
   - passes the jump test
 - `transcription_initiation`: has transcription initiation
