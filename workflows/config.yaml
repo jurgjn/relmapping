@@ -1,3 +1,5 @@
+annot_tsv: annot_Apr27/Fig2D2_regulatory_annotation_Apr27.tsv
+
 annot_with_gene_id:
 - coding_promoter
 - pseudogene_promoter
