@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Session genome="ce10" hasGeneTrack="true" hasSequenceTrack="true" locus="chrI:12675000-12690000" nextAutoscaleGroup="3" path="/Users/jj374/relmapping/annot_Apr27/Fig2A.xml" version="8">
+<Session genome="ce10" hasGeneTrack="true" hasSequenceTrack="true" locus="chrI:12675200-12686700" nextAutoscaleGroup="3" path="/Users/jj374/relmapping/annot_Apr27/Fig2A.xml" version="8">
     <Resources>
         <Resource path="/Users/jj374/relmapping/lcap808_geo/tracks_log2_fwd/lcap_glp1_d6_log2_fwd.bw"/>
         <Resource path="/Users/jj374/cb-head2/relmapping/WS260_ce10/WS260_ce10.transcripts.annot.gtf.gz"/>
@@ -66,10 +66,10 @@
             <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.4E-45" minimum="-7.0" type="LINEAR"/>
         </Track>
         <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="30" id="/Users/jj374/relmapping/scap815_geo/tracks_fwd/scap_wt_all_fwd.bw" name="Txn init fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
-            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="50.0" minimum="0.0" type="LINEAR"/>
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="25.0" minimum="0.0" type="LINEAR"/>
         </Track>
         <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="178,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="30" id="/Users/jj374/relmapping/scap815_geo/tracks_rev/scap_wt_all_rev.bw" name="Txn init rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
-            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.4E-45" minimum="-10.0" type="LINEAR"/>
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.4E-45" minimum="-25.0" type="LINEAR"/>
         </Track>
         <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" id="/Users/jj374/cb-head2/relmapping/annot_Apr27/Fig2D2_regulatory_annotation_Apr27_ce10.bed" name="Regulatory annotation" renderer="BASIC_FEATURE" sortable="true" visible="true" windowFunction="count"/>
         <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" id="/Users/jj374/cb-head2/relmapping/WS260_ce10/WS260_ce10.transcripts.annot.gtf.gz" name="Annotated transcripts" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
