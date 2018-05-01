@@ -40,5 +40,5 @@
 - `lcap_%stage_%rep_%strand_ucount`, `_dcount` number reads with 5' ends within -250:-75 upstream (+75:+250 downstream) of the accessible site
 - `lcap_%stage_%strand_baseMean`, `_log2FoldChange`, `_lfcSE`, `_stat`, `_pvalue`, `_padj` [DESeq2 output](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#differential-expression-analysis) of a one-side test for an increase in downstream counts against upstream counts ("jump test")
 - `lcap_%stage_%strand_passed` TRUE or FALSE based on whether the site has a statistically significant increase in long cap (padj<0.1 and log2FoldChange>1.5)
-- `lcap_wt_emb_fwd_passed_incr` TRUE or FALSE based on whether the site passed the "incr" test
-- `lcap_wt_emb_fwd_passed` TRUE or FALSE based on whether the site passed at least one of the jump/incr tests
+- `lcap_%stage_%strand_passed_incr` TRUE or FALSE based on whether the site passed the "incr" test
+- `lcap_%stage_%strand_passed` TRUE or FALSE based on whether the site passed at least one of the jump/incr tests
