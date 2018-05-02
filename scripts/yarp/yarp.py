@@ -1535,7 +1535,10 @@ class GenomicDataFrame(object):
             ll_cluster_i = [self.r.index]
         else:
             l_cluster_i = self.r[cluster_col]
-            ll_cluster_i = [l_cluster_i[l_cluster_i == v].index.tolist() for v in OrderedCounter(l_cluster_i).keys()]
+            if figB_magic or figB_suppl_magic:
+                ll_cluster_i = [l_cluster_i[l_cluster_i == v].index.tolist() for v in ['coding_promoter', 'putative_enhancer']]
+            else:
+                ll_cluster_i = [l_cluster_i[l_cluster_i == v].index.tolist() for v in OrderedCounter(l_cluster_i).keys()]
 
         if l_title is None: l_title = list(self.t.keys())
         if l_title_cbar is None: l_title_cbar = list(l_title)
