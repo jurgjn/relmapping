@@ -1,0 +1,12 @@
+| Figure  | Coordinates                | Dimensions |
+|---------+----------------------------+------------|
+| Fig1B   |                            |            |
+| Fig2A   | chrI:12,675,200-12,686,700 | 1050 x 500 |
+| Fig1S1B |                            |            |
+| Fig2S1D |                            |            |
+| Fig2S1E |                            |            |
+| Fig2S4B |                            |            |
+| Fig2S4C |                            |            |
+| Fig2S4D |                            |            |
+
+Dimensions = what was shown by Shift-Command-4 on a Retina display, so double for actual pixels
