@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Session genome="ce10" hasGeneTrack="true" hasSequenceTrack="true" locus="chrIII:9041700-9196700" path="/Users/jj374/relmapping/annot_Apr27/Fig1B.xml" version="8">
+    <Resources>
+        <Resource path="/Users/jj374/relmapping/atac814_geo/tracks/atac_glp1_d6.bw"/>
+        <Resource path="/Users/jj374/relmapping/atac814_geo/tracks/atac_wt_l2.bw"/>
+        <Resource path="/Users/jj374/relmapping/atac814_geo/tracks/atac_wt_ya.bw"/>
+        <Resource path="/Users/jj374/relmapping/atac814_geo/tracks/atac_glp1_d1.bw"/>
+        <Resource path="/Users/jj374/relmapping/WS260_ce10/WS260_ce10.transcripts.gtf.gz"/>
+        <Resource path="/Users/jj374/relmapping/atac814_geo/tracks/atac_wt_emb.bw"/>
+        <Resource path="/Users/jj374/relmapping/atac814_geo/tracks/atac_wt_l4.bw"/>
+        <Resource path="/Users/jj374/relmapping/atac814_geo/tracks/atac_wt_l1.bw"/>
+        <Resource path="/Users/jj374/relmapping/atac814_geo/tracks/atac_wt_l3.bw"/>
+        <Resource path="/Users/jj374/relmapping/atac814_geo/tracks/atac_glp1_d13.bw"/>
+        <Resource path="/Users/jj374/relmapping/WS260_ce10/WS260_ce10.transcripts.annot.gtf.gz"/>
+        <Resource path="/Users/jj374/relmapping/atac814_geo/tracks/atac_glp1_d2.bw"/>
+        <Resource path="/Users/jj374/relmapping/annot_Apr27/Fig2D2_regulatory_annotation_Apr27_ce10.bed"/>
+        <Resource path="/Users/jj374/relmapping/annot/Fig1D1_accessible_sites/Fig1D1_accessible_sites_bed3.bed"/>
+        <Resource path="/Users/jj374/relmapping/atac814_geo/tracks/atac_glp1_d9.bw"/>
+    </Resources>
+    <Panel height="744" name="DataPanel" width="1423">
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="96,96,96" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/atac814_geo/tracks/atac_wt_emb.bw" name="atac_wt_emb.bw" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="40.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="96,96,96" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/atac814_geo/tracks/atac_wt_l1.bw" name="atac_wt_l1.bw" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="40.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="96,96,96" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/atac814_geo/tracks/atac_wt_l2.bw" name="atac_wt_l2.bw" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="40.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="96,96,96" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/atac814_geo/tracks/atac_wt_l3.bw" name="atac_wt_l3.bw" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="40.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="96,96,96" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/atac814_geo/tracks/atac_wt_l4.bw" name="atac_wt_l4.bw" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="40.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="96,96,96" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/atac814_geo/tracks/atac_wt_ya.bw" name="atac_wt_ya.bw" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="40.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/atac814_geo/tracks/atac_glp1_d1.bw" name="atac_glp1_d1.bw" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="40.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/atac814_geo/tracks/atac_glp1_d2.bw" name="atac_glp1_d2.bw" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="40.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/atac814_geo/tracks/atac_glp1_d6.bw" name="atac_glp1_d6.bw" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="40.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/atac814_geo/tracks/atac_glp1_d9.bw" name="atac_glp1_d9.bw" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="40.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/atac814_geo/tracks/atac_glp1_d13.bw" name="atac_glp1_d13.bw" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="40.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/annot/Fig1D1_accessible_sites/Fig1D1_accessible_sites_bed3.bed" name="Fig1D1_accessible_sites_bed3.bed" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="EXPANDED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/WS260_ce10/WS260_ce10.transcripts.gtf.gz" name="WS260_ce10.transcripts.gtf.gz" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,0" colorScale="ContinuousColorScale;0.0;102.0;255,255,255;0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/annot_Apr27/Fig2D2_regulatory_annotation_Apr27_ce10.bed" name="Fig2D2_regulatory_annotation_Apr27_ce10.bed" renderer="BASIC_FEATURE" sortable="true" visible="true" windowFunction="count">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="102.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/WS260_ce10/WS260_ce10.transcripts.annot.gtf.gz" name="WS260_ce10.transcripts.annot.gtf.gz" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+    </Panel>
+    <Panel height="40" name="FeaturePanel" width="1423">
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="Reference sequence" name="Reference sequence" sortable="false" visible="true"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" colorScale="ContinuousColorScale;0.0;88.0;255,255,255;0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" height="35" id="ce10_genes" name="Gene" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="88.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+    </Panel>
+    <PanelLayout dividerFractions="0.943109987357775"/>
+</Session>
