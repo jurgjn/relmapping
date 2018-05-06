@@ -602,3 +602,13 @@ rule lcap808:
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10', '.bam.bai', 'lcap808'), bid=config['stages_rep']),
         # Gene-level read counts (for accessibility dynamics)
         expand('lcap808_geo/gene_level_read_counts/lcap_{sample}.tsv', sample=config['stages_rep']),
+        # GEO -- md5 checksums of fastq files
+        expand(pf('lcap808_{sample}', 'md5sum_r1', '.txt', 'lcap808'), sample=list(config['lcap808'].keys())),
+        expand(pf('lcap808_{sample}', 'md5sum_r2', '.txt', 'lcap808'), sample=list(config['lcap808'].keys())),
+        # GEO -- read lengths
+        expand(pf('lcap808_{sample}', 'readlen_r1', '.txt', 'lcap808'), sample=list(config['lcap808'].keys())),
+        expand(pf('lcap808_{sample}', 'readlen_r2', '.txt', 'lcap808'), sample=list(config['lcap808'].keys())),
+        # GEO -- fragment sizes for insert size stats
+        expand(pf('lcap808_{sample}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.fsizes', '.txt', 'lcap808'), sample=list(config['lcap808'].keys())),
+
+    

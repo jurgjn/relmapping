@@ -8,6 +8,39 @@ rule fqz_c_r2_samples:
     output: pf('{bid}', 'c_r2', '.txt', '{prefix}')
     shell: "gunzip -c {input} | wc -l | awk '{{print $1/4}}' > {output}"
 
+rule md5sum_r1_samples:
+    input: 'samples/{bid}.r1.fq.gz'
+    output: pf('{bid}', 'md5sum_r1', '.txt', '{prefix}')
+    shell: 'md5sum {input} > {output}'
+
+rule md5sum_r2_samples:
+    input: 'samples/{bid}.r2.fq.gz'
+    output: pf('{bid}', 'md5sum_r2', '.txt', '{prefix}')
+    shell: 'md5sum {input} > {output}'
+
+rule readlen_r1_samples:
+    input: 'samples/{bid}.r1.fq.gz'
+    output: pf('{bid}', 'readlen_r1', '.txt', '{prefix}')
+    run:
+        (fp_inp, fp_out) = (str(input), str(output))
+        n_reads = int(1e6) # estimate read length from the first 1M reads
+        counts = collections.Counter(map(len, itertools.islice(hts.FastqReader(fp_inp), n_reads)))
+        print(max(counts.keys()))
+        with open(fp_out, 'w') as fh_out:
+            #fh_out.write('%d-%d' % (min(counts.keys()), max(counts.keys())))
+            fh_out.write('%d' % (max(counts.keys()),))
+
+rule readlen_r2_samples:
+    input: 'samples/{bid}.r2.fq.gz'
+    output: pf('{bid}', 'readlen_r2', '.txt', '{prefix}')
+    run:
+        (fp_inp, fp_out) = (str(input), str(output))
+        n_reads = int(1e6) # estimate read length from the first 1M reads
+        counts = collections.Counter(map(len, itertools.islice(hts.FastqReader(fp_inp), n_reads)))
+        with open(fp_out, 'w') as fh_out:
+            #fh_out.write('%d-%d' % (min(counts.keys()), max(counts.keys())))
+            fh_out.write('%d' % (max(counts.keys()),))
+
 rule fqz_c_r1:
     input: pf('{bid}', '{step}', '.r1.fq.gz', '{prefix}')
     output: pf('{bid}', '{step}.c_r1', '.txt', '{prefix}')
