@@ -307,3 +307,11 @@ rule atac814:
         expand('atac814_geo/tracks/atac_{sample}.bw', sample=config['stages']),
         # alignments (to match GEO submission)
         expand('atac814_geo/alignments/atac_{sample}.bam', sample=config['stages_rep']),
+        # GEO -- md5 checksums of fastq files
+        expand(pf('atac814_{sample}', 'md5sum_r1', '.txt', 'atac814'), sample=config['atac814'].keys()),
+        expand(pf('atac814_{sample}', 'md5sum_r2', '.txt', 'atac814'), sample=config['atac814_pe'].keys()),
+        # GEO -- read lengths
+        expand(pf('atac814_{sample}', 'readlen_r1', '.txt', 'atac814'), sample=config['atac814'].keys()),
+        expand(pf('atac814_{sample}', 'readlen_r2', '.txt', 'atac814'), sample=config['atac814_pe'].keys()),
+        # GEO -- fragment sizes
+        expand(pf('atac814_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.fsizes', '.txt', 'atac814'), sample=config['atac814_pe'].keys()),
