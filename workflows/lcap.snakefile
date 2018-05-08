@@ -610,5 +610,3 @@ rule lcap808:
         expand(pf('lcap808_{sample}', 'readlen_r2', '.txt', 'lcap808'), sample=list(config['lcap808'].keys())),
         # GEO -- fragment sizes for insert size stats
         expand(pf('lcap808_{sample}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.fsizes', '.txt', 'lcap808'), sample=list(config['lcap808'].keys())),
-
-    
