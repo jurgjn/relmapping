@@ -272,6 +272,48 @@ atac814_pe:
   wt_ya_rep1c: HS327_crb55_JA4
   wt_ya_rep2: HS168_crb55_N701-N503
 
+atac814_se:
+  glp1_d1_rep1a: HS456_MS14
+  glp1_d1_rep1b: HS457_MS20
+  glp1_d1_rep1c: HS458_MS31
+  glp1_d1_rep2a: HS446_MS4
+  glp1_d1_rep2b: HS456_MS9
+  glp1_d2_rep1a: HS456_MS15
+  glp1_d2_rep1b: HS457_MS21
+  glp1_d2_rep1c: HS458_MS32
+  glp1_d2_rep2a: HS446_MS1
+  glp1_d2_rep2b: HS456_MS8
+  glp1_d2_rep2c: HS457_MS19
+  #glp1_d6_rep0a: HS456_MS10
+  #glp1_d6_rep0b: HS457_MS27
+  glp1_d6_rep1a: HS446_MS3
+  glp1_d6_rep1b: HS457_MS24
+  glp1_d6_rep1c: HS458_MS33
+  glp1_d6_rep2: HS462_MS39
+  glp1_d9_rep1a: HS446_MS2
+  glp1_d9_rep1b: HS457_MS26
+  glp1_d9_rep1c: HS458_MS34
+  glp1_d9_rep2: HS462_MS40
+  glp1_d13_rep1a: HS456_MS17
+  glp1_d13_rep1b: HS456_MS18
+  glp1_d13_rep1c: HS457_MS28
+  glp1_d13_rep1d: HS457_MS29
+  glp1_d13_rep1e: HS458_MS35
+  glp1_d13_rep1f: HS458_MS36
+  glp1_d13_rep1g: HS462_MS37
+  glp1_d13_rep1h: HS462_MS38
+  glp1_d13_rep2a: HS462_MS41
+  glp1_d13_rep2b: HS465_MS44
+  glp1_d13_rep2c: HS470_MS48
+  #gon2gem1_d1_rep1a: HS457_MS23
+  #gon2gem1_d1_rep1b: HS462_MS43
+  #gon2gem1_d1_rep2a: HS474_MS49
+  #gon2gem1_d1_rep2b: HS476_MS51
+  #gon2gem1_d2_rep1a: HS457_MS22
+  #gon2gem1_d2_rep1b: HS462_MS42
+  #gon2gem1_d2_rep2a: HS474_MS50
+  #gon2gem1_d2_rep2b: HS476_MS52
+
 atac808:
   wt_emb_rep1: HS086_Caro-A
   wt_emb_rep2: HS086_Caro-E
@@ -1709,6 +1751,72 @@ scap815:
     # ya all TAP (new HS604 YA looks too sparse/artefactual)
     wt_ya_rep1: weick2014_ya_n2_tap_extra
     wt_ya_rep2: HS053_Yan-02_S16
+
+dnase_concentrations:
+- 2.5U_ml
+- 5U_ml
+- 10U_ml
+- 25U_ml
+- 50U_ml
+- 100U_ml
+- 200U_ml
+- 400U_ml
+- 800U_ml
+
+mnase_concentrations:
+- 0.025U_ml
+- 0.05U_ml
+- 0.1U_ml
+- 0.25U_ml
+- 0.5U_ml
+- 1U_ml
+- 4U_ml
+- 8U_ml
+- 16U_ml
+
+dnase_mnase819:
+    dnase_wt_emb_rep1:
+        library_id: EMB-JA10-N2-dnase-S1.2
+        protocol: Pippin
+    dnase_wt_emb_rep2:
+        library_id: EMB-JA11-N2-dnase-S2
+        protocol: Pippin
+    dnase_wt_l1_rep1:
+        library_id: L1-JA2-N2-dnase-S1.1
+        protocol: Pippin
+    dnase_wt_l1_rep2:
+        library_id: L1-JA6-N2-dnase-S2
+        protocol: Beads
+    dnase_wt_l2_rep1:
+        library_id: L2-JA7-N2-dnase-S1
+        protocol: Beads
+    dnase_wt_l2_rep2:
+        library_id: L2-JA1-N2-dnase-S2
+        protocol: Beads
+    dnase_wt_l3_rep1:
+        library_id: L3-JA15-N2-dnase-S1
+        protocol: Pippin
+    dnase_wt_l3_rep2:
+        library_id: L3-JA16-N2-dnase-S2
+        protocol: Pippin
+    dnase_wt_l4_rep1:
+        library_id: L4-JA3-N2-dnase-S1
+        protocol: Beads
+    dnase_wt_l4_rep2:
+        library_id: L4-JA9-N2-dnase-S2
+        protocol: Beads
+    dnase_wt_ya_rep1:
+        library_id: YA-JA4-N2-dnase-S1.1
+        protocol: Pippin
+    dnase_wt_ya_rep2:
+        library_id: YA-JA5-N2-dnase-S2
+        protocol: Beads
+    mnase_wt_emb_rep1:
+        library_id: EMB-JA12-N2-mnase-S1
+        protocol: Pippin
+    mnase_wt_emb_rep2:
+        library_id: EMB-JA13-N2-mnase-S2.2
+        protocol: Pippin
 
 hmod749:
 - H3K4me3_wt_emb
