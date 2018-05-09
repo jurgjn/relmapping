@@ -107,7 +107,54 @@ rule dnase_mnase:
         expand(pf('{bid}', 'c_r2', '.txt', 'dnase_mnase'), bid=l_dnase_mnase_samples()),
         expand(pf('{bid}', 'tg_pe.bwa_pe', '.bam', 'dnase_mnase'), bid=l_dnase_mnase_samples()),
         expand(pf('{bid}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt300', '_treat_pileup.bw', 'dnase_mnase'), bid=l_dnase_mnase_samples()),
+        # GEO -- md5 checksums of fastq files
+        expand(pf('{bid}', 'md5sum_r1', '.txt', 'dnase_mnase'), bid=l_dnase_mnase_samples()),
+        expand(pf('{bid}', 'md5sum_r2', '.txt', 'dnase_mnase'), bid=l_dnase_mnase_samples()),
+        # GEO -- read lengths
+        expand(pf('{bid}', 'readlen_r1', '.txt', 'dnase_mnase'), bid=l_dnase_mnase_samples()),
+        expand(pf('{bid}', 'readlen_r2', '.txt', 'dnase_mnase'), bid=l_dnase_mnase_samples()),
+        # GEO -- fragment sizes
+        expand(pf('{bid}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.fsizes', '.txt', 'dnase_mnase'), bid=l_dnase_mnase_samples()),
 
 rule dnase_mnase_labelled:
     input:
         expand(pf('{label}', 'spmr_lt300', '.bw', 'dnase_mnase_labelled'), label=d_dnase_mnase_label_bid.keys()),
+
+def dnase_mnase819_geo_read1_(wildcards):
+    fn_ = wildcards.raw_file_1
+    df_ = pd.read_csv('dnase_mnase819_geo/dnase_mnase_geo1_samples.tsv', sep='\t').query('raw_file_1 == @fn_')
+    assert(len(df_) == 1)
+    return 'samples/%s.r1.fq.gz' % (df_.iloc[0]['bid'],)
+
+def dnase_mnase819_geo_read2_(wildcards):
+    fn_ = wildcards.raw_file_2
+    df_ = pd.read_csv('dnase_mnase819_geo/dnase_mnase_geo1_samples.tsv', sep='\t').query('raw_file_2 == @fn_')
+    assert(len(df_) == 1)
+    return 'samples/%s.r2.fq.gz' % (df_.iloc[0]['bid'],)
+
+rule dnase_mnase819_geo_read1:
+    input:
+        dnase_mnase819_geo_read1_,
+    output:
+        'dnase_mnase819_geo/reads/{raw_file_1}'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule dnase_mnase819_geo_read2:
+    input:
+        dnase_mnase819_geo_read2_,
+    output:
+        'dnase_mnase819_geo/reads/{raw_file_2}'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule dnase_mnase819_geo:
+    input:
+        expand('dnase_mnase819_geo/reads/{raw_file_1}', raw_file_1=itertools.islice(pd.read_csv('dnase_mnase819_geo/dnase_mnase_geo1_samples.tsv', sep='\t')['raw_file_1'].tolist(), None)),
+        expand('dnase_mnase819_geo/reads/{raw_file_2}', raw_file_2=itertools.islice(pd.read_csv('dnase_mnase819_geo/dnase_mnase_geo1_samples.tsv', sep='\t')['raw_file_2'].tolist(), None)),
