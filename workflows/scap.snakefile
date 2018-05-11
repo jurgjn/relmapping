@@ -543,7 +543,7 @@ rule scap815_read1:
     input:
         'samples/scap815_{replicate}.r1.fq.gz'
     output:
-        'scap815_geo/reads/scap_{replicate}.read1.fastq.gz'
+        'scap815_geo/reads/scap_{replicate}.fastq.gz'
     shell:
         '''
         ln -s `pwd`/{input} `pwd`/{output}
@@ -552,7 +552,7 @@ rule scap815_read1:
 
 rule scap815_fwd:
     input:
-        pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd.sum_by_stage', '.bw', 'scap815'),
+        pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_fwd.sum_by_stage', '.bw', 'scap815'),
     output:
         'scap815_geo/tracks_fwd/scap_{stage}_fwd.bw'
     shell:
@@ -563,7 +563,7 @@ rule scap815_fwd:
 
 rule scap815_rev:
     input:
-        pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.sum_by_stage.neg', '.bw', 'scap815'),
+        pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_rev.sum_by_stage.neg', '.bw', 'scap815'),
     output:
         'scap815_geo/tracks_rev/scap_{stage}_rev.bw'
     shell:
@@ -574,7 +574,7 @@ rule scap815_rev:
 
 rule scap815_all_fwd:
     input:
-        pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd.gt0x2', '.bw', 'scap815'),
+        pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_fwd.gt0x2', '.bw', 'scap815'),
     output:
         'scap815_geo/tracks_fwd/scap_wt_all_fwd.bw'
     shell:
@@ -585,7 +585,7 @@ rule scap815_all_fwd:
 
 rule scap815_all_rev:
     input:
-        pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.gt0x2.neg', '.bw', 'scap815'),
+        pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_rev.gt0x2.neg', '.bw', 'scap815'),
     output:
         'scap815_geo/tracks_rev/scap_wt_all_rev.bw'
     shell:
@@ -596,22 +596,20 @@ rule scap815_all_rev:
 
 rule scap815:
     input:
-        expand(pf('scap815_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
-        expand(pf('scap815_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
-        expand(pf('scap815_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.c', '.txt', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
-        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd.sum_by_stage', '.bw', 'scap815'), stage=config['stages_wt']),
-        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.sum_by_stage', '.bw', 'scap815'), stage=config['stages_wt']),
-        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.sum_by_stage.neg', '.bw', 'scap815'), stage=config['stages_wt']),
-        pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd.gt0x2', '.bw', 'scap815'),
-        pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.gt0x2', '.bw', 'scap815'),
-        pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.gt0x2.neg', '.bw', 'scap815'),
-        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd.gt0x2', '.bw', 'scap815'), stage=config['stages_wt']),
-        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.gt0x2', '.bw', 'scap815'), stage=config['stages_wt']),
-        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_rev.gt0x2.neg', '.bw', 'scap815'), stage=config['stages_wt']),
+        expand(pf('scap815_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_fwd', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
+        expand(pf('scap815_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_rev', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
+        expand(pf('scap815_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.c', '.txt', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_fwd.sum_by_stage', '.bw', 'scap815'), stage=config['stages_wt']),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_rev.sum_by_stage', '.bw', 'scap815'), stage=config['stages_wt']),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_rev.sum_by_stage.neg', '.bw', 'scap815'), stage=config['stages_wt']),
+        pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_fwd.gt0x2', '.bw', 'scap815'),
+        pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_rev.gt0x2', '.bw', 'scap815'),
+        pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_rev.gt0x2.neg', '.bw', 'scap815'),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_fwd.gt0x2', '.bw', 'scap815'), stage=config['stages_wt']),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_rev.gt0x2', '.bw', 'scap815'), stage=config['stages_wt']),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_rev.gt0x2.neg', '.bw', 'scap815'), stage=config['stages_wt']),
         # GEO submission -- reads
-        expand('scap815_geo/reads/scap_{replicate}.read1.fastq.gz', replicate=config['scap815'].keys()),
+        expand('scap815_geo/reads/scap_{replicate}.fastq.gz', replicate=config['scap815'].keys()),
         # GEO submission -- coverage tracks
-        expand('scap815_geo/tracks_fwd/scap_{stage}_fwd.bw', stage=config['stages_wt']),
-        expand('scap815_geo/tracks_rev/scap_{stage}_rev.bw', stage=config['stages_wt']),
-        'scap815_geo/tracks_fwd/scap_wt_all_fwd.bw',
-        'scap815_geo/tracks_rev/scap_wt_all_rev.bw',
+        expand('scap815_geo/tracks_fwd/scap_{stage}_fwd.bw', stage=config['stages_wt'] + ['wt_all']),
+        expand('scap815_geo/tracks_rev/scap_{stage}_rev.bw', stage=config['stages_wt'] + ['wt_all']),
