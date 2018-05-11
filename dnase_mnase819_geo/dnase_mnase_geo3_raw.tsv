@@ -110,6 +110,7 @@ mnase_wt_emb_rep1_0.25U_ml.read1.fastq.gz	fastq	f5a7f0e627dfd4fa1dd1421c24d6ea35
 mnase_wt_emb_rep1_0.5U_ml.read1.fastq.gz	fastq	b372ac3f96f8e29b4f6511bd29da883d	HiSeq2000	51	paired-end
 mnase_wt_emb_rep1_1U_ml.read1.fastq.gz	fastq	037498163f486fbdadc921ab5730bd36	HiSeq2000	51	paired-end
 mnase_wt_emb_rep1_4U_ml.read1.fastq.gz	fastq	626a749e6304e6aa66f9f32edd13248d	HiSeq2000	51	paired-end
+mnase_wt_emb_rep1_8U_ml.read1.fastq.gz	fastq	ab921eab008b97061ff14254b1615f06	HiSeq2000	51	paired-end
 mnase_wt_emb_rep1_16U_ml.read1.fastq.gz	fastq	eb2519bd82e339066605897c9612a4f7	HiSeq2000	51	paired-end
 mnase_wt_emb_rep2_0.025U_ml.read1.fastq.gz	fastq	699576b3b3087d29848749567e973bc7	HiSeq2000	51	paired-end
 mnase_wt_emb_rep2_0.05U_ml.read1.fastq.gz	fastq	11de1a37a2575934a52668606ac01ef5	HiSeq2000	51	paired-end
@@ -231,6 +232,7 @@ mnase_wt_emb_rep1_0.25U_ml.read2.fastq.gz	fastq	25776d1f8fb3cbceb42dca85a94a3efe
 mnase_wt_emb_rep1_0.5U_ml.read2.fastq.gz	fastq	02322dadd6acd66b0c0374f74c8269ab	HiSeq2000	51	paired-end
 mnase_wt_emb_rep1_1U_ml.read2.fastq.gz	fastq	e2e44ca5816ee529cae636414a6cd4d3	HiSeq2000	51	paired-end
 mnase_wt_emb_rep1_4U_ml.read2.fastq.gz	fastq	f30a5d1404f41687f008958b9080308d	HiSeq2000	51	paired-end
+mnase_wt_emb_rep1_8U_ml.read2.fastq.gz	fastq	04a449d1457c69e7dfb50f2ae4cf3f67	HiSeq2000	51	paired-end
 mnase_wt_emb_rep1_16U_ml.read2.fastq.gz	fastq	2b5e33cd2f9fa28151424649f9f5c92b	HiSeq2000	51	paired-end
 mnase_wt_emb_rep2_0.025U_ml.read2.fastq.gz	fastq	ccdd2acd427a05cee01b31df60943a08	HiSeq2000	51	paired-end
 mnase_wt_emb_rep2_0.05U_ml.read2.fastq.gz	fastq	b1972c8bf956f1cb6f037a67204e12da	HiSeq2000	51	paired-end

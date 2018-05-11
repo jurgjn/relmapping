@@ -154,7 +154,25 @@ rule dnase_mnase819_geo_read2:
         touch -h `pwd`/{output}
         '''
 
+def dnase_mnase819_geo_processed_(wildcards):
+    fn_ = wildcards.raw_file_2
+    df_ = pd.read_csv('dnase_mnase819_geo/dnase_mnase_geo1_samples.tsv', sep='\t').query('raw_file_2 == @fn_')
+    assert(len(df_) == 1)
+    return 'samples/%s.r2.fq.gz' % (df_.iloc[0]['bid'],)
+
+rule dnase_mnase819_geo_processed:
+    input:
+        dnase_mnase819_geo_processed_,
+    output:
+        'dnase_mnase819_geo/reads/{raw_file_1}'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
 rule dnase_mnase819_geo:
     input:
         expand('dnase_mnase819_geo/reads/{raw_file_1}', raw_file_1=itertools.islice(pd.read_csv('dnase_mnase819_geo/dnase_mnase_geo1_samples.tsv', sep='\t')['raw_file_1'].tolist(), None)),
         expand('dnase_mnase819_geo/reads/{raw_file_2}', raw_file_2=itertools.islice(pd.read_csv('dnase_mnase819_geo/dnase_mnase_geo1_samples.tsv', sep='\t')['raw_file_2'].tolist(), None)),
+        #expand('dnase_mnase819_geo/reads/{raw_file_2}', raw_file_2=itertools.islice(pd.read_csv('dnase_mnase819_geo/dnase_mnase_geo1_samples.tsv', sep='\t')['raw_file_2'].tolist(), None)),
