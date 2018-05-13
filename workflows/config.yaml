@@ -644,6 +644,10 @@ atac_cfp1_805:
 - HS588_ATAC_JA51_N2_L3
 - HS588_ATAC_JA52_cfp1_L3
 - HS588_ATAC_Wei_SM_L3
+- HS097_Caro-I
+- HS097_Caro-J
+- HS097_Caro-K
+- HS097_Caro-L
 
 atac_cfp1_804:
 - HS067_CG001
