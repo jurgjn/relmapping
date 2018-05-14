@@ -222,17 +222,24 @@ rule ce10:
         bowtie-build shared/ce10.fa shared/ce10
         '''
 
-rule process_ce10:
-    input:
-        'shared/ce10.2bit',
-        'shared/ce10.chroms',
-        'shared/ce10.fa',
-        'shared/ce10.fa.amb',
-        'shared/ce10.fa.ann',
-        'shared/ce10.fa.bwt',
-        'shared/ce10.fa.pac',
-        'shared/ce10.fa.sa',
-        'shared/ce10.1.ebwt',
+rule ce11:
+    output:
+        'shared/ce11.2bit',
+        'shared/ce11.chroms',
+        'shared/ce11.fa',
+        #'shared/ce11.fa.amb',
+        #'shared/ce11.fa.ann',
+        #'shared/ce11.fa.bwt',
+        #'shared/ce11.fa.pac',
+        #'shared/ce11.fa.sa',
+        #'shared/ce11.1.ebwt',
+    shell: '''
+        curl http://hgdownload.cse.ucsc.edu/goldenPath/ce11/bigZips/ce11.2bit -o shared/ce11.2bit
+        curl http://hgdownload.cse.ucsc.edu/goldenPath/ce11/bigZips/ce11.chrom.sizes -o shared/ce11.chroms
+        twoBitToFa shared/ce11.2bit shared/ce11.fa
+        bwa index shared/ce11.fa
+        #bowtie-build shared/ce11.fa shared/ce11
+        '''
 
 """
 bwa index shared/ecoli.fa

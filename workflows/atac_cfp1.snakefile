@@ -7,6 +7,7 @@ rule atac_cfp1:
         expand(pf('{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt300', '_treat_pileup.bw', 'atac_cfp1'), sample=config['atac_cfp1_805']),
         expand(pf('{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt300_keepdup_all', '_treat_pileup.bw', 'atac_cfp1'), sample=config['atac_cfp1_805']),
         expand(pf('{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac_cfp1'), sample=config['atac_cfp1_805']),
+        expand(pf('{sample}', 'tg_pe.bwa_pe_ce11.rm_unmapped_pe.rm_chrM', '.bam', 'atac_cfp1'), sample=config['atac_cfp1_805']),
 
 rule atac_cfp1_qc:
     input:
