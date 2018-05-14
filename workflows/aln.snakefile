@@ -216,6 +216,15 @@ rule rm_blacklist:
     shell:
         'samtools view -b -L shared/ce10_blacklist.bed -U {output} {input[0]} > /dev/null'
 
+rule rm_blacklist_ce11:
+    input:
+        pf('{bid}', '{step}', '.bam', '{prefix}'),
+        pf('{bid}', '{step}', '.bam.bai', '{prefix}'),
+    output:
+        pf('{bid}', '{step}.rm_blacklist_ce11', '.bam', '{prefix}'),
+    shell:
+        'samtools view -b -L shared/ce11_blacklist.bed -U {output} {input[0]} > /dev/null'
+
 rule rm_chrM:
     input:
         pf('{bid}', '{step}', '.bam', '{prefix}'),
