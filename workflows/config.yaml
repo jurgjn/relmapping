@@ -1781,72 +1781,72 @@ mnase_concentrations:
 dnase_mnase819_rep:
     dnase_wt_emb_rep1:
         library_id: EMB-JA10-N2-dnase-S1.2
-        protocol: Pippin
+        protocol: 1
         title: wt_emb_DNase-seq_rep1
         source name: mixed embryos
     dnase_wt_emb_rep2:
         library_id: EMB-JA11-N2-dnase-S2
-        protocol: Pippin
+        protocol: 1
         title: wt_emb_DNase-seq_rep2
         source name: mixed embryos
     dnase_wt_l1_rep1:
         library_id: L1-JA2-N2-dnase-S1.1
-        protocol: Pippin
+        protocol: 1
         title: wt_L1_DNase-seq_rep1
         source name: L1 larvae
     dnase_wt_l1_rep2:
         library_id: L1-JA6-N2-dnase-S2
-        protocol: Beads
+        protocol: 2
         title: wt_L1_DNase-seq_rep2
         source name: L1 larvae
     dnase_wt_l2_rep1:
         library_id: L2-JA7-N2-dnase-S1
-        protocol: Beads
+        protocol: 2
         title: wt_L2_DNase-seq_rep1
         source name: L2 larvae
     dnase_wt_l2_rep2:
         library_id: L2-JA1-N2-dnase-S2
-        protocol: Beads
+        protocol: 2
         title: wt_L2_DNase-seq_rep2
         source name: L2 larvae
     dnase_wt_l3_rep1:
         library_id: L3-JA15-N2-dnase-S1
-        protocol: Pippin
+        protocol: 1
         title: wt_L3_DNase-seq_rep1
         source name: L3 larvae
     dnase_wt_l3_rep2:
         library_id: L3-JA16-N2-dnase-S2
-        protocol: Pippin
+        protocol: 1
         title: wt_L3_DNase-seq_rep2
         source name: L3 larvae
     dnase_wt_l4_rep1:
         library_id: L4-JA3-N2-dnase-S1
-        protocol: Beads
+        protocol: 2
         title: wt_L4_DNase-seq_rep1
         source name: L4 larvae
     dnase_wt_l4_rep2:
         library_id: L4-JA9-N2-dnase-S2
-        protocol: Beads
+        protocol: 2
         title: wt_L4_DNase-seq_rep2
         source name: L4 larvae
     dnase_wt_ya_rep1:
         library_id: YA-JA4-N2-dnase-S1.1
-        protocol: Pippin
+        protocol: 1
         title: wt_YA_DNase-seq_rep1
         source name: young adults
     dnase_wt_ya_rep2:
         library_id: YA-JA5-N2-dnase-S2
-        protocol: Beads
+        protocol: 2
         title: wt_YA_DNase-seq_rep2
         source name: young adults
     mnase_wt_emb_rep1:
         library_id: EMB-JA12-N2-mnase-S1
-        protocol: Pippin
+        protocol: 1
         title: wt_emb_MNase-seq_rep1
         source name: mixed embryos
     mnase_wt_emb_rep2:
         library_id: EMB-JA13-N2-mnase-S2.2
-        protocol: Pippin
+        protocol: 1
         title: wt_emb_MNase-seq_rep2
         source name: mixed embryos
 
