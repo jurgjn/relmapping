@@ -1,4 +1,4 @@
-rule bwa_pe:
+rule bwa_pe: # rm -f ... gets rid of temporary files left from a previously crashed run...
     input:
         pf('{bid}', '{step}', '.r1.fq.gz', '{prefix}'),
         pf('{bid}', '{step}', '.r2.fq.gz', '{prefix}'),
@@ -7,6 +7,8 @@ rule bwa_pe:
     threads: 4
     params: genome_fa='shared/ce10.fa'
     shell: '''
+        rm -f {output}_tmpA.????.bam
+        rm -f {output}_tmpB.????.bam
         bwa sampe {params.genome_fa} \
             <(bwa aln -t {threads} {params.genome_fa} {input[0]}) \
             <(bwa aln -t {threads} {params.genome_fa} {input[1]}) \
@@ -19,7 +21,7 @@ rule bwa_pe:
         > {output}
         '''
 
-rule bwa_pe_ce11:
+rule bwa_pe_ce11: # rm -f ... gets rid of temporary files left from a previously crashed run...
     input:
         pf('{bid}', '{step}', '.r1.fq.gz', '{prefix}'),
         pf('{bid}', '{step}', '.r2.fq.gz', '{prefix}'),
@@ -28,6 +30,8 @@ rule bwa_pe_ce11:
     threads: 4
     params: genome_fa='shared/ce11.fa'
     shell: '''
+        rm -f {output}_tmpA.????.bam
+        rm -f {output}_tmpB.????.bam
         bwa sampe {params.genome_fa} \
             <(bwa aln -t {threads} {params.genome_fa} {input[0]}) \
             <(bwa aln -t {threads} {params.genome_fa} {input[1]}) \
