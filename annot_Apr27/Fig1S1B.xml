@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Session genome="ce10" hasGeneTrack="true" hasSequenceTrack="true" locus="chrII:6369500-6378000" nextAutoscaleGroup="4" path="/Users/jj374/relmapping/annot_Apr27/Fig1S1b.xml" version="8">
+    <Resources>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_400U_ml.bw"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/mnase_wt_emb_rep1_1U_ml.bw"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_200U_ml.bw"/>
+        <Resource path="/Users/jj374/relmapping/atac814_geo/tracks/atac_wt_emb.bw"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_100U_ml.bw"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/mnase_wt_emb_rep1_0.1U_ml.bw"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/mnase_wt_emb_rep1_8U_ml.bw"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/mnase_wt_emb_rep1_0.5U_ml.bw"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_800U_ml.bw"/>
+        <Resource path="/Users/jj374/relmapping/WS260_ce10/WS260_ce10.transcripts.annot.gtf.gz"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/mnase_wt_emb_rep1_4U_ml.bw"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/mnase_wt_emb_rep1_0.25U_ml.bw"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_50U_ml.bw"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_25U_ml.bw"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_2.5U_ml.bw"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_5U_ml.bw"/>
+        <Resource path="/Users/jj374/cb-head2/relmapping/annot/Fig2S3_overlaps/modERN_modENCODE/modERN_modENCODE_peak_pileup.bw"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_10U_ml.bw"/>
+        <Resource path="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/mnase_wt_emb_rep1_16U_ml.bw"/>
+    </Resources>
+    <Panel height="780" name="DataPanel" width="1423">
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="64,64,64" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" id="/Users/jj374/relmapping/WS260_ce10/WS260_ce10.transcripts.annot.gtf.gz" name="Genes" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="64,64,64" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/cb-head2/relmapping/annot/Fig2S3_overlaps/modERN_modENCODE/modERN_modENCODE_peak_pileup.bw" name="ChIP-seq peaks" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="125.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_2.5U_ml.bw" name="DNase 2.5U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="10.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_5U_ml.bw" name="DNase 5U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="10.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_10U_ml.bw" name="DNase 10U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="25.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_25U_ml.bw" name="DNase 25U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="25.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_50U_ml.bw" name="DNase 50U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="25.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_100U_ml.bw" name="DNase 100U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="25.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_200U_ml.bw" name="DNase 200U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="20.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_400U_ml.bw" name="DNase 400U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="10.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/dnase_wt_emb_rep2_800U_ml.bw" name="DNase 800U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="10.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,178,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/mnase_wt_emb_rep1_0.1U_ml.bw" name="MNase 0.1U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="25.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,178,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/mnase_wt_emb_rep1_0.25U_ml.bw" name="MNase 0.25U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="25.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,178,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/mnase_wt_emb_rep1_0.5U_ml.bw" name="MNase 0.5U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="25.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,178,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/mnase_wt_emb_rep1_1U_ml.bw" name="MNase 1U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="25.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,178,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/mnase_wt_emb_rep1_4U_ml.bw" name="MNase 4U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="3.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,178,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/mnase_wt_emb_rep1_8U_ml.bw" name="MNase 8U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="3.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,178,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="40" id="/Users/jj374/relmapping/dnase_mnase819_geo/tracks/mnase_wt_emb_rep1_16U_ml.bw" name="MNase 16U/ml" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="3.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="178,0,0" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="12" height="60" id="/Users/jj374/relmapping/atac814_geo/tracks/atac_wt_emb.bw" name="ATAC" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="125.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+    </Panel>
+    <Panel height="40" name="FeaturePanel" width="1423">
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="Reference sequence" name="Reference sequence" sortable="false" visible="true"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" colorScale="ContinuousColorScale;0.0;88.0;255,255,255;0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" height="35" id="ce10_genes" name="Gene" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="88.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+    </Panel>
+    <PanelLayout dividerFractions="0.988621997471555"/>
+</Session>
