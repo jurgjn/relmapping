@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Session genome="ce10" hasGeneTrack="false" hasSequenceTrack="true" locus="chrIII:1020500-1023500" nextAutoscaleGroup="2" path="/Users/jj374/relmapping/annot_Apr27/Fig2S4B,C,D.xml" version="8">
+    <Resources>
+        <Resource path="/Users/jj374/relmapping/lcap808_geo/tracks_log2_rev/lcap_wt_emb_log2_rev.bw"/>
+        <Resource path="/Users/jj374/relmapping/lcap808_geo/tracks_log2_fwd/lcap_wt_ya_log2_fwd.bw"/>
+        <Resource path="/Users/jj374/relmapping/lcap808_geo/tracks_log2_fwd/lcap_wt_l4_log2_fwd.bw"/>
+        <Resource path="/Users/jj374/relmapping/lcap808_geo/tracks_log2_rev/lcap_wt_ya_log2_rev.bw"/>
+        <Resource path="/Users/jj374/relmapping/lcap808_geo/tracks_log2_rev/lcap_wt_l4_log2_rev.bw"/>
+        <Resource path="/Users/jj374/relmapping/lcap808_geo/tracks_log2_fwd/lcap_wt_emb_log2_fwd.bw"/>
+        <Resource path="/Users/jj374/relmapping/lcap808_geo/tracks_log2_rev/lcap_wt_l3_log2_rev.bw"/>
+        <Resource path="/Users/jj374/relmapping/lcap808_geo/tracks_log2_rev/lcap_wt_l1_log2_rev.bw"/>
+        <Resource path="/Users/jj374/relmapping/WS260_ce10/WS260_ce10.transcripts.annot.gtf.gz"/>
+        <Resource path="/Users/jj374/relmapping/lcap808_geo/tracks_log2_rev/lcap_wt_l2_log2_rev.bw"/>
+        <Resource path="/Users/jj374/relmapping/scap815_geo/tracks_fwd/scap_wt_all_fwd.bw"/>
+        <Resource path="/Users/jj374/relmapping/lcap808_geo/tracks_log2_fwd/lcap_wt_l3_log2_fwd.bw"/>
+        <Resource path="/Users/jj374/relmapping/scap815_geo/tracks_rev/scap_wt_all_rev.bw"/>
+        <Resource path="/Users/jj374/relmapping/annot_Apr27/Fig2D2_regulatory_annotation_Apr27_ce10.bed"/>
+        <Resource path="/Users/jj374/relmapping/lcap808_geo/tracks_log2_fwd/lcap_wt_l2_log2_fwd.bw"/>
+        <Resource path="/Users/jj374/relmapping/lcap808_geo/tracks_log2_fwd/lcap_wt_l1_log2_fwd.bw"/>
+    </Resources>
+    <Panel height="650" name="DataPanel" width="1423">
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/lcap808_geo/tracks_log2_fwd/lcap_wt_emb_log2_fwd.bw" name="Txn elong Emb fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="4.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/lcap808_geo/tracks_log2_rev/lcap_wt_emb_log2_rev.bw" name="Txn elong Emb rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="0.0" minimum="-4.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/lcap808_geo/tracks_log2_fwd/lcap_wt_l1_log2_fwd.bw" name="Txn elong L1 fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="4.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/lcap808_geo/tracks_log2_rev/lcap_wt_l1_log2_rev.bw" name="Txn elong L1 rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="0.0" minimum="-4.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/lcap808_geo/tracks_log2_fwd/lcap_wt_l2_log2_fwd.bw" name="Txn elong L2 fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="4.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/lcap808_geo/tracks_log2_rev/lcap_wt_l2_log2_rev.bw" name="Txn elong L2 rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="0.0" minimum="-4.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/lcap808_geo/tracks_log2_fwd/lcap_wt_l3_log2_fwd.bw" name="Txn elong L3 fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="4.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/lcap808_geo/tracks_log2_rev/lcap_wt_l3_log2_rev.bw" name="Txn elong L3 rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="0.0" minimum="-4.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/lcap808_geo/tracks_log2_fwd/lcap_wt_l4_log2_fwd.bw" name="Txn elong L4 fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="4.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/lcap808_geo/tracks_log2_rev/lcap_wt_l4_log2_rev.bw" name="Txn elong L4 rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="0.0" minimum="-4.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/lcap808_geo/tracks_log2_fwd/lcap_wt_ya_log2_fwd.bw" name="Txn elong YA fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="4.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/lcap808_geo/tracks_log2_rev/lcap_wt_ya_log2_rev.bw" name="Txn elong YA rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="0.0" minimum="-4.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/scap815_geo/tracks_fwd/scap_wt_all_fwd.bw" name="Txn init fwd" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="322.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="178,0,0" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/scap815_geo/tracks_rev/scap_wt_all_rev.bw" name="Txn init rev" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.4E-45" minimum="-50.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/annot_Apr27/Fig2D2_regulatory_annotation_Apr27_ce10.bed" name="Regulatory annotation" renderer="BASIC_FEATURE" sortable="true" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/Users/jj374/relmapping/WS260_ce10/WS260_ce10.transcripts.annot.gtf.gz" name="Annotated genes" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+    </Panel>
+    <Panel height="20" name="FeaturePanel" width="1423">
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="Reference sequence" name="Reference sequence" sortable="false" visible="true"/>
+    </Panel>
+    <PanelLayout dividerFractions="0.9863842662632375"/>
+</Session>
