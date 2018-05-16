@@ -631,6 +631,10 @@ atac728_pe:
   atac728_wt_ya_rep2: HS168_crb55_N701-N503
 
 atac_cfp1_805:
+- HS097_Caro-I
+- HS097_Caro-J
+- HS097_Caro-K
+- HS097_Caro-L
 - HS322_crb55_EMB-JA33
 - HS322_crb55_EMB-JA33w
 - HS333_crb55_RC22
@@ -644,10 +648,8 @@ atac_cfp1_805:
 - HS588_ATAC_JA51_N2_L3
 - HS588_ATAC_JA52_cfp1_L3
 - HS588_ATAC_Wei_SM_L3
-- HS097_Caro-I
-- HS097_Caro-J
-- HS097_Caro-K
-- HS097_Caro-L
+- HS616_ATAC_JA49_N2
+- HS616_ATAC_JA50_cfp1
 
 atac_cfp1_804:
 - HS067_CG001
