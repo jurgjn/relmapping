@@ -5,8 +5,8 @@
 | Fig1S1B | chrII:6,369,500-6,380,000  | 600 x 780  |
 | Fig2S1D |                            |            |
 | Fig2S1E |                            |            |
-| Fig2S4B |                            |            |
-| Fig2S4C |                            |            |
-| Fig2S4D |                            |            |
+| Fig2S4B | chrIII:1,020,500-1,023,500 | 640 x 640  |
+| Fig2S4C | chrI:11,590,000-11,605,000 | 640 x 640  |
+| Fig2S4D | chrV:2,296,000-2,307,500   | 640 x 640  |
 
 Dimensions = what was shown by Shift-Command-4 on a Retina display, so double for actual pixels
