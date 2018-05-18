@@ -142,6 +142,10 @@ d_ucsc_ensembl = {
     'chrM':   'MtDNA',
 }
 
+def pct_(a, fmt='%.1f%%'):
+    pct_ = 100.0 * a / np.nansum(a)
+    return [fmt % (pct_i_,) for pct_i_ in pct_]
+
 def nanmean_pc(*args, **kwargs): return np.nanmean(*args, **kwargs) * 100.0
 
 def f_uk(x): return '{:,}'.format(x)
