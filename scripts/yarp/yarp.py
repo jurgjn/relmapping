@@ -151,6 +151,13 @@ def nanmean_pc(*args, **kwargs): return np.nanmean(*args, **kwargs) * 100.0
 def f_uk(x): return '{:,}'.format(x)
 def float_uk(s): return float(''.join(filter(lambda x: x in '0123456789.', s)))
 
+def is_gene_id(gene_id):
+    if gene_id != gene_id:
+        return False
+    elif gene_id == '.':
+        return False
+    else:
+        return True
 
 def rolling_mean_kernel(width): return np.ones(width) / float(width)
 f_mean50 = lambda y: np.convolve(y, rolling_mean_kernel(50), mode='same')
