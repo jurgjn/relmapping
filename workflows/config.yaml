@@ -688,6 +688,7 @@ atac_cfp1_804:
 
 atac:
 - HS298_JA26_N2_atac_S1
+- HS311_JA26_ATAC_S2
 - HS322_EMB_JA33_atac_S1
 - HS333_JA26_atac_S2
 - HS491_metset_ATAC_rep1
