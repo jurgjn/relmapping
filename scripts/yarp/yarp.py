@@ -489,8 +489,10 @@ def imshow_rpc(crosstab_, ax=None, cmap='viridis', row_labels=None, col_labels=N
     for ((y, x), c), ((yy, xx), p) in zip(np.ndenumerate(crosstab_), np.ndenumerate(rpc)):
         ax.text(x, y, '%d\n(%.1f%%)' % (c,p,), color='k', horizontalalignment='center', verticalalignment='center')
 
-def read_wbgtf(fp, parse_attr=[], *args, **kwargs):
+def read_wbgtf(fp, parse_attr=[], coords_adj=False, *args, **kwargs):
     df = pd.read_csv(fp, sep='\t', names=NAMES_GTF, comment='#', *args, **kwargs)
+    if coords_adj: # convert coordinates from GTF-style to BED-style
+        df['start'] = df['start'] - 1
     if parse_attr:
         return df_gfftags_unpack(df, name='attribute') # Does not preserve attribute order...
     else:
