@@ -408,9 +408,8 @@ def df_gfftags_pack(df, gfftags_col='name', keep_cols=['chrom', 'start', 'end', 
 def df_gfftags_unpack(df, name='name'):
     df_out = df.drop(name, 1)
     df_name = pd.DataFrame(df[name].apply(hts.parse_GFF_attribute_string).tolist())
-    df_name = df_name.convert_objects(convert_numeric=True)
     for col in df_name.columns:
-        df_out[col] = df_name[col]
+        df_out[col] = pd.to_numeric(df_name[col], errors='ignore', downcast='integer')
     return df_out
 
 def df_reorder_columns(df, l_head):
