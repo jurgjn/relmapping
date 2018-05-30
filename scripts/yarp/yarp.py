@@ -408,9 +408,8 @@ def df_gfftags_pack(df, gfftags_col='name', keep_cols=['chrom', 'start', 'end', 
 def df_gfftags_unpack(df, name='name'):
     df_out = df.drop(name, 1)
     df_name = pd.DataFrame(df[name].apply(hts.parse_GFF_attribute_string).tolist())
-    df_name = df_name.convert_objects(convert_numeric=True)
     for col in df_name.columns:
-        df_out[col] = df_name[col]
+        df_out[col] = pd.to_numeric(df_name[col], errors='ignore', downcast='integer')
     return df_out
 
 def df_reorder_columns(df, l_head):
@@ -490,8 +489,10 @@ def imshow_rpc(crosstab_, ax=None, cmap='viridis', row_labels=None, col_labels=N
     for ((y, x), c), ((yy, xx), p) in zip(np.ndenumerate(crosstab_), np.ndenumerate(rpc)):
         ax.text(x, y, '%d\n(%.1f%%)' % (c,p,), color='k', horizontalalignment='center', verticalalignment='center')
 
-def read_wbgtf(fp, parse_attr=[], *args, **kwargs):
+def read_wbgtf(fp, parse_attr=[], coords_adj=False, *args, **kwargs):
     df = pd.read_csv(fp, sep='\t', names=NAMES_GTF, comment='#', *args, **kwargs)
+    if coords_adj: # convert coordinates from GTF-style to BED-style
+        df['start'] = df['start'] - 1
     if parse_attr:
         return df_gfftags_unpack(df, name='attribute') # Does not preserve attribute order...
     else:
