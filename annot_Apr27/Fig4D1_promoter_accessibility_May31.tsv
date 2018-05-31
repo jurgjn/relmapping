@@ -1,3 +1,4 @@
+chrom	start	end	devel_cluster_label	ageing_cluster_label
 chrI	11272	11423	I1	stable
 chrI	26902	27053	I2	stable
 chrI	36018	36169	Mix8	stable
