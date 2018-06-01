@@ -313,6 +313,12 @@ rule atac814:
         # GEO -- fragment sizes
         expand(pf('atac814_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.fsizes', '.txt', 'atac814'), sample=config['atac814_pe'].keys()),
 
+rule atac814_ce11:
+    input:
+        expand(pf('atac814_{sample}', 'tg_pe.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_blacklist_ce11.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac814'), sample=config['stages_wt_rep']),
+        expand(pf('atac814_{sample}', 'tg_pe.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_blacklist_ce11.rm_q10.macs2_pe_lt300', '_treat_pileup.bw', 'atac814'), sample=config['stages_wt_rep']),
+        expand(pf('atac814_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'), sample=config['stages_rep']),
+
 rule atac814_mapq0:
     input:
         expand(pf('atac814_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac814'), sample=config['stages_wt_rep']),
