@@ -586,7 +586,7 @@ rule lcap808:
         # Mean across replicates
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_sfnorm.mean_by_stage', '.bw', 'lcap808'), bid=config['stages']),
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_sfnorm.mean_by_stage', '.bw', 'lcap808'), bid=config['stages']),
-        # normalise tracks by sizeFactors
+        # log2-scaled tracks
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_sfnorm.mean_by_stage.log2p', '.bw', 'lcap808'), bid=config['stages']),
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev_sfnorm.mean_by_stage.log2p', '.bw', 'lcap808'), bid=config['stages']),
         # GEO -- raw reads
@@ -610,3 +610,23 @@ rule lcap808:
         expand(pf('lcap808_{sample}', 'readlen_r2', '.txt', 'lcap808'), sample=list(config['lcap808'].keys())),
         # GEO -- fragment sizes for insert size stats
         expand(pf('lcap808_{sample}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.fsizes', '.txt', 'lcap808'), sample=list(config['lcap808'].keys())),
+
+rule lcap808_mapq0:
+    input:
+        # WS260_ce10 exon counts
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.htseq_counts', '.tsv', 'lcap808'), bid=config['stages_rep']),
+        # Startbp tracks for jump/incr tests
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.startbp_fwd', '.bw', 'lcap808'), bid=config['stages_rep']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.startbp_rev', '.bw', 'lcap808'), bid=config['stages_rep']),
+        # calculate sizeFactors from gene-level read counts using DESeq2
+        #pf('lcap808', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.sizefactors_lcap808', '_counts.tsv', 'lcap808'),
+        #pf('lcap808', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.sizefactors_lcap808', '_sizefactors.tsv', 'lcap808'),
+        # normalise tracks by sizeFactors
+        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.filled_fwd_sfnorm', '.bw', 'lcap808'), bid=config['stages_rep']),
+        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.filled_rev_sfnorm', '.bw', 'lcap808'), bid=config['stages_rep']),
+        # Mean across replicates
+        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.filled_fwd_sfnorm.mean_by_stage', '.bw', 'lcap808'), bid=config['stages']),
+        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.filled_rev_sfnorm.mean_by_stage', '.bw', 'lcap808'), bid=config['stages']),
+        # log2-scaled tracks
+        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.filled_fwd_sfnorm.mean_by_stage.log2p', '.bw', 'lcap808'), bid=config['stages']),
+        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.filled_rev_sfnorm.mean_by_stage.log2p', '.bw', 'lcap808'), bid=config['stages']),

@@ -615,3 +615,12 @@ rule scap815:
         expand('scap815_geo/tracks_rev/scap_{stage}_rev.bw', stage=config['stages_wt'] + ['wt_all']),
         # ce11
         expand(pf('scap815_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11', '.bam', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
+
+rule scap815_mapq0:
+    input:
+        pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.firstbp_fwd.gt0x2', '.bw', 'scap815'),
+        pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.firstbp_rev.gt0x2', '.bw', 'scap815'),
+        pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.firstbp_rev.gt0x2.neg', '.bw', 'scap815'),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.firstbp_fwd.gt0x2', '.bw', 'scap815'), stage=config['stages_wt']),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.firstbp_rev.gt0x2', '.bw', 'scap815'), stage=config['stages_wt']),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.firstbp_rev.gt0x2.neg', '.bw', 'scap815'), stage=config['stages_wt']),
