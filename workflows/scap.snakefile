@@ -613,3 +613,5 @@ rule scap815:
         # GEO submission -- coverage tracks
         expand('scap815_geo/tracks_fwd/scap_{stage}_fwd.bw', stage=config['stages_wt'] + ['wt_all']),
         expand('scap815_geo/tracks_rev/scap_{stage}_rev.bw', stage=config['stages_wt'] + ['wt_all']),
+        # ce11
+        expand(pf('scap815_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11', '.bam', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
