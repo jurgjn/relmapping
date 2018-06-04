@@ -1,0 +1,52 @@
+#!/usr/bin/env ipython
+'''
+bigWiggleTools -- naive wrapper around wiggletools (https://github.com/Ensembl/WiggleTools) 
+that automatically converts output to bigWig.
+'''
+
+import os
+import sys
+import tempfile
+
+wt_cmd = sys.argv[1]
+fp_out = sys.argv[2]
+fp_tmp_chroms = tempfile.mktemp(suffix='.tmp.chroms', 
+    prefix=os.path.basename(fp_out), dir=os.path.dirname(fp_out))
+
+if wt_cmd == 'write':
+    fp_tmp_wtools = tempfile.mktemp(suffix='.tmp.wig', 
+        prefix=os.path.basename(fp_out), dir=os.path.dirname(fp_out))
+elif wt_cmd == 'write_bg':
+    fp_tmp_wtools = tempfile.mktemp(suffix='.tmp.bedGraph', 
+        prefix=os.path.basename(fp_out), dir=os.path.dirname(fp_out))
+else:
+    assert False, 'wt_cmd should be write or write_bg'
+
+print('wt_cmd=%s' % (wt_cmd,))
+print('fp_out=%s' % (fp_out,))
+
+print('fp_tmp_chroms=%s' % (fp_tmp_chroms,))
+fp_chroms_template = sys.argv[-1] # Use last argument -- likely to be one of the input files as template for chroms
+
+print('fp_chroms_template=%s' % (fp_chroms_template,))
+assert os.path.isfile(fp_chroms_template)
+!bigWigInfo -chroms {fp_chroms_template} | grep '^[[:space:]]' | awk -v OFS='\t' '{{print $$1,$$3}}' > {fp_tmp_chroms}
+!sort -k1,1 -o {fp_tmp_chroms} {fp_tmp_chroms} # UCSC .chroms-files appear to be sorted by chrom...
+!head {fp_tmp_chroms}
+print()
+
+print('fp_tmp_wtools=%s' % (fp_tmp_wtools,))
+cmd = ' '.join(['wiggletools', wt_cmd, fp_tmp_wtools] + sys.argv[3:])
+print('wiggletools: ' + cmd)
+!{cmd}
+
+if wt_cmd == 'write':
+    #!wigToBigWig -clip {fp_tmp_wtools} {fp_tmp_chroms} {fp_out}
+    !wigToBigWig -clip {fp_tmp_wtools} shared/ce11.chroms {fp_out}    
+else:
+    !sort -k1,1 -k2,2n -o {fp_tmp_wtools} {fp_tmp_wtools}
+    #!bedGraphToBigWig {fp_tmp_wtools} {fp_tmp_chroms} {fp_out}
+    !bedGraphToBigWig {fp_tmp_wtools} shared/ce11.chroms {fp_out}
+
+!rm {fp_tmp_wtools}
+!rm {fp_tmp_chroms}

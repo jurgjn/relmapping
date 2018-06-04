@@ -265,6 +265,16 @@ rule atac814_tracks:
         scripts/bigWiggleTools.ipy write {output[0]} scale 0.1 bin 10 mean {input[0]} {input[1]}
         '''
 
+rule atac814_tracks_ce11:
+    input:
+        pf('atac814_{sample}_rep1', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'),
+        pf('atac814_{sample}_rep2', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'),
+    output:
+        'atac814_geo/tracks_ce11/atac_{sample}_ce11.bw',
+    shell: '''
+        scripts/bigWiggleTools_ce11.ipy write {output[0]} scale 0.1 bin 10 mean {input[0]} {input[1]}
+        '''
+
 rule atac814_alignments:
     input:
         pf('atac814_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10', '.bam', 'atac814'),
@@ -318,6 +328,8 @@ rule atac814_ce11:
         expand(pf('atac814_{sample}', 'tg_pe.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_blacklist_ce11.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac814'), sample=config['stages_wt_rep']),
         expand(pf('atac814_{sample}', 'tg_pe.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_blacklist_ce11.rm_q10.macs2_pe_lt300', '_treat_pileup.bw', 'atac814'), sample=config['stages_wt_rep']),
         expand(pf('atac814_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'), sample=config['stages_rep']),
+        # ce11 stage-specific coverage tracks
+        expand('atac814_geo/tracks_ce11/atac_{sample}_ce11.bw', sample=config['stages']),
 
 rule atac814_mapq0:
     input:
