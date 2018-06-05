@@ -613,8 +613,15 @@ rule scap815:
         # GEO submission -- coverage tracks
         expand('scap815_geo/tracks_fwd/scap_{stage}_fwd.bw', stage=config['stages_wt'] + ['wt_all']),
         expand('scap815_geo/tracks_rev/scap_{stage}_rev.bw', stage=config['stages_wt'] + ['wt_all']),
-        # ce11
-        expand(pf('scap815_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11', '.bam', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
+
+rule scap815_ce11:
+    input:
+        expand(pf('scap815_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_fwd', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
+        expand(pf('scap815_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_rev', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
+        expand(pf('scap815_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.c', '.txt', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_fwd.sum_by_stage', '.bw', 'scap815'), stage=config['stages_wt']),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_rev.sum_by_stage', '.bw', 'scap815'), stage=config['stages_wt']),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_rev.sum_by_stage.neg', '.bw', 'scap815'), stage=config['stages_wt']),
 
 rule scap815_mapq0:
     input:

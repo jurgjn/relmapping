@@ -24,6 +24,15 @@ rule scap_rm_non_coding:
     shell:
         'samtools view -b -L WS260_ce10/WS260_ce10.transcripts.non_coding.bed -U {output} {input[0]} > /dev/null'
 
+rule scap_rm_non_coding_ce11:
+    input:
+        pf('{bid}', '{step}', '.bam', '{prefix}'),
+        pf('{bid}', '{step}', '.bam.bai', '{prefix}'),
+    output:
+        pf('{bid}', '{step}.rm_non_coding_ce11', '.bam', '{prefix}'),
+    shell:
+        'samtools view -b -L annot_ce11/canonical_geneset/WS260_ce11.transcripts.non_coding.bed -U {output} {input[0]} > /dev/null'
+
 rule scap_rm_non_coding_browse:
     input:
         expand(pf('{bid}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.firstbp_fwd', '.bw', 'scap'), bid=['scap541_emb_l3_ya']),
