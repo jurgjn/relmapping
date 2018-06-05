@@ -44,6 +44,32 @@ rule firstbp_rev_scap:
         bedGraphToBigWig {output[0]} {params.ce10_chroms} {output[1]}
         '''
 
+rule firstbp_fwd_ce11_scap:
+    input: pf('{bid}', '{step}', '.bam', '{prefix}')
+    output:
+        temp(pf('{bid}', '{step}.firstbp_fwd_ce11', '.tmp', '{prefix}')),
+        pf('{bid}', '{step}.firstbp_fwd_ce11', '.bw', '{prefix}'),
+    params: ce11_chroms='shared/ce11.chroms'
+    shell:
+        '''
+        samtools view -b {input} | bedtools genomecov -ibam stdin -bga -5 -strand + > {output[0]}
+        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        bedGraphToBigWig {output[0]} {params.ce11_chroms} {output[1]}
+        '''
+
+rule firstbp_rev_ce11_scap:
+    input: pf('{bid}', '{step}', '.bam', '{prefix}')
+    output:
+        temp(pf('{bid}', '{step}.firstbp_rev_ce11', '.tmp', '{prefix}')),
+        pf('{bid}', '{step}.firstbp_rev_ce11', '.bw', '{prefix}'),
+    params: ce11_chroms='shared/ce11.chroms'
+    shell:
+        '''
+        samtools view -b {input} | bedtools genomecov -ibam stdin -bga -5 -strand - > {output[0]}
+        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        bedGraphToBigWig {output[0]} {params.ce11_chroms} {output[1]}
+        '''
+
 rule bw_neg:
     input:
         pf('{bid}', '{step}', '.bw', '{prefix}'),
@@ -616,12 +642,8 @@ rule scap815:
 
 rule scap815_ce11:
     input:
-        expand(pf('scap815_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_fwd', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
-        expand(pf('scap815_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_rev', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
-        expand(pf('scap815_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.c', '.txt', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
-        expand(pf('scap815_{stage}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_fwd.sum_by_stage', '.bw', 'scap815'), stage=config['stages_wt']),
-        expand(pf('scap815_{stage}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_rev.sum_by_stage', '.bw', 'scap815'), stage=config['stages_wt']),
-        expand(pf('scap815_{stage}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_rev.sum_by_stage.neg', '.bw', 'scap815'), stage=config['stages_wt']),
+        expand(pf('scap815_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_fwd_ce11', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
+        expand(pf('scap815_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_rev_ce11', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
 
 rule scap815_mapq0:
     input:
