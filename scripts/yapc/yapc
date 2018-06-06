@@ -1,0 +1,302 @@
+#!/usr/bin/env python
+
+'''
+This is a generic "peak caller" for ATAC/DNase/MNase/ChIP genomic HTS data.
+It finds regions of concave curvature as defined by the sign of the (heavily
+smoothed) second derivative (a well-known classic approach from signal processing).
+It works well in situations where peaks have a characteristic width, and was
+written with the aim of "post-processing" peak calls from a statistical caller
+(MACS2) in order to separate neighbouring peaks that are incorrectly
+identified as a single peak by the statistical approach.
+1. Call peaks using MACS2
+2. Call concave regions using concavePeaks:
+    concavePeaks ChIP_track.bw > ChIP_track.bed
+3. Discard concave regions that do not overlap a MACS2 peak (e.g. bedtools subtract)
+4. Filter peaks by the "curvature index" (column 5 in the output) to remove
+visually non-compelling noise.
+Usage: concavePeaks [--fill] [-w <width>] [-m <smtime>] <input>
+Options:
+    --fill          fill gaps with average values from flanking bp
+    -w <width>      smooth window width in bp [default: 150]
+    -m <smtime>     apply smoothing this number of times [default: 3]
+    <input>         input bigwig
+- It may is possible to use concave regions directly as IDR input, ranking
+concave regions by the "curvature index". The "curvature index" is dependant
+both on the shape as well as the height of a peak, and is generally unique to
+a peak (=very few tied ranks which is good for the IDR model). In addition,
+concave regions by default contain sensible as well as very weak peaks, which is
+again required for IDR analysis.
+- The method finds a very large number of (raw) peaks. This high sensitivity is 
+useful for simultaneously identifying representative peaks in multiple conditions
+(such as developmental time series data).
+- The method is sensitive to the choice of the smoothing window. It could, in theory,
+be further improved by utilising multiple windows (and wavelets), as has been previously 
+done for mass spectrometry data in ([Du et al 2006](https://doi.org/10.1093/bioinformatics/btl355)).
+'''
+
+from __future__ import division
+from __future__ import print_function
+from builtins import range
+#from future.utils import iteritems
+import sys
+import itertools
+import signal
+import logging
+signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s; %(levelname)s; %(funcName)s; %(message)s',
+        datefmt='%y-%m-%d %H:%M:%S')
+import numpy as np
+import pyBigWig
+import os
+import collections
+import csv
+import pandas as pd
+from pprint import pprint
+
+"""
+Eight-order approximation centered at grid point derived from:
+    Fornberg, Bengt (1988), "Generation of Finite Difference Formulas on Arbitrarily Spaced Grids",
+        Mathematics of Computation 51 (184): 699-706, doi:10.1090/S0025-5718-1988-0935077-0
+"""
+def prepare_second_derivative_kernel(width, times):
+    kernel = np.array([-1.0/560, 8.0/315, -1.0/5, 8.0/5, -205.0/72, 8.0/5, -1.0/5, 8.0/315, -1.0/560])
+    rolling_mean_kernel = np.ones(width)/float(width)
+    for i in range(times):
+        kernel = np.convolve(kernel, rolling_mean_kernel)
+    return 1e6*kernel[::-1]
+
+def fill_gap(y):
+    y[np.isnan(y)] = 0
+    s = np.where(np.diff(y) < 0)[0] + 1
+    e = np.where(np.diff(y) > 0)[0] + 1
+    if s[0] > e[0]:
+        e = e[1:]
+    if s[-1] > e[-1]:
+        s = s[0:(len(s)-1)]
+    for i,j in zip(s,e):
+        y[i:j] = (y[i-1]+y[j])/2
+    return y
+
+def pairwise(it):
+    # https://stackoverflow.com/questions/5389507/iterating-over-every-two-elements-in-a-list/5389547
+    it = iter(it)
+    while True:
+        yield next(it), next(it)
+
+def is_bw(fp):
+    with pyBigWig.open(fp) as fh:
+        f = fh.isBigWig()
+    return f
+
+def makedirsp(fp):
+    try:
+        os.makedirs(fp)
+    except:
+        if not(os.path.isdir(fp)):
+            raise
+
+def coverage(l_fp_inp, fp_out):
+    print('calculating mean of all input signal:')
+    l_fh_inp = [pyBigWig.open(fp_inp) for fp_inp in l_fp_inp]
+    assert pyBigWig.numpy == 1
+    assert all([fh_inp.isBigWig() for fh_inp in l_fh_inp])
+
+    fh_out = pyBigWig.open(fp_out, 'w')
+    fh_out.addHeader([(chrom, size) for (chrom, size) in l_fh_inp[0].chroms().items()])
+
+    for chrom, size in itertools.islice(l_fh_inp[0].chroms().items(), None):
+        l_val = []
+        print(chrom, size)
+        for fh_inp in l_fh_inp:
+            l_val.append(fill_gap(fh_inp.values(chrom, 0, size, numpy=True)))
+        fh_out.addEntries(chrom, 0, values=np.mean(l_val, axis=0), span=1, step=1)
+
+    # Close files
+    for fh_inp in l_fh_inp:
+        fh_inp.close()
+    fh_out.close()
+
+def d2smooth(fp_inp, fp_out):
+    fh_inp = pyBigWig.open(fp_inp) 
+    fh_out = pyBigWig.open(fp_out, 'w')
+    fh_out.addHeader([(chrom, size) for (chrom, size) in fh_inp.chroms().items()])
+
+    for chrom, size in itertools.islice(fh_inp.chroms().items(), None):
+        print(chrom, size)
+        val = fh_inp.values(chrom, 0, size, numpy=True)
+        kernel = prepare_second_derivative_kernel(75, 3)
+        val_d2 = np.convolve(val, kernel, mode='same')
+        fh_out.addEntries(chrom, 0, values=val_d2, span=1, step=1)
+
+    fh_inp.close()
+    fh_out.close()
+
+def write_gffbed(fp,
+                 chrom, start, end, name='', attr=None, score=0, strand='.', 
+                 thickStart=None, thickEnd=None, itemRgb='#0072b2', 
+                 trackline='#track gffTags=on', v=False):
+    df = pd.DataFrame()
+    def force_iter(l_):
+        try:
+            l = list(l_)
+            if (len(l) > 1) and not(type(l_) is str):
+                return l
+            else:
+                return list(itertools.repeat(l_, len(df)))
+        except TypeError:
+            return list(itertools.repeat(l_, len(df)))
+    #return list(l) if hasattr(l, '__iter__') else list(itertools.repeat(l, len(df)))
+    df['chrom'] = list(chrom)
+    df['start'] = force_iter(start)
+    df['end'] = force_iter(end)
+    def pack_row(ir): return (";".join([("%s=%s" % (k, v)).replace(" ", "%20") for k, v in zip(ir[1].index, ir[1])]))
+    attr_ = pd.concat([pd.DataFrame({'Name': force_iter(name)}), attr], axis=1)
+    df['name'] = list(map(pack_row, attr_.iterrows()))
+    df['score'] = force_iter(score)
+    df['strand'] = force_iter(strand)
+
+    if not(thickStart is None):
+        df['thickStart'] = force_iter(thickStart)       
+    else:
+        df['thickStart'] = df['start'].copy().tolist()
+
+    if not(thickEnd is None):
+        df['thickEnd'] = force_iter(thickEnd)
+    else:
+        df['thickEnd'] = df['end'].copy().tolist()
+
+    df['itemRgb'] = force_iter(itemRgb)
+    with open(fp, 'w') as fh:
+        print(trackline, file=fh)
+        df.sort_values(['chrom', 'start', 'end']).to_csv(fh, sep='\t', index=False, header=False, quoting=csv.QUOTE_NONE)
+    if v: return df
+
+# https://doi.org/10.1101/gr.153668.112
+# For analyses where a single TSS position was required, we considered the distribution of cap 5' ends 
+# within the TIC, and selected the position with the most tags (the mode). In the case of a tie (two or more 
+# positions with the same number of tags), we selected the mode closest to the median of the TIC.
+def nanargmax_median(a):
+    a_max = np.nanmax(a)
+    a_max_indices = np.flatnonzero(a == a_max)
+    if len(a_max_indices) == 0:
+        return 0
+    return a_max_indices[len(a_max_indices) // 2]
+
+assert nanargmax_median([1,2,3,3,3,2,1]) == 3
+assert nanargmax_median([1,2,2,1]) == 2
+assert nanargmax_median([1]) == 0
+
+def find_concave_regions_chrom(d2y, chrom='.', tol=1e-10):
+    s = np.where(np.diff((d2y < tol).astype(int))==1)[0] + 1
+    e = np.where(np.diff((d2y < tol).astype(int))==-1)[0] + 1
+    if s[0] > e[0]:
+        s = np.insert(s, 0, 0)
+    if s[-1] > e[-1]:
+        e = np.insert(e, len(e), len(d2y))
+    v = [-np.mean(d2y[i:j]) for i,j in zip(s,e)]
+    m = [i + nanargmax_median(-d2y[i:j]) for i,j in zip(s,e)]
+
+    df_regions = pd.DataFrame(collections.OrderedDict([
+        ('chrom', [chrom]*len(s)),
+        ('concave_start', s),
+        ('concave_end', e),
+        #('val', v),
+        ('mode', m),
+    ]))
+
+    print('%d raw concave regions on chrom %s' % (len(df_regions), chrom))
+    return df_regions
+
+def find_concave_regions(fp_inp, fp_out_tsv, fp_out_bed, min_width=75):
+    fh_inp = pyBigWig.open(fp_inp) 
+    df_regions = pd.concat([
+        find_concave_regions_chrom(d2y=fh_inp.values(chrom, 0, size, numpy=True), chrom=chrom)
+        for chrom, size in itertools.islice(fh_inp.chroms().items(), None)], axis=0, ignore_index=True)
+    fh_inp.close()
+    
+    print('%d peaks total' % (len(df_regions),))
+    df_regions = df_regions.query('(concave_end - concave_start) >= @min_width')
+    print('%d peaks after filtering for discarding peaks (min_width=%d)' % (len(df_regions), min_width))
+
+    write_gffbed(fp_out_bed,
+        chrom = df_regions['chrom'],
+        start = df_regions['concave_start'],
+        end = df_regions['concave_end'],
+        thickStart = df_regions['mode'],
+        thickEnd = df_regions['mode'] + 1,
+    )
+
+"""
+~/repos/yapc/yapc \
+  wt_emb_rep1 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_emb_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_emb_rep2 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_emb_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_l1_rep1 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l1_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_l1_rep2 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l1_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_l2_rep1 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l2_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_l2_rep2 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l2_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_l3_rep1 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l3_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_l3_rep2 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l3_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_l4_rep1 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l4_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_l4_rep2 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l4_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_ya_rep1 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_ya_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_ya_rep2 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_ya_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+             atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.yapc/atac814_wt_pe.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.yapc
+"""
+if __name__ == '__main__':
+    l_inp = sys.argv[1:-1]
+
+    #d_label_fp = collections.OrderedDict([*pairwise(l_inp)])
+    #for (label, fp) in d_label_fp.items():
+    #pprint(d_label_fp)
+
+    # Make output directory + intermediate directories if necessary
+    prefix_out = sys.argv[-1]
+    makedirsp(os.path.split(prefix_out)[0])
+
+    df = pd.DataFrame.from_records([*pairwise(l_inp)], columns=['sample', 'fp'])
+    df['is_bw'] = df['fp'].map(is_bw)
+    print('Sample sheet:')
+    print(df)
+    print()
+    #print(df.to_string(formatters={'sample': str, 'fp': str, 'is_bw': str}))
+
+    # fp_coverage
+    fp_coverage = prefix_out + '_coverage.bw'
+    if not(os.path.isfile(fp_coverage)):
+        coverage(df['fp'].tolist(), fp_coverage)
+    else:
+        assert is_bw(fp_coverage)
+        print('Recycling existing coverage track: %s' % (fp_coverage,))
+
+    # fp_d2smooth
+    fp_d2smooth = prefix_out + '_d2smooth.bw'
+    if not(os.path.isfile(fp_d2smooth)):
+        print('Calculating d2smooth: %s' % (fp_d2smooth,))
+        d2smooth(fp_coverage, fp_d2smooth)
+    else:
+        assert is_bw(fp_d2smooth)
+        print('Recycling existing d2smooth track: %s' % (fp_d2smooth,))
+
+    # fp_peaksall -- all raw peaks, scored by D2
+    fp_peaksall_tsv = prefix_out + '_peaksall.tsv'
+    fp_peaksall_bed = prefix_out + '_peaksall.bed'
+    find_concave_regions(fp_d2smooth, fp_peaksall_tsv, fp_peaksall_bed)
+
+    #fp_peaksall_bed = prefix_out + '_peaksall.bed'
+
+    #fp_peaksidr_wt_emb -- IDR peaks, scored by IDR
+    #fp_peaksidr_wt_ya -- IDR peaks, scored by IDR
+
+    # fp_peaksidr -- IDR peaks, scored by IDR
+
+    #print(os.path.commonprefix(l_fp_inp))
+    #from docopt import docopt
+    #args = docopt(__doc__)
+    #args = {k.lstrip('-<').rstrip('>'):args[k] for k in args}
+    #try:
+    #    main(args)
+    #except KeyboardInterrupt:
+    #    logging.warning('Interrupted')
+    #    sys.exit(1)
