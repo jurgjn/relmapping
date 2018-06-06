@@ -78,6 +78,14 @@ rule bw_neg:
     shell:
         'scripts/bigWiggleTools.ipy write_bg {output} "scale -1" {input}'
 
+rule bw_neg_ce11:
+    input:
+        pf('{bid}', '{step}', '.bw', '{prefix}'),
+    output:
+        pf('{bid}', '{step}.neg_ce11', '.bw', '{prefix}'),
+    shell:
+        'scripts/bigWiggleTools_ce11.ipy write_bg {output} "scale -1" {input}'
+
 rule keep:
     input:
         pf('{bid}', '{step}', '.bam', '{prefix}'),
@@ -474,6 +482,16 @@ rule scap815_sum_by_stage:
         scripts/bigWiggleTools.ipy write_bg {output[0]} sum {input[0]} {input[1]}
     '''
 
+rule scap815_sum_by_stage_ce11:
+    input:
+        pf('scap815_{stage}_rep1', '{step}', '.bw', 'scap815'),
+        pf('scap815_{stage}_rep2', '{step}', '.bw', 'scap815'),
+    output:
+        pf('scap815_{stage}', '{step}.sum_by_stage_ce11', '.bw', 'scap815'),
+    shell: '''
+        scripts/bigWiggleTools_ce11.ipy write_bg {output[0]} sum {input[0]} {input[1]}
+    '''
+
 rule scap815_gt0x2_all:
     input:
         expand(pf('scap815_{stage}', '{{step}}', '.bw', 'scap815'), stage=config['stages_wt_rep_scap815']),
@@ -485,6 +503,19 @@ rule scap815_gt0x2_all:
         scripts/bigWiggleTools.ipy write_bg {output[0]} sum {input[0]} {input[1]} {input[2]} {input[3]} {input[4]} {input[5]} {input[6]} {input[7]} {input[8]} {input[9]} {input[10]} {input[11]} {input[12]} {input[13]}
         scripts/bigWiggleTools.ipy write_bg {output[1]} sum gt 0 {input[0]} gt 0 {input[1]} gt 0 {input[2]} gt 0 {input[3]} gt 0 {input[4]} gt 0 {input[5]} gt 0 {input[6]} gt 0 {input[7]} gt 0 {input[8]} gt 0 {input[9]} gt 0 {input[10]} gt 0 {input[11]} gt 0 {input[12]} gt 0 {input[13]}
         scripts/bigWiggleTools.ipy write_bg {output[2]} mult {output[0]} gt 1 {output[1]}
+    '''
+
+rule scap815_gt0x2_all_ce11:
+    input:
+        expand(pf('scap815_{stage}', '{{step}}', '.bw', 'scap815'), stage=config['stages_wt_rep_scap815']),
+    output:
+        pf('scap815_wt_all', '{step}.gt0x2_ce11', '_sum.bw', 'scap815'), # sum of signal across all replicates
+        pf('scap815_wt_all', '{step}.gt0x2_ce11', '_gt0_count.bw', 'scap815'), # number of replicates with non-zero signal
+        pf('scap815_wt_all', '{step}.gt0x2_ce11', '.bw', 'scap815'), # summed signal from base pairs with non-zero coverage in at least two replicates
+    shell: '''
+        scripts/bigWiggleTools_ce11.ipy write_bg {output[0]} sum {input[0]} {input[1]} {input[2]} {input[3]} {input[4]} {input[5]} {input[6]} {input[7]} {input[8]} {input[9]} {input[10]} {input[11]} {input[12]} {input[13]}
+        scripts/bigWiggleTools_ce11.ipy write_bg {output[1]} sum gt 0 {input[0]} gt 0 {input[1]} gt 0 {input[2]} gt 0 {input[3]} gt 0 {input[4]} gt 0 {input[5]} gt 0 {input[6]} gt 0 {input[7]} gt 0 {input[8]} gt 0 {input[9]} gt 0 {input[10]} gt 0 {input[11]} gt 0 {input[12]} gt 0 {input[13]}
+        scripts/bigWiggleTools_ce11.ipy write_bg {output[2]} mult {output[0]} gt 1 {output[1]}
     '''
 
 rule scap815_gt0x2_emb:
@@ -598,6 +629,28 @@ rule scap815_rev:
         touch -h `pwd`/{output}
         '''
 
+rule scap815_fwd_ce11:
+    input:
+        pf('scap815_{stage}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_fwd_ce11.sum_by_stage_ce11', '.bw', 'scap815'),
+    output:
+        'scap815_geo/tracks_ce11_fwd/scap_{stage}_ce11_fwd.bw'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule scap815_rev_ce11:
+    input:
+        pf('scap815_{stage}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_rev_ce11.sum_by_stage_ce11.neg_ce11', '.bw', 'scap815'),
+    output:
+        'scap815_geo/tracks_ce11_rev/scap_{stage}_ce11_rev.bw'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
 rule scap815_all_fwd:
     input:
         pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_fwd.gt0x2', '.bw', 'scap815'),
@@ -614,6 +667,28 @@ rule scap815_all_rev:
         pf('scap815_wt_all', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.rm_q10.firstbp_rev.gt0x2.neg', '.bw', 'scap815'),
     output:
         'scap815_geo/tracks_rev/scap_wt_all_rev.bw'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule scap815_all_ce11_fwd:
+    input:
+        pf('scap815_wt_all', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_fwd_ce11.gt0x2_ce11', '.bw', 'scap815'),
+    output:
+        'scap815_geo/tracks_ce11_fwd/scap_wt_all_ce11_fwd.bw'
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule scap815_all_ce11_rev:
+    input:
+        pf('scap815_wt_all', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_rev_ce11.gt0x2_ce11.neg_ce11', '.bw', 'scap815'),
+    output:
+        'scap815_geo/tracks_ce11_rev/scap_wt_all_ce11_rev.bw'
     shell:
         '''
         ln -s `pwd`/{input} `pwd`/{output}
@@ -644,6 +719,15 @@ rule scap815_ce11:
     input:
         expand(pf('scap815_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_fwd_ce11', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
         expand(pf('scap815_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_rev_ce11', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),
+        pf('scap815_wt_all', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_fwd_ce11.gt0x2_ce11', '.bw', 'scap815'),
+        pf('scap815_wt_all', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_rev_ce11.gt0x2_ce11', '.bw', 'scap815'),
+        pf('scap815_wt_all', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_rev_ce11.gt0x2_ce11.neg_ce11', '.bw', 'scap815'),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_fwd_ce11.sum_by_stage_ce11', '.bw', 'scap815'), stage=config['stages_wt']),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_rev_ce11.sum_by_stage_ce11', '.bw', 'scap815'), stage=config['stages_wt']),
+        expand(pf('scap815_{stage}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_rev_ce11.sum_by_stage_ce11.neg_ce11', '.bw', 'scap815'), stage=config['stages_wt']),
+        # GEO submission -- coverage tracks
+        expand('scap815_geo/tracks_ce11_fwd/scap_{stage}_ce11_fwd.bw', stage=config['stages_wt'] + ['wt_all']),
+        expand('scap815_geo/tracks_ce11_rev/scap_{stage}_ce11_rev.bw', stage=config['stages_wt'] + ['wt_all']),
 
 rule scap815_mapq0:
     input:
