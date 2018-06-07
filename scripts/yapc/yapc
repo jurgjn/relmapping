@@ -52,6 +52,7 @@ import pyBigWig
 import os
 import collections
 import csv
+import math
 import pandas as pd
 from pprint import pprint
 
@@ -110,7 +111,10 @@ def coverage(l_fp_inp, fp_out):
         l_val = []
         print(chrom, size)
         for fh_inp in l_fh_inp:
-            l_val.append(fill_gap(fh_inp.values(chrom, 0, size, numpy=True)))
+            #val = fill_gap(fh_inp.values(chrom, 0, size, numpy=True)) # This is doing something else.
+            val = fh_inp.values(chrom, 0, size, numpy=True)
+            #print(val.shape)
+            l_val.append(val)
         fh_out.addEntries(chrom, 0, values=np.mean(l_val, axis=0), span=1, step=1)
 
     # Close files
@@ -217,9 +221,10 @@ def find_concave_regions(fp_inp, fp_out_tsv, fp_out_bed, min_width=75):
     fh_inp.close()
     
     print('%d peaks total' % (len(df_regions),))
-    df_regions = df_regions.query('(concave_end - concave_start) >= @min_width')
-    print('%d peaks after filtering for discarding peaks (min_width=%d)' % (len(df_regions), min_width))
+    df_regions = df_regions.query('(concave_end - concave_start) >= @min_width').reset_index(drop=True)
+    print('%d peaks after discarding narrow concave regions (min_width=%d)' % (len(df_regions), min_width))
 
+    """
     write_gffbed(fp_out_bed,
         chrom = df_regions['chrom'],
         start = df_regions['concave_start'],
@@ -227,40 +232,120 @@ def find_concave_regions(fp_inp, fp_out_tsv, fp_out_bed, min_width=75):
         thickStart = df_regions['mode'],
         thickEnd = df_regions['mode'] + 1,
     )
+    """
+
+    return df_regions
+
+def read_regions(fp, chroms, starts, ends, v=False):
+    assert os.path.isfile(fp)
+    n_clip = 0
+    fh = pyBigWig.open(fp)
+    for chrom, start_, end_ in zip(chroms, starts, ends):
+        # fixes pyBigWig -- RuntimeError: You must supply a chromosome, start and end position.
+        start = int(start_)
+        end = int(end_)
+
+        # Clip region if necessary
+        if (0 <= start) and (end < fh.chroms(chrom)):
+            r = fh.values(chrom, start, end)#, numpy=True)
+        else:
+            r = np.zeros(end - start) # Should get the partial signal
+            n_clip += 1
+
+        yield np.array(r)
+    fh.close()
+    if v: print(n_clip, 'clipped regions')
+
+#df = pd.read_csv(input[0], sep='\t', names=['chrom', 'start', 'end', 'name', 'score', 'strand'])
+#        df['score'] = list(map(lambda x: -x, read_regions(input[1], df.chrom, map(int, df.start), map(int, df.end), np.mean)))
+#        #df['score'] = list(map(lambda x: -x, read_regions(input[1], df.chrom, map(int, df.start), map(int, df.end), np.min)))
+#        df.to_csv(output[0], header=False, index=False, sep='\t')
+def score(fp_inp, chroms, starts, ends):
+    kernel = prepare_second_derivative_kernel(75, 3)
+    fh_inp = pyBigWig.open(fp_inp)
+
+    d_chrom_d2smooth = {}
+    for chrom, size in itertools.islice(fh_inp.chroms().items(), None):
+        #print(chrom)
+        val = fh_inp.values(chrom, 0, size, numpy=True)
+        val_d2 = np.convolve(val, kernel, mode='same')
+        d_chrom_d2smooth[chrom] = val_d2
+
+    for chrom, start, end in zip(chroms, starts, ends):
+        yield -np.mean(d_chrom_d2smooth[chrom][start:end])
+
+def run_idr(chroms, starts, ends, scores_rep1, scores_rep2, prefix_out, condition):
+    fp_rep1 = prefix_out + '_peaksidr_%(condition)s_rep1.bed' % locals()
+    fp_rep2 = prefix_out + '_peaksidr_%(condition)s_rep2.bed' % locals()
+    fp_iout = prefix_out + '_peaksidr_%(condition)s.bed' % locals()
+
+    df_ = pd.DataFrame()
+    df_['chrom'] = chroms
+    df_['start'] = starts
+    df_['end'] = ends
+    df_['name'] = '.'
+    df_['score_rep1'] = scores_rep1.clip(lower=0)
+    df_['score_rep2'] = scores_rep2.clip(lower=0)
+    df_['strand'] = '.'
+
+    #https://github.com/nboley/idr/blob/74665e73bffb689a440948640c386b1188eea1e3/idr/idr.py#L64
+    df_['col6'] = 0#float('nan') # signalValue
+    df_['col7'] = 0#float('nan') # pValue
+    df_['col8'] = 0#float('nan') # qValue
+
+    df_[['chrom', 'start', 'end', 'name', 'score_rep1', 'strand', 'col6', 'col7', 'col8']].to_csv(fp_rep1, header=False, index=False, sep='\t')
+    df_[['chrom', 'start', 'end', 'name', 'score_rep2', 'strand', 'col6', 'col7', 'col8']].to_csv(fp_rep2, header=False, index=False, sep='\t')
+
+    idr_args = '--input-file-type bed --rank score --peak-merge-method max'
+    idr_cmd = 'idr %(idr_args)s --samples %(fp_rep1)s %(fp_rep2)s --output-file %(fp_iout)s' % locals()
+    print('Running idr on %(condition)s:' % locals())
+    print(idr_cmd)
+    os.system(idr_cmd)
+
+def parse_inp(l_inp):
+    l_records = []
+    l_conditions = l_inp[0::3]
+    l_fp_rep1 = l_inp[1::3]
+    l_fp_rep2 = l_inp[2::3]
+    for (condition, fp_rep1, fp_rep2) in zip(l_conditions, l_fp_rep1, l_fp_rep2):
+        l_records.append([condition, condition + '_rep1', fp_rep1])
+        l_records.append([condition, condition + '_rep2', fp_rep2])
+    return pd.DataFrame.from_records(l_records, columns=['condition', 'sample', 'fp'])
 
 """
-~/repos/yapc/yapc \
-  wt_emb_rep1 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_emb_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
-  wt_emb_rep2 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_emb_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
-  wt_l1_rep1 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l1_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
-  wt_l1_rep2 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l1_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
-  wt_l2_rep1 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l2_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
-  wt_l2_rep2 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l2_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
-  wt_l3_rep1 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l3_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
-  wt_l3_rep2 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l3_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
-  wt_l4_rep1 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l4_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
-  wt_l4_rep2 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l4_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
-  wt_ya_rep1 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_ya_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
-  wt_ya_rep2 atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_ya_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
-             atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.yapc/atac814_wt_pe.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.yapc
+scripts/yapc/yapc \
+  wt_emb \
+    atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_emb_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+    atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_emb_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_l1 \
+    atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l1_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+    atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l1_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_l2 \
+    atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l2_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+    atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l2_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_l3 \
+    atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l3_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+    atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l3_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_l4 \
+    atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l4_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+    atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_l4_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  wt_ya \
+    atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_ya_rep1.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+    atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200/atac814_wt_ya_rep2.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200_treat_pileup.bw \
+  atac814/tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.yapc/atac814_wt_pe.tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.yapc
 """
 if __name__ == '__main__':
     l_inp = sys.argv[1:-1]
+    df = parse_inp(l_inp)
+    df['is_bw'] = df['fp'].map(is_bw)
 
-    #d_label_fp = collections.OrderedDict([*pairwise(l_inp)])
-    #for (label, fp) in d_label_fp.items():
-    #pprint(d_label_fp)
+    print('Samples:')
+    print(df.to_string(line_width=10000, index=False))
+    print()
 
     # Make output directory + intermediate directories if necessary
     prefix_out = sys.argv[-1]
     makedirsp(os.path.split(prefix_out)[0])
-
-    df = pd.DataFrame.from_records([*pairwise(l_inp)], columns=['sample', 'fp'])
-    df['is_bw'] = df['fp'].map(is_bw)
-    print('Sample sheet:')
-    print(df)
-    print()
-    #print(df.to_string(formatters={'sample': str, 'fp': str, 'is_bw': str}))
 
     # fp_coverage
     fp_coverage = prefix_out + '_coverage.bw'
@@ -282,15 +367,100 @@ if __name__ == '__main__':
     # fp_peaksall -- all raw peaks, scored by D2
     fp_peaksall_tsv = prefix_out + '_peaksall.tsv'
     fp_peaksall_bed = prefix_out + '_peaksall.bed'
-    find_concave_regions(fp_d2smooth, fp_peaksall_tsv, fp_peaksall_bed)
+    if not(os.path.isfile(fp_peaksall_tsv)):
+        # call concave regions
+        df_regions = find_concave_regions(fp_d2smooth, fp_peaksall_tsv, fp_peaksall_bed)
 
-    #fp_peaksall_bed = prefix_out + '_peaksall.bed'
+        # score concave regions
+        kernel = prepare_second_derivative_kernel(75, 3)
+        for i, r in itertools.islice(df.iterrows(), None):
+            fp_ = r['fp']
+            col_ = r['sample'] + '_score'
+            print('scoring peaks for sample: %s' % (r['sample'],))
+            df_regions[col_] = [*score(fp_, df_regions.chrom.tolist(), df_regions.concave_start.tolist(), df_regions.concave_end.tolist())]
 
+        # write all concave regions to output
+        df_regions.to_csv(fp_peaksall_tsv, header=True, index=False, sep='\t')
+        write_gffbed(fp_peaksall_bed,
+            chrom = df_regions['chrom'],
+            start = df_regions['concave_start'],
+            end = df_regions['concave_end'],
+            attr = df_regions[[sample + '_score' for sample in df['sample']]],
+            thickStart = df_regions['mode'],
+            thickEnd = df_regions['mode'] + 1,
+        )
+
+    else:
+        df_regions = pd.read_csv(fp_peaksall_tsv, sep='\t')
+        print('Recycling existing scored concave regions (n=%d): %s' % (len(df_regions), fp_peaksall_tsv,))
+
+    # rank scores & truncate peak list based on "best" rank => 100,000 peaks
     #fp_peaksidr_wt_emb -- IDR peaks, scored by IDR
+    #print(df_regions[[sample + '_score' for sample in df['sample']]].head(20))
+    #print(df_regions[[sample + '_score' for sample in df['sample']]].head(20).rank(axis=0, ascending=False))
+    print()
+    print('%d raw peaks' % (len(df_regions),))
+    df_regions['min_rank'] = df_regions[[sample + '_score' for sample in df['sample']]].rank(axis=0, ascending=False).min(axis=1)
+    df_regions_idr = df_regions.sort_values('min_rank').head(100000).sort_values(['chrom', 'concave_start', 'concave_end']).reset_index(drop=True)#.drop('min_rank', axis=1)
+    
+    print()
+    print('curvature index-scores:')
+    col_ = [sample + '_score' for sample in df['sample']]
+    print(df_regions[col_].head().to_string(line_width=10000, index=False))
+    print()
+
+    # run IDR using scores from each condition
+    for condition in df['condition'].unique():
+        fp_idr = prefix_out + '_peaksidr_%(condition)s.bed' % locals()
+        if not(os.path.isfile(fp_idr)):
+            run_idr(df_regions_idr['chrom'], df_regions_idr['concave_start'], df_regions_idr['concave_end'], df_regions_idr['%(condition)s_rep1_score' % locals()], df_regions_idr['%(condition)s_rep2_score' % locals()], prefix_out, condition)
+        else:
+            print('Recycling existing IDR run: %s' % (fp_idr,))
+
+        col_prefix = condition
+        names_ = [
+            'chrom', 'concave_start', 'concave_end', 'name',
+            '%(col_prefix)s_scaledIDR' % locals(), 'strand',
+            '%(col_prefix)s_localIDR' % locals(), '%(col_prefix)s_globalIDR' % locals(),
+            '%(col_prefix)s_rep1_start' % locals(), '%(col_prefix)s_rep1_end' % locals(), '%(col_prefix)s_rep1_score' % locals(),
+            '%(col_prefix)s_rep2_start' % locals(), '%(col_prefix)s_rep2_end' % locals(), '%(col_prefix)s_rep2_score' % locals(),
+        ]
+        df_ = pd.read_csv(fp_idr, names=names_, sep='\t').sort_values(['chrom', 'concave_start', 'concave_end']).reset_index(drop=True)
+        df_regions_idr['%(col_prefix)s_globalIDR' % locals()] = df_['%(col_prefix)s_globalIDR' % locals()]
+
+    print()
+    print('globalIDR:')
+    col_ = ['%(col_prefix)s_globalIDR' % locals() for col_prefix in df['condition'].unique()]
+    print(df_regions_idr[col_].head().to_string(line_width=10000, index=False))
+    print()
+
+    # Final peak boundaries -- fixed at flank_len bases either side of the mode
+    flank_len = 75
+    df_regions_idr['fixed_start'] = df_regions_idr['mode'] - flank_len
+    df_regions_idr['fixed_end'] = df_regions_idr['mode'] + flank_len + 1
+
+    # 
+    fp_regions_idr = prefix_out + '.tsv'
+    df_regions_idr.to_csv(fp_regions_idr, header=True, index=False, sep='\t')
+    print('Wrote all %d IDR-scored peaks to %s' % (len(df_regions_idr), fp_regions_idr))
+
+    # Write final .bed-files at a range of thresholds
+    col_ = ['%(col_prefix)s_globalIDR' % locals() for col_prefix in df['condition'].unique()]
+    df_regions_idr['max_globalIDR'] = df_regions_idr[col_].max(axis=1)
+    for th in [0.001, 0.005, 0.01, 0.05]:
+        th_globalIDR = -math.log(th, 10)
+        fp_regions_idr_th = prefix_out + '_%(th)s.bed' % locals()
+        df_regions_idr_th = df_regions_idr.query('max_globalIDR > @th_globalIDR').reset_index(drop=True)
+        write_gffbed(fp_regions_idr_th,
+            chrom = df_regions_idr_th['chrom'],
+            start = df_regions_idr_th['fixed_start'],
+            end = df_regions_idr_th['fixed_end'],
+            attr = df_regions_idr_th[col_],
+        )
+        print('Wrote %d peaks at IDR=%.3f to %s' % (len(df_regions_idr_th), th, fp_regions_idr_th))
+
     #fp_peaksidr_wt_ya -- IDR peaks, scored by IDR
-
     # fp_peaksidr -- IDR peaks, scored by IDR
-
     #print(os.path.commonprefix(l_fp_inp))
     #from docopt import docopt
     #args = docopt(__doc__)
