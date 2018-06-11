@@ -470,11 +470,31 @@ rule sizefactors_lcap808_counts:
             .drop(['__no_feature', '__ambiguous', '__too_low_aQual', '__not_aligned', '__alignment_not_unique'])\
             .to_csv(output[0], sep='\t')
 
+rule sizefactors_lcap808_counts_ce11:
+    input:
+        expand(pf('lcap808_{sample}', '{{step}}.htseq_counts_ce11', '.tsv', 'lcap808'), sample=config['stages_rep']),
+    output:
+        pf('lcap808', '{step}.sizefactors_lcap808_ce11', '_counts.tsv', 'lcap808'),
+    run:
+        def counts_(fp): return pd.read_csv(fp, sep='\t', names=('gene_id', 'counts'))['counts'].tolist()
+        df = pd.DataFrame(collections.OrderedDict([(parse_pf(input_)[0], counts_(input_)) for input_ in input]),
+            index=pd.read_csv(input[0], sep='\t', names=('gene_id', 'counts'))['gene_id'].tolist())\
+            .drop(['__no_feature', '__ambiguous', '__too_low_aQual', '__not_aligned', '__alignment_not_unique'])\
+            .to_csv(output[0], sep='\t')
+
 rule sizefactors_lcap808_deseq:
     input:
         pf('lcap808', '{step}.sizefactors_lcap808', '_counts.tsv', 'lcap808')
     output:
         pf('lcap808', '{step}.sizefactors_lcap808', '_sizefactors.tsv', 'lcap808')
+    script:
+        'sizefactors_lcap808_deseq.R'
+
+rule sizefactors_lcap808_deseq_ce11:
+    input:
+        pf('lcap808', '{step}.sizefactors_lcap808_ce11', '_counts.tsv', 'lcap808')
+    output:
+        pf('lcap808', '{step}.sizefactors_lcap808_ce11', '_sizefactors.tsv', 'lcap808')
     script:
         'sizefactors_lcap808_deseq.R'
 
@@ -510,6 +530,38 @@ rule filled_rev_lcap808_sfnorm:
         bedGraphToBigWig {output[0]} <(samtools view -H {input} | awk 'substr($2,1,2)=="SN" {{print substr($2, 4),substr($3, 4)}}') {output[1]}
         '''
 
+rule filled_fwd_lcap808_sfnorm_ce11:
+    input:
+        pf('{bid}', '{step}', '.bam', '{prefix}'),
+        pf('lcap808', '{step}.sizefactors_lcap808_ce11', '_sizefactors.tsv', 'lcap808'),
+    output:
+        temp(pf('{bid}', '{step}.filled_fwd_sfnorm_ce11', '.bedGraph', '{prefix}')),
+        pf('{bid}', '{step}.filled_fwd_sfnorm_ce11', '.bw', '{prefix}'),
+    shell:
+        '''
+        sample=$(basename "{input[0]}" | cut -f1 -d".")
+        sf=$(cat {input[1]} | awk -F'\\t' -v OFS='\\t' -v sample=$sample '($1 == sample) {{print 1/$2}}')
+        samtools view -b -u {input[0]} | bedtools genomecov -ibam stdin -bg -pc -strand - -scale $sf > {output[0]}
+        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        bedGraphToBigWig {output[0]} <(samtools view -H {input} | awk 'substr($2,1,2)=="SN" {{print substr($2, 4),substr($3, 4)}}') {output[1]}
+        '''
+
+rule filled_rev_lcap808_sfnorm_ce11:
+    input:
+        pf('{bid}', '{step}', '.bam', '{prefix}'),
+        pf('lcap808', '{step}.sizefactors_lcap808_ce11', '_sizefactors.tsv', 'lcap808'),
+    output:
+        temp(pf('{bid}', '{step}.filled_rev_sfnorm_ce11', '.bedGraph', '{prefix}')),
+        pf('{bid}', '{step}.filled_rev_sfnorm_ce11', '.bw', '{prefix}'),
+    shell:
+        '''
+        sample=$(basename "{input[0]}" | cut -f1 -d".")
+        sf=$(cat {input[1]} | awk -F'\\t' -v OFS='\\t' -v sample=$sample '($1 == sample) {{print 1/$2}}')
+        samtools view -b -u {input[0]} | bedtools genomecov -ibam stdin -bg -pc -strand + -scale $sf > {output[0]}
+        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        bedGraphToBigWig {output[0]} <(samtools view -H {input} | awk 'substr($2,1,2)=="SN" {{print substr($2, 4),substr($3, 4)}}') {output[1]}
+        '''
+
 rule lcap808_mean_by_stage:
     input:
         pf('{bid}_rep1', '{step}', '.bw', 'lcap808'),
@@ -518,6 +570,16 @@ rule lcap808_mean_by_stage:
         pf('{bid}', '{step}.mean_by_stage', '.bw', 'lcap808'),
     shell: '''
         scripts/bigWiggleTools.ipy write_bg {output[0]} mean {input[0]} {input[1]}
+    '''
+
+rule lcap808_mean_by_stage_ce11:
+    input:
+        pf('{bid}_rep1', '{step}', '.bw', 'lcap808'),
+        pf('{bid}_rep2', '{step}', '.bw', 'lcap808'),
+    output:
+        pf('{bid}', '{step}.mean_by_stage_ce11', '.bw', 'lcap808'),
+    shell: '''
+        scripts/bigWiggleTools_ce11.ipy write_bg {output[0]} mean {input[0]} {input[1]}
     '''
 
 rule lcap823_mean_by_stage:
@@ -530,13 +592,13 @@ rule lcap823_mean_by_stage:
         scripts/bigWiggleTools.ipy write_bg {output[0]} mean {input[0]} {input[1]}
     '''
 
-rule log2p:
+rule log2p_ce11:
     input:
         pf('{bid}', '{step}', '.bw', '{prefix}'),
     output:
-        pf('{bid}', '{step}.log2p', '.bw', '{prefix}'),
+        pf('{bid}', '{step}.log2p_ce11', '.bw', '{prefix}'),
     shell: '''
-        scripts/bigWiggleTools.ipy write_bg {output[0]} log 2 offset 1 {input[0]}
+        scripts/bigWiggleTools_ce11.ipy write_bg {output[0]} log 2 offset 1 {input[0]}
     '''
 
 rule lcap808_linear_fwd:
@@ -557,6 +619,24 @@ rule lcap808_linear_rev:
         scripts/bigWiggleTools.ipy write {output[0]} "scale -0.1" bin 10 {input[0]}
         '''
 
+rule lcap808_linear_fwd_ce11:
+    input:
+        pf('lcap808_{sample}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.filled_fwd_sfnorm_ce11.mean_by_stage_ce11', '.bw', 'lcap808'),
+    output:
+        'lcap808_geo/tracks_ce11_linear_fwd/lcap_{sample}_ce11_linear_fwd.bw',
+    shell: '''
+        scripts/bigWiggleTools_ce11.ipy write {output[0]} scale 0.1 bin 10 {input[0]}
+        '''
+
+rule lcap808_linear_rev_ce11:
+    input:
+        pf('lcap808_{sample}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.filled_rev_sfnorm_ce11.mean_by_stage_ce11', '.bw', 'lcap808'),
+    output:
+        'lcap808_geo/tracks_ce11_linear_rev/lcap_{sample}_ce11_linear_rev.bw',
+    shell: '''
+        scripts/bigWiggleTools_ce11.ipy write {output[0]} "scale -0.1" bin 10 {input[0]}
+        '''
+
 rule lcap808_log2_fwd:
     input:
         pf('lcap808_{sample}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd_sfnorm.mean_by_stage.log2p', '.bw', 'lcap808'),
@@ -573,6 +653,24 @@ rule lcap808_log2_rev:
         'lcap808_geo/tracks_log2_rev/lcap_{sample}_log2_rev.bw',
     shell: '''
         scripts/bigWiggleTools.ipy write {output[0]} "scale -0.1" bin 10 {input[0]}
+        '''
+
+rule lcap808_log2_fwd_ce11:
+    input:
+        pf('lcap808_{sample}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.filled_fwd_sfnorm_ce11.mean_by_stage_ce11.log2p_ce11', '.bw', 'lcap808'),
+    output:
+        'lcap808_geo/tracks_ce11_log2_fwd/lcap_{sample}_ce11_log2_fwd.bw',
+    shell: '''
+        scripts/bigWiggleTools_ce11.ipy write {output[0]} scale 0.1 bin 10 {input[0]}
+        '''
+
+rule lcap808_log2_rev_ce11:
+    input:
+        pf('lcap808_{sample}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.filled_rev_sfnorm_ce11.mean_by_stage_ce11.log2p_ce11', '.bw', 'lcap808'),
+    output:
+        'lcap808_geo/tracks_ce11_log2_rev/lcap_{sample}_ce11_log2_rev.bw',
+    shell: '''
+        scripts/bigWiggleTools_ce11.ipy write {output[0]} "scale -0.1" bin 10 {input[0]}
         '''
 
 rule lcap808_gene_level_read_counts:
@@ -642,22 +740,28 @@ rule lcap808_ce11:
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.filled_fwd.mean_by_stage', '.bw', 'lcap808'), bid=config['stages']),
         expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.filled_rev.mean_by_stage', '.bw', 'lcap808'), bid=config['stages']),
         # WS260_ce10 exon counts
-        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.htseq_counts_ce11', '.tsv', 'lcap808'), bid=config['stages_rep']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.htseq_counts_ce11', '.tsv', 'lcap808'), bid=config['stages_rep']),
         # Startbp tracks for jump/incr tests
-        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.startbp_fwd', '.bw', 'lcap808'), bid=config['stages_rep']),
-        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.startbp_rev', '.bw', 'lcap808'), bid=config['stages_rep']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.startbp_fwd', '.bw', 'lcap808'), bid=config['stages_rep']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.startbp_rev', '.bw', 'lcap808'), bid=config['stages_rep']),
         # calculate sizeFactors from gene-level read counts using DESeq2
-        #pf('lcap808', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.sizefactors_lcap808', '_counts.tsv', 'lcap808'),
-        #pf('lcap808', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.sizefactors_lcap808', '_sizefactors.tsv', 'lcap808'),
+        pf('lcap808', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.sizefactors_lcap808_ce11', '_counts.tsv', 'lcap808'),
+        pf('lcap808', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.sizefactors_lcap808_ce11', '_sizefactors.tsv', 'lcap808'),
         # normalise tracks by sizeFactors
-        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.filled_fwd_sfnorm', '.bw', 'lcap808'), bid=config['stages_rep']),
-        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.filled_rev_sfnorm', '.bw', 'lcap808'), bid=config['stages_rep']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.filled_fwd_sfnorm_ce11', '.bw', 'lcap808'), bid=config['stages_rep']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.filled_rev_sfnorm_ce11', '.bw', 'lcap808'), bid=config['stages_rep']),
         # Mean across replicates
-        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.filled_fwd_sfnorm.mean_by_stage', '.bw', 'lcap808'), bid=config['stages']),
-        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.filled_rev_sfnorm.mean_by_stage', '.bw', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.filled_fwd_sfnorm_ce11.mean_by_stage_ce11', '.bw', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.filled_rev_sfnorm_ce11.mean_by_stage_ce11', '.bw', 'lcap808'), bid=config['stages']),
         # log2-scaled tracks
-        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.filled_fwd_sfnorm.mean_by_stage.log2p', '.bw', 'lcap808'), bid=config['stages']),
-        #expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.filled_rev_sfnorm.mean_by_stage.log2p', '.bw', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.filled_fwd_sfnorm_ce11.mean_by_stage_ce11.log2p_ce11', '.bw', 'lcap808'), bid=config['stages']),
+        expand(pf('lcap808_{bid}', 'trim20.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist_ce11.filled_rev_sfnorm_ce11.mean_by_stage_ce11.log2p_ce11', '.bw', 'lcap808'), bid=config['stages']),
+        # GEO -- linear tracks
+        expand('lcap808_geo/tracks_ce11_linear_fwd/lcap_{stage}_ce11_linear_fwd.bw', stage=config['stages']),
+        expand('lcap808_geo/tracks_ce11_linear_rev/lcap_{stage}_ce11_linear_rev.bw', stage=config['stages']),
+        # GEO -- log2 tracks
+        expand('lcap808_geo/tracks_ce11_log2_fwd/lcap_{stage}_ce11_log2_fwd.bw', stage=config['stages']),
+        expand('lcap808_geo/tracks_ce11_log2_rev/lcap_{stage}_ce11_log2_rev.bw', stage=config['stages']),
 
 rule lcap808_mapq0:
     input:
