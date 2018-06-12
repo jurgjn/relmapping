@@ -1,4 +1,12 @@
 #!/usr/bin/env python
+"""
+An adhoc peak caller for genomic high-throughput sequencing data such as ATAC-seq, 
+DNase-seq or ChIP-seq. Specifically written for the purpose of capturing representative 
+peaks of characteristic width in a time series data set with two biological replicates per
+time point. Briefly, candidate peak locations are defined using concave regions (regions 
+with negative smoothed second derivative) from signal averaged across all samples. The 
+candidate peaks are then tested for condition-specific statistical significance using IDR.
+"""
 
 import argparse
 import collections
@@ -7,29 +15,28 @@ import itertools
 import logging
 import os
 import math
-import signal
 import sys
 
 from pprint import pprint
 
+import idr
 import numpy as np
 import pandas as pd
 import pyBigWig
 
-signal.signal(signal.SIGPIPE, signal.SIG_DFL)
-logging.basicConfig(
-        level=logging.DEBUG,
-        format='%(asctime)s; %(levelname)s; %(funcName)s; %(message)s',
-        datefmt='%y-%m-%d %H:%M:%S')
-
 def prepare_second_derivative_kernel(width, times):
-    kernel = np.array([-1.0/560, 8.0/315, -1.0/5, 8.0/5, -205.0/72, 8.0/5, -1.0/5, 8.0/315, -1.0/560]) # doi:10.1090/S0025-5718-1988-0935077-0
+    """
+    Second derivative weights from: https://doi.org/10.1090/S0025-5718-1988-0935077-0
+    Ref for smoothing 3 times: https://terpconnect.umd.edu/~toh/spectrum/Differentiation.html#Smoothing
+    """
+    kernel = [-1.0/560, 8.0/315, -1.0/5, 8.0/5, -205.0/72, 8.0/5, -1.0/5, 8.0/315, -1.0/560]
     rolling_mean_kernel = np.ones(width)/float(width)
     for i in range(times):
         kernel = np.convolve(kernel, rolling_mean_kernel)
-    return 1e6*kernel[::-1]
+    ADHOC_LARGE_NUMBER = 1e6 # scale to have better visualisation of d2smooth in IGV
+    return ADHOC_LARGE_NUMBER*kernel[::-1]
 
-def fill_gap(y):
+def fill_gap(y): # work-around for a specific weirdly-formatted data set; not meant for general use
     y[np.isnan(y)] = 0
     s = np.where(np.diff(y) < 0)[0] + 1
     e = np.where(np.diff(y) > 0)[0] + 1
@@ -167,17 +174,6 @@ def find_concave_regions(fp_inp, fp_out_tsv, fp_out_bed):
         for chrom, size in itertools.islice(fh_inp.chroms().items(), None)], axis=0, ignore_index=True)
     fh_inp.close()
     print('%d peaks total' % (len(df_regions),))
-
-    """
-    write_gffbed(fp_out_bed,
-        chrom = df_regions['chrom'],
-        start = df_regions['concave_start'],
-        end = df_regions['concave_end'],
-        thickStart = df_regions['mode'],
-        thickEnd = df_regions['mode'] + 1,
-    )
-    """
-
     return df_regions
 
 def read_regions(fp, chroms, starts, ends, v=False):
@@ -226,19 +222,24 @@ def run_idr(chroms, starts, ends, scores_rep1, scores_rep2, prefix_out, conditio
     df_['start'] = starts
     df_['end'] = ends
     df_['name'] = '.'
-    df_['score_rep1'] = scores_rep1.clip(lower=0)
-    df_['score_rep2'] = scores_rep2.clip(lower=0)
+
+    # https://github.com/nboley/idr/blob/74665e73bffb689a440948640c386b1188eea1e3/idr/idr.py#L287-L299
+    # https://github.com/nboley/idr/blob/74665e73bffb689a440948640c386b1188eea1e3/idr/idr.py#L845
+    # https://github.com/nboley/idr/blob/74665e73bffb689a440948640c386b1188eea1e3/idr/idr.py#L858-L865
+    df_['score_rep1'] = pd.Series(scores_rep1).rank()
+    df_['score_rep2'] = pd.Series(scores_rep2).rank()
     df_['strand'] = '.'
 
-    #https://github.com/nboley/idr/blob/74665e73bffb689a440948640c386b1188eea1e3/idr/idr.py#L64
-    df_['col6'] = 0#float('nan') # signalValue
-    df_['col7'] = 0#float('nan') # pValue
-    df_['col8'] = 0#float('nan') # qValue
+    # https://github.com/nboley/idr/blob/74665e73bffb689a440948640c386b1188eea1e3/idr/idr.py#L64
+    # values don't seem to be used, but seem to be required to be present in the input...
+    df_['col6'] = 0 # signalValue?
+    df_['col7'] = 0 # pValue?
+    df_['col8'] = 0 # qValue?
 
     df_[['chrom', 'start', 'end', 'name', 'score_rep1', 'strand', 'col6', 'col7', 'col8']].to_csv(fp_rep1, header=False, index=False, sep='\t')
     df_[['chrom', 'start', 'end', 'name', 'score_rep2', 'strand', 'col6', 'col7', 'col8']].to_csv(fp_rep2, header=False, index=False, sep='\t')
 
-    idr_args = '--input-file-type bed --rank score --peak-merge-method max'
+    idr_args = '--input-file-type bed --rank score --peak-merge-method max --plot'
     idr_cmd = 'idr %(idr_args)s --samples %(fp_rep1)s %(fp_rep2)s --output-file %(fp_iout)s' % locals()
     print('Running idr on condition %(condition)s:' % locals())
     print(idr_cmd)
@@ -291,22 +292,19 @@ def main(df_samples, prefix_out, kernel, min_concave_region_width, truncate_idr_
         df_regions = pd.read_csv(fp_peaksall_tsv, sep='\t')
         print('Recycling existing scored concave regions (n=%d): %s' % (len(df_regions), fp_peaksall_tsv,))
 
+    # discard narrow peaks
+    print('%d raw peaks' % (len(df_regions),))
     df_regions = df_regions.query('(concave_end - concave_start) >= @min_concave_region_width').reset_index(drop=True)
     print('%d peaks after discarding narrow concave regions (min_concave_region_width=%d)' % (len(df_regions), min_concave_region_width))
 
     # rank scores & truncate peak list based on "best" rank => 100,000 peaks
-    #fp_peaksidr_wt_emb -- IDR peaks, scored by IDR
-    #print(df_regions[[sample + '_score' for sample in df['sample']]].head(20))
-    #print(df_regions[[sample + '_score' for sample in df['sample']]].head(20).rank(axis=0, ascending=False))
-    print()
-    print('%d raw peaks' % (len(df_regions),))
     df_regions['min_rank'] = df_regions[[sample + '_score' for sample in df_samples['sample']]].rank(axis=0, ascending=False).min(axis=1)
-    df_regions_idr = df_regions.sort_values('min_rank').head(truncate_idr_input).sort_values(['chrom', 'concave_start', 'concave_end']).reset_index(drop=True)#.drop('min_rank', axis=1)
+    df_regions_idr = df_regions.sort_values('min_rank').head(truncate_idr_input).sort_values(['chrom', 'concave_start', 'concave_end']).reset_index(drop=True)
+    print('%d peaks after filtering based on best rank across all conditions (truncate_idr_input=%d)' % (len(df_regions_idr), truncate_idr_input))
     
-    print()
-    print('curvature index-scores:')
+    print('\ncurvature index-scores:')
     col_ = [sample + '_score' for sample in df_samples['sample']]
-    print(df_regions[col_].head().to_string(line_width=10000, index=False))
+    print(df_regions[col_].head().to_string(line_width=1000, index=False))
     print()
 
     # run IDR using scores from each condition
@@ -331,7 +329,7 @@ def main(df_samples, prefix_out, kernel, min_concave_region_width, truncate_idr_
     print()
     print('globalIDR:')
     col_ = ['%(col_prefix)s_globalIDR' % locals() for col_prefix in df_samples['condition'].unique()]
-    print(df_regions_idr[col_].head().to_string(line_width=10000, index=False))
+    print(df_regions_idr[col_].head().to_string(line_width=1000, index=False))
     print()
 
     # Final peak boundaries -- fixed at flank_len bases either side of the mode
@@ -354,7 +352,7 @@ def main(df_samples, prefix_out, kernel, min_concave_region_width, truncate_idr_
     for th in [0.001, 0.005, 0.01, 0.05]:
         th_globalIDR = -math.log(th, 10)
         fp_regions_idr_th = prefix_out + '_%(th)s.bed' % locals()
-        df_regions_idr_th = df_regions_idr.query('max_globalIDR > @th_globalIDR').reset_index(drop=True)
+        df_regions_idr_th = df_regions_idr.query('max_globalIDR >= @th_globalIDR').reset_index(drop=True)
         write_gffbed(fp_regions_idr_th,
             chrom = df_regions_idr_th['chrom'],
             start = df_regions_idr_th['start'],
@@ -385,7 +383,7 @@ def makedirsp(fp):
 
 if __name__ == '__main__':
     try:
-        parser = argparse.ArgumentParser()
+        parser = argparse.ArgumentParser(description=__doc__)
         parser.add_argument('OUTPUT_PREFIX', help='Prefix to use for all output files')
         parser.add_argument('CONDITION_REP1_REP2', nargs='*', help='Name of the condition, BigWig files of first and second replicates')
         parser.add_argument('--smoothing-window-width', help='Width of the smoothing window used for the second derivative track', type=int, default=150)
@@ -395,9 +393,17 @@ if __name__ == '__main__':
         parser.add_argument('--fixed-peak-halfwidth', help='Set final peak coordinates to the specified number of base pairs on either side of the concave region mode', type=int)
         args = parser.parse_args()
 
+        logging.basicConfig(level=logging.DEBUG)
+        #        format='%(asctime)s; %(levelname)s; %(funcName)s; %(message)s',
+        #        datefmt='%y-%m-%d %H:%M:%S')
+        logging.debug('numpy version: %s' % (np.__version__,))
+        logging.debug('pandas version: %s' % (pd.__version__,))
+        logging.debug('pyBigWig.numpy flag: %s' % (pyBigWig.numpy))
+        logging.debug('IDR version: %s' % (idr.__version__))
+
         df_samples = parse_input_files(args.CONDITION_REP1_REP2)
         print('Input samples:')
-        print(df_samples.to_string(line_width=10000, index=False))
+        print(df_samples.to_string(line_width=1000, index=False))
         print()
 
         print('Output prefix: %s' % (args.OUTPUT_PREFIX,))
