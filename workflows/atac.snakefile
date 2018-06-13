@@ -337,6 +337,12 @@ rule atac814_mapq0:
         expand(pf('atac814_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt300', '_treat_pileup.bw', 'atac814'), sample=config['stages_wt_rep']),
         expand(pf('atac814_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'), sample=config['stages_rep']),
 
+rule atac824:
+    input:
+        expand(pf('atac824_{sample}', 'c_r1', '.txt', 'atac824'), sample=techreps_collapse(config['atac824'].keys())),
+        expand(pf('atac824_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac824'), sample=techreps_collapse(config['atac824'].keys())),
+        #expand(pf('atac824_{condition}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_stage', '_treat_pileup.bw', 'atac824'), condition=config['atac824_tissues']),
+
 rule atac:
     input:
         expand(pf('{bid}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac'), bid=[*config['atac']]),

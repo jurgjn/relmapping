@@ -807,6 +807,32 @@ lcap823_tissues:
 - muscle
 - intest
 
+atac824:
+  hypod_rep1: HS635_JSs110 #JSs110
+  hypod_rep2a: HS625_JSs093 #JSs093
+  hypod_rep2b: HS634_JSs109 #JSs109
+  neurons_rep1a: HS571_JSs071 #JSs071
+  neurons_rep1b: HS634_JSs105 #JSs105
+  neurons_rep2: HS571_JSs069 #JSs069
+  gonad_rep1: HS542_JSs065 #JSs065
+  gonad_rep2a: HS615_JSs089 #JSs089
+  gonad_rep2b: HS634_JSs106 #JSs106
+  muscle_rep1a: HS604_JSs076 #JSs076
+  muscle_rep1b: HS625_JSs094 #JSs094
+  muscle_rep1c: HS634_JSs107 #JSs107
+  muscle_rep2a: HS615_JSs090 #JSs090
+  muscle_rep2b: HS625_JSs095 #JSs095
+  intest_rep1: HS571_JSs070 #JSs070
+  intest_rep2a: HS625_JSs092 #JSs092
+  intest_rep2b: HS634_JSs108 #JSs108
+
+atac824_tissues:
+- hypod
+- neurons
+- gonad
+- muscle
+- intest
+
 lcap808: # lcap805 with glp1 sample swaps fixed by inferring the (likely) label via clustering to old glp1 data that had the antisense artefacts (but was correctly labelled)
   wt_emb_rep1a: HS182_JA26r-N2-lcRNA-S1r
   wt_emb_rep1b: HS485_JA26_lcRNA_S1r

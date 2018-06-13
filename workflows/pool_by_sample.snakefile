@@ -139,3 +139,26 @@ rule lcap823:
         expand('samples/lcap823_{sample}.r1.fq.gz', sample=techreps_collapse(config['lcap823'].keys(), include_raw=True)),
         expand('samples/lcap823_{sample}.r2.fq.gz', sample=techreps_collapse(config['lcap823'].keys(), include_raw=True)),
 
+# snakemake --use-conda --cores 12 -s workflows/pool_by_sample.snakefile atac824 --dryrun
+def atac824_r1_input(wildcards):
+    l_ = ['samples/%s.r1.fq.gz' % (bid,) for bid in techreps_retrieve(wildcards.sample, config['atac824'])]
+    assert len(l_) > 0
+    return l_
+
+rule atac824_r1_:
+    input:
+        atac824_r1_input,
+    output:
+        'samples/atac824_{sample}.r1.fq.gz'
+    run:
+        print(input, output)
+        if os.path.isfile(str(input)):
+            shell("ln -s `pwd`/{input} `pwd`/{output}")
+            shell("touch -h `pwd`/{output}")
+        else:
+            arg_input = ' '.join(input)
+            shell('cat %(arg_input)s > %(output)s' % locals())
+
+rule atac824:
+    input:
+        expand('samples/atac824_{sample}.r1.fq.gz', sample=techreps_collapse(config['atac824'].keys(), include_raw=True)),
