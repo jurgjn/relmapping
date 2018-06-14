@@ -834,8 +834,8 @@ rule lcap823:
         expand(pf('lcap823_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd', '.bw', 'lcap823'), bid=config['lcap823'].keys()),
         expand(pf('lcap823_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev', '.bw', 'lcap823'), bid=config['lcap823'].keys()),
         # Startbp tracks for jump/incr tests
-        expand(pf('lcap823_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.startbp_fwd', '.bw', 'lcap823'), bid=config['lcap823'].keys()),
-        expand(pf('lcap823_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.startbp_rev', '.bw', 'lcap823'), bid=config['lcap823'].keys()),
+        expand(pf('lcap823_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.startbp_fwd', '.bw', 'lcap823'), bid=techreps_collapse(config['lcap823'].keys())),
+        expand(pf('lcap823_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.startbp_rev', '.bw', 'lcap823'), bid=techreps_collapse(config['lcap823'].keys())),
         # Coverage tracks, q10, mean by stage
         expand(pf('lcap823_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd.mean_by_stage', '.bw', 'lcap823'), bid=config['lcap823_tissues']),
         expand(pf('lcap823_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev.mean_by_stage', '.bw', 'lcap823'), bid=config['lcap823_tissues']),
