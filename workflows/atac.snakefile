@@ -265,6 +265,16 @@ rule atac814_tracks:
         scripts/bigWiggleTools.ipy write {output[0]} scale 0.1 bin 10 mean {input[0]} {input[1]}
         '''
 
+rule atac824_mean_by_condition:
+    input:
+        pf('atac824_{condition}_rep1', '{step}', '_treat_pileup.bw', 'atac824'),
+        pf('atac824_{condition}_rep2', '{step}', '_treat_pileup.bw', 'atac824'),
+    output:
+        pf('atac824_{condition}', '{step}.mean_by_condition', '.bw', 'atac824'),
+    shell: '''
+        scripts/bigWiggleTools.ipy write {output[0]} scale 0.1 bin 10 mean {input[0]} {input[1]}
+    '''
+
 rule atac814_tracks_ce11:
     input:
         pf('atac814_{sample}_rep1', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'),
@@ -341,7 +351,7 @@ rule atac824:
     input:
         expand(pf('atac824_{sample}', 'c_r1', '.txt', 'atac824'), sample=techreps_collapse(config['atac824'].keys())),
         expand(pf('atac824_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac824'), sample=techreps_collapse(config['atac824'].keys())),
-        #expand(pf('atac824_{condition}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_stage', '_treat_pileup.bw', 'atac824'), condition=config['atac824_tissues']),
+        expand(pf('atac824_{condition}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_condition', '.bw', 'atac824'), condition=config['atac824_tissues']),
 
 rule atac:
     input:
