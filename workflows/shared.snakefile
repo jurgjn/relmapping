@@ -251,6 +251,18 @@ cat shared/ce10.fa shared/ecoli.fa > shared/ce10_ecoli.fa
 bwa index shared/ce10_ecoli.fa
 """
 
+rule cb3:
+    output:
+        'shared/cb3.2bit',
+        'shared/cb3.chroms',
+        'shared/cb3.fa',
+    shell: '''
+        curl http://hgdownload.cse.ucsc.edu/goldenPath/cb3/bigZips/cb3.2bit -o shared/cb3.2bit
+        curl http://hgdownload.cse.ucsc.edu/goldenPath/cb3/bigZips/cb3.chrom.sizes -o shared/cb3.chroms
+        twoBitToFa shared/cb3.2bit shared/cb3.fa
+        bwa index shared/cb3.fa
+        '''
+
 rule mean10:
     input:
         pf('sites', '{step}', '.bw', '{prefix}'),
