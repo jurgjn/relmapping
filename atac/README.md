@@ -15,3 +15,5 @@ Paired-end data was also processed as follows (`atac_ce10_spmr_pe_lt200`).
 2. Low-quality (q<10 -- `rm_unmapped_pe`, `rm_q10`), mitochondrial (`rm_chrM`), and [modENCODE blacklisted](https://www.encodeproject.org/comparative/regulation/#Wormset5) (`rm_blacklist`) reads were discarded.
 3. Normalised coverage was calculated using MACS2 in paired-end mode, size-selecting for <200bp fragments (`macs2_pe_lt200`).
 4. Files were renamed by library series ID (where available), and signal was smoothed by binning at 10bp resolution (`atac_ce10_spmr_pe_lt200`).
+
+Rule `atac_processed` builds both single- and paired-end coverage tracks for all samples.
