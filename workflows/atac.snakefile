@@ -355,5 +355,54 @@ rule atac824:
 
 rule atac:
     input:
-        expand(pf('{bid}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac'), bid=[*config['atac']]),
-        expand(pf('{bid}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt300', '_treat_pileup.bw', 'atac'), bid=[*config['atac']]),
+        expand(pf('{bid}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac'), bid=['HS298_JA26_N2_atac_S1']),#[*config['atac']]),
+        expand(pf('{bid}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt300', '_treat_pileup.bw', 'atac'), bid=['HS298_JA26_N2_atac_S1']),#[*config['atac']]),
+
+def df_atac():
+    def processed_id(bid, lid):
+        if lid != lid or lid == '':
+            return '_%(bid)s' % locals()
+        return '%(lid)s_%(bid)s' % locals()
+    def is_se(bid): return os.path.isfile('samples/%(bid)s.r1.fq.gz' % locals())
+    def is_pe(bid): return os.path.isfile('samples/%(bid)s.r2.fq.gz' % locals())
+
+    fp_ = 'processed_tracks/Worm Regulatory Mapping Data Sets - Libraries (ATAC-, DNase-, MNase-seq).tsv'
+    df_ = pd.read_csv(fp_, sep='\t').query('(Enzyme == "Tn5")')[['Bioinformatics ID(s)', 'Library series ID']].rename(columns={'Bioinformatics ID(s)': 'bid', 'Library series ID': 'lid'}).reset_index(drop=True)
+    df_['pid'] = [ *map(processed_id, df_['bid'], df_['lid']) ]
+    df_['is_pe'] = [ *map(is_pe, df_['bid']) ]
+    df_['is_se'] = [ *map(is_se, df_['bid']) ]
+    #df_ = df_.query('bid == "HS298_JA26_N2_atac_S1" | bid == "HS491_metset_ATAC_rep1" | bid == "HS491_tm548_ATAC_rep1"')
+    return df_
+
+def atac_ce10_spmr_se_input_(wildcards):
+    pid_ = wildcards.pid
+    df_ = df_atac().query('pid == @pid_')
+    assert(len(df_) == 1)
+    return pf(df_.iloc[0]['bid'], 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac')
+
+def atac_ce10_spmr_pe_lt200_input_(wildcards):
+    pid_ = wildcards.pid
+    df_ = df_atac().query('pid == @pid_')
+    assert(len(df_) == 1)
+    return pf(df_.iloc[0]['bid'], 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac')
+
+rule atac_ce10_spmr_se:
+    input:
+        atac_ce10_spmr_se_input_
+    output:
+        pf('{pid}', 'atac_ce10_spmr_se', '.bw', 'processed_tracks')
+    shell:
+        'scripts/bigWiggleTools.ipy write {output} scale 0.1 bin 10 {input}'
+
+rule atac_ce10_spmr_pe_lt200:
+    input:
+        atac_ce10_spmr_pe_lt200_input_
+    output:
+        pf('{pid}', 'atac_ce10_spmr_pe_lt200', '.bw', 'processed_tracks')
+    shell:
+        'scripts/bigWiggleTools.ipy write {output} scale 0.1 bin 10 {input}'
+
+rule atac_processed:
+    input:
+        expand(pf('{pid}', 'atac_ce10_spmr_se', '.bw', 'processed_tracks'), pid=[* df_atac().query('is_se')['pid'] ]),
+        expand(pf('{pid}', 'atac_ce10_spmr_pe_lt200', '.bw', 'processed_tracks'), pid=[* df_atac().query('is_pe')['pid'] ]),
