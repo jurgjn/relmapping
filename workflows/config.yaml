@@ -708,6 +708,9 @@ atac:
 - HS616_ATAC_Wei_N2b
 - HS616_ATAC_Wei_S_Mb
 
+atac_cb3:
+- HS645_ATAC_TG_CB2
+
 lcap_raw:
 - chen13_emb_lcap1
 - chen13_emb_lcap2

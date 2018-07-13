@@ -13,8 +13,6 @@ include: 'workflows/macs2.snakefile'
 include: 'workflows/aln.snakefile'
 
 include: 'workflows/atac.snakefile'
-#include: 'workflows/atac_dm.snakefile'
-include: 'workflows/atac_am.snakefile'
 include: 'workflows/atac_HS491.snakefile'
 include: 'workflows/atac_cfp1.snakefile'
 
@@ -23,7 +21,7 @@ include: 'workflows/adhoc.snakefile'
 include: 'workflows/dnase_mnase.snakefile'
 
 include: 'workflows/lcap.snakefile'
-include: 'workflows/lcap_am.snakefile'
+#include: 'workflows/lcap_am.snakefile'
 include: 'workflows/lcap_tm.snakefile'
 include: 'workflows/lcap_geo.snakefile'
 
@@ -40,3 +38,6 @@ include: 'workflows/hmod.snakefile'
 
 include: 'workflows/motifs.snakefile'
 include: 'workflows/chip_distribution.snakefile'
+
+include: 'workflows/yapc.snakefile'
+include: 'workflows/tracks_cb3.snakefile'

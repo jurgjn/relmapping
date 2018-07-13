@@ -134,3 +134,52 @@ rule adhoc:
         pf('DRIPseq_vs_RNAseH', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.macs2_DRIPseq', '_peaks.narrowPeak', 'adhoc'),
         expand(pf('{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.macs2_pe_lt300', '_peaks.narrowPeak', 'adhoc'), bid=l_dnase),
         expand(pf('{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.centroids_lt300', '.bw', 'adhoc'), bid=l_dnase),
+
+rule chrom_dan:
+    input:
+        'motifs/chrom_fa/{chrom}.fa'
+    output:
+        'motifs/chrom_dan/{chrom}.dan'
+    shell:
+        'dan {input} -sformat fasta -windowsize 9 -shiftincrement 1 -dnaconc 50 -saltconc 50 -outfile {output}'
+
+rule chrom_wig: # wiggle start coordinate hard-coded based on dan windowsize
+    input:
+        'motifs/chrom_dan/{chrom}.dan'
+    output:
+        'motifs/chrom_wig/{chrom}.wig'
+    shell:
+        '''
+        sed '/^#/d' {input} | sed '/^$/d' | awk '(NR > 1) {{print $4}}' > {output}
+        sed -i '1ifixedStep chrom={wildcards.chrom} start=4 step=1' {output}
+        '''
+
+rule chrom_dan21:
+    input:
+        'motifs/chrom_fa/{chrom}.fa'
+    output:
+        pf('{chrom}', 'chrom_dan21', '.dan', 'motifs')
+    params:
+        windowsize=21
+    shell:
+        'dan {input} -sformat fasta -windowsize {params.windowsize} -shiftincrement 1 -dnaconc 50 -saltconc 50 -outfile {output}'
+
+rule chrom_wig21: # wiggle start coordinate hard-coded based on dan windowsize
+    input:
+        pf('{chrom}', 'chrom_dan21', '.dan', 'motifs')
+    output:
+        pf('{chrom}', 'chrom_wig21', '.wig', 'motifs')
+    shell:
+        '''
+        sed '/^#/d' {input} | sed '/^$/d' | awk '(NR > 1) {{print $4}}' > {output}
+        sed -i '1ifixedStep chrom={wildcards.chrom} start=10 step=1' {output}
+        '''
+
+rule tm:
+    input:
+        expand('motifs/chrom_dan/{chrom}.dan', chrom=['chrI', 'chrII', 'chrIII', 'chrIV', 'chrV', 'chrX', 'chrM']),
+        expand('motifs/chrom_wig/{chrom}.wig', chrom=['chrI', 'chrII', 'chrIII', 'chrIV', 'chrV', 'chrX', 'chrM']),
+        #wigToBigWig <(cat motifs/chrom_wig/chrI.wig motifs/chrom_wig/chrII.wig motifs/chrom_wig/chrIII.wig motifs/chrom_wig/chrIV.wig motifs/chrom_wig/chrM.wig motifs/chrom_wig/chrV.wig motifs/chrom_wig/chrX.wig) shared/ce10.chroms seq_tracks/ce10.tm9.bw
+        expand(pf('{chrom}', 'chrom_dan21', '.dan', 'motifs'), chrom=['chrI', 'chrII', 'chrIII', 'chrIV', 'chrV', 'chrX', 'chrM']),
+        expand(pf('{chrom}', 'chrom_wig21', '.wig', 'motifs'), chrom=['chrI', 'chrII', 'chrIII', 'chrIV', 'chrV', 'chrX', 'chrM']),
+        # wigToBigWig <(cat motifs/chrom_wig21/chrI.chrom_wig21.wig motifs/chrom_wig21/chrII.chrom_wig21.wig motifs/chrom_wig21/chrIII.chrom_wig21.wig motifs/chrom_wig21/chrIV.chrom_wig21.wig motifs/chrom_wig21/chrM.chrom_wig21.wig motifs/chrom_wig21/chrV.chrom_wig21.wigmotifs/chrom_wig21/chrX.chrom_wig21.wig) shared/ce10.chroms seq_tracks/ce10.tm21.bw
