@@ -212,19 +212,6 @@ rule outrons:
     shell:
         'samtools view -b -L shared/dm160615_outrons.bed {input} > {output}'
 
-rule lcap:
-    input:
-        expand(pf('{bid}', 'c_r1', '.txt', 'lcap'), bid=config['lcap_raw']),
-        expand(pf('{bid}', 'c_r2', '.txt', 'lcap'), bid=config['lcap_raw']),
-        #expand(htp('.bid/{bid}_1M.r1.fq.gz'), bid=config['lcap_raw']),
-        #expand(htp('.bid/{bid}_1M.r2.fq.gz'), bid=config['lcap_raw']),
-        #expand(pf('{bid}', 'trim14.bwa_pe', '.bam', 'lcap'), bid=config['lcap_raw']),
-        #expand(pf('{bid}', 'trim20.bwa_pe', '.bam', 'lcap'), bid=config['lcap_raw']),
-        #expand(pf('{bid}', 'trim20.bwa_pe', '.bam.bai', 'lcap'), bid=config['lcap_raw']),
-        expand(pf('{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd', '.bw', 'lcap'), bid=config['lcap_raw']),
-        expand(pf('{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev', '.bw', 'lcap'), bid=config['lcap_raw']),
-        expand(pf('{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.htseq_counts', '.tsv', 'lcap'), bid=config['lcap_HS569']),
-
 rule lcap_nreads_vs_outron_coverage_sample:
     input:
         expand('samples/{bid}_{sub}.r1.fq.gz', bid=['HS352_JA1_lcRNA_S1r', 'HS352_JA7_lcRNA_S1r'], sub=['1M', '5M', '10M', '20M']),
@@ -839,3 +826,34 @@ rule lcap823:
         # Coverage tracks, q10, mean by stage
         expand(pf('lcap823_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd.mean_by_stage', '.bw', 'lcap823'), bid=config['lcap823_tissues']),
         expand(pf('lcap823_{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev.mean_by_stage', '.bw', 'lcap823'), bid=config['lcap823_tissues']),
+
+rule lcap_ce10_linear_fwd:
+    input:
+        pf('{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_fwd', '.bw', 'lcap')
+    output:
+        pf('_{bid}', 'lcap_ce10_linear_fwd', '.bw', 'processed_tracks')
+    shell: '''
+        scripts/bigWiggleTools.ipy write {output} scale 0.1 bin 10 {input}
+        '''
+
+rule lcap_ce10_linear_rev:
+    input:
+        pf('{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.filled_rev', '.bw', 'lcap')
+    output:
+        pf('_{bid}', 'lcap_ce10_linear_rev', '.bw', 'processed_tracks')
+    shell: '''
+        scripts/bigWiggleTools.ipy write {output} "scale -0.1" bin 10 {input}
+        '''
+
+rule lcap_processed: # smj 100 lcap_processed --keep-going --restart-times 3 -n
+    input:
+        #expand(pf('{bid}', 'c_r1', '.txt', 'lcap'), bid=config['lcap_raw']),
+        #expand(pf('{bid}', 'c_r2', '.txt', 'lcap'), bid=config['lcap_raw']),
+        #expand(htp('.bid/{bid}_1M.r1.fq.gz'), bid=config['lcap_raw']),
+        #expand(htp('.bid/{bid}_1M.r2.fq.gz'), bid=config['lcap_raw']),
+        #expand(pf('{bid}', 'trim14.bwa_pe', '.bam', 'lcap'), bid=config['lcap_raw']),
+        #expand(pf('{bid}', 'trim20.bwa_pe', '.bam', 'lcap'), bid=config['lcap_raw']),
+        #expand(pf('{bid}', 'trim20.bwa_pe', '.bam.bai', 'lcap'), bid=config['lcap_raw']),
+        #expand(pf('{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.htseq_counts', '.tsv', 'lcap'), bid=config['lcap_HS569']),
+        expand(pf('_{bid}', 'lcap_ce10_linear_fwd', '.bw', 'processed_tracks'), bid=config['lcap_raw']),
+        expand(pf('_{bid}', 'lcap_ce10_linear_rev', '.bw', 'processed_tracks'), bid=config['lcap_raw']),

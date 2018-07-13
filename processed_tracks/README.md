@@ -21,6 +21,14 @@ Rule `atac_processed` builds both single- and paired-end coverage tracks for all
 
 DNase-seq, and MNase-seq was processed as paired-end ATAC-seq data.
 
+## Short cap RNA-seq (scap_ce10_init_fwd, _rev)
+
+1. Reads were trimmed using trim_galore (`tg_se`), and aligned using bwa in single-end mode (`bwa_se`).
+2. Low-quality (q<10 -- `rm_unmapped`, `rm_q10`), mitochondrial (`rm_chrM`), tRNA, snoRNA, rRNA, or miRNA (`rm_non_coding`), and modENCODE-blacklisted reads (`rm_blacklist`) were discarded.
+3. Strand-specific coverage of 5’ ends of reads was generated (`firstbp_fwd`, `firstbp_rev`).
+
+Rule `scap_processed` builds coverage tracks for both samples.
+
 ## Long cap RNA-seq (lcap_ce10_linear_fwd, _rev)
 
 1. Reads were trimmed to 20bp (`trim20`), and aligned using bwa in paired-end mode (`bwa_pe`).
