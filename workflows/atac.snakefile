@@ -367,7 +367,7 @@ def df_atac():
     def is_pe(bid): return os.path.isfile('samples/%(bid)s.r2.fq.gz' % locals())
 
     fp_ = 'processed_tracks/Worm Regulatory Mapping Data Sets - Libraries (ATAC-, DNase-, MNase-seq).tsv'
-    df_ = pd.read_csv(fp_, sep='\t').query('(Enzyme == "Tn5")')[['Bioinformatics ID(s)', 'Library series ID']].rename(columns={'Bioinformatics ID(s)': 'bid', 'Library series ID': 'lid'}).reset_index(drop=True)
+    df_ = pd.read_csv(fp_, sep='\t').query('(Enzyme == "Tn5") & (Genome == "ce10")')[['Bioinformatics ID(s)', 'Library series ID']].rename(columns={'Bioinformatics ID(s)': 'bid', 'Library series ID': 'lid'}).reset_index(drop=True)
     df_['pid'] = [ *map(processed_id, df_['bid'], df_['lid']) ]
     df_['is_pe'] = [ *map(is_pe, df_['bid']) ]
     df_['is_se'] = [ *map(is_se, df_['bid']) ]

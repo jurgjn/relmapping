@@ -26,7 +26,7 @@ include: 'workflows/lcap_tm.snakefile'
 include: 'workflows/lcap_geo.snakefile'
 
 include: 'workflows/scap.snakefile'
-include: 'workflows/scap_labelled.snakefile'
+#include: 'workflows/scap_labelled.snakefile'
 
 include: 'workflows/scap_rm_non_coding.snakefile'
 include: 'workflows/scap_rm_exonic.snakefile'
