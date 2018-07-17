@@ -737,3 +737,54 @@ rule scap815_mapq0:
         expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.firstbp_fwd.gt0x2', '.bw', 'scap815'), stage=config['stages_wt']),
         expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.firstbp_rev.gt0x2', '.bw', 'scap815'), stage=config['stages_wt']),
         expand(pf('scap815_{stage}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_non_coding.firstbp_rev.gt0x2.neg', '.bw', 'scap815'), stage=config['stages_wt']),
+
+def df_scap():
+    def processed_id(bid, lid):
+        if lid != lid or lid == '':
+            return '_%(bid)s' % locals()
+        return '%(lid)s_%(bid)s' % locals()
+    df_ = pd.DataFrame(config['scap']).transpose()
+    df_.index.name = 'bid'
+    df_.rename(columns={'library_series_id': 'lid'}, inplace=True)
+    df_ = df_.reset_index()
+    df_['pid'] = [ *map(processed_id, df_['bid'], df_['lid']) ]
+    return df_#[['bid', 'pid', 'lid']]
+
+def scap_ce10_init_fwd_input_(wildcards):
+    pid_ = wildcards.pid
+    df_ = df_scap().query('pid == @pid_')
+    assert(len(df_) == 1)
+    return pf(df_.iloc[0]['bid'], 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.firstbp_fwd', '.bw', 'scap')
+
+def scap_ce10_init_rev_input_(wildcards):
+    pid_ = wildcards.pid
+    df_ = df_scap().query('pid == @pid_')
+    assert(len(df_) == 1)
+    return pf(df_.iloc[0]['bid'], 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.firstbp_rev', '.bw', 'scap')
+
+rule scap_ce10_init_fwd:
+    input:
+        scap_ce10_init_fwd_input_,
+    output:
+        pf('{pid}', 'scap_ce10_init_fwd', '.bw', 'processed_tracks'),
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule scap_ce10_init_rev:
+    input:
+        scap_ce10_init_rev_input_,
+    output:
+        pf('{pid}', 'scap_ce10_init_rev', '.bw', 'processed_tracks'),
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule scap_processed:
+    input:
+        expand(pf('{pid}', 'scap_ce10_init_fwd', '.bw', 'processed_tracks'), pid=[* df_scap()['pid'] ]),
+        expand(pf('{pid}', 'scap_ce10_init_rev', '.bw', 'processed_tracks'), pid=[* df_scap()['pid'] ]),
