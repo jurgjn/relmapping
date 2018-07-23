@@ -324,7 +324,7 @@ def df_atac():
     def is_pe(bid): return os.path.isfile('samples/%(bid)s.r2.fq.gz' % locals())
 
     if df_atac_ is None:
-        fp_ = 'processed_tracks/Worm Regulatory Mapping Data Sets - Libraries (ATAC-, DNase-, MNase-seq).tsv'
+        fp_ = 'processed_tracks/metadata/Worm Regulatory Mapping Data Sets - Libraries (ATAC-, DNase-, MNase-seq).tsv'
         df_ = pd.read_csv(fp_, sep='\t').query('(Enzyme == "Tn5") & (Genome == "ce10")')[['Bioinformatics ID(s)', 'Library series ID']].rename(columns={'Bioinformatics ID(s)': 'bid', 'Library series ID': 'lid'}).reset_index(drop=True)
         df_['pid'] = [ *map(processed_id, df_['bid'], df_['lid']) ]
         df_['is_pe'] = [ *map(is_pe, df_['bid']) ]
@@ -375,7 +375,9 @@ rule atac_processed_stats:
                 ]),
     output:
         'atac/atac_stats_raw_counts.tsv', # raw read counts at each step
+        'atac/atac_stats_frac_passed.tsv',
         'processed_tracks/atac_ce10_stats.tsv', # percentages that passed each step
+
     run:
         df = pd.DataFrame()
         df.index.name = 'dataset'
@@ -407,3 +409,4 @@ rule atac_processed_stats:
         )
         df_['useful_reads'] = df['tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c'].astype(int).map(yp.f_uk)
         df_.sort_index().to_csv(output[1], sep='\t')
+        df_.sort_index().to_csv(output[2], sep='\t')

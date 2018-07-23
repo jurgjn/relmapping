@@ -35,17 +35,6 @@ def dnase_mnase_label_bid_make():
 
 d_dnase_mnase_label_bid = dnase_mnase_label_bid_make()
 
-rule dnase_mnase_labelled_spmr_lt300:
-    input:
-        lambda wildcards: pf('%s', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt300', '_treat_pileup.bw', 'dnase_mnase') % (d_dnase_mnase_label_bid[wildcards.label],),
-    output:
-        pf('{label}', 'spmr_lt300', '.bw', 'dnase_mnase_labelled'),
-    shell:
-        '''
-        ln -s `pwd`/{input} `pwd`/{output}
-        touch -h `pwd`/{output}
-        '''
-
 rule dmnase_stats:
     input:
         expand(pf('{bid}', '{step}', '.txt', 'dnase_mnase'), bid=l_dnase_mnase_samples(),
@@ -61,7 +50,8 @@ rule dmnase_stats:
                 ]),
 
     output:
-        'dnase_mnase/dmnase_raw_counts.tsv', # raw read counts at each step
+        'dnase_mnase/dmnase_stats_raw_counts.tsv', # raw read counts at each step
+        'dnase_mnase/dmnase_stats_frac_passed.tsv',
         'processed_tracks/dmnase_ce10_stats.tsv', # percentages that passed each step
     run:
         df = pd.DataFrame()
@@ -100,7 +90,7 @@ rule dmnase_stats:
         #                   / df['tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.c_fr'].astype(int)).map('{:,.02f}'.format)
 
         df_.sort_index().to_csv(output[1], sep='\t')
-
+        df_.sort_index().to_csv(output[2], sep='\t')
 
 rule dnase_mnase:
     input:
@@ -117,9 +107,13 @@ rule dnase_mnase:
         # GEO -- fragment sizes
         expand(pf('{bid}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.fsizes', '.txt', 'dnase_mnase'), bid=l_dnase_mnase_samples()),
 
-rule dnase_mnase_labelled:
+rule dmnase_ce10_spmr:
     input:
-        expand(pf('{label}', 'spmr_lt300', '.bw', 'dnase_mnase_labelled'), label=d_dnase_mnase_label_bid.keys()),
+        lambda wildcards: pf('%s', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt300', '_treat_pileup.bw', 'dnase_mnase') % (d_dnase_mnase_label_bid[wildcards.label],),
+    output:
+        pf('{label}', 'dmnase_ce10_spmr', '.bw', 'processed_tracks'),
+    shell:
+        'scripts/bigWiggleTools.ipy write {output} scale 0.1 bin 10 {input}'
 
 def dnase_mnase819_geo_read1_(wildcards):
     fn_ = wildcards.raw_file_1
@@ -176,4 +170,4 @@ rule dnase_mnase819_geo:
     input:
         expand('dnase_mnase819_geo/reads/{raw_file_1}', raw_file_1=itertools.islice(pd.read_csv('dnase_mnase819_geo/dnase_mnase_geo1_samples.tsv', sep='\t')['raw_file_1'].tolist(), None)),
         expand('dnase_mnase819_geo/reads/{raw_file_2}', raw_file_2=itertools.islice(pd.read_csv('dnase_mnase819_geo/dnase_mnase_geo1_samples.tsv', sep='\t')['raw_file_2'].tolist(), None)),
-        #expand('dnase_mnase819_geo/reads/{raw_file_2}', raw_file_2=itertools.islice(pd.read_csv('dnase_mnase819_geo/dnase_mnase_geo1_samples.tsv', sep='\t')['raw_file_2'].tolist(), None)),
+
