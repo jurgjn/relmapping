@@ -217,56 +217,6 @@ rule lcap_nreads_vs_outron_coverage_sample:
         expand('samples/{bid}_{sub}.r1.fq.gz', bid=['HS352_JA1_lcRNA_S1r', 'HS352_JA7_lcRNA_S1r'], sub=['1M', '5M', '10M', '20M']),
         expand('samples/{bid}_{sub}.r2.fq.gz', bid=['HS352_JA1_lcRNA_S1r', 'HS352_JA7_lcRNA_S1r'], sub=['1M', '5M', '10M', '20M']),
 
-rule lcap_qc:
-    input:
-        expand(pf('{bid}', '{step}', '.txt', 'lcap'), bid=config['lcap_raw'],
-            step=[
-                'c_r1', # Total reads
-                'trim20.bwa_pe.c_r1',
-                'trim20.bwa_pe.rm_unmapped_pe.c_r1',
-                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.c_r1',
-                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.c_r1',
-                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.c_r1',
-                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.c_r1',
-                ]),
-    output:
-        'lcap/lcap_qc_counts.tsv',
-        'lcap/lcap_qc_passed.tsv',
-    run:
-        df = pd.DataFrame()
-        df.index.name = 'sample'
-        for (bid, step, suffix, prefix) in map(parse_pf, input):
-            df.ix[bid, step] = read_int(pf(bid, step, suffix, prefix))
-        df.to_csv(output[0], sep='\t')
-
-        def pct_(a, b): return list(map(lambda a_i, b_i: '%.01f%%' % (100.0 * a_i / b_i,), a, b))
-        def loss_pct_(col_a, col_b): return list(map(lambda a_i, b_i: '%.02f%%' % (100.0 * (a_i - b_i) / a_i,), df[col_a], df[col_b]))
-        def keep_pct_(col_a, col_b): return list(map(lambda a_i, b_i: '%.02f%%' % (100.0 * b_i / a_i,), df[col_a], df[col_b]))
-        df_ = pd.DataFrame()
-        df_['raw_reads'] = df['c_r1'].astype(int).map(yp.f_uk)
-        df_['mapped'] = keep_pct_(
-                'trim20.bwa_pe.c_r1',
-                'trim20.bwa_pe.rm_unmapped_pe.c_r1',
-        )
-        df_['not_mitochondrial'] = keep_pct_(
-                'trim20.bwa_pe.rm_unmapped_pe.c_r1',
-                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.c_r1',
-        )
-        df_['not_rRNA'] = keep_pct_(
-                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.c_r1',
-                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.c_r1',
-        )
-        df_['not_blacklisted'] = keep_pct_(
-                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.c_r1',
-                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.c_r1',
-        )
-        df_['mapq10'] = keep_pct_(
-                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.c_r1',
-                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.c_r1',
-        )
-        df_['useful_reads'] = df['trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.c_r1'].astype(int).map(yp.f_uk)
-        df_.sort_index().to_csv(output[1], sep='\t')
-
 rule lcap_nreads_vs_outron_coverage:
     input:
         'lcap/lcap_qc.tsv'
@@ -857,3 +807,53 @@ rule lcap_processed: # smj 100 lcap_processed --keep-going --restart-times 3 -n
         #expand(pf('{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.htseq_counts', '.tsv', 'lcap'), bid=config['lcap_HS569']),
         expand(pf('_{bid}', 'lcap_ce10_linear_fwd', '.bw', 'processed_tracks'), bid=config['lcap_raw']),
         expand(pf('_{bid}', 'lcap_ce10_linear_rev', '.bw', 'processed_tracks'), bid=config['lcap_raw']),
+
+rule lcap_processed_stats:
+    input:
+        expand(pf('{bid}', '{step}', '.txt', 'lcap'), bid=config['lcap_raw'],
+            step=[
+                'c_r1', # Total reads
+                'trim20.bwa_pe.c_r1',
+                'trim20.bwa_pe.rm_unmapped_pe.c_r1',
+                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.c_r1',
+                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.c_r1',
+                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.c_r1',
+                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.c_r1',
+                ]),
+    output:
+        'lcap/lcap_stats_raw_counts.tsv', # raw read counts at each step
+        'processed_tracks/lcap_ce10_stats.tsv', # percentages that passed each step
+    run:
+        df = pd.DataFrame()
+        df.index.name = 'sample'
+        for (bid, step, suffix, prefix) in map(parse_pf, input):
+            df.ix[bid, step] = read_int(pf(bid, step, suffix, prefix))
+        df.to_csv(output[0], sep='\t')
+
+        def pct_(a, b): return list(map(lambda a_i, b_i: '%.01f%%' % (100.0 * a_i / b_i,), a, b))
+        def loss_pct_(col_a, col_b): return list(map(lambda a_i, b_i: '%.02f%%' % (100.0 * (a_i - b_i) / a_i,), df[col_a], df[col_b]))
+        def keep_pct_(col_a, col_b): return list(map(lambda a_i, b_i: '%.02f%%' % (100.0 * b_i / a_i,), df[col_a], df[col_b]))
+        df_ = pd.DataFrame()
+        df_['raw_reads'] = df['c_r1'].astype(int).map(yp.f_uk)
+        df_['mapped'] = keep_pct_(
+                'trim20.bwa_pe.c_r1',
+                'trim20.bwa_pe.rm_unmapped_pe.c_r1',
+        )
+        df_['not_mitochondrial'] = keep_pct_(
+                'trim20.bwa_pe.rm_unmapped_pe.c_r1',
+                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.c_r1',
+        )
+        df_['not_rRNA'] = keep_pct_(
+                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.c_r1',
+                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.c_r1',
+        )
+        df_['not_blacklisted'] = keep_pct_(
+                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.c_r1',
+                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.c_r1',
+        )
+        df_['mapq10'] = keep_pct_(
+                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.c_r1',
+                'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.c_r1',
+        )
+        df_['useful_reads'] = df['trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.c_r1'].astype(int).map(yp.f_uk)
+        df_.sort_index().to_csv(output[1], sep='\t')

@@ -48,52 +48,6 @@ rule coverage_spmr_q10_reads_by_stage:
         'ln -s `pwd`/{input} `pwd`/{output}'
 
 """
-rule atac728_qc:
-    input:
-        expand(pf('{sample}', '{step}', '.txt', 'atac728'), sample=config['stages_atac_by_rep'],
-            step=[
-                'c_r1', # Total reads
-                'tg_se.bwa_se.c',
-                'tg_se.bwa_se.rm_unmapped.c',
-                'tg_se.bwa_se.rm_unmapped.rm_chrM.c',
-                'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.c',
-                'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c',
-                ]),
-    output:
-        'atac728/atac_qc_counts.tsv',
-        'atac728/atac_qc_passed.tsv',
-    run:
-        df = pd.DataFrame()
-        df.index.name = 'sample'
-        for (bid, step, suffix, prefix) in map(parse_pf, input):
-            df.ix[bid, step] = read_int(pf(bid, step, suffix, prefix))
-        df.to_csv(output[0], sep='\t')
-
-        def pct_(a, b): return list(map(lambda a_i, b_i: '%.01f%%' % (100.0 * a_i / b_i,), a, b))
-        def loss_pct_(col_a, col_b): return list(map(lambda a_i, b_i: '%.02f%%' % (100.0 * (a_i - b_i) / a_i,), df[col_a], df[col_b]))
-        def keep_pct_(col_a, col_b): return list(map(lambda a_i, b_i: '%.02f%%' % (100.0 * b_i / a_i,), df[col_a], df[col_b]))
-
-        df_ = pd.DataFrame()
-        df_['raw_reads'] = df['c_r1'].astype(int)
-        df_['mapped'] = keep_pct_(
-                'tg_se.bwa_se.c',
-                'tg_se.bwa_se.rm_unmapped.c',
-        )
-        df_['not mitochondrial'] = keep_pct_(
-                'tg_se.bwa_se.rm_unmapped.c',
-                'tg_se.bwa_se.rm_unmapped.rm_chrM.c',
-        )
-        df_['not blacklisted'] = keep_pct_(
-                'tg_se.bwa_se.rm_unmapped.rm_chrM.c',
-                'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.c',
-        )
-        df_['mapq10'] = keep_pct_(
-                'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.c',
-                'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c',
-        )
-        df_['useful_reads'] = df['tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c'].astype(int)
-        df_.sort_index().to_csv(output[1], sep='\t')
-
 rule sfnorm_atac728_wt_glp1:
     input:
         pf('atac728_wt_glp1', '{step}.sfnorm', '_counts.tsv', 'atac728'), # computed in atac_sizefactor.ipynb so not in snakemake
@@ -358,7 +312,10 @@ rule atac:
         expand(pf('{bid}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac'), bid=['HS298_JA26_N2_atac_S1']),#[*config['atac']]),
         expand(pf('{bid}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt300', '_treat_pileup.bw', 'atac'), bid=['HS298_JA26_N2_atac_S1']),#[*config['atac']]),
 
+df_atac_ = None
 def df_atac():
+    global df_atac_
+
     def processed_id(bid, lid):
         if lid != lid or lid == '':
             return '_%(bid)s' % locals()
@@ -366,13 +323,16 @@ def df_atac():
     def is_se(bid): return os.path.isfile('samples/%(bid)s.r1.fq.gz' % locals())
     def is_pe(bid): return os.path.isfile('samples/%(bid)s.r2.fq.gz' % locals())
 
-    fp_ = 'processed_tracks/Worm Regulatory Mapping Data Sets - Libraries (ATAC-, DNase-, MNase-seq).tsv'
-    df_ = pd.read_csv(fp_, sep='\t').query('(Enzyme == "Tn5") & (Genome == "ce10")')[['Bioinformatics ID(s)', 'Library series ID']].rename(columns={'Bioinformatics ID(s)': 'bid', 'Library series ID': 'lid'}).reset_index(drop=True)
-    df_['pid'] = [ *map(processed_id, df_['bid'], df_['lid']) ]
-    df_['is_pe'] = [ *map(is_pe, df_['bid']) ]
-    df_['is_se'] = [ *map(is_se, df_['bid']) ]
-    #df_ = df_.query('bid == "HS298_JA26_N2_atac_S1" | bid == "HS491_metset_ATAC_rep1" | bid == "HS491_tm548_ATAC_rep1"')
-    return df_
+    if df_atac_ is None:
+        fp_ = 'processed_tracks/Worm Regulatory Mapping Data Sets - Libraries (ATAC-, DNase-, MNase-seq).tsv'
+        df_ = pd.read_csv(fp_, sep='\t').query('(Enzyme == "Tn5") & (Genome == "ce10")')[['Bioinformatics ID(s)', 'Library series ID']].rename(columns={'Bioinformatics ID(s)': 'bid', 'Library series ID': 'lid'}).reset_index(drop=True)
+        df_['pid'] = [ *map(processed_id, df_['bid'], df_['lid']) ]
+        df_['is_pe'] = [ *map(is_pe, df_['bid']) ]
+        df_['is_se'] = [ *map(is_se, df_['bid']) ]
+        #df_ = df_.query('bid == "HS298_JA26_N2_atac_S1" | bid == "HS491_metset_ATAC_rep1" | bid == "HS491_tm548_ATAC_rep1"')
+        df_atac_ = df_
+
+    return df_atac_
 
 def atac_ce10_spmr_se_input_(wildcards):
     pid_ = wildcards.pid
@@ -380,7 +340,7 @@ def atac_ce10_spmr_se_input_(wildcards):
     assert(len(df_) == 1)
     return pf(df_.iloc[0]['bid'], 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac')
 
-def atac_ce10_spmr_pe_lt200_input_(wildcards):
+def atac_ce10_spmr_pe_input_(wildcards):
     pid_ = wildcards.pid
     df_ = df_atac().query('pid == @pid_')
     assert(len(df_) == 1)
@@ -394,15 +354,61 @@ rule atac_ce10_spmr_se:
     shell:
         'scripts/bigWiggleTools.ipy write {output} scale 0.1 bin 10 {input}'
 
-rule atac_ce10_spmr_pe_lt200:
+rule atac_ce10_spmr_pe:
     input:
-        atac_ce10_spmr_pe_lt200_input_
+        atac_ce10_spmr_pe_input_
     output:
-        pf('{pid}', 'atac_ce10_spmr_pe_lt200', '.bw', 'processed_tracks')
+        pf('{pid}', 'atac_ce10_spmr_pe', '.bw', 'processed_tracks')
     shell:
         'scripts/bigWiggleTools.ipy write {output} scale 0.1 bin 10 {input}'
 
 rule atac_processed:
     input:
         expand(pf('{pid}', 'atac_ce10_spmr_se', '.bw', 'processed_tracks'), pid=[* df_atac().query('is_se')['pid'] ]),
-        expand(pf('{pid}', 'atac_ce10_spmr_pe_lt200', '.bw', 'processed_tracks'), pid=[* df_atac().query('is_pe')['pid'] ]),
+        expand(pf('{pid}', 'atac_ce10_spmr_pe', '.bw', 'processed_tracks'), pid=[* df_atac().query('is_pe')['pid'] ]),
+
+rule atac_processed_stats:
+    input:
+        expand(pf('{bid}', '{step}', '.txt', 'atac'), bid=df_atac().query('is_se')['bid'].tolist(),
+            step=[
+                'c_r1', # Total reads
+                'tg_se.bwa_se.c', # After adapter trimming
+                'tg_se.bwa_se.rm_unmapped.c', # Mapped reads
+                'tg_se.bwa_se.rm_unmapped.rm_chrM.c', # Non-mitochondrial
+                'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.c', # Non-blacklisted
+                'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c', # Q<10-aligned
+                ]),
+    output:
+        'atac/atac_stats_raw_counts.tsv', # raw read counts at each step
+        'processed_tracks/atac_ce10_stats.tsv', # percentages that passed each step
+    run:
+        df = pd.DataFrame()
+        df.index.name = 'sample'
+        for (bid, step, suffix, prefix) in map(parse_pf, input):
+            df.ix[bid, step] = read_int(pf(bid, step, suffix, prefix))
+        df.to_csv(output[0], sep='\t')
+
+        def pct_(a, b): return list(map(lambda a_i, b_i: '%.01f%%' % (100.0 * a_i / b_i,), a, b))
+        def loss_pct_(col_a, col_b): return list(map(lambda a_i, b_i: '%.02f%%' % (100.0 * (a_i - b_i) / a_i,), df[col_a], df[col_b]))
+        def keep_pct_(col_a, col_b): return list(map(lambda a_i, b_i: '%.02f%%' % (100.0 * b_i / a_i,), df[col_a], df[col_b]))
+
+        df_ = pd.DataFrame()
+        df_['raw_reads'] = df['c_r1'].astype(int).map(yp.f_uk)
+        df_['mapped'] = keep_pct_(
+                'tg_se.bwa_se.c',
+                'tg_se.bwa_se.rm_unmapped.c',
+        )
+        df_['not_mitochondrial'] = keep_pct_(
+                'tg_se.bwa_se.rm_unmapped.c',
+                'tg_se.bwa_se.rm_unmapped.rm_chrM.c',
+        )
+        df_['not_blacklisted'] = keep_pct_(
+                'tg_se.bwa_se.rm_unmapped.rm_chrM.c',
+                'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.c',
+        )
+        df_['mapq10'] = keep_pct_(
+                'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.c',
+                'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c',
+        )
+        df_['useful_reads'] = df['tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c'].astype(int).map(yp.f_uk)
+        df_.sort_index().to_csv(output[1], sep='\t')

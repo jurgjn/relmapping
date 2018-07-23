@@ -292,7 +292,7 @@ rule c_TCA:
         with open(output[0], 'w') as fh:
             print(n_TCA_fwd + n_TCA_rev, file=fh)
 
-rule scap_qc:
+rule scap_processed_stats:
     input:
         expand(pf('{bid}', '{step}', '.txt', 'scap'), bid=config['scap'].keys(),
             step=[
@@ -326,8 +326,10 @@ rule scap_qc:
                 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_TCA',                
                 ]),
     output:
-        'scap/scap_qc_counts.tsv',
-        'scap/scap_qc_leaks.tsv',
+        'scap/scap_stats_raw_counts.tsv', # raw read counts at each step
+        'processed_tracks/scap_ce10_stats.tsv', # percentages that passed each step
+        #'scap/scap_qc_counts.tsv',
+        #'scap/scap_qc_leaks.tsv',
     run:
         df = pd.DataFrame()
         df.index.name = 'bid'
