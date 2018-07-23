@@ -795,19 +795,6 @@ rule lcap_ce10_linear_rev:
         scripts/bigWiggleTools.ipy write {output} "scale -0.1" bin 10 {input}
         '''
 
-rule lcap_processed: # smj 100 lcap_processed --keep-going --restart-times 3 -n
-    input:
-        #expand(pf('{bid}', 'c_r1', '.txt', 'lcap'), bid=config['lcap_raw']),
-        #expand(pf('{bid}', 'c_r2', '.txt', 'lcap'), bid=config['lcap_raw']),
-        #expand(htp('.bid/{bid}_1M.r1.fq.gz'), bid=config['lcap_raw']),
-        #expand(htp('.bid/{bid}_1M.r2.fq.gz'), bid=config['lcap_raw']),
-        #expand(pf('{bid}', 'trim14.bwa_pe', '.bam', 'lcap'), bid=config['lcap_raw']),
-        #expand(pf('{bid}', 'trim20.bwa_pe', '.bam', 'lcap'), bid=config['lcap_raw']),
-        #expand(pf('{bid}', 'trim20.bwa_pe', '.bam.bai', 'lcap'), bid=config['lcap_raw']),
-        #expand(pf('{bid}', 'trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.htseq_counts', '.tsv', 'lcap'), bid=config['lcap_HS569']),
-        expand(pf('_{bid}', 'lcap_ce10_linear_fwd', '.bw', 'processed_tracks'), bid=config['lcap_raw']),
-        expand(pf('_{bid}', 'lcap_ce10_linear_rev', '.bw', 'processed_tracks'), bid=config['lcap_raw']),
-
 rule lcap_processed_stats:
     input:
         expand(pf('{bid}', '{step}', '.txt', 'lcap'), bid=config['lcap_raw'],
@@ -825,7 +812,7 @@ rule lcap_processed_stats:
         'processed_tracks/lcap_ce10_stats.tsv', # percentages that passed each step
     run:
         df = pd.DataFrame()
-        df.index.name = 'sample'
+        df.index.name = 'dataset'
         for (bid, step, suffix, prefix) in map(parse_pf, input):
             df.ix[bid, step] = read_int(pf(bid, step, suffix, prefix))
         df.to_csv(output[0], sep='\t')

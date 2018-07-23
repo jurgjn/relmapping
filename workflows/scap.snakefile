@@ -292,7 +292,7 @@ rule c_TCA:
         with open(output[0], 'w') as fh:
             print(n_TCA_fwd + n_TCA_rev, file=fh)
 
-rule scap_processed_stats:
+rule scap_stats:
     input:
         expand(pf('{bid}', '{step}', '.txt', 'scap'), bid=config['scap'].keys(),
             step=[
@@ -327,12 +327,11 @@ rule scap_processed_stats:
                 ]),
     output:
         'scap/scap_stats_raw_counts.tsv', # raw read counts at each step
+        'scap/scap_stats_frac_passed.tsv',
         'processed_tracks/scap_ce10_stats.tsv', # percentages that passed each step
-        #'scap/scap_qc_counts.tsv',
-        #'scap/scap_qc_leaks.tsv',
     run:
         df = pd.DataFrame()
-        df.index.name = 'bid'
+        df.index.name = 'dataset'
         for (bid, step, suffix, prefix) in map(parse_pf, input):
             #df.ix[bid, step] = '%d' % (read_int(pf(bid, step, suffix, prefix)),)
             df.ix[bid, step] = read_int(pf(bid, step, suffix, prefix))
@@ -340,47 +339,25 @@ rule scap_processed_stats:
         #df.sort_index(axis=0, inplace=True)
         df.to_csv(output[0], sep='\t')
 
-        """
-
-        l_raw = df['c_r1'].astype(int) # Raw reads, as they came off the sequencer
-        l_tgr = df['c_r1'] - df['tg_se.c_r1'] # Reads removed by trim_galore
-        l_unm = df['tg_se.c_r1'] - df['tg_se.bwa_se.c_aln'] # Reads not mapped to the worm genome
-        l_chm = df['tg_se.bwa_se.c_chrM'] # Reads mapped to chrM
-        l_blk = df['tg_se.bwa_se.c_blacklist'] # Reads mapped to chrM
-
-        #rm_tg -- either adapter dimer, or low-quality
-        ##pct_(l_tgr, l_raw)
-        """
         def pct_(a, b): return list(map(lambda a_i, b_i: '%.01f%%' % (100.0 * a_i / b_i,), a, b))
         def loss_pct_(col_a, col_b): return list(map(lambda a_i, b_i: '%.02f%%' % (100.0 * (a_i - b_i) / a_i,), df[col_a], df[col_b]))
+        def keep_pct_(col_a, col_b): return list(map(lambda a_i, b_i: '%.02f%%' % (100.0 * b_i / a_i,), df[col_a], df[col_b]))
 
         df_ = pd.DataFrame()
         df_['raw_reads'] = df['c_r1'].astype(int).map(yp.f_uk)
-        df_['adapter_or_lowqual'] = loss_pct_('c_r1', 'tg_se.c_r1')
-        df_['unmapped'] = loss_pct_('tg_se.bwa_se.c', 'tg_se.bwa_se.rm_unmapped.c')
-        df_['mitochondrial'] = loss_pct_('tg_se.bwa_se.rm_unmapped.c','tg_se.bwa_se.rm_unmapped.rm_chrM.c')
-        df_['blacklist'] = loss_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.c')
-        df_['mapq_lt10'] = loss_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c')
-        df_['non_coding'] = loss_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.c')        
+        df_['not_adapter_or_lowqual'] = keep_pct_('c_r1', 'tg_se.c_r1')
+        df_['mapped'] = keep_pct_('tg_se.bwa_se.c', 'tg_se.bwa_se.rm_unmapped.c')
+        df_['not_mitochondrial'] = keep_pct_('tg_se.bwa_se.rm_unmapped.c','tg_se.bwa_se.rm_unmapped.rm_chrM.c')
+        df_['not_blacklisted'] = keep_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.c')
+        df_['mapq10'] = keep_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c')
+        df_['not_non_coding'] = keep_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.c')        
         df_['useful_reads'] = df['tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.c'].astype(int).map(yp.f_uk)
         #df_['tics_top5'] = loss_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_rm_tics_top5')
         #df_['tics_top20'] = loss_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_rm_tics_top20')
-        df_['inr_sites'] = df['tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_TCA'].astype(int).map(yp.f_uk)
+        #df_['inr_sites'] = df['tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_TCA'].astype(int).map(yp.f_uk)
 
-        """
-        df_['rm_tg_frac'] = l_tgr
-        df_['not_mapped'] = l_unm
-        df_['mitochondrial'] = l_chm
-        df_['blacklist'] = l_blk
-
-        #samtools mapped:
-        #chrM -- samtools mapped chrM
-        #mapq0 -- samtools mapped not chrM mapq zero
-        #mapq_low -- samtools mapped not chrM
-        #highly_abundant
-        #useful
-        """
         df_.to_csv(output[1], sep='\t')
+        df_.to_csv(output[2], sep='\t')
 
 def scap_wt_qc_pass():
     df_ = pd.DataFrame(config['scap']).transpose().query('(strain == "N2") & (qc_fail != qc_fail)')
@@ -785,8 +762,3 @@ rule scap_ce10_init_rev:
         ln -s `pwd`/{input} `pwd`/{output}
         touch -h `pwd`/{output}
         '''
-
-rule scap_processed:
-    input:
-        expand(pf('{pid}', 'scap_ce10_init_fwd', '.bw', 'processed_tracks'), pid=[* df_scap()['pid'] ]),
-        expand(pf('{pid}', 'scap_ce10_init_rev', '.bw', 'processed_tracks'), pid=[* df_scap()['pid'] ]),

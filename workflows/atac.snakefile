@@ -362,11 +362,6 @@ rule atac_ce10_spmr_pe:
     shell:
         'scripts/bigWiggleTools.ipy write {output} scale 0.1 bin 10 {input}'
 
-rule atac_processed:
-    input:
-        expand(pf('{pid}', 'atac_ce10_spmr_se', '.bw', 'processed_tracks'), pid=[* df_atac().query('is_se')['pid'] ]),
-        expand(pf('{pid}', 'atac_ce10_spmr_pe', '.bw', 'processed_tracks'), pid=[* df_atac().query('is_pe')['pid'] ]),
-
 rule atac_processed_stats:
     input:
         expand(pf('{bid}', '{step}', '.txt', 'atac'), bid=df_atac().query('is_se')['bid'].tolist(),
@@ -383,7 +378,7 @@ rule atac_processed_stats:
         'processed_tracks/atac_ce10_stats.tsv', # percentages that passed each step
     run:
         df = pd.DataFrame()
-        df.index.name = 'sample'
+        df.index.name = 'dataset'
         for (bid, step, suffix, prefix) in map(parse_pf, input):
             df.ix[bid, step] = read_int(pf(bid, step, suffix, prefix))
         df.to_csv(output[0], sep='\t')
