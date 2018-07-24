@@ -814,7 +814,7 @@ rule lcap_processed_stats:
 
     run:
         df = pd.DataFrame()
-        df.index.name = 'dataset'
+        df.index.name = 'dataset_id'
         for (bid, step, suffix, prefix) in map(parse_pf, input):
             df.ix[bid, step] = read_int(pf(bid, step, suffix, prefix))
         df.to_csv(output[0], sep='\t')
@@ -846,4 +846,8 @@ rule lcap_processed_stats:
         )
         df_['useful_reads'] = df['trim20.bwa_pe.rm_unmapped_pe.rm_chrM.rm_rRNA_broad.rm_blacklist.rm_q10.c_r1'].astype(int).map(yp.f_uk)
         df_.sort_index().to_csv(output[1], sep='\t')
+
+        # Add library_series_id, GEO id for final table
+        d_ = dict(zip(config['lcap808'].values(), config['lcap808'].keys()))
+        df_.insert(loc=0, column='geo_id', value=[ *map(lambda bid: d_.get(bid, ''), df_.index) ])
         df_.sort_index().to_csv(output[2], sep='\t')
