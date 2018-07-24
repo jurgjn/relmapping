@@ -47,7 +47,7 @@ chroms_ce10 = {
 
 def read_int(fp_inp):
     assert(os.path.isfile(fp_inp))
-    print(fp_inp)
+    #print(fp_inp)
     with open(fp_inp) as fh_inp:
         return int(fh_inp.read())
 

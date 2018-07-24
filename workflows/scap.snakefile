@@ -331,7 +331,7 @@ rule scap_stats:
         'processed_tracks/scap_ce10_stats.tsv', # percentages that passed each step
     run:
         df = pd.DataFrame()
-        df.index.name = 'dataset'
+        df.index.name = 'dataset_id'
         for (bid, step, suffix, prefix) in map(parse_pf, input):
             #df.ix[bid, step] = '%d' % (read_int(pf(bid, step, suffix, prefix)),)
             df.ix[bid, step] = read_int(pf(bid, step, suffix, prefix))
@@ -355,8 +355,12 @@ rule scap_stats:
         #df_['tics_top5'] = loss_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_rm_tics_top5')
         #df_['tics_top20'] = loss_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_rm_tics_top20')
         #df_['inr_sites'] = df['tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_TCA'].astype(int).map(yp.f_uk)
-
         df_.to_csv(output[1], sep='\t')
+
+        # Add library_series_id, GEO id for final table
+        df_.insert(loc=0, column='library_series_id', value=[ *map(lambda bid: config['scap'][bid]['library_series_id'], df_.index) ])
+        d_ = dict(zip(config['scap815'].values(), config['scap815'].keys()))
+        df_.insert(loc=1, column='geo_id', value=[ *map(lambda bid: d_.get(bid, ''), df_.index) ])
         df_.to_csv(output[2], sep='\t')
 
 def scap_wt_qc_pass():
