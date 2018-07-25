@@ -263,6 +263,13 @@ rule cb3:
         bwa index shared/cb3.fa
         '''
 
+"""
+curl http://hgdownload.cse.ucsc.edu/goldenPath/sacCer3/bigZips/sacCer3.2bit -o shared/sacCer3.2bit
+curl http://hgdownload.cse.ucsc.edu/goldenPath/sacCer3/bigZips/sacCer3.chrom.sizes -o shared/sacCer3.chroms
+twoBitToFa shared/sacCer3.2bit shared/sacCer3.fa
+bwa index shared/sacCer3.fa
+"""
+
 rule mean10:
     input:
         pf('sites', '{step}', '.bw', '{prefix}'),

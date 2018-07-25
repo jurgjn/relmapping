@@ -380,7 +380,7 @@ rule atac_processed_stats:
 
     run:
         df = pd.DataFrame()
-        df.index.name = 'dataset'
+        df.index.name = 'dataset_id'
         for (bid, step, suffix, prefix) in map(parse_pf, input):
             df.ix[bid, step] = read_int(pf(bid, step, suffix, prefix))
         df.to_csv(output[0], sep='\t')
@@ -409,4 +409,8 @@ rule atac_processed_stats:
         )
         df_['useful_reads'] = df['tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c'].astype(int).map(yp.f_uk)
         df_.sort_index().to_csv(output[1], sep='\t')
+        
+        d_ = dict(zip(config['atac814'].values(), config['atac814'].keys()))
+        df_.insert(loc=0, column='geo_id', value=[ *map(lambda bid: d_.get(bid, ''), df_.index) ])
+
         df_.sort_index().to_csv(output[2], sep='\t')

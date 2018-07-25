@@ -850,4 +850,4 @@ rule lcap_processed_stats:
         # Add library_series_id, GEO id for final table
         d_ = dict(zip(config['lcap808'].values(), config['lcap808'].keys()))
         df_.insert(loc=0, column='geo_id', value=[ *map(lambda bid: d_.get(bid, ''), df_.index) ])
-        df_.sort_index().to_csv(output[2], sep='\t')
+        df_.to_csv(output[2], sep='\t')

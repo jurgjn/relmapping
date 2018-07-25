@@ -780,18 +780,6 @@ lcap_raw:
 - HS569_lcRNA_glp1_P39_D14
 - HS569_lcRNA_glp1_P39_D7
 
-lcap_HS569:
-- HS569_lcRNA_glp1_P15_D3
-- HS569_lcRNA_glp1_P15_YA
-- HS569_lcRNA_glp1_P22_D10
-- HS569_lcRNA_glp1_P22_D14
-- HS569_lcRNA_glp1_P22_D3
-- HS569_lcRNA_glp1_P22_D7
-- HS569_lcRNA_glp1_P22_YA
-- HS569_lcRNA_glp1_P39_D10
-- HS569_lcRNA_glp1_P39_D14
-- HS569_lcRNA_glp1_P39_D7
-
 lcap823:
   neurons_rep1a: HS634_JSs096
   neurons_rep1b: HS634_JSs097
