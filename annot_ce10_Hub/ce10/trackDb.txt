@@ -3,7 +3,7 @@ bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE11
 shortLabel ATAC-seq Emb
 longLabel Chromatin accessibility in Emb
 type bigWig
-maxHeightPixels 50
+maxHeightPixels 30
 viewLimits 0:40
 visibility full
 
@@ -12,7 +12,7 @@ bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE11
 shortLabel ATAC-seq L1
 longLabel Chromatin accessibility in L1
 type bigWig
-maxHeightPixels 50
+maxHeightPixels 30
 viewLimits 0:40
 visibility full
 
@@ -21,7 +21,7 @@ bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE11
 shortLabel ATAC-seq L2
 longLabel Chromatin accessibility in L2
 type bigWig
-maxHeightPixels 50
+maxHeightPixels 30
 viewLimits 0:40
 visibility full
 
@@ -30,7 +30,7 @@ bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE11
 shortLabel ATAC-seq L3
 longLabel Chromatin accessibility in L3
 type bigWig
-maxHeightPixels 50
+maxHeightPixels 30
 viewLimits 0:40
 visibility full
 
@@ -39,7 +39,7 @@ bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE11
 shortLabel ATAC-seq L4
 longLabel Chromatin accessibility in L4
 type bigWig
-maxHeightPixels 50
+maxHeightPixels 30
 viewLimits 0:40
 visibility full
 
@@ -48,6 +48,51 @@ bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE11
 shortLabel ATAC-seq YA
 longLabel Chromatin accessibility in young adults
 type bigWig
-maxHeightPixels 50
+maxHeightPixels 30
+viewLimits 0:40
+visibility full
+
+track atac_glp1_d1
+bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_glp1_d1.bw
+shortLabel ATAC-seq d1
+longLabel Chromatin accessibility in d1
+type bigWig
+maxHeightPixels 30
+viewLimits 0:40
+visibility full
+
+track atac_glp1_d2
+bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_glp1_d2.bw
+shortLabel ATAC-seq d2
+longLabel Chromatin accessibility in d2
+type bigWig
+maxHeightPixels 30
+viewLimits 0:40
+visibility full
+
+track atac_glp1_d6
+bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_glp1_d6.bw
+shortLabel ATAC-seq d6
+longLabel Chromatin accessibility in d6
+type bigWig
+maxHeightPixels 30
+viewLimits 0:40
+visibility full
+
+track atac_glp1_d9
+bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_glp1_d9.bw
+shortLabel ATAC-seq d9
+longLabel Chromatin accessibility in d9
+type bigWig
+maxHeightPixels 30
+viewLimits 0:40
+visibility full
+
+track atac_glp1_d13
+bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_glp1_d13.bw
+shortLabel ATAC-seq d13
+longLabel Chromatin accessibility in d13
+type bigWig
+maxHeightPixels 30
 viewLimits 0:40
 visibility full
