@@ -1,2 +1,3 @@
 genome ce10
 trackDb ce10/trackDb.txt
+defaultPos chrI:12675200-12686700
