@@ -3,6 +3,8 @@ bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE11
 shortLabel ATAC-seq Emb
 longLabel Stage-specific genome-wide accessibility profile
 type bigWig
+maxHeightPixels 50
+viewLimits 0 40
 visibility full
 
 track atac_wt_l1
@@ -10,6 +12,8 @@ bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE11
 shortLabel ATAC-seq L1
 longLabel Stage-specific genome-wide accessibility profile
 type bigWig
+maxHeightPixels 50
+viewLimits 0 40
 visibility full
 
 track atac_wt_l2
@@ -17,6 +21,8 @@ bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE11
 shortLabel ATAC-seq L2
 longLabel Stage-specific genome-wide accessibility profile
 type bigWig
+maxHeightPixels 50
+viewLimits 0 40
 visibility full
 
 track atac_wt_l3
@@ -24,6 +30,8 @@ bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE11
 shortLabel ATAC-seq L3
 longLabel Stage-specific genome-wide accessibility profile
 type bigWig
+maxHeightPixels 50
+viewLimits 0 40
 visibility full
 
 track atac_wt_l4
@@ -31,6 +39,8 @@ bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE11
 shortLabel ATAC-seq L4
 longLabel Stage-specific genome-wide accessibility profile
 type bigWig
+maxHeightPixels 50
+viewLimits 0 40
 visibility full
 
 track atac_wt_ya
@@ -38,4 +48,6 @@ bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE11
 shortLabel ATAC-seq YA
 longLabel Stage-specific genome-wide accessibility profile
 type bigWig
+maxHeightPixels 50
+viewLimits 0 40
 visibility full
