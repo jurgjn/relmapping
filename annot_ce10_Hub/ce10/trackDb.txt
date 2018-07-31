@@ -1,11 +1,11 @@
 track ATACEmb
-bigDataUrl atac_wt_emb.bw
+bigDataUrl https://github.com/jurgjn/relmapping/blob/master/annot_ce10_Hub/ce10/atac_wt_emb.bw?raw=true
 shortLabel ATAC Signal Emb
 longLabel Depth of alignments of DNAse reads
 type bigWig
 
 track ATACL1
-bigDataUrl atac_wt_l1.bw
+bigDataUrl https://github.com/jurgjn/relmapping/blob/master/annot_ce10_Hub/ce10/atac_wt_l1.bw?raw=true
 shortLabel ATAC Signal L1
 longLabel Depth of alignments of DNAse reads
 type bigWig
