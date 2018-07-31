@@ -6,6 +6,7 @@ type bigWig
 maxHeightPixels 30
 viewLimits 0:40
 visibility full
+priority 1
 
 track atac_wt_l1
 bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_wt_l1.bw
@@ -15,6 +16,7 @@ type bigWig
 maxHeightPixels 30
 viewLimits 0:40
 visibility full
+priority 2
 
 track atac_wt_l2
 bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_wt_l2.bw
@@ -24,6 +26,7 @@ type bigWig
 maxHeightPixels 30
 viewLimits 0:40
 visibility full
+priority 3
 
 track atac_wt_l3
 bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_wt_l3.bw
@@ -33,6 +36,7 @@ type bigWig
 maxHeightPixels 30
 viewLimits 0:40
 visibility full
+priority 4
 
 track atac_wt_l4
 bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_wt_l4.bw
@@ -42,6 +46,7 @@ type bigWig
 maxHeightPixels 30
 viewLimits 0:40
 visibility full
+priority 5
 
 track atac_wt_ya
 bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_wt_ya.bw
@@ -51,6 +56,7 @@ type bigWig
 maxHeightPixels 30
 viewLimits 0:40
 visibility full
+priority 6
 
 track atac_glp1_d1
 bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_glp1_d1.bw
@@ -60,6 +66,7 @@ type bigWig
 maxHeightPixels 30
 viewLimits 0:40
 visibility full
+priority 7
 
 track atac_glp1_d2
 bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_glp1_d2.bw
@@ -69,6 +76,7 @@ type bigWig
 maxHeightPixels 30
 viewLimits 0:40
 visibility full
+priority 8
 
 track atac_glp1_d6
 bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_glp1_d6.bw
@@ -78,6 +86,7 @@ type bigWig
 maxHeightPixels 30
 viewLimits 0:40
 visibility full
+priority 9
 
 track atac_glp1_d9
 bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_glp1_d9.bw
@@ -87,6 +96,7 @@ type bigWig
 maxHeightPixels 30
 viewLimits 0:40
 visibility full
+priority 10
 
 track atac_glp1_d13
 bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_glp1_d13.bw
@@ -96,3 +106,4 @@ type bigWig
 maxHeightPixels 30
 viewLimits 0:40
 visibility full
+priority 11
