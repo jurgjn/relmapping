@@ -1,11 +1,11 @@
 track ATACEmb
-bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_wt_emb.bw
+bigDataUrl https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE114439&format=file&file=GSE114439%5Fatac%5Fwt%5Femb.bw
 shortLabel ATAC Signal Emb
 longLabel Depth of alignments of DNAse reads
 type bigWig
 
 track ATACL1
-bigDataUrl ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE114nnn/GSE114439/suppl/GSE114439_atac_wt_l1.bw
+bigDataUrl https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE114439&format=file&file=GSE114439%5Fatac%5Fwt%5Fl1.bw
 shortLabel ATAC Signal L1
 longLabel Depth of alignments of DNAse reads
 type bigWig
