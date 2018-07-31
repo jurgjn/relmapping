@@ -1,0 +1,6 @@
+hub Regulatory Elements (hub)
+shortLabel Regulatory Elements (short)
+longLabel Regulatory Elements (long)
+genomesFile genomes.txt
+email jurgjn@users.noreply.github.com
+descriptionUrl ucscHub.html

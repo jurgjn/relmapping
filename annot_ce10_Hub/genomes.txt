@@ -1,0 +1,2 @@
+genome ce10
+trackDb ce10/trackDb.txt
