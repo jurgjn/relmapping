@@ -4,7 +4,7 @@ shortLabel ATAC-seq Emb
 longLabel Stage-specific genome-wide accessibility profile
 type bigWig
 maxHeightPixels 50
-viewLimits 0 40
+viewLimits 0:40
 visibility full
 
 track atac_wt_l1
@@ -13,7 +13,7 @@ shortLabel ATAC-seq L1
 longLabel Stage-specific genome-wide accessibility profile
 type bigWig
 maxHeightPixels 50
-viewLimits 0 40
+viewLimits 0:40
 visibility full
 
 track atac_wt_l2
@@ -22,7 +22,7 @@ shortLabel ATAC-seq L2
 longLabel Stage-specific genome-wide accessibility profile
 type bigWig
 maxHeightPixels 50
-viewLimits 0 40
+viewLimits 0:40
 visibility full
 
 track atac_wt_l3
@@ -31,7 +31,7 @@ shortLabel ATAC-seq L3
 longLabel Stage-specific genome-wide accessibility profile
 type bigWig
 maxHeightPixels 50
-viewLimits 0 40
+viewLimits 0:40
 visibility full
 
 track atac_wt_l4
@@ -40,7 +40,7 @@ shortLabel ATAC-seq L4
 longLabel Stage-specific genome-wide accessibility profile
 type bigWig
 maxHeightPixels 50
-viewLimits 0 40
+viewLimits 0:40
 visibility full
 
 track atac_wt_ya
@@ -49,5 +49,5 @@ shortLabel ATAC-seq YA
 longLabel Stage-specific genome-wide accessibility profile
 type bigWig
 maxHeightPixels 50
-viewLimits 0 40
+viewLimits 0:40
 visibility full
