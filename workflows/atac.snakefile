@@ -250,6 +250,32 @@ rule atac814_alignments:
         touch -h `pwd`/{output}
         '''
 
+rule macs2_daugherty2017:
+    input:
+        pf('{bid}', '{step}', '.bam', '{prefix}'),
+    output:
+        pf('{bid}', '{step}.macs2_daugherty2017', '_peaks.narrowPeak', '{prefix}'), # [0]
+        pf('{bid}', '{step}.macs2_daugherty2017', '_peaks.xls', '{prefix}'), # [1]
+        pf('{bid}', '{step}.macs2_daugherty2017', '_summits.bed', '{prefix}'), # [2]
+        temp(pf('{bid}', '{step}.macs2_daugherty2017', '_treat_pileup.bdg', '{prefix}')), # [3]
+        pf('{bid}', '{step}.macs2_daugherty2017', '_treat_pileup.bw', '{prefix}'), # [4]
+        temp(pf('{bid}', '{step}.macs2_daugherty2017', '_treat.bam', '{prefix}')), # [5]
+        temp(pf('{bid}', '{step}.macs2_daugherty2017', '.chroms', '{prefix}')), # [6]
+    conda:
+        'envs/py2.yaml'
+    params:
+        # single-base reads were shifted 75bp 5’ to mimic read distributions of a 150 bp fragment of ChIP-seq
+        # The following settings were used for MACS: -g 9e7, -q 5e-2, --nomodel, --extsize 150, -B, --keep-dup all, and --call-summits
+        macs2_args = '--format BAM --shift -75    --gsize ce -q 5e-2  --nomodel --extsize 150 --bdg --keep-dup all     --call-summits  --SPMR '
+    shell: '''
+        samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
+        macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_daugherty2017 --name {wildcards.bid}.{wildcards.step}.macs2_daugherty2017
+        samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
+        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
+        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+    '''
+
 rule atac814:
     input:
         # techreps separately:
@@ -286,6 +312,10 @@ rule atac814:
         expand(pf('atac814_{sample}', 'readlen_r2', '.txt', 'atac814'), sample=config['atac814_pe'].keys()),
         # GEO -- fragment sizes
         expand(pf('atac814_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.fsizes', '.txt', 'atac814'), sample=config['atac814_pe'].keys()),
+        # Rev3Q3 -- macs2_daugherty2017
+        expand(pf('atac814_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_daugherty2017', '_treat_pileup.bw', 'atac814'), 
+            sample=['wt_emb_rep1', 'wt_emb_rep2', 'wt_l3_rep1', 'wt_l3_rep2', 'wt_ya_rep1', 'wt_ya_rep2']),
+
 
 rule atac814_ce11:
     input:
@@ -301,10 +331,37 @@ rule atac814_mapq0:
         expand(pf('atac814_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.macs2_pe_lt300', '_treat_pileup.bw', 'atac814'), sample=config['stages_wt_rep']),
         expand(pf('atac814_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'), sample=config['stages_rep']),
 
+rule sample_prp1: # sample pseudoreplicate #1 from two biological replicates
+    input:
+        pf('{sample}_rep1', '{step}', '.bam', '{prefix}'),
+        pf('{sample}_rep2', '{step}', '.bam', '{prefix}'),
+    output:
+        pf('{sample}_rep1', '{step}.sample_prp', '.bam', '{prefix}'),
+    threads: 4
+    shell: '''
+        samtools merge -u --threads {threads} - {input[0]} {input[1]} | samtools view -h -S --threads {threads} - \
+        | awk 'BEGIN{{srand(42);}} substr($1,1,1) == "@" || (rand() < .5)' \
+        | samtools view -b --threads {threads} - > {output[0]}
+    '''
+
+rule sample_prp2: # sample pseudoreplicate #2 from two biological replicates
+    input:
+        pf('{sample}_rep1', '{step}', '.bam', '{prefix}'),
+        pf('{sample}_rep2', '{step}', '.bam', '{prefix}'),
+    output:
+        pf('{sample}_rep2', '{step}.sample_prp', '.bam', '{prefix}'),
+    threads: 4
+    shell: '''
+        samtools merge -u --threads {threads} - {input[0]} {input[1]} | samtools view -h -S --threads {threads} - \
+        | awk 'BEGIN{{srand(42);}} substr($1,1,1) == "@" || (.5 <= rand())' \
+        | samtools view -b --threads {threads} - > {output[0]}
+    '''
+
 rule atac824:
     input:
         expand(pf('atac824_{sample}', 'c_r1', '.txt', 'atac824'), sample=techreps_collapse(config['atac824'].keys())),
         expand(pf('atac824_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac824'), sample=techreps_collapse(config['atac824'].keys())),
+        expand(pf('atac824_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.sample_prp.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac824'), sample=techreps_collapse(config['atac824'].keys())),
         expand(pf('atac824_{condition}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.mean_by_condition', '.bw', 'atac824'), condition=config['atac824_tissues']),
 
 rule atac:
@@ -379,7 +436,14 @@ rule atac_processed_stats:
         'processed_tracks/atac_ce10_stats.tsv', # percentages that passed each step
 
     run:
-        df = pd.DataFrame()
+        """
+        df = make_dnase_mnase_samples(expanded=True)[['Bioinformatics ID(s)', 'Library series ID', 'geo_id', 'Digestion conditions (homogenized)']].set_index('Bioinformatics ID(s)') #pd.DataFrame()
+        df.index.name = 'dataset_id'
+        for (bid, step, suffix, prefix) in map(parse_pf, input):
+            df.ix[bid, step] = read_int(pf(bid, step, suffix, prefix))
+        df.to_csv(output[0], sep='\t')
+        """
+        df = df_atac().query('is_se')[['bid', 'lid']].set_index('bid')
         df.index.name = 'dataset_id'
         for (bid, step, suffix, prefix) in map(parse_pf, input):
             df.ix[bid, step] = read_int(pf(bid, step, suffix, prefix))
@@ -410,7 +474,8 @@ rule atac_processed_stats:
         df_['useful_reads'] = df['tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c'].astype(int).map(yp.f_uk)
         df_.sort_index().to_csv(output[1], sep='\t')
         
+        df_.insert(loc=0, column='library_series_id', value=df['lid'])
         d_ = dict(zip(config['atac814'].values(), config['atac814'].keys()))
-        df_.insert(loc=0, column='geo_id', value=[ *map(lambda bid: d_.get(bid, ''), df_.index) ])
+        df_.insert(loc=1, column='geo_id', value=[ *map(lambda bid: d_.get(bid, ''), df_.index) ])
 
         df_.sort_index().to_csv(output[2], sep='\t')
