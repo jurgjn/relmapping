@@ -7,6 +7,8 @@ annot_ce10:
   fp_annot_tsv: annot_ce10/annotated_elements.tsv
   fp_annot_bed: annot_ce10/annotated_elements.bed
   loc_metrics: annot_ce10/regulatory_annotation_metrics/
+  fp_scap_fwd: scap815_geo/tracks_fwd/scap_wt_all_fwd.bw
+  fp_scap_rev: scap815_geo/tracks_rev/scap_wt_all_rev.bw
 
 annot_with_gene_id:
 - coding_promoter
