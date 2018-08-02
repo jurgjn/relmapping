@@ -239,8 +239,8 @@ rule atac824_mean_by_condition:
 
 rule atac814_tracks_ce11:
     input:
-        pf('atac814_{sample}_rep1', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'),
-        pf('atac814_{sample}_rep2', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'),
+        pf('atac814_{sample}_rep1', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'),
+        pf('atac814_{sample}_rep2', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'),
     output:
         'atac814_geo/tracks_ce11/atac_{sample}_ce11.bw',
     shell: '''
@@ -252,6 +252,17 @@ rule atac814_alignments:
         pf('atac814_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10', '.bam', 'atac814'),
     output:
         'atac814_geo/alignments/atac_{sample}.bam',
+    shell:
+        '''
+        ln -s `pwd`/{input} `pwd`/{output}
+        touch -h `pwd`/{output}
+        '''
+
+rule atac814_alignments_ce11:
+    input:
+        pf('atac814_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_q10', '.bam', 'atac814'),
+    output:
+        'atac814_geo/alignments_ce11/atac_{sample}_ce11.bam',
     shell:
         '''
         ln -s `pwd`/{input} `pwd`/{output}
@@ -324,14 +335,14 @@ rule atac814:
         expand(pf('atac814_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_daugherty2017', '_treat_pileup.bw', 'atac814'), 
             sample=['wt_emb_rep1', 'wt_emb_rep2', 'wt_l3_rep1', 'wt_l3_rep2', 'wt_ya_rep1', 'wt_ya_rep2']),
 
-
 rule atac814_ce11:
     input:
         expand(pf('atac814_{sample}', 'tg_pe.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_blacklist_ce11.rm_q10.macs2_pe_lt200', '_treat_pileup.bw', 'atac814'), sample=config['stages_wt_rep']),
         expand(pf('atac814_{sample}', 'tg_pe.bwa_pe_ce11.rm_unmapped_pe.rm_chrM.rm_blacklist_ce11.rm_q10.macs2_pe_lt300', '_treat_pileup.bw', 'atac814'), sample=config['stages_wt_rep']),
-        expand(pf('atac814_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'), sample=config['stages_rep']),
+        expand(pf('atac814_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'), sample=config['stages_rep']),
         # ce11 stage-specific coverage tracks
         expand('atac814_geo/tracks_ce11/atac_{sample}_ce11.bw', sample=config['stages']),
+        expand('atac814_geo/alignments_ce11/atac_{sample}_ce11.bam', sample=config['stages_rep']),
 
 rule atac814_mapq0:
     input:
