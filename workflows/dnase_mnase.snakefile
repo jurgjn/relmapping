@@ -1,7 +1,8 @@
 def make_dnase_mnase_samples(expanded=False):
     fp_inp = 'processed_tracks/metadata/Worm Regulatory Mapping Data Sets - Libraries (ATAC-, DNase-, MNase-seq).tsv'
     fp_out = 'dnase_mnase/dnase_mnase_samples.tsv'
-    df_ = pd.read_csv(fp_inp, sep='\t').query('(Strain == "N2") & (Enzyme == "dnase" | Enzyme == "mnase")').sort_values(['Enzyme', 'Stage'])
+    #df_ = pd.read_csv(fp_inp, sep='\t').query('(Strain == "N2") & (Enzyme == "dnase" | Enzyme == "mnase")').sort_values(['Enzyme', 'Stage'])
+    df_ = pd.read_csv(fp_inp, sep='\t').query('(Enzyme == "dnase" | Enzyme == "mnase")').sort_values(['Enzyme', 'Stage'])
     df_ = df_.loc[df_['Bioinformatics ID(s)'] == df_['Bioinformatics ID(s)']] # All sequenced libraries
     df_ = df_.loc[~(df_['Library series ID'] == 'EMB-JA0-N2-dnase-test')] # Early test data, partial digestion course
     df_ = df_.loc[~(df_['Library series ID'] == 'EMB-JA11-N2-dnase-S2.1xtraHS082')] # Pippen/beads tests

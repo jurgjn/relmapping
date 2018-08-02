@@ -1,4 +1,12 @@
 
+rule atac_bin10_ce10:
+    input:
+        pf('{dataset}', '{step}', '_treat_pileup.bw', 'atac'),
+    output:
+        pf('{dataset}', '{step}.bin10_ce10', '.bw', 'atac'),
+    shell:
+        'scripts/bigWiggleTools.ipy write {output} scale 0.1 bin 10 {input}'
+
 rule alignment_raw_reads_by_rep:
     input:
         pf('atac728_{sample}', 'tg_se.bwa_se', '.bam', 'atac728'),
