@@ -5,3 +5,5 @@ HS086_Caro-E	atac_ce10_spmr_se	SPMR	ce10	10bp	bw	HS086_Caro-E.atac_ce10_spmr_se.
 HS086_Caro-E	atac_ce10_spmr_pe	SPMR	ce10	10bp	bw	HS086_Caro-E.atac_ce10_spmr_pe.bw
 HS476_MS51	atac_ce10_spmr_se	SPMR	ce10	10bp	bw	HS476_MS51.atac_ce10_spmr_se.bw
 HS476_MS52	atac_ce10_spmr_se	SPMR	ce10	10bp	bw	HS476_MS52.atac_ce10_spmr_se.bw
+HS645_ATAC_TG_CB2	atac_CB4_spmr_se_preliminary	SPMR	CB4	10bp	bw	HS645_ATAC_TG_CB2.atac_CB4_spmr_se_preliminary.bw
+HS645_ATAC_TG_CB2	atac_CB4_spmr_pe_preliminary	SPMR	CB4	10bp	bw	HS645_ATAC_TG_CB2.atac_CB4_spmr_pe_preliminary.bw

@@ -5,6 +5,14 @@ rule atac_bin10_ce10:
     output:
         pf('{dataset}', '{step}.bin10_ce10', '.bw', 'atac'),
     shell:
+        'scripts/bigWiggleTools_ce10.ipy write {output} scale 0.1 bin 10 {input}'
+
+rule atac_bin10:
+    input:
+        pf('{dataset}', '{step}', '_treat_pileup.bw', 'atac'),
+    output:
+        pf('{dataset}', '{step}.bin10', '.bw', 'atac'),
+    shell:
         'scripts/bigWiggleTools.ipy write {output} scale 0.1 bin 10 {input}'
 
 rule alignment_raw_reads_by_rep:

@@ -3,3 +3,4 @@ HS086_Caro-A         atac     ce
 HS086_Caro-E         atac     ce
 HS476_MS51           atac     ce
 HS476_MS52           atac     ce
+HS645_ATAC_TG_CB2    atac     cb

@@ -213,13 +213,13 @@ rule ce10:
         'shared/ce10.fa.bwt',
         'shared/ce10.fa.pac',
         'shared/ce10.fa.sa',
-        'shared/ce10.1.ebwt',
+        #'shared/ce10.1.ebwt',
     shell: '''
         curl http://hgdownload.cse.ucsc.edu/goldenPath/ce10/bigZips/ce10.2bit -o shared/ce10.2bit
         curl http://hgdownload.cse.ucsc.edu/goldenPath/ce10/bigZips/ce10.chrom.sizes -o shared/ce10.chroms
         twoBitToFa shared/ce10.2bit shared/ce10.fa
         bwa index shared/ce10.fa
-        bowtie-build shared/ce10.fa shared/ce10
+        #bowtie-build shared/ce10.fa shared/ce10
         '''
 
 rule ce11:
@@ -227,11 +227,11 @@ rule ce11:
         'shared/ce11.2bit',
         'shared/ce11.chroms',
         'shared/ce11.fa',
-        #'shared/ce11.fa.amb',
-        #'shared/ce11.fa.ann',
-        #'shared/ce11.fa.bwt',
-        #'shared/ce11.fa.pac',
-        #'shared/ce11.fa.sa',
+        'shared/ce11.fa.amb',
+        'shared/ce11.fa.ann',
+        'shared/ce11.fa.bwt',
+        'shared/ce11.fa.pac',
+        'shared/ce11.fa.sa',
         #'shared/ce11.1.ebwt',
     shell: '''
         curl http://hgdownload.cse.ucsc.edu/goldenPath/ce11/bigZips/ce11.2bit -o shared/ce11.2bit
@@ -239,6 +239,48 @@ rule ce11:
         twoBitToFa shared/ce11.2bit shared/ce11.fa
         bwa index shared/ce11.fa
         #bowtie-build shared/ce11.fa shared/ce11
+        '''
+
+rule cb3:
+    output:
+        'shared/cb3.2bit',
+        'shared/cb3.chroms',
+        'shared/cb3.fa',
+        'shared/cb3.fa.amb',
+        'shared/cb3.fa.ann',
+        'shared/cb3.fa.bwt',
+        'shared/cb3.fa.pac',
+        'shared/cb3.fa.sa',
+    shell: '''
+        curl http://hgdownload.cse.ucsc.edu/goldenPath/cb3/bigZips/cb3.2bit -o shared/cb3.2bit
+        curl http://hgdownload.cse.ucsc.edu/goldenPath/cb3/bigZips/cb3.chrom.sizes -o shared/cb3.chroms
+        twoBitToFa shared/cb3.2bit shared/cb3.fa
+        bwa index shared/cb3.fa
+        '''
+
+rule CB4:
+    '''
+    C. briggsae genome from:
+        ftp://ftp.ensemblgenomes.org/pub/metazoa/release-40/fasta/caenorhabditis_briggsae/dna/Caenorhabditis_briggsae.CB4.dna.toplevel.fa.gz
+
+    https://www.biostars.org/p/173963/
+    > samtools faidx input.fa
+    > cut -f1,2 input.fa.fai > sizes.genome
+    Generating chroms file using samtools faidx / cut
+    '''
+    output:
+        'shared/CB4.fa',
+        'shared/CB4.chroms',
+        'shared/CB4.fa.amb',
+        'shared/CB4.fa.ann',
+        'shared/CB4.fa.bwt',
+        'shared/CB4.fa.pac',
+        'shared/CB4.fa.sa',
+    shell: '''
+        curl ftp://ftp.ensemblgenomes.org/pub/metazoa/release-40/fasta/caenorhabditis_briggsae/dna/Caenorhabditis_briggsae.CB4.dna.toplevel.fa.gz | gunzip -c - > shared/CB4.fa
+        samtools faidx shared/CB4.fa
+        cut -f1,2 shared/CB4.fa.fai > shared/CB4.chroms
+        bwa index shared/CB4.fa
         '''
 
 """
@@ -250,18 +292,6 @@ curl http://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.chrom.sizes -o 
 cat shared/ce10.fa shared/ecoli.fa > shared/ce10_ecoli.fa
 bwa index shared/ce10_ecoli.fa
 """
-
-rule cb3:
-    output:
-        'shared/cb3.2bit',
-        'shared/cb3.chroms',
-        'shared/cb3.fa',
-    shell: '''
-        curl http://hgdownload.cse.ucsc.edu/goldenPath/cb3/bigZips/cb3.2bit -o shared/cb3.2bit
-        curl http://hgdownload.cse.ucsc.edu/goldenPath/cb3/bigZips/cb3.chrom.sizes -o shared/cb3.chroms
-        twoBitToFa shared/cb3.2bit shared/cb3.fa
-        bwa index shared/cb3.fa
-        '''
 
 """
 curl http://hgdownload.cse.ucsc.edu/goldenPath/sacCer3/bigZips/sacCer3.2bit -o shared/sacCer3.2bit

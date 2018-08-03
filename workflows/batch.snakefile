@@ -47,3 +47,7 @@ rule batch:
     input:
         ['batch/processed_files/%s' % (file_,) for file_ in df_batch_files['File']] \
         + ['batch/processed_files.txt']
+
+rule batch_debug:
+    input:
+        pf('HS645_ATAC_TG_CB2', 'tg_se.bwa_se_CB4.rm_unmapped.rm_M', '.bam', 'atac'),

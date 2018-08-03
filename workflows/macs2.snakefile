@@ -1,3 +1,7 @@
+"""
+- LC_COLLATE=C before sort of a bedGraph fixes:
+    bedGraphToBigWig /file/ is not case-sensitive sorted at line 22614. Please use "sort -k1,1 -k2,2n" with LC_COLLATE=C, or bedSort and try again."
+"""
 
 rule macs2_pe_lt100:
     input:
@@ -21,8 +25,7 @@ rule macs2_pe_lt100:
             --treatment {output[5]} \
             --outdir {wildcards.prefix}/{wildcards.step}.macs2_pe_lt100 --name {wildcards.bid}.{wildcards.step}.macs2_pe_lt100
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -48,8 +51,7 @@ rule macs2_pe_lt150:
             --treatment {output[5]} \
             --outdir {wildcards.prefix}/{wildcards.step}.macs2_pe_lt150 --name {wildcards.bid}.{wildcards.step}.macs2_pe_lt150
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -75,8 +77,7 @@ rule macs2_pe_lt200:
             --treatment {output[5]} \
             --outdir {wildcards.prefix}/{wildcards.step}.macs2_pe_lt200 --name {wildcards.bid}.{wildcards.step}.macs2_pe_lt200
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -102,8 +103,7 @@ rule macs2_pe_lt300:
             --treatment {output[5]} \
             --outdir {wildcards.prefix}/{wildcards.step}.macs2_pe_lt300 --name {wildcards.bid}.{wildcards.step}.macs2_pe_lt300
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -129,8 +129,7 @@ rule macs2_pe_lt300_keepdup_all:
             --treatment {output[5]} \
             --outdir {wildcards.prefix}/{wildcards.step}.macs2_pe_lt300_keepdup_all --name {wildcards.bid}.{wildcards.step}.macs2_pe_lt300_keepdup_all
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -153,8 +152,7 @@ rule macs2_se_extsize200:
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize200 --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize200
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -177,8 +175,7 @@ rule macs2_se_extsize200_keepdup_all:
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize200_keepdup_all --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize200_keepdup_all
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -201,8 +198,7 @@ rule macs2_se_extsize150:
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize150 --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize150
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -225,8 +221,7 @@ rule macs2_se_extsize125:
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize125 --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize125
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -249,8 +244,7 @@ rule macs2_se_extsize100:
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize100 --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize100
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -273,8 +267,7 @@ rule macs2_se_extsize200_shiftm100:
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize200_shiftm100 --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize200_shiftm100
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -297,8 +290,7 @@ rule macs2_se_extsize100_shiftm50:
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize100_shiftm50 --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize100_shiftm50
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -321,8 +313,7 @@ rule macs2_se_extsize150_shiftm75:
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize150_shiftm75 --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize150_shiftm75
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -345,8 +336,7 @@ rule macs2_se_extsize1_shiftm75_keepdup_all: # Bigwig tracks of ATAC-seq cut sit
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize1_shiftm75_keepdup_all --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize1_shiftm75_keepdup_all
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -369,8 +359,7 @@ rule macs2_se_extsize1_keepdup_all: # Bigwig tracks of ATAC-seq cut sites, usefu
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize1_keepdup_all --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize1_keepdup_all
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -393,8 +382,7 @@ rule macs2_se_extsize150_shiftm75_keepdup_all:
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize150_shiftm75_keepdup_all --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize150_shiftm75_keepdup_all
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -417,8 +405,7 @@ rule macs2_se_extsize150_shiftm75_keepdup_all_noSPMR:
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -441,8 +428,7 @@ rule macs2_se_extsize150_shiftm75_keepdup_auto:
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize150_shiftm75_keepdup_auto --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize150_shiftm75_keepdup_auto
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -465,8 +451,7 @@ rule macs2_se_extsize150_shiftm75_keepdup_1:
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize150_shiftm75_keepdup_1 --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize150_shiftm75_keepdup_1
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -489,8 +474,7 @@ rule macs2_se_extsize50_shiftm25:
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize50_shiftm25 --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize50_shiftm25
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
@@ -513,7 +497,6 @@ rule macs2_se_extsize20_shiftm10:
         samtools view --threads {threads} -h {input[0]} | samtools view -b - > {output[5]}
         macs2 callpeak {params.macs2_args} --treatment {output[5]} --outdir {wildcards.prefix}/{wildcards.step}.macs2_se_extsize20_shiftm10 --name {wildcards.bid}.{wildcards.step}.macs2_se_extsize20_shiftm10
         samtools view -H {input[0]} | grep '@SQ' | awk -F'\\t' -v OFS='\\t' '{{print substr($2, 4), substr($3, 4)}}' > {output[6]}
-        sort -k1,1 -k2,2n -o {output[3]} {output[3]}
-        bedGraphToBigWig {output[3]} {output[6]} {output[4]}
+        LC_COLLATE=C sort -k1,1 -k2,2n -o {output[3]} {output[3]}
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''

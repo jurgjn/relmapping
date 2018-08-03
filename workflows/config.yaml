@@ -1,4 +1,3 @@
-
 batch:
   atac:
     ce:
@@ -8,17 +7,36 @@ batch:
         Resolution: 10bp
         Filetype: bw
         _prefix: atac
-        _step: tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.bin10_ce10
+        _step: tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.bin10
         _suffix: .bw
         _input_type: single-end
-
       atac_ce10_spmr_pe:
         Scale: SPMR
         Genome: ce10
         Resolution: 10bp
         Filetype: bw
         _prefix: atac
-        _step: tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.bin10_ce10
+        _step: tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.rm_q10.macs2_pe_lt200.bin10
+        _suffix: .bw
+        _input_type: paired-end
+    cb:
+      # CB4 does not contain the mitochondrial genome => skip mitochondrial removal step
+      atac_CB4_spmr_se_preliminary:
+        Scale: SPMR
+        Genome: CB4
+        Resolution: 10bp
+        Filetype: bw
+        _prefix: atac
+        _step: tg_se.bwa_se_CB4.rm_unmapped.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all.bin10
+        _suffix: .bw
+        _input_type: single-end
+      atac_CB4_spmr_pe_preliminary:
+        Scale: SPMR
+        Genome: CB4
+        Resolution: 10bp
+        Filetype: bw
+        _prefix: atac
+        _step: tg_pe.bwa_pe_CB4.rm_unmapped_pe.rm_q10.macs2_pe_lt200.bin10
         _suffix: .bw
         _input_type: paired-end
 
