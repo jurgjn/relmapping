@@ -358,32 +358,6 @@ rule atac814_mapq0:
         expand(pf('atac814_{sample}', 'tg_pe.bwa_pe.rm_unmapped_pe.rm_chrM.rm_blacklist.macs2_pe_lt300', '_treat_pileup.bw', 'atac814'), sample=config['stages_wt_rep']),
         expand(pf('atac814_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.macs2_se_extsize150_shiftm75_keepdup_all', '_treat_pileup.bw', 'atac814'), sample=config['stages_rep']),
 
-rule sample_prp1: # sample pseudoreplicate #1 from two biological replicates
-    input:
-        pf('{sample}_rep1', '{step}', '.bam', '{prefix}'),
-        pf('{sample}_rep2', '{step}', '.bam', '{prefix}'),
-    output:
-        pf('{sample}_rep1', '{step}.sample_prp', '.bam', '{prefix}'),
-    threads: 4
-    shell: '''
-        samtools merge -u --threads {threads} - {input[0]} {input[1]} | samtools view -h -S --threads {threads} - \
-        | awk 'BEGIN{{srand(42);}} substr($1,1,1) == "@" || (rand() < .5)' \
-        | samtools view -b --threads {threads} - > {output[0]}
-    '''
-
-rule sample_prp2: # sample pseudoreplicate #2 from two biological replicates
-    input:
-        pf('{sample}_rep1', '{step}', '.bam', '{prefix}'),
-        pf('{sample}_rep2', '{step}', '.bam', '{prefix}'),
-    output:
-        pf('{sample}_rep2', '{step}.sample_prp', '.bam', '{prefix}'),
-    threads: 4
-    shell: '''
-        samtools merge -u --threads {threads} - {input[0]} {input[1]} | samtools view -h -S --threads {threads} - \
-        | awk 'BEGIN{{srand(42);}} substr($1,1,1) == "@" || (.5 <= rand())' \
-        | samtools view -b --threads {threads} - > {output[0]}
-    '''
-
 rule atac824:
     input:
         expand(pf('atac824_{sample}', 'c_r1', '.txt', 'atac824'), sample=techreps_collapse(config['atac824'].keys())),
