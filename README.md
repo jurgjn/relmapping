@@ -1,5 +1,11 @@
 Preliminary code and results related to mapping regulatory elements; currently not aimed at any use beyond the lab.
 
+Work-in-progress documentation:
+- [Description of the software environment (INSTALL.md)](INSTALL.md)
+- [Running the processing pipeline (batch/README.md)](batch/README.md)
+- [Step-by-step description of the standard processing (processed_tracks/README.md)](processed_tracks/README.md)
+- [Notes on how the internal processing is organised](workflows/README.md)
+
 ## Notes
 - Genomic coordinates are in [`WBcel215/ce10`](http://hgdownload.soe.ucsc.edu/goldenPath/ce10/bigZips/) ([`WS220`](https://github.com/WormBase/website/issues/2003)), except where explicitly stated otherwise
 - Gene annotations are a subset of WS260 with coordinates backlifted to `WBcel215/ce10` ([`WS260_ce10`](/WS260_ce10))
