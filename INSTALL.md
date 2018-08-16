@@ -1,15 +1,16 @@
 # Primary processing
 Primary processing -- alignment, coverage tracks, peak calling, etc -- is done in `snakemake`.
 
-1. [Download](https://www.continuum.io) and install anaconda, python 3.x (=not 2.x)
+1. [Download](https://www.continuum.io) and install anaconda or miniconda, python 3.x (=not 2.x)
 
 2. Install packages:
   ```bash
   conda install 'bwa < 0.7' samtools \
       fastx_toolkit trim-galore seqtk idr \
       ucsc-bedgraphtobigwig ucsc-bigwigtobedgraph \
-      ucsc-bigwiginfo git macs2 htseq \
-      pyBigWig weblogo twobitreader matplotlib-venn
+      ucsc-bigwiginfo git git-lfs htseq \
+      pyBigWig weblogo twobitreader matplotlib-venn \
+      wiggletools -c bioconda -c conda-forge
   ```
 
 3. Clone the pipeline repository into `~/relmapping`:
