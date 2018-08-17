@@ -698,6 +698,77 @@ rule scap815:
         expand('scap815_geo/tracks_fwd/scap_{stage}_fwd.bw', stage=config['stages_wt'] + ['wt_all']),
         expand('scap815_geo/tracks_rev/scap_{stage}_rev.bw', stage=config['stages_wt'] + ['wt_all']),
 
+rule scap815_stats:
+    input:
+        expand(pf('scap815_{bid}', '{step}', '.txt', 'scap815'), bid=techreps_collapse(config['scap815'].keys()),
+            step=[
+                'c_r1', # Total reads
+                'tg_se.c_r1', # Adapter-trimmed + quality-trimmed reads (#1)
+                'tg_se.bwa_se.c', # Adapter-trimmed + quality-trimmed reads (#2)
+                'tg_se.bwa_se.rm_unmapped.c', # Aligned reads
+                'tg_se.bwa_se.rm_unmapped.rm_chrM.c', # Aligned chrM
+                'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.c', # Blacklisted
+                ####
+                #'tg_se_q0.c_r1', # Adapter-trimmed reads
+                #'tg_se.bwa_se.c', # Total reads
+                #'tg_se.bwa_se_ecoli.c', # All reads in the fastq file -- sanity check
+                #'tg_se.bwa_se_ecoli.c_aln',
+                #'tg_se.bwa_se_ecoli.c_q10',
+                #'tg_se.bwa_se.keep.c', # Aligned excl chrM, blacklist
+                #'tg_se.bwa_se.q10_keep.c',
+                #'tg_se.bwa_se.q10_keep.c_atac',
+                #'tg_se_q10.bwa_se.q10_keep.c',
+                #'tg_se_q15.bwa_se.q10_keep.c',
+                #'tg_se_q20.bwa_se.q10_keep.c',
+                #'tg_se_len16.bwa_se.q10_keep.c'
+                'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c',
+                'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.c', # Highly abundant, non-coding
+                #'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_rm_tics_top5',
+                #'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_rm_tics_top20',
+                #'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_rm_tics_top100',
+                #'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_capstack',
+                #'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_chen_kruesi_consensus',
+                #'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_kruesi_l3',
+                #'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_TCA',                
+                ]),
+    output:
+        'scap815/scap_stats_raw_counts.tsv', # raw read counts at each step
+        'scap815/scap_stats_frac_passed.tsv',
+        #'scap815/scap_stats.tsv', # percentages that passed each step
+    run:
+        df = pd.DataFrame()
+        df.index.name = 'dataset_id'
+        for (bid, step, suffix, prefix) in map(parse_pf, input):
+            #df.ix[bid, step] = '%d' % (read_int(pf(bid, step, suffix, prefix)),)
+            df.ix[bid, step] = read_int(pf(bid, step, suffix, prefix))
+        #df.sort_index(axis=1, inplace=True)
+        #df.sort_index(axis=0, inplace=True)
+        df.to_csv(output[0], sep='\t')
+
+        def pct_(a, b): return list(map(lambda a_i, b_i: '%.01f%%' % (100.0 * a_i / b_i,), a, b))
+        def loss_pct_(col_a, col_b): return list(map(lambda a_i, b_i: '%.02f%%' % (100.0 * (a_i - b_i) / a_i,), df[col_a], df[col_b]))
+        def keep_pct_(col_a, col_b): return list(map(lambda a_i, b_i: '%.02f%%' % (100.0 * b_i / a_i,), df[col_a], df[col_b]))
+
+        df_ = pd.DataFrame()
+        df_['raw_reads'] = df['c_r1'].astype(int).map(yp.f_uk)
+        df_['not_adapter_or_lowqual'] = keep_pct_('c_r1', 'tg_se.c_r1')
+        df_['mapped'] = keep_pct_('tg_se.bwa_se.c', 'tg_se.bwa_se.rm_unmapped.c')
+        df_['not_mitochondrial'] = keep_pct_('tg_se.bwa_se.rm_unmapped.c','tg_se.bwa_se.rm_unmapped.rm_chrM.c')
+        df_['not_blacklisted'] = keep_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.c')
+        df_['mapq10'] = keep_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c')
+        df_['not_non_coding'] = keep_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.c')        
+        df_['useful_reads'] = df['tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.rm_non_coding.c'].astype(int).map(yp.f_uk)
+        #df_['tics_top5'] = loss_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_rm_tics_top5')
+        #df_['tics_top20'] = loss_pct_('tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_rm_tics_top20')
+        #df_['inr_sites'] = df['tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.c_TCA'].astype(int).map(yp.f_uk)
+        df_.to_csv(output[1], sep='\t')
+
+        # Add library_series_id, GEO id for final table
+        #df_.insert(loc=0, column='library_series_id', value=[ *map(lambda bid: config['scap'][bid]['library_series_id'], df_.index) ])
+        #d_ = dict(zip(config['scap815'].values(), config['scap815'].keys()))
+        #df_.insert(loc=1, column='geo_id', value=[ *map(lambda bid: d_.get(bid, ''), df_.index) ])
+        #df_.to_csv(output[2], sep='\t')
+
 rule scap815_ce11:
     input:
         expand(pf('scap815_{sample}', 'tg_se.bwa_se_ce11.rm_unmapped.rm_chrM.rm_blacklist_ce11.rm_non_coding_ce11.rm_q10.firstbp_fwd_ce11', '.bw', 'scap815'), sample=techreps_collapse(config['scap815'].keys(), include_raw=True)),

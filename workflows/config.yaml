@@ -154,6 +154,20 @@ stages_wt_rep_scap815:
 - wt_ya_rep1
 - wt_ya_rep2
 
+stages_wt_rep_scap815_raw:
+- wt_emb_rep1
+- wt_emb_rep2
+- wt_l1_rep1
+- wt_l1_rep2
+- wt_l2_rep1
+- wt_l2_rep2
+- wt_l3_rep1
+- wt_l3_rep2
+- wt_l4_rep1
+- wt_l4_rep2
+- wt_ya_rep1
+- wt_ya_rep2
+
 stages_glp1_rep:
 - glp1_d1_rep1
 - glp1_d1_rep2

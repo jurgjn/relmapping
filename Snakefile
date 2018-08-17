@@ -18,7 +18,7 @@ include: 'workflows/atac_cfp1.snakefile'
 
 include: 'workflows/adhoc.snakefile'
 
-include: 'workflows/dnase_mnase.snakefile'
+#include: 'workflows/dnase_mnase.snakefile'
 
 include: 'workflows/lcap.snakefile'
 include: 'workflows/lcap_tm.snakefile'
@@ -39,5 +39,5 @@ include: 'workflows/motifs.snakefile'
 include: 'workflows/chip_distribution.snakefile'
 
 include: 'workflows/batch.snakefile'
-include: 'workflows/processed_tracks.snakefile'
+#include: 'workflows/processed_tracks.snakefile'
 include: 'workflows/yapc.snakefile'
