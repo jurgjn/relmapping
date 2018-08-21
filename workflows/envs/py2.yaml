@@ -1,3 +1,5 @@
+channels:
+    - javascript
 dependencies:
     - python < 3
     - macs2
