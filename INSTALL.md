@@ -17,12 +17,17 @@ Primary processing -- alignment, coverage tracks, peak calling, etc -- is done i
   git clone https://github.com/jurgjn/relmapping.git
   ```
 
-4. One can then submit batch jobs using `snakemake` by, at minimum, specifying `--cluster sbatch` and the number of jobs (test by adding `--dry-run`), e.g.:
+4. Activate the environment:
+  ```bash
+  source activate relmapping
+  ```
+
+5. One can then submit batch jobs using `snakemake` by, at minimum, specifying `--cluster sbatch` and the number of jobs (test by adding `--dry-run`), e.g.:
   ```bash
   snakemake --cluster sbatch --jobs NCORES batch --use-conda -n
   ```
 
-5. These two aliases (for `~/.bash_aliases`) add a few things, such as logging in sensible places :
+6. These two aliases (for `~/.bash_aliases`) add a few things, such as logging in sensible places :
   ```bash
   alias smj="snakemake --cluster 'sbatch -o $HOME/relmapping/logs/slurm_%j_%N.out.txt -e $HOME/relmapping/logs/slurm_%j_%N.err.txt' --use-conda --jobs "   
   alias smc="snakemake --use-conda --cores "
