@@ -1,16 +1,15 @@
-# Primary processing
+# Batch processing
 Primary processing -- alignment, coverage tracks, peak calling, etc -- is done in `snakemake`.
 
 1. [Download](https://www.continuum.io) and install anaconda or miniconda, python 3.x (=not 2.x)
 
-2. Install packages:
+2. Create a separate environment called `relmapping` with the necessary packages:
   ```bash
-  conda install 'bwa < 0.7' samtools \
-      fastx_toolkit trim-galore seqtk idr \
-      ucsc-bedgraphtobigwig ucsc-bigwigtobedgraph \
-      ucsc-bigwiginfo git git-lfs htseq \
-      pyBigWig weblogo twobitreader matplotlib-venn \
-      wiggletools -c bioconda -c conda-forge
+  conda create --name relmapping -c bioconda -c conda-forge \
+      'python > 3' 'bwa < 0.7' \
+      samtools fastx_toolkit trim-galore seqtk idr ucsc-bedgraphtobigwig \
+      ucsc-bigwigtobedgraph ucsc-bigwiginfo git git-lfs htseq pyBigWig weblogo \
+      twobitreader matplotlib-venn wiggletools snakemake pybedtools scikit-learn ipython
   ```
 
 3. Clone the pipeline repository into `~/relmapping`:
@@ -19,8 +18,8 @@ Primary processing -- alignment, coverage tracks, peak calling, etc -- is done i
   ```
 
 4. One can then submit batch jobs using `snakemake` by, at minimum, specifying `--cluster sbatch` and the number of jobs (test by adding `--dry-run`), e.g.:
-  ```
-  snakemake --cluster sbatch --jobs NCORES RULE
+  ```bash
+  snakemake --cluster sbatch --jobs NCORES batch --use-conda -n
   ```
 
 5. These two aliases (for `~/.bash_aliases`) add a few things, such as logging in sensible places :
@@ -37,5 +36,3 @@ and `smj` runs `RULE` in batch mode:
   smj NCORES RULE
   ```
 (also, add `-n` or `--dry-run` for testing a command)...
-
-# Annotation pipeline & downstream analyses -- TODO...
