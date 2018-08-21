@@ -1,5 +1,5 @@
 channels:
-    - javascript
+    - bioconda
 dependencies:
     - python < 3
     - macs2
