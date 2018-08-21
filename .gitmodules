@@ -1,0 +1,3 @@
+[submodule "yapc"]
+	path = yapc
+	url = https://github.com/jurgjn/yapc.git
