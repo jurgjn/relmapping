@@ -303,6 +303,43 @@ rule macs2_daugherty2017:
         bedGraphToBigWig {output[3]} {output[6]} {output[4]}
     '''
 
+rule atac_nanmax:
+    input:
+        pf('{bid}', '{step}', '_treat_pileup.bw', '{prefix}'),
+    output:
+        pf('{bid}', '{step}.atac_nanmax', '.txt', '{prefix}'),
+    run:
+        def df_atac_():
+            fp_ = 'annot_eLife_revised/Figure 1-source data 1. Accessible sites.txt'
+            df_atac = pd.read_csv(fp_, sep='\t')
+            df_atac['mode'] = df_atac[['start', 'end']].mean(axis=1).map(int)
+            return df_atac
+        df_atac = df_atac_()
+        df_atac['atac_nanmax'] = list(map(lambda c: int(np.nanmax(c)), yp.read_regions(input[0], df_atac.chrom.tolist(), df_atac.start.tolist(), df_atac.end.tolist())))
+        df_atac[['atac_nanmax']].to_csv(output[0], sep='\t', index=False, header=True)
+
+rule atac814_deseq2x2_counts:
+    input:
+        pf('atac814_{stage1}_rep1', '{step}', '.txt', 'atac814'),
+        pf('atac814_{stage1}_rep2', '{step}', '.txt', 'atac814'),
+        pf('atac814_{stage2}_rep1', '{step}', '.txt', 'atac814'),
+        pf('atac814_{stage2}_rep2', '{step}', '.txt', 'atac814'),
+    output:
+        pf('atac814_{stage1}_vs_{stage2}', '{step}.atac814_deseq2x2', '_counts.txt', 'atac814'),
+    run:
+        df_ = pd.concat([pd.read_csv(input[0]), pd.read_csv(input[1]), pd.read_csv(input[2]), pd.read_csv(input[3])], axis=1)
+        df_.columns = ['stage1_rep1', 'stage1_rep2', 'stage2_rep1', 'stage2_rep2']
+        df_.to_csv(output[0], sep='\t', index=True, header=True)
+
+rule atac814_deseq2x2_deseq:
+    input:
+        pf('atac814_{stage1}_vs_{stage2}', '{step}.atac814_deseq2x2', '_counts.txt', 'atac814'),
+    output:
+        pf('atac814_{stage1}_vs_{stage2}', '{step}.atac814_deseq2x2', '_deseq.txt', 'atac814'),
+    shell: '''
+        cat {input[0]} | scripts/deseq2x2.R > {output[0]}
+        '''
+
 rule atac814:
     input:
         # techreps separately:
@@ -343,6 +380,9 @@ rule atac814:
         expand(pf('atac814_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_daugherty2017', '_treat_pileup.bw', 'atac814'), sample=[* config['stages_rep'] ]),
         # Rev3Q1/2 -- noSPMR peak height counts
         expand(pf('atac814_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR', '_treat_pileup.bw', 'atac814'), sample=[* config['stages_rep'] ]),
+        # Rev1Q1
+        expand(pf('atac814_{sample}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR.atac_nanmax', '.txt', 'atac814'), sample=[* config['stages_rep'] ]),
+        expand(pf('atac814_{stage1}_vs_{stage2}', 'tg_se.bwa_se.rm_unmapped.rm_chrM.rm_blacklist.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all_noSPMR.atac_nanmax.atac814_deseq2x2', '_deseq.txt', 'atac814'), stage1=config['stages'], stage2=config['stages'])
 
 rule atac814_ce11:
     input:

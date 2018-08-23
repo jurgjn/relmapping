@@ -39,6 +39,51 @@ batch:
         _step: tg_pe.bwa_pe_CB4.rm_unmapped_pe.rm_q10.macs2_pe_lt200.bin10
         _suffix: .bw
         _input_type: paired-end
+      atac_CB4_yapc_se_preliminary_all:
+        Scale: peak_calls (all)
+        Genome: CB4
+        Resolution: 1bp
+        Filetype: tsv
+        _prefix: atac
+        _step: tg_se.bwa_se_CB4.rm_unmapped.rm_q10.sample_spr.macs2_se_extsize150_shiftm75_keepdup_all.yapc_spr_se
+        _suffix: .tsv
+        _input_type: paired-end
+      atac_CB4_yapc_se_preliminary_0.05:
+        Scale: peak_calls at IDR=0.05
+        Genome: CB4
+        Resolution: 1bp
+        Filetype: bed
+        _prefix: atac
+        _step: tg_se.bwa_se_CB4.rm_unmapped.rm_q10.sample_spr.macs2_se_extsize150_shiftm75_keepdup_all.yapc_spr_se
+        _suffix: _0.05.bed
+        _input_type: single-end
+      atac_CB4_yapc_se_preliminary_0.01:
+        Scale: peak_calls at IDR=0.01
+        Genome: CB4
+        Resolution: 1bp
+        Filetype: bed
+        _prefix: atac
+        _step: tg_se.bwa_se_CB4.rm_unmapped.rm_q10.sample_spr.macs2_se_extsize150_shiftm75_keepdup_all.yapc_spr_se
+        _suffix: _0.01.bed
+        _input_type: single-end
+      atac_CB4_yapc_se_preliminary_0.005:
+        Scale: peak_calls at IDR=0.005
+        Genome: CB4
+        Resolution: 1bp
+        Filetype: bed
+        _prefix: atac
+        _step: tg_se.bwa_se_CB4.rm_unmapped.rm_q10.sample_spr.macs2_se_extsize150_shiftm75_keepdup_all.yapc_spr_se
+        _suffix: _0.005.bed
+        _input_type: single-end
+      atac_CB4_yapc_se_preliminary_0.001:
+        Scale: peak_calls at IDR=0.001
+        Genome: CB4
+        Resolution: 1bp
+        Filetype: bed
+        _prefix: atac
+        _step: tg_se.bwa_se_CB4.rm_unmapped.rm_q10.sample_spr.macs2_se_extsize150_shiftm75_keepdup_all.yapc_spr_se
+        _suffix: _0.001.bed
+        _input_type: single-end
 
 annot_tsv: annot_Apr27/Fig2D2_regulatory_annotation_Apr27.tsv
 
