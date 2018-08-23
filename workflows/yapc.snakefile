@@ -59,6 +59,10 @@ rule yapc_spr_pe:
         pf('{sample}', '{step}.yapc_spr_pe', '_coverage.bw', '{prefix}'),
         pf('{sample}', '{step}.yapc_spr_pe', '_d2smooth.bw', '{prefix}'),
         pf('{sample}', '{step}.yapc_spr_pe', '.tsv', '{prefix}'),
+        pf('{sample}', '{step}.yapc_spr_pe', '_0.05.bed', '{prefix}'),
+        pf('{sample}', '{step}.yapc_spr_pe', '_0.01.bed', '{prefix}'),
+        pf('{sample}', '{step}.yapc_spr_pe', '_0.005.bed', '{prefix}'),
+        pf('{sample}', '{step}.yapc_spr_pe', '_0.001.bed', '{prefix}'),
     params:
         yapc_args = '--smoothing-window-width 75'
     shell:
@@ -72,6 +76,10 @@ rule yapc_spr_se:
         pf('{sample}', '{step}.yapc_spr_se', '_coverage.bw', '{prefix}'),
         pf('{sample}', '{step}.yapc_spr_se', '_d2smooth.bw', '{prefix}'),
         pf('{sample}', '{step}.yapc_spr_se', '.tsv', '{prefix}'),
+        pf('{sample}', '{step}.yapc_spr_se', '_0.05.bed', '{prefix}'),
+        pf('{sample}', '{step}.yapc_spr_se', '_0.01.bed', '{prefix}'),
+        pf('{sample}', '{step}.yapc_spr_se', '_0.005.bed', '{prefix}'),
+        pf('{sample}', '{step}.yapc_spr_se', '_0.001.bed', '{prefix}'),
     params:
         yapc_args = '--smoothing-window-width 150'
     shell:

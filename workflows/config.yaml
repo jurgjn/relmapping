@@ -47,7 +47,7 @@ batch:
         _prefix: atac
         _step: tg_se.bwa_se_CB4.rm_unmapped.rm_q10.sample_spr.macs2_se_extsize150_shiftm75_keepdup_all.yapc_spr_se
         _suffix: .tsv
-        _input_type: paired-end
+        _input_type: single-end
       atac_CB4_yapc_se_preliminary_0.05:
         Scale: peak_calls at IDR=0.05
         Genome: CB4
