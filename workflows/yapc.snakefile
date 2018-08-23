@@ -62,7 +62,7 @@ rule yapc_spr_pe:
     params:
         yapc_args = '--smoothing-window-width 75'
     shell:
-        '~/repos/yapc/yapc {wildcards.prefix}/{wildcards.step}.yapc_spr_pe/{wildcards.sample}.{wildcards.step}.yapc_spr_pe {wildcards.sample} {input[0]} {input[1]} {params.yapc_args}'
+        '~/relmapping/yapc/yapc {wildcards.prefix}/{wildcards.step}.yapc_spr_pe/{wildcards.sample}.{wildcards.step}.yapc_spr_pe {wildcards.sample} {input[0]} {input[1]} {params.yapc_args}'
 
 rule yapc_spr_se:
     input:
@@ -75,4 +75,4 @@ rule yapc_spr_se:
     params:
         yapc_args = '--smoothing-window-width 150'
     shell:
-        '~/repos/yapc/yapc {wildcards.prefix}/{wildcards.step}.yapc_spr_se/{wildcards.sample}.{wildcards.step}.yapc_spr_se {wildcards.sample} {input[0]} {input[1]} {params.yapc_args}'
+        '~/relmapping/yapc/yapc {wildcards.prefix}/{wildcards.step}.yapc_spr_se/{wildcards.sample}.{wildcards.step}.yapc_spr_se {wildcards.sample} {input[0]} {input[1]} {params.yapc_args}'
