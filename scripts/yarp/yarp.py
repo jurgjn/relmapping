@@ -166,6 +166,24 @@ def nanmax(c):
     nanmax_ = np.nanmax(c)
     return nanmax_ if nanmax_ == nanmax_ else 0
 
+def bootci_mean95(l):
+    """
+    jj374@cb-head2:~/relmapping$ cat scripts/bootci_mean95_example.txt | scripts/bootci_mean95.R
+    0.3333333
+    0.3163333
+    0.3496667
+
+    bootci_mean95([0] * 2000 + [1] * 1000)
+    (0.3333333, 0.3163333, 0.3496667)
+    """
+    s_inp = '\n'.join(map(str, l))
+    proc = subprocess.Popen('scripts/bootci_mean95.R', stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+    proc.stdin.write(s_inp.encode('utf-8'))
+    proc.stdin.close()
+    s_out = proc.stdout.read().decode('utf-8').split('\n')
+    proc.wait()
+    return (float(s_out[0]), float(s_out[1]), float(s_out[2]))
+
 """
 def read_regions(fp, chroms, starts, ends, f=None):
     fh = pyBigWig.open(fp)
