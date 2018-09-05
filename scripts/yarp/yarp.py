@@ -28,6 +28,7 @@ import subprocess
 import sys
 import inspect
 import itertools
+import multiprocessing
 
 #import StringIO
 
@@ -182,7 +183,55 @@ def bootci_mean95(l):
     proc.stdin.close()
     s_out = proc.stdout.read().decode('utf-8').split('\n')
     proc.wait()
+    proc.stdout.close()
     return (float(s_out[0]), float(s_out[1]), float(s_out[2]))
+
+def bootci_mean99(l):
+    """
+    jj374@cb-head2:~/relmapping$ cat scripts/bootci_mean95_example.txt | scripts/bootci_mean95.R
+    0.3333333
+    0.3163333
+    0.3496667
+
+    bootci_mean95([0] * 2000 + [1] * 1000)
+    (0.3333333, 0.3163333, 0.3496667)
+    """
+    s_inp = '\n'.join(map(str, l))
+    proc = subprocess.Popen('scripts/bootci_mean99.R', stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+    proc.stdin.write(s_inp.encode('utf-8'))
+    proc.stdin.close()
+    s_out = proc.stdout.read().decode('utf-8').split('\n')
+    proc.wait()
+    proc.stdout.close()
+    return (float(s_out[0]), float(s_out[1]), float(s_out[2]))
+
+def bootci_mean95_p(m_):
+    pool = multiprocessing.Pool()#processes=20) #If processes is None then the number returned by os.cpu_count() is used. 
+    m_subset_ = m_#[np.random.randint(m_.shape[0], size=1000),:]
+    res_ = pool.map(bootci_mean95, m_subset_.T)
+    l_mean = []
+    l_lo = []
+    l_hi = []
+    for (mean_, lo_, hi_) in res_:
+        l_mean.append(mean_)
+        l_lo.append(lo_)
+        l_hi.append(hi_)
+    pool.close()
+    return (l_mean, l_lo, l_hi)
+
+def bootci_mean99_p(m_):
+    pool = multiprocessing.Pool()#processes=20) #If processes is None then the number returned by os.cpu_count() is used. 
+    m_subset_ = m_#[np.random.randint(m_.shape[0], size=1000),:]
+    res_ = pool.map(bootci_mean99, m_subset_.T)
+    l_mean = []
+    l_lo = []
+    l_hi = []
+    for (mean_, lo_, hi_) in res_:
+        l_mean.append(mean_)
+        l_lo.append(lo_)
+        l_hi.append(hi_)
+    pool.close()
+    return (l_mean, l_lo, l_hi)
 
 """
 def read_regions(fp, chroms, starts, ends, f=None):
@@ -697,7 +746,6 @@ def pie_by_enr(l_obs, l_exp, l_label,
         l_col.append(col)
     plt.pie(l_obs, colors=l_col, labels=l_label, counterclock=False, autopct='%.2f%%', **kwargs)
 
-
 """
 Choosing a good (default) colour map...
 http://matplotlib.org/users/colormaps.html
@@ -974,13 +1022,104 @@ class GenomicDataFrameTrack(object):
         r = ax.plot(self.x, y_, drawstyle='steps-mid', *args, **kwargs)
         ax.set_xlim(-self.flank_len, +self.flank_len)
         return r
+
+    def errorbar(self, ax=None, l_index=None, f=None, method='clt', plot_errorbar=True, plot_hline=False, *args, **kwargs):
+        if ax is None: ax = plt.gca()
+        if l_index is None:
+            l_index = [int(self.m.shape[1] / 2)]
+        if not ('color' in kwargs.keys()):
+            kwargs['color'] = BLACK
+        if not ('capsize' in kwargs.keys()):
+            kwargs['capsize'] = 3
+
+        if f is None:
+            m_ = self.m[:,l_index]
+            n_ = m_.shape[0]
+
+            if method == 'bootstrap':
+                (l_mean, l_lo, l_hi) = bootci_mean95_p(m_)
+
+            elif method == 'clt':
+                l_mean = np.mean(m_, axis=0)
+                l_std = np.std(m_, axis=0)
+                l_lo = l_mean - 2 * l_std / math.sqrt(n_)
+                l_hi = l_mean + 2 * l_std / math.sqrt(n_)
+
+            else:
+                assert False
+        else:
+            #(l_mean, l_lo, l_hi) = bootci_mean95_p(f(self.m[:,l_index]))
+            m_ = f(self.m[:,l_index])
+            n_ = m_.shape[0]
+
+            if method == 'bootstrap':
+                (l_mean, l_lo, l_hi) = bootci_mean95_p(m_)
+
+            elif method == 'clt':
+                l_mean = np.mean(m_, axis=0)
+                l_std = np.std(m_, axis=0)
+                l_lo = l_mean - 2 * l_std / math.sqrt(n_)
+                l_hi = l_mean + 2 * l_std / math.sqrt(n_)
+
+            else:
+                assert False
+
+        if plot_errorbar:
+            l_lo_ = np.array(l_mean) - np.array(l_lo)
+            l_hi_ = np.array(l_hi) - np.array(l_mean)
+            x_ = [self.x[index] for index in l_index]
+            r = ax.errorbar(x=x_, y=l_mean, yerr=(l_lo_, l_hi_), linestyle='None', zorder=10, *args, **kwargs)
+        if plot_hline:
+            r = ax.axhline(y=l_lo, linestyle='dotted', color='k', alpha=0.3)
+            r = ax.axhline(y=l_hi, linestyle='dotted', color='k', alpha=0.3)
+
+    def plot_ci(self, ax=None, f=np.mean, set_x_axis=True, f_h=None, *args, **kwargs):
+        index = int(self.m.shape[1] / 2)
+        x = self.m[:,index]
+
+        (mean_, lo_, hi_) = bootci_mean95(x)
+        print(mean_, lo_, hi_)
+        if ax is None: ax = plt.gca()
+
+        # Error bars -- too small
+        #ax.errorbar([0], [mean_], yerr=np.array([[mean_ - lo_, hi_ - mean_]]), *args)
+        
+        # Three lines
+        #ax.axhline(y=lo_, alpha=0.5, *args, **kwargs)
+        #ax.axhline(y=mean_, alpha=0.5, *args, **kwargs)
+        #ax.axhline(y=hi_, alpha=0.5, *args, **kwargs)
     
+        # Line + rectangle
+        xy_ = (self.imshow_extent[0], lo_)
+        width_ = self.imshow_extent[1] - self.imshow_extent[0]
+        height_ = hi_ - lo_
+        ax.add_patch(matplotlib.patches.Rectangle(xy_, width_, height_, alpha=0.5, linewidth=0, *args, **kwargs))
+
     def plot_hs(self, ax=None, f=np.mean, set_x_axis=True, f_h=None, smooth_width=50, *args, **kwargs):
         def rolling_mean_kernel(width): return np.ones(width) / float(width)
         f_h50 = lambda y: np.convolve(y, rolling_mean_kernel(smooth_width), mode='same')
         self.plot(ax=ax, f=f, set_x_axis=set_x_axis, f_h=f_h50, *args, **kwargs)      
 
     def plotq(self, ax=None, q=5, q_i=None, set_x_axis=True, cmap=matplotlib.cm.get_cmap("viridis"), f=np.median, *args, **kwargs):
+        if ax is None: ax = plt.gca()
+        for (i, m_i) in zip(range(q), np.array_split(self.m, q)):
+            if not(q_i is None) and (q_i != i):
+                continue
+            if q_i is None:
+                #http://stackoverflow.com/questions/15140072/how-to-map-number-to-color-using-matplotlibs-colormap
+                color_i = cmap(quantile_mid(i, q))
+            else:
+                color_i = 'k'
+            r = ax.plot(self.x, f(m_i, 0),
+                        label="%d of %d" % (i + 1, q),
+                        color=color_i,
+                        drawstyle='steps-mid',
+                        *args, **kwargs)
+        ax.set_xlim(-self.flank_len, +self.flank_len)
+        return r
+
+    def plotq_ci(self, ax=None, q=5, q_i=None, set_x_axis=True, cmap=matplotlib.cm.get_cmap("viridis"), f=np.median, *args, **kwargs):
+        print('plotq_ci')
         if ax is None: ax = plt.gca()
         for (i, m_i) in zip(range(q), np.array_split(self.m, q)):
             if not(q_i is None) and (q_i != i):
