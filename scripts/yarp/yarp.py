@@ -1023,7 +1023,7 @@ class GenomicDataFrameTrack(object):
         ax.set_xlim(-self.flank_len, +self.flank_len)
         return r
 
-    def errorbar(self, ax=None, l_index=None, f=None, method='clt', plot_errorbar=True, plot_hline=False, *args, **kwargs):
+    def errorbar(self, ax=None, l_index=None, f=None, method='clt', plot_errorbar=True, plot_hline=False, plot_rect=False, *args, **kwargs):
         if ax is None: ax = plt.gca()
         if l_index is None:
             l_index = [int(self.m.shape[1] / 2)]
@@ -1069,9 +1069,16 @@ class GenomicDataFrameTrack(object):
             l_hi_ = np.array(l_hi) - np.array(l_mean)
             x_ = [self.x[index] for index in l_index]
             r = ax.errorbar(x=x_, y=l_mean, yerr=(l_lo_, l_hi_), linestyle='None', zorder=10, *args, **kwargs)
+
         if plot_hline:
             r = ax.axhline(y=l_lo, linestyle='dotted', color='k', alpha=0.3)
             r = ax.axhline(y=l_hi, linestyle='dotted', color='k', alpha=0.3)
+
+        if plot_rect:
+            xy_ = (self.imshow_extent[0], l_lo[0])
+            width_ = self.imshow_extent[1] - self.imshow_extent[0]
+            height_ = l_hi[0] - l_lo[0]
+            ax.add_patch(matplotlib.patches.Rectangle(xy_, width_, height_, color='k', alpha=0.1, linewidth=0))
 
     def plot_ci(self, ax=None, f=np.mean, set_x_axis=True, f_h=None, *args, **kwargs):
         index = int(self.m.shape[1] / 2)
