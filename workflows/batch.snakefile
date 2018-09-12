@@ -53,3 +53,7 @@ rule batch_debug:
         #pf('HS645_ATAC_TG_CB2', 'tg_se.bwa_se_CB4.rm_unmapped', '.bam', 'atac'),
         pf('HS645_ATAC_TG_CB2', 'tg_pe.bwa_pe_CB4.rm_unmapped_pe.rm_q10.sample_spr.macs2_pe_lt200.yapc_spr_pe', '.tsv', 'atac'),
         pf('HS645_ATAC_TG_CB2', 'tg_se.bwa_se_CB4.rm_unmapped.rm_q10.sample_spr.macs2_se_extsize150_shiftm75_keepdup_all.yapc_spr_se', '.tsv', 'atac'),
+
+rule batch_single: # Special rule to process one file at a time for jadb integration
+    input:
+        'batch/processed_files/%s.%s.%s' % (config['Dataset'], config['Processing'], config['Filetype'])

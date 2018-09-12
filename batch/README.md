@@ -28,6 +28,11 @@ HS645_ATAC_TG_CB2 atac_CB4_spmr_se_preliminary SPMR  CB4    10bp       bw       
 HS645_ATAC_TG_CB2 atac_CB4_spmr_pe_preliminary SPMR  CB4    10bp       bw       HS645_ATAC_TG_CB2.atac_CB4_spmr_pe_preliminary.bw
 ```
 
+Alternatively, to generate a single file at a time (for jadb):
+```
+snakemake batch_single --config Dataset=HS086_Caro-A Processing=atac_ce10_spmr_pe Filetype=bw -n
+```
+
 ## Description for default processing
 
 Brackets refer to corresponding processing rules in [workflows/](/workflows/).
