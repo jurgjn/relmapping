@@ -56,4 +56,4 @@ rule batch_debug:
 
 rule batch_single: # Special rule to process one file at a time for jadb integration
     input:
-        'batch/processed_files/%s.%s.%s' % (config['Dataset'], config['Processing'], config['Filetype'])
+        'batch/processed_files/%s.%s.%s' % (config.get('Dataset', 'NA'), config.get('Processing', 'NA'), config.get('Filetype', 'NA'))
