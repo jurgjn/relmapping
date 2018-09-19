@@ -1,3 +1,31 @@
+annot_cb:
+  atac_samples:
+    wt_ya:
+      rep1:
+        - samples_raw/ATAC-JA60-YA_S1_L001_R1_001.fastq.gz
+        - samples_raw/ATAC-JA60-YA_S1_L002_R1_001.fastq.gz
+      rep2:
+        - samples_raw/ATAC-TG-CB2_S5_L001_R1_001.fastq.gz
+        - samples_raw/ATAC-TG-CB2_S5_L002_R1_001.fastq.gz
+
+  lcap_samples:
+    wt_ya:
+      rep1_read1:
+        - samples_raw/LCRNA-cb-YA_S14_L001_R1_001.fastq.gz
+      rep1_read2:
+        - samples_raw/LCRNA-cb-YA_S14_L001_R2_001.fastq.gz
+      rep2_read1:
+        - samples_raw/LCRNA-cb-YA_S14_L002_R1_001.fastq.gz
+      rep2_read2:
+        - samples_raw/LCRNA-cb-YA_S14_L002_R2_001.fastq.gz
+
+  atac_step: tg_se.bwa_se_CB4.rm_unmapped.rm_contigs_CB4.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all
+  atac_suffix: _treat_pileup.bw
+  lcap_filled_fwd: trim20.bwa_pe_CB4.rm_unmapped_pe.rm_contigs_CB4.rm_q10.filled_fwd
+  lcap_filled_rev: trim20.bwa_pe_CB4.rm_unmapped_pe.rm_contigs_CB4.rm_q10.filled_rev
+  lcap_firstbp_fwd: trim20.bwa_pe_CB4.rm_unmapped_pe.rm_contigs_CB4.rm_q10.startbp_fwd
+  lcap_firstbp_rev: trim20.bwa_pe_CB4.rm_unmapped_pe.rm_contigs_CB4.rm_q10.startbp_rev
+
 batch:
   atac:
     ce:
@@ -84,17 +112,6 @@ batch:
         _step: tg_se.bwa_se_CB4.rm_unmapped.rm_q10.sample_spr.macs2_se_extsize150_shiftm75_keepdup_all.yapc_spr_se
         _suffix: _0.001.bed
         _input_type: single-end
-
-annot_tsv: annot_Apr27/Fig2D2_regulatory_annotation_Apr27.tsv
-
-annot_ce10:
-  fp_sites_tsv: annot_ce10/accessible_sites.tsv
-  fp_sites_bed: annot_ce10/accessible_sites.bed
-  fp_annot_tsv: annot_ce10/annotated_elements.tsv
-  fp_annot_bed: annot_ce10/annotated_elements.bed
-  loc_metrics: annot_ce10/regulatory_annotation_metrics/
-  fp_scap_fwd: scap815_geo/tracks_fwd/scap_wt_all_fwd.bw
-  fp_scap_rev: scap815_geo/tracks_rev/scap_wt_all_rev.bw
 
 annot_with_gene_id:
 - coding_promoter

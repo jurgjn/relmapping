@@ -43,7 +43,7 @@ rule filled_fwd_lcap:
     shell:
         '''
         samtools view -b -u {input} | bedtools genomecov -ibam stdin -bg -pc -strand - > {output[0]}
-        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        LC_COLLATE=C sort -k1,1 -k2,2n {output[0]} -o {output[0]}
         bedGraphToBigWig {output[0]} <(samtools view -H {input} | awk 'substr($2,1,2)=="SN" {{print substr($2, 4),substr($3, 4)}}') {output[1]}
         '''
 
@@ -55,7 +55,7 @@ rule filled_rev_lcap:
     shell:
         '''
         samtools view -b -u {input} | bedtools genomecov -ibam stdin -bg -pc -strand + > {output[0]}
-        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        LC_COLLATE=C sort -k1,1 -k2,2n {output[0]} -o {output[0]}
         bedGraphToBigWig {output[0]} <(samtools view -H {input} | awk 'substr($2,1,2)=="SN" {{print substr($2, 4),substr($3, 4)}}') {output[1]}
         '''
 
@@ -138,7 +138,7 @@ rule startbp_fwd_lcap:
     shell:
         '''
         samtools view -b -f 128 -u {input} | bedtools genomecov -ibam stdin -bg -5 -strand + > {output[0]}
-        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        LC_COLLATE=C sort -k1,1 -k2,2n {output[0]} -o {output[0]}
         bedGraphToBigWig {output[0]} <(samtools view -H {input} | awk 'substr($2,1,2)=="SN" {{print substr($2, 4),substr($3, 4)}}') {output[1]}
         '''
 
@@ -150,7 +150,7 @@ rule startbp_rev_lcap:
     shell:
         '''
         samtools view -b -f 128 -u {input} | bedtools genomecov -ibam stdin -bg -5 -strand - > {output[0]}
-        sort -k1,1 -k2,2n {output[0]} -o {output[0]}
+        LC_COLLATE=C sort -k1,1 -k2,2n {output[0]} -o {output[0]}
         bedGraphToBigWig {output[0]} <(samtools view -H {input} | awk 'substr($2,1,2)=="SN" {{print substr($2, 4),substr($3, 4)}}') {output[1]}
         '''
 

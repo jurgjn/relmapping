@@ -76,10 +76,34 @@ rule samples_cb_r2:
         arg_input = ' '.join(input)
         shell('cat %(arg_input)s > %(output)s' % locals())
 
+rule rm_contigs_CB4:
+    input:
+        pf('{bid}', '{step}', '.bam', '{prefix}'),
+        pf('{bid}', '{step}', '.bam.bai', '{prefix}')
+    output:
+        pf('{bid}', '{step}.rm_contigs_CB4', '.bam', '{prefix}'),
+    shell:
+        'samtools view -b {input[0]} I II III IV V X > {output}'
+
+rule lcap_mean_by_stage:
+    input:
+        pf('{cond}_rep1', '{step}', '.bw', 'lcap'),
+        pf('{cond}_rep2', '{step}', '.bw', 'lcap'),
+    output:
+        pf('{cond}', '{step}.mean_by_stage', '.bw', 'lcap'),
+    shell: '''
+        scripts/bigWiggleTools.ipy write_bg {output[0]} mean {input[0]} {input[1]}
+    '''
+
 rule annot_cb:
     input:
         #expand('samples/{sample}.r1.fq.gz', sample=[*df_annot_cb_data.query('assay == "atac"').index]),
         #expand('samples/{sample}.r1.fq.gz', sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
         #expand('samples/{sample}.r2.fq.gz', sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
-        expand(pf('{sample}', 'tg_se.bwa_se_CB4', '.bam', 'atac'), sample=[*df_annot_cb_data.query('assay == "atac"').index]),
-        expand(pf('{sample}', 'tg_pe.bwa_pe_CB4', '.bam', 'lcap'), sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
+        expand(pf('{sample}', config['annot_cb']['atac_step'], config['annot_cb']['atac_suffix'], 'atac'), sample=[*df_annot_cb_data.query('assay == "atac"').index]),
+        expand(pf('{sample}', config['annot_cb']['lcap_filled_fwd'], '.bw', 'lcap'), sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
+        expand(pf('{sample}', config['annot_cb']['lcap_filled_rev'], '.bw', 'lcap'), sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
+        expand(pf('annot_cb_lcap_{cond}', config['annot_cb']['lcap_filled_fwd'] + '.mean_by_stage', '.bw', 'lcap'), cond=[* config['annot_cb']['lcap_samples'].keys() ]),
+        expand(pf('annot_cb_lcap_{cond}', config['annot_cb']['lcap_filled_rev'] + '.mean_by_stage', '.bw', 'lcap'), cond=[* config['annot_cb']['lcap_samples'].keys() ]),
+        expand(pf('{sample}', config['annot_cb']['lcap_firstbp_fwd'], '.bw', 'lcap'), sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
+        expand(pf('{sample}', config['annot_cb']['lcap_firstbp_rev'], '.bw', 'lcap'), sample=[*df_annot_cb_data.query('assay == "lcap"').index]),

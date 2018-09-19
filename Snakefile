@@ -41,3 +41,5 @@ include: 'workflows/chip_distribution.snakefile'
 include: 'workflows/batch.snakefile'
 #include: 'workflows/processed_tracks.snakefile'
 include: 'workflows/yapc.snakefile'
+
+include: 'workflows/annot_cb.snakefile'
