@@ -33,3 +33,18 @@ annot_cb:
 ```
 $ smc 20 annot_cb -n
 ```
+
+3. Run the following ipython notebooks from `annot_cb/notebooks`.
+- annot_cb_atac.ipynb
+- annot_cb_canonical_geneset.ipynb
+- annot_cb_exon.ipynb
+- annot_cb_lcap.ipynb
+- annot_cb_maxgap.ipynb
+- annot_cb_type.ipynb
+
+Once finished, the final .bed-file with the annotation should be located in `annot_cb/regulatory_annotation_cb.bed`
+
+The annotation follows the approach for *C. elegans*, but adjusted to work without transcription initiation information (short cap RNA-seq):
+- Accessible sites do not get representative transcription initiation modes
+- There's no extra step to capture low-confidence promoters, as this relied on checking the positioning of transcription initiation relative to the putative gene annotation
+- There's no enhancer annotation, as this relied on presence/absence of transcription initiation
