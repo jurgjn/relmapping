@@ -20,6 +20,7 @@ annot_cb:
         - samples_raw/LCRNA-cb-YA_S14_L002_R2_001.fastq.gz
 
   atac_step: tg_se.bwa_se_CB4.rm_unmapped.rm_contigs_CB4.rm_q10.macs2_se_extsize150_shiftm75_keepdup_all
+  atac_step_prp: tg_se.bwa_se_CB4.rm_unmapped.rm_contigs_CB4.rm_q10.sample_prp.macs2_se_extsize150_shiftm75_keepdup_all
   atac_suffix: _treat_pileup.bw
   lcap_filled_fwd: trim20.bwa_pe_CB4.rm_unmapped_pe.rm_contigs_CB4.rm_q10.filled_fwd
   lcap_filled_rev: trim20.bwa_pe_CB4.rm_unmapped_pe.rm_contigs_CB4.rm_q10.filled_rev

@@ -95,15 +95,82 @@ rule lcap_mean_by_stage:
         scripts/bigWiggleTools.ipy write_bg {output[0]} mean {input[0]} {input[1]}
     '''
 
-rule annot_cb:
+rule annot_cb_atac:
     input:
-        #expand('samples/{sample}.r1.fq.gz', sample=[*df_annot_cb_data.query('assay == "atac"').index]),
-        #expand('samples/{sample}.r1.fq.gz', sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
-        #expand('samples/{sample}.r2.fq.gz', sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
         expand(pf('{sample}', config['annot_cb']['atac_step'], config['annot_cb']['atac_suffix'], 'atac'), sample=[*df_annot_cb_data.query('assay == "atac"').index]),
-        expand(pf('{sample}', config['annot_cb']['lcap_filled_fwd'], '.bw', 'lcap'), sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
-        expand(pf('{sample}', config['annot_cb']['lcap_filled_rev'], '.bw', 'lcap'), sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
-        expand(pf('annot_cb_lcap_{cond}', config['annot_cb']['lcap_filled_fwd'] + '.mean_by_stage', '.bw', 'lcap'), cond=[* config['annot_cb']['lcap_samples'].keys() ]),
-        expand(pf('annot_cb_lcap_{cond}', config['annot_cb']['lcap_filled_rev'] + '.mean_by_stage', '.bw', 'lcap'), cond=[* config['annot_cb']['lcap_samples'].keys() ]),
+        expand(pf('{sample}', config['annot_cb']['atac_step_prp'], config['annot_cb']['atac_suffix'], 'atac'), sample=[*df_annot_cb_data.query('assay == "atac"').index]),
+    output:
+        'annot_cb/accessible_sites_cb.tsv',
+        'annot_cb/notebooks/annot_cb_atac.html',
+    shell: '''
+        jupyter nbconvert --execute annot_cb/notebooks/annot_cb_atac.ipynb --ExecutePreprocessor.timeout=-1
+    '''
+
+rule annot_cb_canonical_geneset:
+    input:
+    output:
+        'annot_cb/notebooks/annot_cb_canonical_geneset.html',
+    shell: '''
+        jupyter nbconvert --execute annot_cb/notebooks/annot_cb_canonical_geneset.ipynb --ExecutePreprocessor.timeout=-1
+    '''
+
+rule annot_cb_exon:
+    input:
+        'annot_cb/accessible_sites_cb.tsv',
+        'annot_cb/notebooks/annot_cb_canonical_geneset.html',
+    output:
+        'annot_cb/notebooks/annot_cb_exon.html',
+    shell: '''
+        jupyter nbconvert --execute annot_cb/notebooks/annot_cb_exon.ipynb --ExecutePreprocessor.timeout=-1
+    '''
+
+rule annot_cb_lcap:
+    input:
+        'annot_cb/accessible_sites_cb.tsv',
         expand(pf('{sample}', config['annot_cb']['lcap_firstbp_fwd'], '.bw', 'lcap'), sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
         expand(pf('{sample}', config['annot_cb']['lcap_firstbp_rev'], '.bw', 'lcap'), sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
+    output:
+        'annot_cb/notebooks/annot_cb_lcap.html',
+    shell: '''
+        jupyter nbconvert --execute annot_cb/notebooks/annot_cb_lcap.ipynb --ExecutePreprocessor.timeout=-1
+    '''
+
+rule annot_cb_maxgap:
+    input:
+        'annot_cb/accessible_sites_cb.tsv',
+        'annot_cb/notebooks/annot_cb_canonical_geneset.html',
+        'annot_cb/notebooks/annot_cb_exon.html',
+        expand(pf('annot_cb_lcap_{cond}', config['annot_cb']['lcap_filled_fwd'] + '.mean_by_stage', '.bw', 'lcap'), cond=[* config['annot_cb']['lcap_samples'].keys() ]),
+        expand(pf('annot_cb_lcap_{cond}', config['annot_cb']['lcap_filled_rev'] + '.mean_by_stage', '.bw', 'lcap'), cond=[* config['annot_cb']['lcap_samples'].keys() ]),
+    output:
+        'annot_cb/notebooks/annot_cb_maxgap.html',
+    shell: '''
+        jupyter nbconvert --execute annot_cb/notebooks/annot_cb_maxgap.ipynb --ExecutePreprocessor.timeout=-1
+    '''
+
+rule annot_cb_type:
+    input:
+        'annot_cb/accessible_sites_cb.tsv',
+        'annot_cb/notebooks/annot_cb_atac.html',
+        'annot_cb/notebooks/annot_cb_canonical_geneset.html',
+        'annot_cb/notebooks/annot_cb_exon.html',
+        'annot_cb/notebooks/annot_cb_lcap.html',
+        'annot_cb/notebooks/annot_cb_maxgap.html',
+    output:
+        'annot_cb/notebooks/annot_cb_type.html',
+        'annot_cb/reg_elements_cb.bed',
+    shell: '''
+        jupyter nbconvert --execute annot_cb/notebooks/annot_cb_type.ipynb --ExecutePreprocessor.timeout=-1
+    '''
+
+rule annot_cb:
+    input:
+        'annot_cb/reg_elements_cb.bed',
+
+rule annot_cb_tests:
+    input:
+        expand('samples/{sample}.r1.fq.gz', sample=[*df_annot_cb_data.query('assay == "atac"').index]),
+        expand('samples/{sample}.r1.fq.gz', sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
+        expand('samples/{sample}.r2.fq.gz', sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
+        #expand(pf('{sample}', config['annot_cb']['lcap_filled_fwd'], '.bw', 'lcap'), sample=[*df_annot_cb_data.query('assay == "lcap"').index]),
+        #expand(pf('{sample}', config['annot_cb']['lcap_filled_rev'], '.bw', 'lcap'), sample=[*df_annot_cb_data.query('assay == "lcap"').index]),

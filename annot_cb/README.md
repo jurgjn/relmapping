@@ -1,4 +1,4 @@
-# Briggsae annotation (do not run -- draft)
+# Briggsae annotation
 
 1. Specify conditions (stages), and files of raw reads for two (biological) replicates in the `annot_cb` section of [workflows/config.yaml](workflows/config.yaml), e.g.:
 ```
@@ -29,24 +29,14 @@ annot_cb:
     #glp1_ya: # Uncomment & add files as above, once data becomes available...
 ```
 
-2. Generate ATAC-seq/long cap coverage tracks by executing the `annot_cb` rule in snakemake (first to test with -n; then remove -n to start the run).
+2. Execute the rule `annot_cb` in snakemake (first to test with -n; then remove -n to start the run), e.g:
 ```
-$ smc 20 annot_cb -n
-```
-
-3. Run the annotation notebooks with [the default 30s execution timeout disabled](https://github.com/jupyter/nbconvert/issues/256) (each notebook might take up to ~10min):
-```
-$ jupyter nbconvert --execute annot_cb/notebooks/annot_cb_atac.ipynb --ExecutePreprocessor.timeout=-1
-$ jupyter nbconvert --execute annot_cb/notebooks/annot_cb_canonical_geneset.ipynb --ExecutePreprocessor.timeout=-1
-$ jupyter nbconvert --execute annot_cb/notebooks/annot_cb_exon.ipynb --ExecutePreprocessor.timeout=-1
-$ jupyter nbconvert --execute annot_cb/notebooks/annot_cb_lcap.ipynb --ExecutePreprocessor.timeout=-1
-$ jupyter nbconvert --execute annot_cb/notebooks/annot_cb_maxgap.ipynb --ExecutePreprocessor.timeout=-1
-$ jupyter nbconvert --execute annot_cb/notebooks/annot_cb_type.ipynb --ExecutePreprocessor.timeout=-1
+$ smc 10 annot_cb -n
 ```
 
-Once finished, the final .bed-file with the annotation should be located in `annot_cb/regulatory_annotation_cb.bed`
+This merges replicates/lanes, aligns, filters, generates all the necessary signal tracks, and runs the downstream annotation notebooks in the right order (these are located in [/annot_cb/notebooks/](/annot_cb/notebooks/). Once finished, the final .bed-file with the annotation should be located in `annot_cb/regulatory_annotation_cb.bed`
 
-The annotation follows the approach for *C. elegans*, but adjusted to work without transcription initiation information (short cap RNA-seq):
+The annotation follows the approach for *C. elegans*, but adjusted to work without a transcription initiation map (short cap RNA-seq):
 - Accessible sites do not get representative transcription initiation modes
 - There's no extra step to capture low-confidence promoters, as this relied on checking the positioning of transcription initiation relative to the putative gene annotation
 - There's no enhancer annotation, as this relied on presence/absence of transcription initiation
