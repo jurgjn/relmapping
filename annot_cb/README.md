@@ -29,18 +29,20 @@ annot_cb:
     #glp1_ya: # Uncomment & add files as above, once data becomes available...
 ```
 
-2. Run the target (first to test with -n; then remove -n to start the run).
+2. Generate ATAC-seq/long cap coverage tracks by executing the `annot_cb` rule in snakemake (first to test with -n; then remove -n to start the run).
 ```
 $ smc 20 annot_cb -n
 ```
 
-3. Run the following ipython notebooks from `annot_cb/notebooks`.
-- annot_cb_atac.ipynb
-- annot_cb_canonical_geneset.ipynb
-- annot_cb_exon.ipynb
-- annot_cb_lcap.ipynb
-- annot_cb_maxgap.ipynb
-- annot_cb_type.ipynb
+3. Run the annotation notebooks with [the default 30s execution timeout disabled](https://github.com/jupyter/nbconvert/issues/256) (each notebook might take up to ~10min):
+```
+$ jupyter nbconvert --execute annot_cb/notebooks/annot_cb_atac.ipynb --ExecutePreprocessor.timeout=-1
+$ jupyter nbconvert --execute annot_cb/notebooks/annot_cb_canonical_geneset.ipynb --ExecutePreprocessor.timeout=-1
+$ jupyter nbconvert --execute annot_cb/notebooks/annot_cb_exon.ipynb --ExecutePreprocessor.timeout=-1
+$ jupyter nbconvert --execute annot_cb/notebooks/annot_cb_lcap.ipynb --ExecutePreprocessor.timeout=-1
+$ jupyter nbconvert --execute annot_cb/notebooks/annot_cb_maxgap.ipynb --ExecutePreprocessor.timeout=-1
+$ jupyter nbconvert --execute annot_cb/notebooks/annot_cb_type.ipynb --ExecutePreprocessor.timeout=-1
+```
 
 Once finished, the final .bed-file with the annotation should be located in `annot_cb/regulatory_annotation_cb.bed`
 
