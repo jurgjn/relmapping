@@ -2071,205 +2071,253 @@ hmod749:
 hmod:
     H3K4me3_wt_emb_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA466_aa52_ab8580/H3K4me3^ab8580_aa52^F^N2^MxE_raw^NA^NA_AA466^C4911597.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA466_aa52_ab8580/H3K4me3^ab8580_aa52^F^N2^MxE_aligned^NA^ce10_AA466^Af948101.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA466_aa52_ab8580/H3K4me3^ab8580_aa52^F^N2^MxE_BEADSQ10NU^log2^ce10_AA466^Bda48311.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA466_aa52_ab8580/H3K4me3^ab8580_aa52^F^N2^MxE_BEADSQ10NU^log2^ce11_AA466^B2352469.bw
     H3K4me3_wt_emb_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/RC052_rc12_ab8580/H3K4me3^ab8580_rc12^F^N2^embryo_raw^NA^NA_RC052^C7211304.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/RC052_rc12_ab8580/H3K4me3^ab8580_rc12^F^N2^embryo_aligned^NA^ce10_RC052^A4559002.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/RC052_rc12_ab8580/H3K4me3^ab8580_rc12^F^N2^embryo_BEADSQ10NU^log2^ce10_RC052^Bd959253.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/RC052_rc12_ab8580/H3K4me3^ab8580_rc12^F^N2^embryo_BEADSQ10NU^log2^ce11_RC052^B6a54439.bw
     H3K4me3_wt_l1_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA515_aa71_ab8580/H3K4me3^ab8580_aa71^F^N2^L1_raw^NA^NA_AA515^Cba31976.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA515_aa71_ab8580/H3K4me3^ab8580_aa71^F^N2^L1_aligned^NA^ce10_AA515^Acc48749.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA515_aa71_ab8580/H3K4me3^ab8580_aa71^F^N2^L1_BEADSQ10NU^log2^ce10_AA515^Bd748950.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA515_aa71_ab8580/H3K4me3^ab8580_aa71^F^N2^L1_BEADSQ10NU^log2^ce11_AA515^B2252613.bw
     H3K4me3_wt_l1_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA694_aa120_ab8580/H3K4me3^ab8580_aa120^F^N2^L1_raw^NA^NA_AA694^Ca439043.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA694_aa120_ab8580/H3K4me3^ab8580_aa120^F^N2^L1_aligned^NA^ce10_AA694^A6c60173.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA694_aa120_ab8580/H3K4me3^ab8580_aa120^F^N2^L1_BEADSQ10NU^log2^ce10_AA694^Bd260445.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA694_aa120_ab8580/H3K4me3^ab8580_aa120^F^N2^L1_BEADSQ10NU^log2^ce11_AA694^B9657112.bw
     H3K4me3_wt_l2_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA519_aa72_ab8580/H3K4me3^ab8580_aa72^F^N2^L2_raw^NA^NA_AA519^C6a31980.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA519_aa72_ab8580/H3K4me3^ab8580_aa72^F^N2^L2_aligned^NA^ce10_AA519^A0148784.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA519_aa72_ab8580/H3K4me3^ab8580_aa72^F^N2^L2_BEADSQ10NU^log2^ce10_AA519^Bc149015.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA519_aa72_ab8580/H3K4me3^ab8580_aa72^F^N2^L2_BEADSQ10NU^log2^ce11_AA519^Bc852619.bw
     H3K4me3_wt_l2_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA698_aa121_ab8580/H3K4me3^ab8580_aa121^F^N2^L2_raw^NA^NA_AA698^C4d39301.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA698_aa121_ab8580/H3K4me3^ab8580_aa121^F^N2^L2_aligned^NA^ce10_AA698^A6260148.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA698_aa121_ab8580/H3K4me3^ab8580_aa121^F^N2^L2_BEADSQ10NU^log2^ce10_AA698^Bbd60356.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA698_aa121_ab8580/H3K4me3^ab8580_aa121^F^N2^L2_BEADSQ10NU^log2^ce11_AA698^B0c57072.bw
     H3K4me3_wt_l3_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA449_aa46_ab8580/H3K4me3^ab8580_aa46^F^N2^L3_raw^NA^NA_AA449^Rbf09917.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA449_aa46_ab8580/H3K4me3^ab8580_aa46^F^N2^L3_aligned^NA^ce10_AA449^Adb47828.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA449_aa46_ab8580/H3K4me3^ab8580_aa46^F^N2^L3_BEADSQ10NU^log2^ce10_AA449^B3c48049.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA449_aa46_ab8580/H3K4me3^ab8580_aa46^F^N2^L3_BEADSQ10NU^log2^ce11_AA449^B4d52438.bw
     H3K4me3_wt_l3_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA611_fb24_ab8580/H3K4me3^ab8580_fb24^F^N2^L3_raw^NA^NA_AA611^C8b36048.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA611_fb24_ab8580/H3K4me3^ab8580_fb24^F^N2^L3_aligned^NA^ce10_AA611^A6950127.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA611_fb24_ab8580/H3K4me3^ab8580_fb24^F^N2^L3_BEADSQ10NU^log2^ce10_AA611^B0050284.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA611_fb24_ab8580/H3K4me3^ab8580_fb24^F^N2^L3_BEADSQ10NU^log2^ce11_AA611^B8352878.bw
     H3K4me3_wt_l4_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA507_aa73_ab8580/H3K4me3^ab8580_aa73^F^N2^L4_raw^NA^NA_AA507^C0f32000.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA507_aa73_ab8580/H3K4me3^ab8580_aa73^F^N2^L4_aligned^NA^ce10_AA507^Aef48697.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA507_aa73_ab8580/H3K4me3^ab8580_aa73^F^N2^L4_BEADSQ10NU^log2^ce10_AA507^B0548893.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA507_aa73_ab8580/H3K4me3^ab8580_aa73^F^N2^L4_BEADSQ10NU^log2^ce11_AA507^B7852588.bw
     H3K4me3_wt_l4_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA523_aa75_ab8580/H3K4me3^ab8580_aa75^F^N2^L4_raw^NA^NA_AA523^Cc932325.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA523_aa75_ab8580/H3K4me3^ab8580_aa75^F^N2^L4_aligned^NA^ce10_AA523^A9048818.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA523_aa75_ab8580/H3K4me3^ab8580_aa75^F^N2^L4_BEADSQ10NU^log2^ce10_AA523^B5949053.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA523_aa75_ab8580/H3K4me3^ab8580_aa75^F^N2^L4_BEADSQ10NU^log2^ce11_AA523^B4652626.bw
     H3K4me3_wt_ya_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA511_aa74_ab8580/H3K4me3^ab8580_aa74^F^N2^YA_raw^NA^NA_AA511^Cc032028.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA511_aa74_ab8580/H3K4me3^ab8580_aa74^F^N2^YA_aligned^NA^ce10_AA511^Ab048719.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA511_aa74_ab8580/H3K4me3^ab8580_aa74^F^N2^YA_BEADSQ10NU^log2^ce10_AA511^B8348897.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA511_aa74_ab8580/H3K4me3^ab8580_aa74^F^N2^YA_BEADSQ10NU^log2^ce11_AA511^Be352594.bw
     H3K4me3_wt_ya_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA528_aa76_ab8580/H3K4me3^ab8580_aa76^F^N2^YA_raw^NA^NA_AA528^C1732330.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA528_aa76_ab8580/H3K4me3^ab8580_aa76^F^N2^YA_aligned^NA^ce10_AA528^A6348845.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me3/N2/AA528_aa76_ab8580/H3K4me3^ab8580_aa76^F^N2^YA_BEADSQ10NU^log2^ce10_AA528^B5849095.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me3/N2/AA528_aa76_ab8580/H3K4me3^ab8580_aa76^F^N2^YA_BEADSQ10NU^log2^ce11_AA528^B4452640.bw
     H3K4me1_wt_emb_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA464_aa52_ab8895/H3K4me1^ab8895_aa52^F^N2^MxE_raw^NA^NA_AA464^Cc811595.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA464_aa52_ab8895/H3K4me1^ab8895_aa52^F^N2^MxE_aligned^NA^ce10_AA464^A7548080.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA464_aa52_ab8895/H3K4me1^ab8895_aa52^F^N2^MxE_BEADSQ10NU^log2^ce10_AA464^B9248284.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA464_aa52_ab8895/H3K4me1^ab8895_aa52^F^N2^MxE_BEADSQ10NU^log2^ce11_AA464^B8652460.bw
     H3K4me1_wt_emb_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/RC050_rc12_ab8895/H3K4me1^ab8895_rc12^F^N2^embryo_raw^NA^NA_RC050^C6911299.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/RC050_rc12_ab8895/H3K4me1^ab8895_rc12^F^N2^embryo_aligned^NA^ce10_RC050^A8658964.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/RC050_rc12_ab8895/H3K4me1^ab8895_rc12^F^N2^embryo_BEADSQ10NU^log2^ce10_RC050^B9b59217.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/RC050_rc12_ab8895/H3K4me1^ab8895_rc12^F^N2^embryo_BEADSQ10NU^log2^ce11_RC050^Bd954436.bw
     H3K4me1_wt_l1_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA514_aa71_ab8895/H3K4me1^ab8895_aa71^F^N2^L1_raw^NA^NA_AA514^C3531975.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA514_aa71_ab8895/H3K4me1^ab8895_aa71^F^N2^L1_aligned^NA^ce10_AA514^A2e48741.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA514_aa71_ab8895/H3K4me1^ab8895_aa71^F^N2^L1_BEADSQ10NU^log2^ce10_AA514^B9248943.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA514_aa71_ab8895/H3K4me1^ab8895_aa71^F^N2^L1_BEADSQ10NU^log2^ce11_AA514^B3752610.bw
     H3K4me1_wt_l1_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA701_aa120_ab8895/H3K4me1^ab8895_aa120^F^N2^L1_raw^NA^NA_AA701^C4839529.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA701_aa120_ab8895/H3K4me1^ab8895_aa120^F^N2^L1_aligned^NA^ce10_AA701^A4a60279.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA701_aa120_ab8895/H3K4me1^ab8895_aa120^F^N2^L1_BEADSQ10NU^log2^ce10_AA701^Bde60496.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA701_aa120_ab8895/H3K4me1^ab8895_aa120^F^N2^L1_BEADSQ10NU^log2^ce11_AA701^Bf357248.bw
     H3K4me1_wt_l2_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA518_aa72_ab8895/H3K4me1^ab8895_aa72^F^N2^L2_raw^NA^NA_AA518^Cf331979.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA518_aa72_ab8895/H3K4me1^ab8895_aa72^F^N2^L2_aligned^NA^ce10_AA518^Aca48782.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA518_aa72_ab8895/H3K4me1^ab8895_aa72^F^N2^L2_BEADSQ10NU^log2^ce10_AA518^B0e49002.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA518_aa72_ab8895/H3K4me1^ab8895_aa72^F^N2^L2_BEADSQ10NU^log2^ce11_AA518^B6652618.bw
     H3K4me1_wt_l2_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA697_aa121_ab8895/H3K4me1^ab8895_aa121^F^N2^L2_raw^NA^NA_AA697^C7639037.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA697_aa121_ab8895/H3K4me1^ab8895_aa121^F^N2^L2_aligned^NA^ce10_AA697^Ab960304.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA697_aa121_ab8895/H3K4me1^ab8895_aa121^F^N2^L2_BEADSQ10NU^log2^ce10_AA697^B5a60612.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA697_aa121_ab8895/H3K4me1^ab8895_aa121^F^N2^L2_BEADSQ10NU^log2^ce11_AA697^B4757075.bw
     H3K4me1_wt_l3_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA017_mE05_ab8895/H3K4me1^ab8895_mE05^F^N2^L3_raw^NA^NA_AA017^Fxx00655.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA017_mE05_ab8895/H3K4me1^ab8895_mE05^F^N2^L3_aligned^NA^ce10_AA017^Ab040845.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA017_mE05_ab8895/H3K4me1^ab8895_mE05^F^N2^L3_BEADSQ10NU^log2^ce10_AA017^B6241005.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA017_mE05_ab8895/H3K4me1^ab8895_mE05^F^N2^L3_BEADSQ10NU^log2^ce11_AA017^B5151098.bw
     H3K4me1_wt_l3_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA034_mE06_ab8895/H3K4me1^ab8895_mE06^F^N2^L3_raw^NA^NA_AA034^Fxx00686.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA034_mE06_ab8895/H3K4me1^ab8895_mE06^F^N2^L3_aligned^NA^ce10_AA034^Aca40921.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA034_mE06_ab8895/H3K4me1^ab8895_mE06^F^N2^L3_BEADSQ10NU^log2^ce10_AA034^B3341126.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA034_mE06_ab8895/H3K4me1^ab8895_mE06^F^N2^L3_BEADSQ10NU^log2^ce11_AA034^B3251136.bw
     H3K4me1_wt_l4_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA506_aa73_ab8895/H3K4me1^ab8895_aa73^F^N2^L4_raw^NA^NA_AA506^C6a31983.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA506_aa73_ab8895/H3K4me1^ab8895_aa73^F^N2^L4_aligned^NA^ce10_AA506^A3848714.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA506_aa73_ab8895/H3K4me1^ab8895_aa73^F^N2^L4_BEADSQ10NU^log2^ce10_AA506^B7148945.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA506_aa73_ab8895/H3K4me1^ab8895_aa73^F^N2^L4_BEADSQ10NU^log2^ce11_AA506^Be752587.bw
     H3K4me1_wt_l4_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA522_aa75_ab8895/H3K4me1^ab8895_aa75^F^N2^L4_raw^NA^NA_AA522^Cd632324.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA522_aa75_ab8895/H3K4me1^ab8895_aa75^F^N2^L4_aligned^NA^ce10_AA522^A3248814.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA522_aa75_ab8895/H3K4me1^ab8895_aa75^F^N2^L4_BEADSQ10NU^log2^ce10_AA522^B3249047.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA522_aa75_ab8895/H3K4me1^ab8895_aa75^F^N2^L4_BEADSQ10NU^log2^ce11_AA522^B5a52624.bw
     H3K4me1_wt_ya_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA510_aa74_ab8895/H3K4me1^ab8895_aa74^F^N2^YA_raw^NA^NA_AA510^C4932016.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA510_aa74_ab8895/H3K4me1^ab8895_aa74^F^N2^YA_aligned^NA^ce10_AA510^Af248728.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA510_aa74_ab8895/H3K4me1^ab8895_aa74^F^N2^YA_BEADSQ10NU^log2^ce10_AA510^B7e48938.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA510_aa74_ab8895/H3K4me1^ab8895_aa74^F^N2^YA_BEADSQ10NU^log2^ce11_AA510^B9b52591.bw
     H3K4me1_wt_ya_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA527_aa76_ab8895/H3K4me1^ab8895_aa76^F^N2^YA_raw^NA^NA_AA527^Cd432329.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA527_aa76_ab8895/H3K4me1^ab8895_aa76^F^N2^YA_aligned^NA^ce10_AA527^A0348833.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K4me1/N2/AA527_aa76_ab8895/H3K4me1^ab8895_aa76^F^N2^YA_BEADSQ10NU^log2^ce10_AA527^Be149058.bw
         log2_ce11: /mnt/jadb/DBfile/DBfiles/H3K4me1/N2/AA527_aa76_ab8895/H3K4me1^ab8895_aa76^F^N2^YA_BEADSQ10NU^log2^ce11_AA527^B4b52637.bw
     H3K36me3_wt_emb_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA535_aa52_ab9050/H3K36me3^ab9050_aa52^F^N2^MxE_raw^NA^NA_AA535^Cef32412.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA535_aa52_ab9050/H3K36me3^ab9050_aa52^F^N2^MxE_aligned^NA^ce10_AA535^A4449132.bam
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA535_aa52_ab9050/H3K36me3^ab9050_aa52^F^N2^MxE_BEADSQ10NU^zscore^ce10_AA535^Bf049258.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA535_aa52_ab9050/H3K36me3^ab9050_aa52^F^N2^MxE_BEADSQ10NU^zscore^ce11_AA535^B1843748.bw
     H3K36me3_wt_emb_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/RC058_rc12_ab9050/H3K36me3^ab9050_rc12^F^N2^embryo_raw^NA^NA_RC058^Ce211314.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/RC058_rc12_ab9050/H3K36me3^ab9050_rc12^F^N2^embryo_aligned^NA^ce10_RC058^Afa59069.bam
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/RC058_rc12_ab9050/H3K36me3^ab9050_rc12^F^N2^embryo_BEADSQ10NU^zscore^ce10_RC058^Bc359295.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/RC058_rc12_ab9050/H3K36me3^ab9050_rc12^F^N2^embryo_BEADSQ10NU^zscore^ce11_RC058^Bec49975.bw
     H3K36me3_wt_l1_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA516_aa71_ab9050/H3K36me3^ab9050_aa71^F^N2^L1_raw^NA^NA_AA516^C2331977.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA516_aa71_ab9050/H3K36me3^ab9050_aa71^F^N2^L1_aligned^NA^ce10_AA516^A0348763.bam
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA516_aa71_ab9050/H3K36me3^ab9050_aa71^F^N2^L1_BEADSQ10NU^zscore^ce10_AA516^B0748949.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA516_aa71_ab9050/H3K36me3^ab9050_aa71^F^N2^L1_BEADSQ10NU^zscore^ce11_AA516^B7a43354.bw
     H3K36me3_wt_l1_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA695_aa120_ab9050/H3K36me3^ab9050_aa120^F^N2^L1_raw^NA^NA_AA695^Cd539038.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA695_aa120_ab9050/H3K36me3^ab9050_aa120^F^N2^L1_aligned^NA^ce10_AA695^A4c60312.bam
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA695_aa120_ab9050/H3K36me3^ab9050_aa120^F^N2^L1_BEADSQ10NU^zscore^ce10_AA695^B7b60597.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA695_aa120_ab9050/H3K36me3^ab9050_aa120^F^N2^L1_BEADSQ10NU^zscore^ce11_AA695^Bd757081.bw
     H3K36me3_wt_l2_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA520_aa72_ab9050/H3K36me3^ab9050_aa72^F^N2^L2_raw^NA^NA_AA520^Cdd31981.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA520_aa72_ab9050/H3K36me3^ab9050_aa72^F^N2^L2_aligned^NA^ce10_AA520^A0c48783.bam
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA520_aa72_ab9050/H3K36me3^ab9050_aa72^F^N2^L2_BEADSQ10NU^zscore^ce10_AA520^Bcf48978.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA520_aa72_ab9050/H3K36me3^ab9050_aa72^F^N2^L2_BEADSQ10NU^zscore^ce11_AA520^Bfb43340.bw
     H3K36me3_wt_l2_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA699_aa121_ab9050/H3K36me3^ab9050_aa121^F^N2^L2_raw^NA^NA_AA699^C0939302.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA699_aa121_ab9050/H3K36me3^ab9050_aa121^F^N2^L2_aligned^NA^ce10_AA699^Af160306.bam
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA699_aa121_ab9050/H3K36me3^ab9050_aa121^F^N2^L2_BEADSQ10NU^zscore^ce10_AA699^B8a60604.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA699_aa121_ab9050/H3K36me3^ab9050_aa121^F^N2^L2_BEADSQ10NU^zscore^ce11_AA699^B4757074.bw
     H3K36me3_wt_l3_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA265pe1_fE3_ab9050/H3K36me3^ab9050_fE3^F^N2^L3_raw^NA^NA_AA265pe1^Ra806757.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA265pe1_fE3_ab9050/H3K36me3^ab9050_fE3^F^N2^L3_aligned^NA^ce10_AA265pe1^Ac045342.bam
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA265pe1_fE3_ab9050/H3K36me3^ab9050_fE3^F^N2^L3_BEADSQ10NU^zscore^ce10_AA265pe1^B0245585.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA265pe1_fE3_ab9050/H3K36me3^ab9050_fE3^F^N2^L3_BEADSQ10NU^zscore^ce11_AA265pe1^Pfe41328.bw
     H3K36me3_wt_l3_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA373_fE4_ab9050/H3K36me3^ab9050_fE4^F^N2^L3_raw^NA^NA_AA373^Rb509114.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA373_fE4_ab9050/H3K36me3^ab9050_fE4^F^N2^L3_aligned^NA^ce10_AA373^A4946881.bam
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA373_fE4_ab9050/H3K36me3^ab9050_fE4^F^N2^L3_BEADSQ10NU^zscore^ce10_AA373^B2d47103.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA373_fE4_ab9050/H3K36me3^ab9050_fE4^F^N2^L3_BEADSQ10NU^zscore^ce11_AA373^Pf642302.bw
     H3K36me3_wt_l4_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA508_aa73_ab9050/H3K36me3^ab9050_aa73^F^N2^L4_raw^NA^NA_AA508^C2b32008.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA508_aa73_ab9050/H3K36me3^ab9050_aa73^F^N2^L4_aligned^NA^ce10_AA508^Aa648668.bam
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA508_aa73_ab9050/H3K36me3^ab9050_aa73^F^N2^L4_BEADSQ10NU^zscore^ce10_AA508^B6b48807.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA508_aa73_ab9050/H3K36me3^ab9050_aa73^F^N2^L4_BEADSQ10NU^zscore^ce11_AA508^B4f43349.bw
     H3K36me3_wt_l4_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA524_aa75_ab9050/H3K36me3^ab9050_aa75^F^N2^L4_raw^NA^NA_AA524^C3032326.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA524_aa75_ab9050/H3K36me3^ab9050_aa75^F^N2^L4_aligned^NA^ce10_AA524^Ae748800.bam
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA524_aa75_ab9050/H3K36me3^ab9050_aa75^F^N2^L4_BEADSQ10NU^zscore^ce10_AA524^B6a48966.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA524_aa75_ab9050/H3K36me3^ab9050_aa75^F^N2^L4_BEADSQ10NU^zscore^ce11_AA524^B5943562.bw
     H3K36me3_wt_ya_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA512_aa74_ab9050/H3K36me3^ab9050_aa74^F^N2^YA_raw^NA^NA_AA512^C7432031.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA512_aa74_ab9050/H3K36me3^ab9050_aa74^F^N2^YA_aligned^NA^ce10_AA512^A8148718.bam
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA512_aa74_ab9050/H3K36me3^ab9050_aa74^F^N2^YA_BEADSQ10NU^zscore^ce10_AA512^Ba748898.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA512_aa74_ab9050/H3K36me3^ab9050_aa74^F^N2^YA_BEADSQ10NU^zscore^ce11_AA512^B7b43377.bw
     H3K36me3_wt_ya_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA529_aa76_ab9050/H3K36me3^ab9050_aa76^F^N2^YA_raw^NA^NA_AA529^Cc932332.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA529_aa76_ab9050/H3K36me3^ab9050_aa76^F^N2^YA_aligned^NA^ce10_AA529^Ae548869.bam
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K36me3/N2/AA529_aa76_ab9050/H3K36me3^ab9050_aa76^F^N2^YA_BEADSQ10NU^zscore^ce10_AA529^B6d49110.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K36me3/N2/AA529_aa76_ab9050/H3K36me3^ab9050_aa76^F^N2^YA_BEADSQ10NU^zscore^ce11_AA529^B4f43673.bw
     H3K27me3_wt_emb_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA536_aa52_309-95259/H3K27me3^309-95259_aa52^F^N2^MxE_raw^NA^NA_AA536^C9632413.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA536_aa52_309-95259/H3K27me3^309-95259_aa52^F^N2^MxE_aligned^NA^ce10_AA536^A3649138.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA536_aa52_309-95259/H3K27me3^309-95259_aa52^F^N2^MxE_BEADSQ10NU^log2^ce10_AA536^B2e49235.bw
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA536_aa52_309-95259/H3K27me3^309-95259_aa52^F^N2^MxE_BEADSQ10NU^zscore^ce10_AA536^Bd049233.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA536_aa52_309-95259/H3K27me3^309-95259_aa52^F^N2^MxE_BEADSQ10NU^zscore^ce11_AA536^B9d43751.bw
     H3K27me3_wt_emb_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA537_rc12_309-95259/H3K27me3^309-95259_rc12^F^N2^MxE_raw^NA^NA_AA537^C3532414.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA537_rc12_309-95259/H3K27me3^309-95259_rc12^F^N2^MxE_aligned^NA^ce10_AA537^A8a49143.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA537_rc12_309-95259/H3K27me3^309-95259_rc12^F^N2^MxE_BEADSQ10NU^log2^ce10_AA537^Bf549236.bw
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA537_rc12_309-95259/H3K27me3^309-95259_rc12^F^N2^MxE_BEADSQ10NU^zscore^ce10_AA537^B1f49235.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA537_rc12_309-95259/H3K27me3^309-95259_rc12^F^N2^MxE_BEADSQ10NU^zscore^ce11_AA537^B7d43755.bw
     H3K27me3_wt_l1_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA517_aa71_309-95259/H3K27me3^309-95259_aa71^F^N2^L1_raw^NA^NA_AA517^C8131978.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA517_aa71_309-95259/H3K27me3^309-95259_aa71^F^N2^L1_aligned^NA^ce10_AA517^Aa848764.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA517_aa71_309-95259/H3K27me3^309-95259_aa71^F^N2^L1_BEADSQ10NU^log2^ce10_AA517^B6e48997.bw
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA517_aa71_309-95259/H3K27me3^309-95259_aa71^F^N2^L1_BEADSQ10NU^zscore^ce10_AA517^Ba148989.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA517_aa71_309-95259/H3K27me3^309-95259_aa71^F^N2^L1_BEADSQ10NU^zscore^ce11_AA517^B2443351.bw
     H3K27me3_wt_l1_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA696_aa120_309-95259/H3K27me3^309-95259_aa120^F^N2^L1_raw^NA^NA_AA696^Ccf39036.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA696_aa120_309-95259/H3K27me3^309-95259_aa120^F^N2^L1_aligned^NA^ce10_AA696^Aa760301.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA696_aa120_309-95259/H3K27me3^309-95259_aa120^F^N2^L1_BEADSQ10NU^log2^ce10_AA696^Bf160579.bw
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA696_aa120_309-95259/H3K27me3^309-95259_aa120^F^N2^L1_BEADSQ10NU^zscore^ce10_AA696^B3360567.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA696_aa120_309-95259/H3K27me3^309-95259_aa120^F^N2^L1_BEADSQ10NU^zscore^ce11_AA696^Bb557050.bw
     H3K27me3_wt_l2_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA521_aa72_309-95259/H3K27me3^309-95259_aa72^F^N2^L2_raw^NA^NA_AA521^C4231982.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA521_aa72_309-95259/H3K27me3^309-95259_aa72^F^N2^L2_aligned^NA^ce10_AA521^A2348797.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA521_aa72_309-95259/H3K27me3^309-95259_aa72^F^N2^L2_BEADSQ10NU^log2^ce10_AA521^B0149011.bw
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA521_aa72_309-95259/H3K27me3^309-95259_aa72^F^N2^L2_BEADSQ10NU^zscore^ce10_AA521^Bfc49008.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA521_aa72_309-95259/H3K27me3^309-95259_aa72^F^N2^L2_BEADSQ10NU^zscore^ce11_AA521^B7743528.bw
     H3K27me3_wt_l2_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA700_aa121_309-95259/H3K27me3^309-95259_aa121^F^N2^L2_raw^NA^NA_AA700^Cba39300.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA700_aa121_309-95259/H3K27me3^309-95259_aa121^F^N2^L2_aligned^NA^ce10_AA700^A5360316.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA700_aa121_309-95259/H3K27me3^309-95259_aa121^F^N2^L2_BEADSQ10NU^log2^ce10_AA700^B3960542.bw
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA700_aa121_309-95259/H3K27me3^309-95259_aa121^F^N2^L2_BEADSQ10NU^zscore^ce10_AA700^Bcc60534.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA700_aa121_309-95259/H3K27me3^309-95259_aa121^F^N2^L2_BEADSQ10NU^zscore^ce11_AA700^B1d57076.bw
     H3K27me3_wt_l3_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA030_mE05_HK00013/H3K27me3^HK00013_mE05^F^N2^L3_raw^NA^NA_AA030^Fxx00681.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA030_mE05_HK00013/H3K27me3^HK00013_mE05^F^N2^L3_aligned^NA^ce10_AA030^A3140823.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA030_mE05_HK00013/H3K27me3^HK00013_mE05^F^N2^L3_BEADSQ10NU^log2^ce10_AA030^Bab40925.bw
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA030_mE05_HK00013/H3K27me3^HK00013_mE05^F^N2^L3_BEADSQ10NU^zscore^ce10_AA030^B0940923.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA030_mE05_HK00013/H3K27me3^HK00013_mE05^F^N2^L3_BEADSQ10NU^zscore^ce11_AA030^P0238399.bw
     H3K27me3_wt_l3_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA039_mE06_HK00013/H3K27me3^HK00013_mE06^F^N2^L3_raw^NA^NA_AA039^Fxx00697.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA039_mE06_HK00013/H3K27me3^HK00013_mE06^F^N2^L3_aligned^NA^ce10_AA039^Ab441067.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA039_mE06_HK00013/H3K27me3^HK00013_mE06^F^N2^L3_BEADSQ10NU^log2^ce10_AA039^B3441197.bw
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA039_mE06_HK00013/H3K27me3^HK00013_mE06^F^N2^L3_BEADSQ10NU^zscore^ce10_AA039^Ba341194.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA039_mE06_HK00013/H3K27me3^HK00013_mE06^F^N2^L3_BEADSQ10NU^zscore^ce11_AA039^P1b38461.bw
     H3K27me3_wt_l4_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA509_aa73_309-95259/H3K27me3^309-95259_aa73^F^N2^L4_raw^NA^NA_AA509^C3032009.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA509_aa73_309-95259/H3K27me3^309-95259_aa73^F^N2^L4_aligned^NA^ce10_AA509^A1648704.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA509_aa73_309-95259/H3K27me3^309-95259_aa73^F^N2^L4_BEADSQ10NU^log2^ce10_AA509^Bc848876.bw
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA509_aa73_309-95259/H3K27me3^309-95259_aa73^F^N2^L4_BEADSQ10NU^zscore^ce10_AA509^B7448873.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA509_aa73_309-95259/H3K27me3^309-95259_aa73^F^N2^L4_BEADSQ10NU^zscore^ce11_AA509^Bed43415.bw
     H3K27me3_wt_l4_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA525_aa75_309-95259/H3K27me3^309-95259_aa75^F^N2^L4_raw^NA^NA_AA525^C3d32327.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA525_aa75_309-95259/H3K27me3^309-95259_aa75^F^N2^L4_aligned^NA^ce10_AA525^Ac148836.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA525_aa75_309-95259/H3K27me3^309-95259_aa75^F^N2^L4_BEADSQ10NU^log2^ce10_AA525^B8049106.bw
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA525_aa75_309-95259/H3K27me3^309-95259_aa75^F^N2^L4_BEADSQ10NU^zscore^ce10_AA525^B7349098.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA525_aa75_309-95259/H3K27me3^309-95259_aa75^F^N2^L4_BEADSQ10NU^zscore^ce11_AA525^B1d43629.bw
     H3K27me3_wt_ya_rep1:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA513_aa74_309-95259/H3K27me3^309-95259_aa74^F^N2^YA_raw^NA^NA_AA513^C0432032.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA513_aa74_309-95259/H3K27me3^309-95259_aa74^F^N2^YA_aligned^NA^ce10_AA513^Aa748748.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA513_aa74_309-95259/H3K27me3^309-95259_aa74^F^N2^YA_BEADSQ10NU^log2^ce10_AA513^Bfa48993.bw
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA513_aa74_309-95259/H3K27me3^309-95259_aa74^F^N2^YA_BEADSQ10NU^zscore^ce10_AA513^B5a48983.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA513_aa74_309-95259/H3K27me3^309-95259_aa74^F^N2^YA_BEADSQ10NU^zscore^ce11_AA513^Bb843362.bw
     H3K27me3_wt_ya_rep2:
         reads_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA530_aa76_309-95259/H3K27me3^309-95259_aa76^F^N2^YA_raw^NA^NA_AA530^C7f32333.txt.gz
+        align_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA530_aa76_309-95259/H3K27me3^309-95259_aa76^F^N2^YA_aligned^NA^ce10_AA530^A5048888.bam
         log2_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA530_aa76_309-95259/H3K27me3^309-95259_aa76^F^N2^YA_BEADSQ10NU^log2^ce10_AA530^B4749079.bw
         zscore_ce10: /mnt/jadb2/DBfile/DBfiles/H3K27me3/N2/AA530_aa76_309-95259/H3K27me3^309-95259_aa76^F^N2^YA_BEADSQ10NU^zscore^ce10_AA530^B4f49076.bw
         zscore_ce11: /mnt/jadb/DBfile/DBfiles/H3K27me3/N2/AA530_aa76_309-95259/H3K27me3^309-95259_aa76^F^N2^YA_BEADSQ10NU^zscore^ce11_AA530^B6d43679.bw
